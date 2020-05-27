@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TotalMetrica_Tree>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TotalMetrica_Tree>
+        <TotalMetrica_TreeComponent>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TotalMetrica_TreeComponent>
+    </modules>
+</config>

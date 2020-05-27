@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" xmlns:c="http://base.google.com/ns/1.0" version="2.0">
+ <channel>
+  <item>
+   <g:id>103CRL46</g:id>
+   <g:title>Short Linho IT</g:title>
+   <g:description>Shorts clochard em linho c/ cinto amarração, fivela em acrílico e bolsos laterais.
+
+- Cinto  amarração
+- Fivela em acrílico
+- Bolsos laterais</g:description>
+   <g:gtin>7890000450683</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Coral</g:color>
+   <g:material>99% Viscose 1% Elastano</g:material>
+   <g:pattern>Sem Estampa</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/short-linho-it</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/s/h/short-linho-it-2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>1.00 kg</g:weight>
+   <g:item_group_id>103CRL</g:item_group_id>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Marcas &gt; D'Laport</g:product_type>
+   <g:price>259.80 BRL</g:price>
+  </item>
+  <item>
+   <g:id>103CRL48</g:id>
+   <g:title>Short Linho IT</g:title>
+   <g:description>Shorts clochard em linho c/ cinto amarração, fivela em acrílico e bolsos laterais.
+
+- Cinto  amarração
+- Fivela em acrílico
+- Bolsos laterais</g:description>
+   <g:gtin>7890000450690</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Coral</g:color>
+   <g:material>99% Viscose 1% Elastano</g:material>
+   <g:pattern>Sem Estampa</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/short-linho-it</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/s/h/short-linho-it-2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>1.00 kg</g:weight>
+   <g:item_group_id>103CRL</g:item_group_id>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Marcas &gt; D'Laport</g:product_type>
+   <g:price>259.80 BRL</g:price>
+  </item>
+ </channel>
+  <config>
+   <system>Magento</system>
+   <extension>Magmodules_Googleshopping</extension>
+   <extension_version>1.8.6</extension_version>
+   <store>Website Principal</store>
+   <url>https://www.camellia.com.br/</url>
+   <processed>2</processed>
+   <pages>1</pages>
+   <generated>2020-03-02 03:00:04</generated>
+   <processing_time>0.2891</processing_time>
+  </config>
+</rss>

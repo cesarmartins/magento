@@ -1,0 +1,831 @@
+
+
+
+<?php
+$isExists = $this->childrens;
+if(!empty($isExists)){
+    ?>
+    <div>
+
+
+        <div class = 'grid'>
+            <div class = 'hor-scroll'>
+                <table cellspacing="0" id="">
+
+                    <thead>
+                        <tr class="headings">
+                            <th><span class="nobr">Pai:</span></th>
+                            <th><span class="nobr">Filtrar por ação:</span></th>
+                            <th><span class="nobr">Filtrar por situação:</span></th>
+                            <th><span class="nobr">Pesquisar pelo nome:</span></th>
+                        </tr>
+                        <tr class="filter">
+                            <th>
+                                <select name="parent_type" >
+                                    <option value="pai1" selected="selected">PAI1</option>
+                                    <option value="pai2">PAI2</option>
+                                </select>
+                            </th>
+                            <th>
+                                <select name="action_id"></select>
+                            </th>
+                            <th>
+                                <select required="" name="filtersituation">
+                                    <option selected="" value="">Escolha uma situação</option>
+                                    <option value="0">Todos</option>
+                                    <option value="1">Aguardando</option>
+                                    <option value="2">Problema</option>
+                                    <option value="3">Lixeira</option>
+                                </select>
+                            </th>
+                            <th>
+                                <input type="text" id="parent" class="ui-autocomplete-input input-text" style="width: 100%" />
+                                <input type="hidden" name="parent_id" id="parent_id"/>
+                            </th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+
+        <table cellspacing="0" class="actions">
+            <tbody>
+                <tr>
+                    <td class="pager">
+                        Página
+                        <a href="# title="Página anterior" id="ant-pag"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>adminhtml/default/default/images/pager_arrow_left.gif" alt="Go to Previous page" class="arrow"></a>
+                        <input type="text" name="page" value="1" class="input-text page" />
+                        <a href="#" title="Próxima página" id="prox-pag"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>adminhtml/default/default/images/pager_arrow_right.gif" alt="Go to Next page" class="arrow"></a>
+
+                        de <span id="tot-pag"><?php echo $this->total_pag; ?></span> páginas            <span class="separator">|</span>
+                        Visualizar            <select name="limit" >
+                            <option value="20" selected="selected">20</option>
+                            <option value="10">10</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="200">200</option>
+                        </select>
+                        por página<span class="separator">|</span>
+                        Total <span id="tot-reg"><?php echo $this->total; ?></span> registros encontrados    <span id="sales_order_grid-total-count" class="no-display">2034</span>
+                    </td>
+                    <td class="filter-actions a-right">
+                        <button  title="Limpar valores" type="button" class="scalable btn-clean "  style=""><span><span><span>Limpar valores</span></span></span></button>
+                        <button  title="Cadastrar" type="button" class="scalable add btn-cadastrar"  style=""><span><span><span>Cadastrar</span></span></span></button> 
+                    </td>
+               </tr>
+            </tbody></table>
+
+        <span class="field-row  a-right" >
+
+
+              <div style="float: right; padding:10px;">
+                  <label>Tipo do cupom</label>
+                  <select required="" name="type">
+                      <option selected="" value="">Selecione</option>
+                      <option value="rider1">1º Boardshort Grátis Super Heat</option>
+                      <option value="rider2">2º Boardshort Grátis Fusion </option>
+                      <option value="friends">Code Friends</option>
+                  </select>
+                  <button id="aprovar-customers" title="Enviar" type="button" class="scalable "  style=""><span><span><span>Enviar</span></span></span></button>
+              </div>
+
+
+            <div style="float: right; padding:10px;">
+                <label>Situação</label>
+                <select required="" name="situation">
+                    <option selected="" value="">Selecione</option>
+                    <option value="0">Todos</option>
+                    <option value="1">Aguardando</option>
+                    <option value="2">Problema</option>
+                    <option value="3">Lixeira</option>
+                </select>
+
+
+            </div>
+
+
+
+
+        </span>
+    </div>
+    <div class = 'grid'>
+        <div class = 'hor-scroll'>
+            <table cellspacing="0" class="data" id="treeGrid_table">
+                <thead>
+                <tr class="headings">
+                    <th><span class="nobr a-center "> <input type="checkbox" name="select-all" value="x" class="select-all"></span></th>
+                    <th><span class="nobr"><span><a href="#" class="sort-title" data-value="id" data-order="desc">ID</a></span></span></th>
+                    <th><span class="nobr"><span><a href="#" class="sort-title" data-value="nome" data-order="desc">Nome</a></span></span></th>
+                    <th><span class="nobr"><span><a href="#" class="sort-title" data-value="parent_id" data-order="desc">Primeiro Nivel</a></span></span></th>
+                    <th><span class="nobr"><span><a href="#" class="sort-title active" data-value="last_action" data-order="asc">Última Ação</a></span></span></th>
+                    <th><span class="nobr"><span class="future"><a href="#" class="sort-title" data-value="future_action" data-order="desc">Ação Futura</a></span></span></th>
+                    <th><span class="nobr"><span><a href="#" class="sort-title" data-value="last_exception" data-order="desc">Observação</a></span></span></th>
+                    <!-- <th><span class="nobr"><span><a href="#" class="sort-title" data-value="status" data-order="desc">Status Atual</a></span></span></th>-->
+                   <!-- <th><span class="nobr"><span><a href="#" class="sort-title">Cód Especial(1)</a></span></span></th>
+                    <th><span class="nobr"><span><a href="#" class="sort-title">Cód Especial(2)</a></span></span></th>
+                    <th><span class="nobr"><span><a href="#" class="sort-title">Friends Code</a></span></span></th>-->
+                </tr>
+                </thead>
+                    <tbody>
+                <?php foreach($this->childrens as $child ): ?>
+                    <tr class="even pointer" >
+                        <td class="a-center a-check">
+                            <input type="checkbox" name="customer[]" value="<?php echo $child['id']; ?>" class="customer-check">
+                        </td>
+                        <td class=" a-right a-id"> <?php echo  $child['id']; ?> </td>
+                        <td class=" a-nome"><a href="#" class="add-acao" data-type="<?php echo (!empty($child['parent']) && $child['parent']=='rato')? 1 : 2 ; ?>" data-id ="<?php echo $child['id']; ?>" >
+                                      <?php echo  $child['child']; ?></a></td>
+                        <td class=" a-right a-parent"  ><?php echo  $child['parent']; ?></td>
+                        <td class=" a-right "> <?php echo  $child['last_action']; ?> </td>
+                        <td class=" a-right "> <?php echo  $child['future_action']; ?> </td>
+
+                        <td class=" a-right "> <?php echo  $child['last_exception']; ?> </td>
+                       <!-- <td class=" a-right "><?php /*echo  $child['status']; */?></td>-->
+
+
+                        <!--<td class=" a-right "  ><?php /*echo  $child['cod_gerado_1']; */?></td>
+                        <td class=" a-right "> <?php /*echo  $child['cod_gerado_2']; */?> </td>
+                        <td class=" a-right "><?php /*echo  $child['codigo_ref']; */?></td>-->
+
+
+                    </tr>
+                    <tr class="show-msg"   style="display: none;" >
+                       <td id="show-coupon-<?php echo $child['id']; ?>" colspan="7">
+                       </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<?php }else { ?>
+    <center style="color: #00244f;font-size: large;line-height: 450px;"  >Você não possui subníveis </center>
+<?php } ?>
+
+
+<style>
+    .coupons {
+        padding: 50px 0;
+    }
+    .coupons li {
+        margin: 20px 0;
+        width: 450px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+    .coupons li:last-child {
+        border-bottom: none;
+    }
+    .coupons li textarea {
+        width: 400px;
+        height: 170px;
+        float: left;
+        text-align: justify;
+        margin: 0 10px 10px 0;
+        display: block;
+        background: transparent none repeat;
+    }
+    .coupons li input {
+        float: left;
+    }
+    .coupons li .copiar {
+        float: right;
+    }
+
+    .input-form{
+        padding: 9px 0px 13px;
+        width: 200px;
+    }
+    .input-form input[type='text']{
+        width: 100%;
+        height: 22px;
+    }
+    .show-msg{
+
+        height: 100px;
+
+    }
+    .show-msg textarea {
+        height: 122px;
+        width: 426px;
+    }
+    .btn-cadastrar{
+        float: right;
+
+    }
+    .a-id{
+        width: 10px;
+    }
+    .a-nome{
+        width: 200px;
+    }
+
+    .a-parent{
+        width: 150px;
+    }
+    .a-check{
+        width: 20px;
+    }
+    .remove-future{
+        float:right;
+    }
+    .grid tr.headings th .remove-future {
+        font-weight: bold;
+        display: inline-block;
+        float:right;
+    }
+    .grid tr.headings th a {
+        display: inline-block;
+        float:left;
+    }
+
+ 
+
+
+</style>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+<script type="text/javascript">
+
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+    var totalPag =  <?php echo $this->total_pag; ?>;
+
+    var urlParent = '<?php echo Mage::getModel('adminhtml/url')->getUrl('tree/adminhtml_tree/getParents/'); ?>';
+    jQuery('#parent').on( "keydown", function( event ) {
+        if ( event.keyCode === jQuery.ui.keyCode.TAB &&
+            jQuery( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    }).autocomplete({
+        source: function( request, response ) {
+            jQuery.getJSON(urlParent, {
+                term: request.term , status:1
+            }, response );
+        },
+        search: function() {
+            // custom minLength
+            var term =  this.value ;
+            if ( term.length < 2 ) {
+                return false;
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+            this.value = ui.item.value;
+             jQuery("#parent_id").val(ui.item.id);
+            var pagAtual = 1;
+            var limit  = jQuery('select[name="limit"]' ).val();
+            pagination(pagAtual ,limit , "");
+           // jQuery('#addChildrens').attr('style','display:block');
+            return false;
+        }
+    });
+
+
+
+
+
+    //pag autal
+
+    function pagination(pag ,limit, lastLine){
+        var url = 'tree/adminhtml_tree/pagination';
+        var parent_id = "";
+        var parentName = jQuery("#parent").val();
+        if(parentName){
+            parent_id = jQuery('#parent_id').val();
+        }
+
+        var orders = [];
+        jQuery('.sort-title').each(function(indx){
+            var order = "";
+            var value = "";
+            if(jQuery(this).hasClass('active')) {
+                order = jQuery(this).data('order');
+                if (order != undefined) {
+                    value = jQuery(this).data('value');
+                    orders.push({name: value, value: order});
+                }
+            }
+        })
+
+        var parent_type  = jQuery("select[name='parent_type']").val();
+        console.log(parent_id);
+        var strOrders = JSON.stringify(orders);
+
+        var lastAction = jQuery("select[name='action_id']").val();
+        if(lastAction == null || lastAction == undefined){
+            lastAction = "";
+        }
+
+        var situation = jQuery('select[name="filtersituation"]').val();
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: 'pag='+pag+'&limit='+limit+'&parent_id='+parent_id+'&orders='+strOrders+'&parent_type='+parent_type+'&last_action='+lastAction+'&situation='+situation,
+            onSuccess: function(r) {
+                var valores  = r.responseJSON.valores;
+                var html = "";
+                for(x in valores ){
+                    if(Number.isInteger(parseInt(x))){
+                        var parentType = 2;
+                        if(valores[x].parent == 'Rato'){
+                            parentType = 1;
+                        }
+
+                        var idViz = "";
+                        idViz = valores[x].id;
+                        console.log(idViz.length);
+                        if(idViz.length < 4){
+                            var z = 0;
+                            var z = Math.abs(idViz.length - 4);
+                            var strZ = "";
+                            for(var y = 0 ; y < z ; y++ ){
+                                strZ += "0";
+                            }
+                           idViz = strZ+idViz;
+                        }
+                        var urlAcao = "";
+                        urlAcao =  '<?php echo Mage::getModel('adminhtml/url')->getUrl('tree/adminhtml_tree/acoes/'); ?>'+'?type='+parentType+'&id='+valores[x].id;
+                        html += '<tr class="even pointer" >';
+                        html += '<td class="a-center a-check">';
+                        html += '<input type="checkbox" name="customer[]" value="'+valores[x].id+'" class="customer-check">';
+                        html += '</td>';
+                        html += '<td class=" a-right a-id">'+idViz+'</td>';
+                        html += '<td class="a-nome ">';
+                        html += '<a href="'+urlAcao+'">';
+                        html +=  valores[x].child+'</a></td>';
+                        html += '<td class=" a-right a-parent ">'+valores[x].parent+'</td>';
+
+                        var lastActionResp = "no action";
+                        if(valores[x].last_action != null){
+                            lastActionResp = valores[x].last_action;
+                        }
+
+                        html += '<td class=" a-right ">'+lastActionResp+'</td>';
+
+                        var actionFuture  = "no action";
+                        var actionFutureId = "";
+                        if(valores[x].future_action != null){
+                            actionFuture = valores[x].future_action.split('-');
+                            actionFutureId = actionFuture[1];
+                            actionFuture = actionFuture[0];
+
+                        }
+
+                        html += '<td class=" a-right "><a href="#" class="action-future" data-id="'+actionFutureId+'">'+actionFuture+'</a></td>';
+
+
+                        var last_exception  = "no observation";
+                        if(valores[x].last_exception != null){
+                            last_exception = valores[x].last_exception;
+                        }
+
+                        html += '<td class=" a-right ">'+last_exception+'</td>';
+
+                        /*html += '<td class=" a-right ">'+valores[x].status+'</td>';*/
+
+                      /*  html += '<td class=" a-right ">'+valores[x].cod_gerado_1+'</td>';
+                        html += '<td class=" a-right ">'+valores[x].cod_gerado_2+'</td>';
+                        html += '<td class=" a-right ">'+valores[x].codigo_ref+'</td>';*/
+
+                        html += '</tr>';
+                        html += '<tr class="show-msg" style="display: none;" ><td id="show-coupon-'+valores[x].id+'" colspan="7"></td></tr>';
+
+                    }
+                }
+                jQuery(".page").val(pag);
+                jQuery("#tot-reg").html( r.responseJSON.total);
+                totalPag =  Math.ceil( parseInt(jQuery('#tot-reg').html())/limit);
+                jQuery('#tot-pag').html(totalPag);
+               // jQuery("#tot-reg").html( r.responseJSON.total);
+
+                if(html == "" || html == undefined )
+                    jQuery('#treeGrid_table tbody').html(lastLine);
+                else
+                    jQuery('#treeGrid_table tbody').html(html);
+
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+    }
+
+    function loadAction(type){
+
+
+        var url = 'tree/adminhtml_tree/getAcoes/';
+        var param = 'type='+type+'&index='+'true';
+
+        jQuery('select[name="action_id"]').html('<option value="">Carregando...</option>');
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: param,
+            onSuccess: function(r) {
+                var resp = r.responseJSON;
+                if(resp.status){
+                    var opt = '<option value="">Escolha uma ação</option>';
+                    for( row in resp.actions ){
+                        if(Number.isInteger(parseInt(row))){
+                            opt += "<option value='"+resp.actions[row]['id']+"' data-prox='"+resp.actions[row]['proxima_acao']+"' data-proxname='"+resp.actions[row]['proxima_acao_name']+"'>"+resp.actions[row]['name']+'</option>';
+                        }
+                    }
+                    jQuery('select[name="action_id"]').html(opt);
+                }
+
+            },
+            onFailure: function() {
+
+                jQuery('select[name="action_id"]').html('<option value="">Selecione</option>');
+
+                alert('Something went wrong...'); }
+        });
+    }
+
+
+
+    jQuery(document).on('click' , '.action-future' , function(ast){
+
+
+        var idAction  = jQuery(this).data('id');
+        jQuery('select[name="action_id"]').val(idAction);
+
+        var pagAtual = 1;
+        var limit  = jQuery('select[name="limit"]').val();
+
+
+        var optSelected = jQuery('select[name="action_id"]').find('option:selected');
+        var pName = optSelected.data('proxname');
+        var pId = optSelected.data('prox');
+
+        var atual = optSelected.html();
+        atual  = atual.replace('p-', "");
+
+        var a = '<a href="#" class="action-future remove-future" data-id="'+pId+'">'+pName+'</a>';
+
+        var html = "";
+
+        html +='<tr class="even pointer remove-future-tr"><td class="a-center a-check">';
+        html +='</td>' ;
+        html +='<td class=" a-right a-id"></td><td class="a-nome ">' ;
+        html +='</td>' ;
+        html +='<td class=" a-right a-parent "></td><td class=" a-right ">'+atual+'</td><td class=" a-right ">' ;
+        html += a+ '</td><td class=" a-right "></td></tr>';
+
+        lastLine = html;
+
+        pagination(pagAtual,limit , lastLine);
+
+
+
+    });
+
+
+    jQuery(document).on('click','.sort-title' , function (ecvt) {
+        var field =  jQuery(this).data('value');
+        if(field != undefined){
+            var orderNow = jQuery(this).data('order');
+            if(orderNow == 'desc'){
+                jQuery(this).data('order' , 'asc');
+            }else{
+                jQuery(this).data('order' , 'desc');
+            }
+
+            jQuery('.sort-title').removeClass('active');
+            jQuery(this).addClass('active');
+
+            var pagAtual = 1;
+            var limit  = jQuery('select[name="limit"]').val();
+
+            pagination(pagAtual,limit, "");
+        }
+    });
+
+    jQuery(document).on("keyup",'.page', function( event ) {
+         if((event.keyCode >= 48 && event.keyCode <= 57)|| event.keyCode >= 96 && event.keyCode <= 105  ) {
+            var pagAtual = parseInt(jQuery(this).val());
+            if(pagAtual > totalPag ||  pagAtual <  1 )
+                return false;
+            var limit  = jQuery('select[name="limit"]' ).val();
+            pagination(pagAtual ,limit , "");
+        }
+    });
+
+
+
+    jQuery(document).on('change', 'select[name="filtersituation"]' , function() {
+        var pagAtual = 1;
+        var limit  = parseInt(jQuery('select[name="limit"]').val());
+        pagination(pagAtual ,limit, "");
+    });
+
+
+
+    jQuery(document).on('change', 'select[name="limit"]' , function() {
+        var pagAtual = 1;
+        var limit  = parseInt(jQuery(this).val());
+        totalPag =  Math.ceil( parseInt(jQuery('#tot-reg').html())/limit);
+        jQuery('#tot-pag').html(totalPag);
+
+        if(pagAtual > totalPag ||  pagAtual <  1 )
+            return false;
+
+        pagination(pagAtual ,limit , "");
+
+    });
+
+
+    jQuery(document).on('change',   "select[name='action_id']" , function() {
+
+        var pagAtual = 1;
+        var limit  = parseInt(jQuery('select[name="limit"]').val());
+
+        var optSelected = jQuery(this).find('option:selected');
+        var pName = optSelected.data('proxname');
+        var pId = optSelected.data('prox');
+
+        var atual = optSelected.html();
+        atual  = atual.replace('p-', "");
+
+        var a = '<a href="#" class="action-future remove-future" data-id="'+pId+'">'+pName+' &gt;&gt;</a>';
+
+         var html = "";
+
+        html +='<tr class="even pointer remove-future-tr"><td class="a-center a-check">';
+        html +='</td>' ;
+        html +='<td class=" a-right a-id"></td><td class="a-nome ">' ;
+        html +='</td>' ;
+        html +='<td class=" a-right a-parent "></td><td class=" a-right ">'+atual+'</td><td class=" a-right ">' ;
+        html += a+ '</td><td class=" a-right "></td></tr>';
+
+       /* jQuery('.remove-future-tr').remove();
+        if(pName != undefined && pName != "" )
+            jQuery('#treeGrid_table').find('tbody').append(html);*/
+
+        lastLine = html;
+
+        pagination(pagAtual ,limit, lastLine);
+
+    });
+
+
+    jQuery(document).on('change', 'select[name="parent_type"]' , function() {
+
+
+        var type = jQuery(this).val();
+
+        loadAction(type);
+
+        var pagAtual = 1;
+        var limit  = parseInt(jQuery('select[name="limit"]').val());
+        jQuery('.remove-future').remove();
+
+        pagination(pagAtual ,limit, "");
+
+    });
+
+
+    jQuery("#prox-pag").on('click',function(){
+        var pagAtual = parseInt(jQuery(".page").val());
+        var proxPag = pagAtual+1;
+        if(proxPag > totalPag )
+            return false;
+        var limit  = jQuery('select[name="limit"]' ).val();
+        pagination(proxPag,limit, "");
+
+    });
+
+
+    jQuery("#ant-pag").on('click',function(){
+        var pagAtual = parseInt(jQuery(".page").val());
+        if(pagAtual == 1 )
+            return false;
+        var proxPag = pagAtual-1;
+        var limit  = jQuery('select[name="limit"]' ).val();
+        pagination(proxPag,limit, "");
+
+    });
+
+
+    jQuery('form[name="salvar"]').submit(function(e){
+        e.preventDefault();
+        var url = 'opinioes/adminhtml_opinioes/salvar/';
+        var param = jQuery(this).serialize();
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: param,
+            onSuccess: function(r) {
+                var resp = r.responseJSON;
+                jQuery('form[name="salvar"]').hide();
+                jQuery('ul.coupons').html('');
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+        return false;
+
+    });
+
+
+    jQuery(document).on('change','select[name="type"]',function (){
+
+        var val = jQuery(this).val();
+        if(val == 'friends'){
+
+            jQuery('input[name="customer[]"]:checked').each(function(i, elm){
+                var id = "";
+                id = jQuery(this).val();
+                html = '<input type="text" name="coupon['+id+']" class="friends-coupon"/>';
+                jQuery("#show-coupon-"+id).html(html);
+                jQuery("#show-coupon-"+id).parent().attr('style','');
+            });
+        }
+
+
+
+    });
+
+    jQuery('#aprovar-customers').on('click' , function(e){
+        e.preventDefault();
+        var ids = "";
+        var v = "";
+
+        jQuery('input[name="customer[]"]:checked').each(function(i, elm){
+            ids+= v+elm.value;
+            v = ",";
+        });
+
+        if(ids == ""){
+            alert('Necessario selecionar algum usuario');
+            return false;
+        }
+        var parent_id = jQuery('#parent_id').val();
+        var type = jQuery('select[name="type"]').val();
+
+        var situation_id = jQuery('select[name="situation"]').val();
+
+
+        if(situation_id != ''){
+
+            var url = 'tree/adminhtml_tree/situacao/';
+            var param = '&ids=' + ids + '&situation=' + situation_id;
+
+            new Ajax.Request(baseUrl + url, {
+                method: 'post',
+                parameters: param,
+                onSuccess: function (r) {
+                    var pagAtual = jQuery('input[name="page"]').val();
+                    var limit  = parseInt(jQuery("select[name='limit']").val());
+                    pagination(pagAtual ,limit , "");
+                 },
+                onFailure: function () {
+                    alert('Something went wrong...');
+                }
+            });
+
+            return false;
+
+        }
+
+
+        if(type != 'friends') {
+            var url = 'tree/adminhtml_tree/processar/';
+            var param = '&ids=' + ids + '&parent_id=' + parent_id + '&type=' + type;
+
+            new Ajax.Request(baseUrl + url, {
+                method: 'post',
+                parameters: param,
+                onSuccess: function (r) {
+                    var valores = r.responseJSON;
+                    for (var i in valores) {
+
+                        if (Number.isInteger(parseInt(i))) {
+                            var html = "";
+
+                            if (valores[i].status) {
+                                html += '<textarea rows="5">' + valores[i].msg + valores[i].link+'</textarea>';
+                                html += '<input type="checkbox" style="display: none">';
+                                html += '<input type="button" class="copiar" value="Copiar">';
+                                html += '<br style="clear: both"/>';
+                            } else {
+
+                                html += '<center style="font-size:16px;color:red;margin-top: 20px;">' + valores[i].msg + '</center>';
+                            }
+
+                            jQuery("#show-coupon-" + valores[i].id).html(html);
+                            jQuery("#show-coupon-" + valores[i].id).parent().attr('style', '');
+                        }
+
+                    }
+
+                },
+                onFailure: function () {
+                    alert('Something went wrong...');
+                }
+            });
+
+        }else if(type == 'friends') {
+
+            var url = 'tree/adminhtml_tree/saveFriendsCoupon/';
+            var param = jQuery('.friends-coupon').serialize();
+
+            new Ajax.Request(baseUrl + url, {
+                method: 'post',
+                parameters: param,
+                onSuccess: function (r) {
+                    var valores = r.responseJSON;
+                    for (var i in valores) {
+
+                        if (Number.isInteger(parseInt(i))) {
+                            var html = "";
+
+                            if (valores[i].status) {
+                                html += '<textarea rows="5">' + valores[i].link +'</textarea>';
+                                html += '<input type="checkbox" style="display: none">';
+                                html += '<input type="button" class="copiar" value="Copiar">';
+                                html += '<br style="clear: both"/>';
+                            } else {
+                                html += '<center style="font-size:16px;color:red;margin-top: 20px;">' + valores[i].msg + '</center>';
+                            }
+
+                            jQuery("#show-coupon-" + valores[i].id).html(html);
+                            jQuery("#show-coupon-" + valores[i].id).parent().attr('style', '');
+                        }
+
+                    }
+
+                },
+                onFailure: function () {
+                    alert('Something went wrong...');
+                }
+            });
+
+
+        }
+
+        return false;
+    });
+
+    jQuery(document).on('click', '.copiar', function(event) {
+        var copyTextarea = jQuery(this).parents('td').find('textarea');
+        copyTextarea.select();
+
+       // jQuery(this).parents('td').find('input[type="checkbox"]').prop('checked', true).show();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'sim!' : 'não!';
+        } catch (err) {
+            alert('Opa, Não conseguimos copiar o texto, é possivel que o seu navegador não tenha suporte, tente usar Crtl+C.');
+        }
+    });
+
+    jQuery('select[name="type"]').change(function(){
+        if(jQuery(this).val()=='swc'){
+            jQuery('input[name="desconto"]').val(40);
+        }else if(jQuery(this).val()=='swr'){
+            jQuery('input[name="desconto"]').val(50);
+        }else if(jQuery(this).val()=='rider1' || jQuery(this).val()=='rider2'){
+            jQuery('input[name="desconto"]').val(85);
+        }
+    });
+
+    jQuery(document).ready(function(){
+        var pagAtual = 1;
+        var limit  = parseInt(jQuery("select[name='limit']").val());
+        var parent_type  = jQuery("select[name='parent_type']").val();
+
+        pagination(pagAtual ,limit , "");
+        if(parent_type)
+            loadAction(parent_type);
+    });
+
+    jQuery(document).on('click', '.btn-clean',function(){
+
+        var pagAtual = 1;
+        var limit = 20;
+        jQuery("select[name='limit']").val(limit);
+        jQuery("select[name='type']").val('');
+        jQuery("select[name='parent_type']").val('pai1');
+        jQuery("#parent").val('');
+        jQuery("#parent_id").val('');
+        loadAction('pai1');
+        pagination(pagAtual ,limit, "");
+
+    });
+
+    var urlCadastrar = '<?php echo Mage::helper('adminhtml')->getUrl('tree/adminhtml_tree/cadastrar',array('_secure'=>true));?>';
+
+    jQuery(document).on('click', '.btn-cadastrar',function(){
+         window.location.href = urlCadastrar;
+    });
+
+
+</script>
+

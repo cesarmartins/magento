@@ -1,0 +1,41 @@
+sku;_store;_attribute_set;_type;_category;_root_category;_product_websites;codazon_featured;codazon_hot;colecao;color;cost;created_at;custom_design;custom_design_from;custom_design_to;custom_layout_update;descricaogoogleshopping;description;ean;faixa_etaria;fit_size;gallery;genero;gift_message_available;glam_prbarcode;googleshopping_category;googleshopping_condition;googleshopping_exclude;has_options;image;image_label;manufacturer;material;media_gallery;meigee_product_theme_id;meta_description;meta_title;minimal_price;msrp;msrp_display_actual_price_type;msrp_enabled;name;news_from_date;news_to_date;options_container;page_layout;posting_days;postmethods;price;required_options;short_description;small_image;small_image_label;special_from_date;special_price;special_to_date;status;tamanho;tax_class_id;tematico;thumbnail;thumbnail_label;tipo_de_manga;updated_at;url_key;url_path;visibility;volume_altura;volume_comprimento;volume_largura;weight;qty;min_qty;use_config_min_qty;is_qty_decimal;backorders;use_config_backorders;min_sale_qty;use_config_min_sale_qty;max_sale_qty;use_config_max_sale_qty;is_in_stock;notify_stock_qty;use_config_notify_stock_qty;manage_stock;use_config_manage_stock;stock_status_changed_auto;use_config_qty_increments;qty_increments;use_config_enable_qty_inc;enable_qty_increments;is_decimal_divided;_links_related_sku;_links_related_position;_links_crosssell_sku;_links_crosssell_position;_links_upsell_sku;_links_upsell_position;_associated_sku;_associated_default_qty;_associated_position;_tier_price_website;_tier_price_customer_group;_tier_price_qty;_tier_price_price;_group_price_website;_group_price_customer_group;_group_price_price;_media_attribute_id;_media_image;_media_lable;_media_position;_media_is_disabled;_custom_option_store;_custom_option_type;_custom_option_title;_custom_option_is_required;_custom_option_price;_custom_option_sku;_custom_option_max_characters;_custom_option_sort_order;_custom_option_row_title;_custom_option_row_price;_custom_option_row_sku;_custom_option_row_sort;_super_products_sku;_super_attribute_code;_super_attribute_option;_super_attribute_price_corr
+produto-1;;Produto Simples;simple;;;base;;;;;;2020-04-27 21:56:27;;;;;dasdasd;"<p><span style=""font-size: large;""><strong>Entrada</strong></span></p>
+<ul>
+<li><span style=""font-size: medium;""><strong>Op&ccedil;&atilde;o 1:</strong>&nbsp;Steak Tartare cortado a faca com batatas souffl&eacute;e.</span></li>
+<li><span style=""font-size: medium;""><strong>Op&ccedil;&atilde;o 2:</strong>&nbsp;Carpaccio de polvo com vinagrete de batata e p&aacute;prica defumada.</span></li>
+</ul>
+<p></p>
+<p><span style=""font-size: large;""><strong>Prato Principal</strong></span></p>
+<ul>
+<li><span style=""font-size: medium;""><strong>Op&ccedil;&atilde;o 1:</strong> Fideua de Camar&otilde;es com a&ccedil;afr&atilde;o finalizada no forno de barro.</span></li>
+<li><span style=""font-size: medium;""><strong>Op&ccedil;&atilde;o 2:</strong>&nbsp;Arroz de polvo assado no forno de barro com p&aacute;prica defumada.</span></li>
+</ul>
+<p></p>
+<p><span style=""font-size: large;""><strong>Sobremesa</strong></span></p>
+<ul>
+<li><span style=""font-size: medium;""><strong>Op&ccedil;&atilde;o 1:</strong>&nbsp;Cheesecake&nbsp;</span></li>
+<li><span style=""font-size: medium;""><strong>Op&ccedil;&atilde;o 2:</strong>&nbsp;Mil folhas</span></li>
+</ul>";p1;;;;;;;;;Não;1;/a/r/arroz-de-polvo-assado-no-forno-de-barro-com-p_prica-defumada.jpg;;;;;;;;;;Utilizar configuração;Utilizar configuração;Menu Restaurant Week;;;Info Coluna de Produto;;;;49.9000;1;"Entrada
+      Opção 1: Prato 1 
+      Opção 2: Prato 2 
+
+Prato Principal
+      Opção 1: Prato 1 
+      Opção 2: Prato 2 
+
+Sobremesa
+      Opção 1: Prato 1 
+      Opção 2: Prato 2";/a/r/arroz-de-polvo-assado-no-forno-de-barro-com-p_prica-defumada.jpg;;;;;1;;0;;/c/h/cheesecake.jpg;;;2020-05-04 22:04:11;a-figueira-rubaiyat;a-figueira-rubaiyat;4;;;;0.1000;1000.0000;0.0000;1;0;0;1;1.0000;1;0.0000;1;1;;1;0;1;0;1;0.0000;1;0;0;;;;;h2o-500ml;0;;;;;;;;;;;90;/a/r/arroz-de-polvo-assado-no-forno-de-barro-com-p_prica-defumada.jpg;;1;0;;checkbox;Doação Delivery Solidário;0;;;;3;Delivery Solidário;10.0000;;0;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;h2o-limoneto-500ml;0;;;;;;;;;;;90;/f/i/fideua-de-camar_es-com-a_afr_o-finalizada-no-forno-de-barro.jpg;;2;0;default;;;;;;;;Delivery Solidário;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;agua-indaia-sem-gas-500ml;0;;;;;;;;;;;90;/c/h/cheesecake.jpg;;3;0;;radio;Sobremesa:;1;;;;2;Cheesecake ;0.0000;;0;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;red-bull-250ml;0;;;;;;;;;;;90;/m/i/mil-folhas.jpg;;4;0;;;;;;;;;Mil folhas;0.0000;;0;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;heineken-long-neck-330ml;0;;;;;;;;;;;90;/1/9/19656_copa-sao-paulo-6.jpg;;0;0;default;;;;;;;;Cheesecake ;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;bohemia-long-neck-355ml;0;;;;;;;;;;;;;;;;default;;;;;;;;Mil folhas;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;radio;Entrada:;1;;;;0;Carpaccio de polvo com vinagrete de batata e páprica defumada;0.0000;;0;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Steak Tartare cortado a faca com batatas soufflée;0.0000;;0;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;default;;;;;;;;Carpaccio de polvo com vinagrete de batata e páprica defumada;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;default;;;;;;;;Steak Tartare cortado a faca com batatas soufflée;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;radio;Prato Principal:;1;;;;1;Arroz de polvo assado no forno de barro com páprica defumada;0.0000;;0;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Fideua de Camarões com açafrão finalizada no forno de barro;0.0000;;0;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;default;;;;;;;;Arroz de polvo assado no forno de barro com páprica defumada;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;default;;;;;;;;Fideua de Camarões com açafrão finalizada no forno de barro;;;;;;;

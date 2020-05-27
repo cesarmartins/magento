@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <TotalMetrica_Importacao>
+            <active>true</active>
+            <codePool>local</codePool>
+        </TotalMetrica_Importacao>
+    </modules>
+</config>

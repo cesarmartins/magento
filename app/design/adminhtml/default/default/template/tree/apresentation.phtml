@@ -1,0 +1,428 @@
+
+
+
+
+<script>jQuery('#anchor-content').css('max-width','100%');</script>
+
+<script id="code">
+  var nodeIdCounter = -1; // use a sequence to guarantee key uniqueness as we add/remove/modify nodes
+
+  function init() {
+    if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+    var $_ = go.GraphObject.make;  // for conciseness in defining templates
+
+
+    myDiagram =
+      $_(go.Diagram, "myDiagramDiv", // must be the ID or reference to div
+        {
+          // initialAutoScale: go.Diagram.UniformToFill,  // automatically scale down to show whole tree
+          // maxScale: 1,
+          contentAlignment: go.Spot.Center,  // center the tree in the viewport
+          isReadOnly: false,  // don't allow user to change the diagram
+          initialContentAlignment: go.Spot.Center,
+          maxSelectionCount: 1, // users can select only one part at a time
+
+           initialContentAlignment: go.Spot.TopCenter
+		,  initialViewportSpot: go.Spot.Center
+      , contentAlignment: go.Spot.None,
+
+          "animationManager.isEnabled": false,
+          "undoManager.isEnabled": true, // enable undo & redo
+          layout:
+            $_(go.TreeLayout,
+              {
+                treeStyle: go.TreeLayout.StyleLastParents,
+                arrangement: go.TreeLayout.ArrangementHorizontal,
+                // properties for most of the tree:
+                angle: 90,
+                layerSpacing: 35,
+                // properties for the "last parents":
+                alternateAngle: 90,
+                alternateLayerSpacing: 35,
+                alternateAlignment: go.TreeLayout.AlignmentBus,
+                alternateNodeSpacing: 20
+              })
+
+        });
+
+
+    // manage boss info manually when a node or link is deleted from the diagram
+    // myDiagram.addDiagramListener("SelectionDeleting", function(e) {
+    //   var part = e.subject.first(); // e.subject is the myDiagram.selection collection,
+    //                                 // so we'll get the first since we know we only have one selection
+    //   myDiagram.startTransaction("clear boss");
+    //   if (part instanceof go.Node) {
+    //     var it = part.findTreeChildrenNodes(); // find all child nodes
+    //     while(it.next()) { // now iterate through them and clear out the boss information
+    //       var child = it.value;
+    //       var bossText = child.findObject("boss"); // since the boss TextBlock is named, we can access it by name
+    //       if (bossText === null) return;
+    //       bossText.text = undefined;
+    //     }
+    //   } else if (part instanceof go.Link) {
+    //     var child = part.toNode;
+    //     var bossText = child.findObject("boss"); // since the boss TextBlock is named, we can access it by name
+    //     if (bossText === null) return;
+    //     bossText.text = undefined;
+    //   }
+    //   myDiagram.commitTransaction("clear boss");
+    // });
+
+    var levelColors = ["#AC193D/#BF1E4B", "#2672EC/#2E8DEF", "#8C0095/#A700AE", "#5133AB/#643EBF",
+                       "#008299/#00A0B1", "#D24726/#DC572E", "#008A00/#00A600", "#094AB2/#0A5BC4"];
+
+    // override TreeLayout.commitNodes to also modify the background brush based on the tree depth level
+    myDiagram.layout.commitNodes = function() {
+      go.TreeLayout.prototype.commitNodes.call(myDiagram.layout);  // do the standard behavior
+      // then go through all of the vertexes and set their corresponding node's Shape.fill
+      // to a brush dependent on the TreeVertex.level value
+      myDiagram.layout.network.vertexes.each(function(v) {
+        if (v.node) {
+          var level = v.level % (levelColors.length);
+          var colors = levelColors[level].split("/");
+          var shape = v.node.findObject("SHAPE");
+          if (shape) shape.fill = $_(go.Brush, "Linear", { 0: colors[0], 1: colors[1], start: go.Spot.Left, end: go.Spot.Right });
+        }
+      });
+    };
+
+    // This function is used to find a suitable ID when modifying/creating nodes.
+    // We used the counter combined with findNodeDataForKey to ensure uniqueness.
+    function getNextKey() {
+      var key = nodeIdCounter;
+      while (myDiagram.model.findNodeDataForKey(key.toString()) !== null) {
+        key = nodeIdCounter -= 1;
+      }
+      return key.toString();
+    }
+
+    function nodeClick(e, obj) {
+
+
+    	// console.log( obj );
+    	// myDiagram.model.addNodeData({ key: "Omega", isGroup: true });
+
+    	// var key = obj.data.key;
+
+    	// var data = myDiagram.model.findNodeDataForKey(key.toString());
+    	// if (data !== null) data['name'] = "red";
+
+	    // This will update the color of the "Delta" Node
+	    // if (data !== null) myDiagram.model.setDataProperty(data, visible, true);
+
+	    // myDiagram.model.setDataProperty(data.name, 'visible', true);
+	    // myDiagram.model.commitTransaction("modified " + 'name');
+
+	    // model.startTransaction("modified " + field);
+
+    	// console.log( obj.findObject("name") );
+
+    	// jQuery('#3').attr('value',JSON.stringify(itflow));
+
+    	// var node = myDiagram.selection.first();
+    	// console.log( node );
+
+
+		  // textblock.text = "Hello!";
+		  // textblock.margin = 5;
+		  // node.add(textblock);
+		  // diagram.add(node);
+
+
+    }
+
+
+
+    // This function provides a common style for most of the TextBlocks.
+    // Some of these values may be overridden in a particular TextBlock.
+    function textStyle() {
+      return { font: "9pt  Segoe UI,sans-serif", stroke: "white" };
+    }
+
+    // This converter is used by the Picture.
+    // function findHeadShot(key) {
+    //   return "<?php echo $this->getSkinUrl('images/HSnopic.png');?>"
+    // }
+
+
+
+
+    // define the Node template
+    myDiagram.nodeTemplate =
+      $_(go.Node, "Auto", 
+        { 
+        	// doubleClick: nodeDoubleClick,
+        	click: nodeClick
+        },
+
+
+        // for sorting, have the Node.text be the data.name
+        new go.Binding("text", "name"),
+        // bind the Part.layerName to control the Node's layer depending on whether it isSelected
+        new go.Binding("layerName", "isSelected", function(sel) { return sel ? "Foreground" : ""; }).ofObject(),
+        // define the node's outer shape
+        $_(go.Shape, "Circle",
+          {
+            name: "SHAPE", fill: "white", stroke: null,
+            // set the port properties:
+            portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer"
+          }),
+        $_(go.Panel, "Horizontal",
+
+          // $_(go.Picture,
+          //   {
+          //     name: 'Picture', // the image
+          //     desiredSize: new go.Size(24, 30),
+          //     margin: new go.Margin(0, 6, 0, 6),
+          //   },
+          //   new go.Binding("source", "key", findHeadShot)),
+
+          // define the panel where the text will appear
+          $_(go.Panel, "Table",
+            {
+              maxSize: new go.Size(120, 999),
+              margin: new go.Margin(0, 4, 0, 4),
+              defaultAlignment: go.Spot.Left
+            },
+            $_(go.RowColumnDefinition, { column: 2, width: 4 }),
+
+
+            $_(go.TextBlock, textStyle(),  // the name hidden
+              {
+              	name: 'name',
+                row: 0, column: 0, columnSpan: 5,
+                font: "9pt Segoe UI,sans-serif",
+                editable: false, isMultiline: false,
+                // minSize: new go.Size(10, 16),
+                visible: false
+              },
+              new go.Binding("text", "name").makeTwoWay()),
+
+
+            $_(go.TextBlock, "", textStyle(), // row-01
+              { row: 1, column: 0 }),
+            $_(go.TextBlock, textStyle(),
+              {
+                row: 1, column: 0, columnSpan: 5,
+                editable: false, isMultiline: false,
+                minSize: new go.Size(10, 14),
+                margin: new go.Margin(0, 0, 0, 0)
+              },
+              new go.Binding("text", "row-01").makeTwoWay()),
+
+            $_(go.TextBlock, "", textStyle(), // row-02
+              { row: 2, column: 0 }),
+            $_(go.TextBlock, textStyle(),
+              {
+                row: 2, column: 0, columnSpan: 5,
+                editable: false, isMultiline: false,
+                minSize: new go.Size(10, 14),
+                margin: new go.Margin(0, 0, 4, 0)
+              },
+              new go.Binding("text", "row-02").makeTwoWay()),
+
+            $_(go.TextBlock, "", textStyle(), // row-03
+              { row: 2, column: 0 }),
+            $_(go.TextBlock, textStyle(),
+              {
+                row: 3, column: 0, columnSpan: 5,
+                editable: false, isMultiline: false,
+                minSize: new go.Size(10, 14),
+                margin: new go.Margin(0, 0, 0, 0)
+              },
+              new go.Binding("text", "row-03").makeTwoWay()),
+
+            $_(go.TextBlock, "", textStyle(), // row-04
+              { row: 2, column: 0 }),
+            $_(go.TextBlock, textStyle(),
+              {
+                row: 4, column: 0, columnSpan: 5,
+                editable: false, isMultiline: false,
+                minSize: new go.Size(10, 14),
+                margin: new go.Margin(0, 0, 0, 0)
+              },
+              new go.Binding("text", "estado").makeTwoWay())
+
+
+          )  // end Table Panel
+        ) // end Horizontal Panel
+      );  // end Node
+
+// On selection changed, make sure infoDraggable will resize as necessary
+    myDiagram.addDiagramListener("ObjectSingleClicked", function(diagramEvent) {
+    	var node = myDiagram.selection.first();
+    	var txtNode = node.findObject('name'); // get a handle for the textBlock
+    	txtNode.visible = !txtNode.visible;
+
+
+    	/*
+			console.log(txtNode.visible);
+			
+	
+
+    	*/
+
+    });
+
+    // define the Link template
+    myDiagram.linkTemplate =
+      $_(go.Link, go.Link.Orthogonal,
+        { corner: 5, relinkableFrom: true, relinkableTo: true },
+        $_(go.Shape, { strokeWidth: 4, stroke: "#00a4a4" }));  // the link shape
+
+    // read in the JSON-format data from the "mySavedModel" element
+    load();
+
+
+    // support editing the properties of the selected person in HTML
+    if (window.Inspector) myInspector = new Inspector('myInspector', myDiagram,{
+	        properties: {
+	          'key': { readOnly: true },
+	          'comments': {}
+	        }
+	      });
+	  }
+
+
+  	var data = { "class": "go.TreeModel",
+          "nodeDataArray": [
+          <?php $i=0; foreach($this->tree as  $value){ $i++; ?>
+          <?php //if ($i > 9){break;} ?>
+
+              {
+                "key"    : "<?php echo $value['id'];?>",
+                "name"   : "<?php echo $value['nome'];?>",
+                "row-01" : "<?php echo str_pad($value['id'],4,'0',STR_PAD_LEFT);?>",
+                "row-02" : "<?php echo str_pad($value['qtd_buy'],2,'0',STR_PAD_LEFT); ?>-<?php echo str_pad($value['qtd_friend'],3,'0',STR_PAD_LEFT); ?>",
+                "row-03" : "<?php echo str_pad($value['qtd_son'],6,'0',STR_PAD_LEFT); ?>",
+                "estado" : "<?php echo $value['estado'] ?>"
+                <?php echo (!empty($value['parent_id']) ? ', "parent":"'.$value['parent_id'].'"' : ''); ?>   
+              },
+
+           <?php } ?>
+
+          ]
+      }
+      ;
+
+  // Show the diagram's model in JSON format
+  function save() {
+    document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+    myDiagram.isModified = false;
+  }
+  function load() {
+    myDiagram.model = go.Model.fromJson(data);
+  }
+</script>
+
+<script>
+	
+function resize(){
+
+	var _header = jQuery('.header').height() + 120;
+	var _window = jQuery(window).height();
+	var _myDriagramDiv = _window - _header;
+	var _canvas = (_window - _header) - 17;
+
+	jQuery('#myDiagramDiv').height(_myDriagramDiv);
+	//jQuery('canvas').height(_canvas);
+
+}
+
+jQuery(document).ready(function(){
+	// resize();
+	// jQuery(window).resize(function(){
+	//     resize();
+	// });
+});
+
+</script>
+
+<style>
+.btn {
+	margin-top: 10px;
+}
+
+.btn.prev {
+	float: left;
+}
+
+.btn.next {
+	float: right;
+}
+
+.btn.selected {
+	background-color: black;
+}
+
+.bread {
+  padding: 50px 0;
+}
+
+.bread li {
+  padding: 0 10px;
+  float: left;
+  cursor: pointer;
+}
+
+.bread li.current {
+  color: #BB1D48;
+  font-weight: bold;
+}
+
+</style>
+
+<div class="block">
+
+  <?php $order = $this->getOrder(); ?>
+
+  <form name="pagination-form" action="<?php echo Mage::helper("adminhtml")->getUrl("*/*/apresentation")?>" method="post">
+
+  	<button class="btn <?php echo ($order == 'child')? 'selected': '';  ?> child" value="child" name="border">Filhos</button>
+  	<button class="btn <?php echo ($order == 'buy')? 'selected': '';  ?> purchase" value="buy" name="border">Compras</button>
+
+  	<div id="sample">
+  		<div id="myDiagramDiv" style="background-color: #F6F6F6; height: 600px;"></div>
+  	</div>
+
+      <?php
+        $prev = $this->getPrev();
+        $next = $this->getNext();
+      ?>
+
+      <ul class="bread">
+      <?php
+      $parents = $this->getParents();
+      $pagAtual = $this->getPage();
+
+      foreach($parents as $item):
+        $firstName = "";
+        $firstName = current(explode(" ",$item['nome']));
+        ?>
+        <li data-id="<?php echo $item['id']; ?>" class="<?php echo ($item['id'] == $pagAtual)? 'current' : '' ;?>" ><?php echo $firstName ?></li>
+      <?php endforeach; ?>
+    </ul>
+
+    <br style="clear: both;">
+
+    <button type="submit"  <?php echo (!empty($prev))? '' : 'disabled="disabled"';?>  value="<?php echo $prev;?>" name="prev" class="btn prev">Anterior</button>
+	  <button type="submit"  <?php echo (!empty($next))? '' : 'disabled="disabled"';?>  value="<?php echo $next;?>" name="next" class="btn next">Próximo</button>
+
+    <input type="hidden" name="order" value="<?php echo $order; ?>" />
+    <input type="hidden" name="pag_atual" value="<?php echo $pagAtual; ?>" />
+    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+
+</form>
+
+</div>
+<script>init();</script>
+
+<script>
+  jQuery('.bread li').click(function(){
+    var id = jQuery(this).data('id');
+    jQuery('form[name="pagination-form"] .btn.next').attr('value',id);
+    jQuery('form[name="pagination-form"] .btn.next').click();
+  });
+</script>
+
+

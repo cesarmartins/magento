@@ -1,0 +1,158 @@
+<?php
+$values        = $this->getAllvalues();
+$dateStart     = $this->getStart();
+$dateEnd       = $this->getLast();
+?>
+
+<div class="col-main">
+    <?php echo $this->getChildHtml('global_messages') ?>
+    <?php echo $this->getChildHtml('content') ?>
+</div>
+
+<form  method="post" action="" >
+    <input type="date" name="date_start" value="<?php echo $dateStart; ?>" placeholder="dd/mm/yyyy" class="input-text" style="" />
+    <input type="date" name="date_last" value="<?php echo $dateEnd; ?>" placeholder="dd/mm/yyyy" class="input-text" style="" />
+    <button id="updateNewSuggest" title="Confirmar" type="submit" class="scalable add right">Pesquisar</button>
+    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+</form>
+<br/><br/><br/><br/>
+
+<div class = 'grid'>
+    <div class = 'hor-scroll'>
+        <h2>Mensagens na tela do APP</h2>
+             <table cellspacing="0" class="data" id="treeGrid_table">
+                <thead>
+                <tr class="headings">
+                    <th width="15%"><span class="nobr"><span>Instagram</span></span></th>
+                    <th ><span class="nobr"><span>Message</span></span></th>
+                    <th width="8%"><span class="nobr"><span>Data Cria&ccedil;&atilde;o</span></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($values as $row){ ?>
+                     <tr class="even pointer">
+                        <td class=" a-nome"><a href="<?php echo Mage::getModel('adminhtml/url')->getUrl('tree/adminhtml_messageapp/chat/'); ?>?insta=<?php echo (!empty($row['instagram']))? "@".$row['instagram'] : "" ; ?>&id_msg=<?php echo $row['id']; ?>&type=menu_app"><?php echo (!empty($row['instagram']))? "@".$row['instagram'] : "" ; ?></a></td>
+                        <td class=" a-right "><?php echo $row['msg']; ?></td>
+                        <td class=" a-right "><?php echo date('d/m/Y H:i:s' , strtotime($row['created_at'])); ?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+    </div>
+</div>
+<br/><br/><br/>
+<!--<div class = 'grid'>
+  <h2>Mensagens da tela de escolher/indicar amigos</h2>
+    <div class = 'hor-scroll'>
+        <table cellspacing="0" class="data" id="treeGrid_table">
+            <thead>
+            <tr class="headings">
+                <th width="15%"><span class="nobr"><span>Instagram</span></span></th>
+                <th><span class="nobr"><span>Message</span></span></th>
+                <th width="8%"><span class="nobr"><span>Data Cria&ccedil;&atilde;o</span></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach($contactValues as $cRow){ ?>
+                <tr class="even pointer" >
+                    <td class=" a-nome"><a href="<?php echo Mage::getModel('adminhtml/url')->getUrl('messageapp/adminhtml_index/chat/'); ?>?insta=<?php echo $cRow['instagram']; ?>&id_msg=<?php echo $cRow['id']; ?>&type=contact"><?php echo $cRow['instagram']; ?></a></td>
+                    <td class=" a-right "><?php echo $cRow['msg']; ?></td>
+                    <td class=" a-right "><?php echo date('d/m/Y H:i:s' , strtotime($cRow['created_at'])); ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>-->
+
+<style>
+
+    table tbody .even:nth-child(2n+1) td {background: #FFF !important;}
+
+    table tbody tr td a {
+        padding: 5px 5px 5px 20px;
+    }
+
+    .grid tr.even td, .grid tr.even tr td {
+        vertical-align: middle;
+    }
+
+    .coupons {
+        padding: 50px 0;
+    }
+    .coupons li {
+        margin: 20px 0;
+        width: 450px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+    .coupons li:last-child {
+        border-bottom: none;
+    }
+    .coupons li textarea {
+        width: 400px;
+        height: 170px;
+        float: left;
+        text-align: justify;
+        margin: 0 10px 10px 0;
+        display: block;
+        background: transparent none repeat;
+    }
+    .coupons li input {
+        float: left;
+    }
+    .coupons li .copiar {
+        float: right;
+    }
+    .input-form{
+        padding: 9px 0px 13px;
+        width: 200px;
+    }
+    .input-form input[type='text']{
+        width: 100%;
+        height: 22px;
+    }
+    .show-msg{
+        height: 100px;
+    }
+    .show-msg textarea {
+        height: 122px;
+        width: 426px;
+    }
+    .btn-cadastrar{
+        float: right;
+    }
+    .a-id{
+        width: 10px;
+    }
+    .a-nome{
+        width: 200px;
+    }
+    .a-parent{
+        width: 150px;
+    }
+    .a-check{
+        width: 20px;
+    }
+    .remove-future{
+        float:right;
+    }
+    .grid tr.headings th .remove-future {
+        font-weight: bold;
+        display: inline-block;
+        float:right;
+    }
+    .grid tr.headings th a {
+        display: inline-block;
+        float:left;
+    }
+    .exceeded-limit{
+
+    }
+
+</style>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+
+<script type="application/javascript">
+</script>

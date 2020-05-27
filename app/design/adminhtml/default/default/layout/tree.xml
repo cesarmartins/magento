@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <tree_adminhtml_tree_index translate="label">
+        <label>Importação</label>
+        <reference name="content">
+            <block type="adminhtml/template" name="treeindex" template="tree/index.phtml" />
+        </reference>
+    </tree_adminhtml_tree_index>
+
+    <tree_adminhtml_tree_cadastrar translate="label">
+        <label>Cadastrar Usuários na Árvore</label>
+        <reference name="head">
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="treecadastrar" template="tree/cadastrar.phtml" />
+        </reference>
+    </tree_adminhtml_tree_cadastrar>
+
+
+    <tree_adminhtml_messageapp_index translate="label">
+        <label>Mensagem do app</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="messageapp" template="tree/message.phtml" />
+        </reference>
+    </tree_adminhtml_messageapp_index>
+
+    <tree_adminhtml_messageapp_chat translate="label">
+        <label>Chat do APP</label>
+        <reference name="head">
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+            <action method="addJs"><script>jquery/jquery.md5.js</script></action>
+        </reference>
+        <remove name="footer"/>
+        <reference name="content">
+            <block type="adminhtml/template" name="messageappchat" template="messageapp/chat.phtml" />
+        </reference>
+    </tree_adminhtml_messageapp_chat>
+
+    <tree_adminhtml_exhibition_tableapresentation translate="label">
+        <label>Tabela da Árvore</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="tableapresentation" template="tree/table_apresentation.phtml" />
+        </reference>
+    </tree_adminhtml_exhibition_tableapresentation>
+
+
+    <tree_adminhtml_tree_actiontree translate="label">
+        <label>Cadastro de Ações</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="treeaciontree" template="tree/action_tree.phtml" />
+        </reference>
+    </tree_adminhtml_tree_actiontree>
+
+
+
+    <tree_adminhtml_tree_sortable translate="label">
+        <label>Posicionar Ações</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="sortable" template="tree/sortable.phtml" />
+        </reference>
+    </tree_adminhtml_tree_sortable>
+
+
+
+
+    <tree_adminhtml_tree_acoes translate="label">
+        <label>Cadastro de Ações para Usuário</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="treecadastraracoes" template="tree/cadastro_acoes.phtml" />
+        </reference>
+    </tree_adminhtml_tree_acoes>
+
+
+
+    <tree_adminhtml_tree_apresentation translate="label">
+        <label>Apresentação Árvore</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+            <action method="addItem"><type>skin_js</type><name>js/go.js</name></action>
+
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="tree_apresentation" template="tree/apresentation.phtml" />
+        </reference>
+    </tree_adminhtml_tree_apresentation>
+</layout>

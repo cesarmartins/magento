@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:g="http://base.google.com/ns/1.0" xmlns:c="http://base.google.com/ns/1.0" version="2.0">
+ <channel>
+  <item>
+   <g:id>fgddvfd</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/2/_/2_1_2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-1</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-661</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/4/_/4_1_2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-2</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-662</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/1/_/1_1_2_1.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-3</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-663</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/1/_/1_1_2_1_1.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-4</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-664</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/2/_/2_1_2_2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-6</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-665</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/4/_/4_1_2_2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-7</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-666</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/1/_/1_1_2_1_2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-8</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-667</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/1/_/1_1_2_1_1_1.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-9</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-668</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/2/_/2_1_2_3.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>teste-10</g:id>
+   <g:title>Produto</g:title>
+   <g:description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</g:description>
+   <g:gtin>asasa</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Amarelo</g:color>
+   <g:material>Sintético</g:material>
+   <g:pattern>Animal Print</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/produto-5-669</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/4/_/4_1_2_3.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>0.50 kg</g:weight>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Bazar</g:product_type>
+   <g:price>10.00 BRL</g:price>
+  </item>
+  <item>
+   <g:id>103CRL46</g:id>
+   <g:title>Short Linho IT</g:title>
+   <g:description>Shorts clochard em linho c/ cinto amarração, fivela em acrílico e bolsos laterais.
+
+- Cinto  amarração
+- Fivela em acrílico
+- Bolsos laterais</g:description>
+   <g:gtin>7890000450683</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Coral</g:color>
+   <g:material>99% Viscose 1% Elastano</g:material>
+   <g:pattern>Sem Estampa</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/short-linho-it</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/s/h/short-linho-it-2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>1.00 kg</g:weight>
+   <g:item_group_id>103CRL</g:item_group_id>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Marcas &gt; D'Laport</g:product_type>
+   <g:price>259.80 BRL</g:price>
+  </item>
+  <item>
+   <g:id>103CRL48</g:id>
+   <g:title>Short Linho IT</g:title>
+   <g:description>Shorts clochard em linho c/ cinto amarração, fivela em acrílico e bolsos laterais.
+
+- Cinto  amarração
+- Fivela em acrílico
+- Bolsos laterais</g:description>
+   <g:gtin>7890000450690</g:gtin>
+   <g:brand>D'Laport</g:brand>
+   <g:color>Coral</g:color>
+   <g:material>99% Viscose 1% Elastano</g:material>
+   <g:pattern>Sem Estampa</g:pattern>
+   <g:gender>Feminino</g:gender>
+   <g:age_group>Adulto</g:age_group>
+   <g:link>https://www.camellia.com.br/short-linho-it</g:link>
+   <g:image_link>https://www.camellia.com.br/media/catalog/product/s/h/short-linho-it-2.jpg</g:image_link>
+   <g:availability>in stock</g:availability>
+   <g:condition>new</g:condition>
+   <g:weight>1.00 kg</g:weight>
+   <g:item_group_id>103CRL</g:item_group_id>
+   <g:google_product_category>1604</g:google_product_category>
+   <g:product_type>Marcas &gt; D'Laport</g:product_type>
+   <g:price>259.80 BRL</g:price>
+  </item>
+ </channel>
+  <config>
+   <system>Magento</system>
+   <extension>Magmodules_Googleshopping</extension>
+   <extension_version>1.8.6</extension_version>
+   <store>Website Principal</store>
+   <url>https://www.camellia.com.br/</url>
+   <processed>12</processed>
+   <pages>1</pages>
+   <generated>2020-02-20 16:54:17</generated>
+   <processing_time>0.2037</processing_time>
+  </config>
+</rss>

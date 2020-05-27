@@ -1,0 +1,827 @@
+
+
+<style>
+
+    table.data tbody tr:nth-child(2n+1) td {background: #eee;}
+
+    .textarea {
+        height: 120px;
+        width: 510px;
+    }
+
+    .coupons {
+        padding: 50px 0;
+    }
+    .coupons li {
+        margin: 20px 0;
+        width: 450px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+    .coupons li:last-child {
+        border-bottom: none;
+    }
+    .coupons li textarea {
+        width: 400px;
+        height: 170px;
+        float: left;
+        text-align: justify;
+        margin: 0 10px 10px 0;
+        display: block;
+        background: transparent none repeat;
+    }
+    .coupons li input {
+        float: left;
+    }
+    .coupons li .copiar {
+        float: right;
+    }
+
+    .input-form{
+        margin-top: 20px;
+        padding: 9px 13px 13px;
+        width: 200px;
+    }
+
+
+    .input-form input[type='text']{
+        width: 100%;
+        height: 22px;
+    }
+    .input-form-add{
+        padding: 9px 13px 58px;
+        width: 275px;
+
+    }
+    .input-form-add input[type='text']{
+        width: 120px;
+        height: 22px;
+
+    }
+    .input-form-add.remove{
+        float:left;
+    }
+    .input-form input[type='text'].qtd{
+        margin-right: 10px;
+        width: 30px;
+    }
+
+    .input-form-parent{
+        width: 120px;
+        height: 22px;
+    }
+
+    .input-form-parent-qtd{
+        height: 22px;
+        width:58px;
+
+    }
+
+    .div-form-parent{
+        width: 500px;
+        height: 27px;
+    }
+
+    .div-form-parent > .left{
+        padding-left:13px ;
+    }
+
+
+    .list-action > .title{
+
+        background-color: #005184;
+        color: #ffffff;
+
+
+    }
+
+    .list-action{
+        width: 800px;
+    }
+
+    .list-action > li{
+        border: 1px #000000 solid;
+
+    }
+
+    .list-action > li > span{
+        display: inline-block;
+        padding-left: 5px;
+    }
+
+    .list-action > .title  > .action{
+        width: 500px;
+    }
+
+    .list-action > .title  > .time{
+        width: 126px;
+    }
+
+
+    .list-action > .geral  > .action{
+        width: 500px;
+    }
+
+    .list-action > .geral  > .time{
+        width: 126px;
+    }
+
+    .list-action > .geral > span{
+        border-left: 1px #000000 solid;
+    }
+
+    .list-action > .geral{
+        background-color: #ffffff;
+    }
+
+
+
+    .list-action > .geral-error  > .time{
+        width: 126px;
+
+    }
+
+    .list-action > .geral-error > span{
+        border-left: 1px #000000 solid;
+    }
+
+    .list-action > .geral-error{
+        background-color: #ff9f95;
+    }
+
+    table tr.obs td {
+        background-color: #ff9f95 !important;
+    }
+
+    .fail{
+        border-color: red;
+
+    }
+
+    table.info{
+        border-color: transparent;
+       # background-color: transparent;
+    }
+    table.info tr td {
+        border-color: transparent;
+    }
+</style>
+<!-- informações do participante -->
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width:50%;">
+                    <h3 class="icon-head head-customer"><?php echo $this->node['nome']; ?> - <span style="color: #888">(<?php echo $this->node['name_situation']; ?>)</span></h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <?php $hasTop = $this->top_node; if(!empty($hasTop) && $hasTop['id'] != $this->node['id'] &&  $hasTop['id'] != $this->parent_node['id'] ):?>
+    <table class="massaction" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td>
+                Top:
+                <a href="#" class="add-acao" data-type="<?php echo (!empty($this->top_node['parent_id']) && $this->top_node['parent_id']==2)? 1 : 2 ; ?>" data-id ="<?php echo $this->top_node['id']; ?>" >
+                    <?php echo $this->top_node['nome'];?>
+                </a>
+                <span class="separator">>></span>
+                <?php $hasParent = $this->parent_node; if(!empty($hasParent)):?>
+                Nivel 1:
+                <a href="#" class="add-acao" data-type="<?php echo (!empty($this->parent_node['parent_id']) && $this->parent_node['parent_id']==2)? 1 : 2 ; ?>" data-id ="<?php echo $this->parent_node['id']; ?>" >
+                     <?php echo $this->parent_node['nome'];?>
+                </a>
+                <span class="separator">>></span>
+                <?php echo $this->node['nome']; ?>
+                <?php endif; ?>
+                </td>
+            <td>
+            </tr>
+        </tbody>
+    </table>
+    <?php endif; ?>
+
+</div>
+
+<div>
+
+    <?php
+    $instagram = $this->node['instagram'];
+    if(strpos($instagram  , '@') === FALSE){
+        $instagram = '@'.$this->node['instagram'];
+    }
+
+    $email = "";
+    if(!empty($this->node['customer_id'])){
+        $customer  = Mage::getModel('customer/customer')->load($this->node['customer_id']);
+        $email = $customer ->getData('email');
+
+    }
+
+    ?>
+    Email     :  <?php echo  $email; ?>
+    <br/>
+    <!-- Link Para Indicar : <?php //echo  Mage::getBaseUrl('web').'indicate/'.$instagram; ?> -->
+    Link Para Indicar : <?php echo  Mage::getBaseUrl('web').'experience/freeboardshortforfriends/'.$instagram; ?>
+    <br/><br/>
+    <?php
+    $cod  =  $this->node['hash_new_link'];
+    $treeId  = (!empty($this->node['id']))? $this->node['id'] : 0 ;
+    if(empty($cod) && $treeId  ){
+
+        $cod  =  Mage::getModel('tree/deadline')->createNewLinkApp($treeId);
+    }
+
+    $linkSms =  Mage::getBaseUrl().'s/freeboardshortsforfriends/'.$cod;
+    $link    =  Mage::getBaseUrl().'freeboardshortsforfriends/'.$cod;
+
+    echo 'New Link App: '.$link = str_replace('index.php/' , '' ,$link );
+    echo '<br/><br/>';
+    echo 'New Link App SMS: '.$linkSms = str_replace('index.php/' , '' ,$linkSms );
+
+
+    ?>
+
+    <br/><br/>
+    <button id="push_seaway_list" title="Push Indicate Friends" data-id ="<?php echo $treeId; ?>" type="button" class="scalable add left">Push Indicate Friends</button>
+
+    <br/><br/>
+    <button id="push_approved" title="Push Approved Friends" data-id ="<?php echo $treeId; ?>" type="button" class="scalable add left">Push Approved Friends</button>
+
+    <br/><br/>
+    <?php if (!empty($this->node['ex_link_app'])){ ?>
+        <span>Data Expiração do Link APP  :  <?php echo date('d/m/Y' , strtotime($this->node['ex_link_app'])); ?></span>
+        <br/>
+        <span>Acessou o APP   :  <?php echo (isset($this->node['ex_first_time_access']) && $this->node['ex_first_time_access'] == 1)? 'SIM' : 'NÃO'; ?></span>
+    <?php }else{ ?>
+<!--        <button id="updateLinkApp" title="Criar Data Expiração Link" type="button" class="scalable add left">Criar Data Expiração Link APP</button>
+-->        <br/><br/>
+    <?php } ?>
+    <br/><br/>
+    <?php $urlGenerateImg = Mage::helper("adminhtml")->getUrl("tree/adminhtml_tree/downloadimg/id/". $this->node['id']."/"); ?>
+    <a href="<?php echo $urlGenerateImg; ?>" target="_blank">Gerar Img</a>
+    <br/>
+    <?php $urlGenerateImg = Mage::helper("adminhtml")->getUrl("tree/adminhtml_tree/downloadimginsta/id/". $this->node['id']."/"); ?>
+    <a href="<?php echo $urlGenerateImg; ?>" target="_blank">Gerar Img insta</a>
+
+
+
+
+
+
+
+
+    <?php if ($this->node['new_list_app'] == 1){ ?>
+        <button id="updateNewSuggest" title="Confirmar" type="button" class="scalable add right">Confirmar Sugestão de Amigo </button>
+        <br/><br/>
+        <button id="updateRefusedSuggest" title="Reprovar" type="button" class="scalable add right">Reprovar Sugestão de Amigo </button>
+    <?php }else if($this->node['new_list_app'] == 2){ ?>
+         <button id="" title="Sugestão Confirmada" disabled="disabled" type="button" class="btn-success scalable add right">Sugestão Confirmada</button>
+    <?php }else if($this->node['new_list_app']  == 3){?>
+         <button id="" title="Sugestão Reprovada" disabled="disabled" type="button" class="btn-success scalable add right">Sugestão Reprovada</button>
+    <?php } ?>
+    <br/><br/>
+</div>
+<!-- form cadastrar ação ou observação -->
+<div class="entry-edit">
+    <form id="submitActions" method="post" action="">
+
+        <div class="grid">
+            <div class="hor-scroll">
+                <table cellspacing="0">
+
+                    <thead>
+                        <tr class="headings">
+                            <th width="5%"><span class="nobr">Qtd permitida</span></th>
+                            <th width="15%"><span class="nobr">Nome</span></th>
+                            <th width="15%"><span class="nobr">Instagram</span></th>
+                            <th width="10%"><span class="nobr">Telefone</span></th>
+                            <th width="10%"><span class="nobr">Situação Instagram</span></th>
+                            <th width="30%"><span class="nobr">Ações</span></th>
+                            <th width="25%"><span class="nobr">Observações</span></th>
+                        </tr>
+                        <tr class="filter">
+                            <th><input type="text" name="qtd" value="<?php echo $this->node['qtd'];?>" class="input-text" style="width: 100%" /></th>
+                            <th><input type="text" name="nome" value="<?php echo $this->node['nome'];?>" class="input-text" style="width: 100%" /></th>
+                            <th><input type="text" name="instagram" value="<?php echo $this->node['instagram'];?>" class="input-text" style="width: 100%" /></th>
+                            <th><input type="text" name="telefone" value="<?php echo $this->node['telefone'];?>" class="input-text" style="width: 100%" /></th>
+                            <th>
+                                <select required="" name="instagram_status">
+                                    <option value="" <?php echo (empty($this->node['instagram_status']))? "selected='selected'" : '';?>>Todos usuários</option>
+                                    <option value="1" <?php echo ($this->node['instagram_status'] == 1)? "selected='selected'" : '';?>>Instagram bloqueado</option>
+                                    <option value="2" <?php echo ($this->node['instagram_status'] == 2)? "selected='selected'" : '';?>>Instagram desbloqueado</option>
+                                    <option value="3" <?php echo ($this->node['instagram_status'] == 3)? "selected='selected'" : '';?>>Aceitou a Seaway seguir o Instagram</option>
+                                </select>
+                            </th>
+                            <th>
+                                <select name="action_id">
+                                    <option value="">Selecione uma ação</option>
+                                    <?php foreach($this->acoes as $acao):
+                                           if(strcasecmp($acao['tipo_acao'], 'p') == 0){
+                                        ?>
+                                        <option value="<?php  echo $acao['id']; ?>"><?php  echo $acao['name']; ?></option>
+                                        <?php }?>
+                                    <?php endforeach;?>
+                                </select>
+                                <input type="hidden" name="id" value="<?php echo $this->node['id'];?>"/>
+                            </th>
+                            <th>
+                                <select name="obs_id">
+                                    <option value="">Selecione uma Observa&ccedil;&atilde;o</option>
+                                </select>
+                                <input type="hidden" name="id" value="<?php echo $this->node['id'];?>"/>
+                            </th>
+                        </tr>
+                        
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="entry-edit" id="obs" style="display:none">
+            <div class="entry-edit-head">
+                <div class="ajax">
+                    <h4 class="icon-head head-customer-view">Descreva o motivo</h4>
+                </div>
+            </div>
+            <fieldset>
+                <textarea name="text" style="width: 100%; height: 120px;"></textarea>
+            </fieldset>
+        </div>
+
+        <div id="sales_order_grid_massaction">
+            <table class="" cellspacing="0" cellpadding="0" style="width: 100%">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button id="submitFormButton" title="Cadastrar" type="button" class="scalable add right">Salvar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </form>
+</div>
+
+<br>
+
+<!-- histórico de ações do participante -->
+<?php
+$hasIt = $this->acoes_cadastradas;
+if(!empty($hasIt)){
+?>
+
+<div class="entry-edit" style="margin-bottom: 30px;">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-customer-sales-statistics">Histórico</h4>
+    </div>
+    <div class="grid">
+        <table class="data" cellspacing="0">
+
+            <thead>
+                <tr class="headings">
+                    <th width="70%">Ação</th>
+                    <th width="15%">Data Cadastro</th>
+                    <th width="15%"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach($this->acoes_cadastradas as $vinculo): ?>
+                    <?php if ($vinculo['name'] != 'default'){ ?>
+                        <tr>
+                            <td rowspan="1"><?php echo $vinculo['name']; ?></td>
+                            <td rowspan="1"><?php echo $vinculo['data_cadastro']; ?></td>
+                            <td class="label"><a href="#" class="a-remove" data-id="<?php echo $vinculo['id']; ?>"> Remover Ação</a></td>
+                        </tr>
+                    <?php } ?>
+
+                    <?php
+                    if(!empty($vinculo['excecoes'])){
+                        foreach($vinculo['excecoes'] as $e):?>
+                       <tr class="obs">
+                            <td class="label"><?php echo (!empty($e['obs']))? $e['obs'] : $e['name'] ; ?></td>
+                            <td rowspan="1" ><?php echo $e['data_cadastro']; ?></td>
+                            <td class="label"><a href="#" style="color:#fff6f1" class="o-remove"  data-action="<?php echo $vinculo['id']; ?>" data-id="<?php echo $e['id']; ?>"> Remover Obs</a></td>
+
+                       </tr>
+                        <?php endforeach;?>
+                    <?php } ?>
+
+                <?php endforeach;?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="clear"></div>
+
+<?php } ?>
+
+
+<!-- histórico de links gerados -->
+<?php 
+
+$nodeLinks = $this->node_links;
+if( !empty($nodeLinks) ){ ?>
+
+ 
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-customer-sales-statistics">Histórico de links</h4>
+    </div>
+    <div class="grid">
+        <table class="data" cellspacing="0">
+
+            <thead>
+                <tr class="headings">
+                    <th width="40%">Mensagem</th>
+                    <th width="">Copiar</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <?php foreach ($nodeLinks as $key => $valueLink) {?>
+                <tr>
+                    <td rowspan="1"><textarea class="textarea"><?php echo $valueLink['link_msg']?></textarea></td>
+                    <td rowspan="1"><input type="button" class="copiar" value="Copiar"></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <script>
+    jQuery(document).on('click', '.copiar', function(event) {
+        var copyTextarea = jQuery(this).parents('tr').find('textarea');
+        copyTextarea.select();
+
+       // jQuery(this).parents('td').find('input[type="checkbox"]').prop('checked', true).show();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'sim!' : 'não!';
+        } catch (err) {
+            alert('Opa, Não conseguimos copiar o texto, é possivel que o seu navegador não tenha suporte, tente usar Crtl+C.');
+        }
+    });
+</script>
+<?php } ?>
+
+
+<?php $coupons = $this->getCoupons();
+if(!empty($coupons)){
+    ?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-customer-sales-statistics">Cupons</h4>
+        </div>
+
+        <?php foreach($coupons as $key => $coupon){ ?>
+            <div class="grid">
+                <table class="data" cellspacing="0">
+                    <tbody>
+                        <?php $canceled = ($coupon['is_canceled'])? 'style="background-color: #FF0000 !important; color: #ffffff;"' : '' ; ?>
+                        <tr ><td <?php echo $canceled;  ?> ><?php echo Mage::getBaseUrl('web'); ?>ex?c=<?php echo $coupon['coupon']; ?></td><td <?php echo $canceled; ?> >
+                                <?php if (!$canceled){ ?>
+                                    <input class="cancel-coupon" data-code="<?php echo $coupon['coupon']; ?>" type="button" value="Cancelar"  />
+                                <?php } ?>
+                            </td></tr>
+                    </tbody>
+                </table>
+            </div>
+        <?php } ?>
+    </div>
+
+
+
+<?php } ?>
+
+
+<?php $produtos = $this->products;
+$productName  = "";
+if(!empty($produtos)){
+?>
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-customer-sales-statistics">Produtos</h4>
+        </div>
+
+        <?php foreach($produtos as $key => $produto){ ?>
+            <div class="grid">
+                <table class="data" cellspacing="0">
+                   <thead>
+                    <tr class="headings">
+                        <th ><?php echo $key; ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($produto as $valor) {
+
+                        $instanceProduct = Mage::getModel('catalog/product')->load($valor['id']);
+                        $productName  = $instanceProduct->getName();
+
+
+                        ?>
+                        <tr>
+                            <td rowspan="1">
+                                <?php echo $valor['sku'].'-'.$valor['cor'];?>
+                                <br/><br/>
+                                <img src="<?php echo  Mage::helper('catalog/image')->init($instanceProduct, 'image' , $valor['img'])->resize(150,150);?>" />
+                            </td>
+
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php } ?>
+    </div>
+
+
+
+<?php } ?>
+
+
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+
+<script type="text/javascript">
+
+
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+
+    jQuery(document).on('click','#submitFormButton',function(sf){
+     //   sf.preventDefault();
+        var url = 'tree/adminhtml_tree/salvarAcao/';
+        var param = jQuery('#submitActions').serialize();
+
+        var valid = jQuery('select[name="action_id"]').val();
+        var valid2 = jQuery('select[name="obs_id"]').val();
+        var valid3 = jQuery('input[name="telefone"]').val();
+        var valid4 = jQuery('input[name="qtd"]').val();
+
+
+        if(valid == "" && valid2 == "" && valid3 == "" /*&& valid4 == 0*/ ){
+            jQuery('select[name="action_id"]').addClass('fail');
+            return false;
+        }
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: param,
+            onSuccess: function(r) {
+               alert(r.responseJSON.msg);
+              location.reload();
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+        return false;
+    });
+
+
+    jQuery(document).on('click','.cancel-coupon',function(sf){
+
+        var url = 'tree/adminhtml_tree/cancelCoupon/';
+        var coupon = jQuery(this).data('code');
+        var id = jQuery('input[type="hidden"]').val();
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: 'coupon='+coupon+'&id='+id,
+            onSuccess: function(r) {
+                location.reload();
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+
+
+    });
+
+    jQuery(document).on('click','.a-remove',function(sf){
+        //   sf.preventDefault();
+        var url = 'tree/adminhtml_tree/removeAcao/';
+        var id = jQuery(this).data('id');
+        if(id  == ""){
+            return false;
+        }
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: 'id='+id,
+            onSuccess: function(r) {
+                alert(r.responseJSON.msg);
+                location.reload();
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+        return false;
+    });
+
+
+    jQuery(document).on('click','.o-remove',function(sf){
+        //   sf.preventDefault();
+        var url = 'tree/adminhtml_tree/removeObservation/';
+        var id = jQuery(this).data('id');
+        var userId = jQuery('input[type="hidden"]').val();
+       // var acaoId = jQuery(this).data('action');
+
+        if(id  == ""){
+            return false;
+        }
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: 'id='+id+'&user_id='+userId/*+'&acao_id='+acaoId*/,
+            onSuccess: function(r) {
+                alert(r.responseJSON.msg);
+                location.reload();
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+        return false;
+    });
+
+
+
+
+    var urlAcoes = '<?php echo Mage::getModel('adminhtml/url')->getUrl('tree/adminhtml_tree/acoes/'); ?>';
+
+    jQuery(document).on('click','.add-acao' , function (pointer) {
+
+        var dataType = jQuery(this).data('type');
+        var dataId = jQuery(this).data('id');
+
+        window.location= urlAcoes+'?type='+dataType+'&id='+dataId;
+
+    });
+
+
+    jQuery(document).on('change','select[name="obs_id"]',function(sf){
+        //   sf.preventDefault();
+
+        var acao = jQuery(this).val();
+        if(acao == 82  ){
+            jQuery('#obs').attr('style' , '');
+        }else{
+            jQuery('#obs').attr('style' , 'display:none');
+        }
+
+        return false;
+    });
+
+
+    jQuery(document).on('click','#updateNewSuggest',function(sf){
+        var id = jQuery('input[type="hidden"]').val();
+        var url = 'tree/adminhtml_tree/confirmSuggest/';
+        if(id){
+            var param = '&tree_id='+id;
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: param,
+                onSuccess: function(r) {
+                    location.reload();
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+        }
+
+
+        return false;
+    });
+
+
+    jQuery(document).on('click','#updateLinkApp',function(sf){
+        var id = jQuery('input[type="hidden"]').val();
+        var url = 'tree/adminhtml_tree/setLinkAppDate/';
+        if(id){
+            var param = '&tree_id='+id;
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: param,
+                onSuccess: function(r) {
+                    var resp = r.responseJSON;
+                    if(resp.status){
+                        alert(resp.msg);
+                    }
+                    location.reload();
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+        }
+
+
+        return false;
+    });
+
+
+    jQuery(document).on('click','#updateRefusedSuggest',function(sf){
+        var id = jQuery('input[type="hidden"]').val();
+        var url = 'tree/adminhtml_tree/refusedSuggest/';
+        if(id){
+            var param = '&tree_id='+id;
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: param,
+                onSuccess: function(r) {
+                    location.reload();
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+        }
+
+
+        return false;
+    });
+
+
+
+    jQuery(document).on('click','#push_approved',function(sf){
+        var id = jQuery('input[type="hidden"]').val();
+        var instagram  = jQuery('input[name="instagram"]').val();
+        var url = 'tree/adminhtml_tree/pushPhoneApproved/';
+        if(id && instagram){
+            var param = '&tree_id='+id+'&instagram='+instagram;
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: param,
+                onSuccess: function(r) {
+                    var resp = r.responseJSON;
+                    alert(resp.msg);
+                    //location.reload();
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+        }
+
+
+        return false;
+    })
+
+
+
+    jQuery(document).on('click','#push_seaway_list',function(sf){
+        var id = jQuery('input[type="hidden"]').val();
+        var instagram  = jQuery('input[name="instagram"]').val();
+        var url = 'tree/adminhtml_tree/pushChooseListSeaway/';
+        if(id && instagram){
+            var param = '&tree_id='+id+'&instagram='+instagram;
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: param,
+                onSuccess: function(r) {
+                    var resp = r.responseJSON;
+                    alert(resp.msg);
+                    //location.reload();
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+        }
+
+
+        return false;
+    })
+
+
+
+
+    jQuery(document).on('change' ,'select[name="action_id"]' ,function(){
+
+        var actionId = jQuery( 'select[name="action_id"] option:selected' ).val();
+        var url = 'tree/adminhtml_tree/loadObservation/';
+        if(actionId){
+            var param = '&action='+actionId;
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: param,
+                onSuccess: function(r) {
+                    var resp = r.responseJSON;
+                    if(resp.status){
+                        var opt = '<option value="">Escolha uma Observação</option>';
+                        for( row in resp.obs ){
+                            if(Number.isInteger(parseInt(row))){
+                                opt += "<option value='"+resp.obs[row]['id']+"'>"+resp.obs[row]['name']+'</option>';
+                            }
+                        }
+                        jQuery('select[name="obs_id"]').html(opt);
+                    }
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+        }
+    });
+
+
+
+</script>
+

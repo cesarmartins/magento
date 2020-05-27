@@ -1,0 +1,232 @@
+<?php
+    $images = $this->getImages();
+    $imagesData = array();
+    foreach ($this->getImages() as $image) {
+        $imagesData[$image->getValueId()] = array(
+            'id' => $image->getValueId(),
+            'label' => $image->getLabel(),
+            'free_transformation' => $image->getFreeTransformation(),
+            'orig_free_transformation' => $image->getFreeTransformation(),
+            'file' => $image->getFile(),
+            'image_url' => $image->getUrl(),
+            'error' => false,
+        );
+    }
+?>
+<div id="cloudinary_transformation_tab" class="entry-edit custom-options product-custom-options">
+    <div class="entry-edit-head">
+        <h4>Cloudinary product specific image transformations</h4>
+    </div>
+
+    <div class="box">
+
+        <div style="width: 60%;">
+
+            <?php if ($this->isCloudinaryEnabled()): ?>
+                <div v-if="Object.keys(images).length" class="grid">
+                    <table cellspacing="0" class="data border" id="media_gallery_content_grid" style="margin-top: 10px;">
+                        <col width="250" />
+                        <col width="200" />
+                        <col />
+                        <col width="100" />
+                        <thead>
+                        <tr class="headings">
+                            <th><?php echo Mage::helper('catalog')->__('Image') ?></th>
+                            <th><?php echo Mage::helper('catalog')->__('Label') ?></th>
+                            <th><?php echo Mage::helper('cloudinary_cloudinary')->__('Cloudinary free transformation') ?></th>
+                            <th><?php echo Mage::helper('cloudinary_cloudinary')->__('Action') ?></th>
+                        </tr>
+                        </thead>
+                        <tbody id="media_gallery_content_list">
+                            <tr v-for="(image, index) in images">
+                                <td class="cell-image">
+                                    <img v-if="image.is_loading" src="<?php echo $this->getSkinUrl('images/ajax-loader.gif') ?>" alt="<?php echo Mage::helper('core')->quoteEscape($this->__('Loading...')) ?>" class="v-middle"/>
+                                    <img v-if="image.image_url && !image.error && image.is_loading !== true" v-bind:src="image.image_url" style="width:auto;height:auto;max-width:250px;max-height:250px;min-height:50px;" />
+                                    <ul v-if="image.error && image.is_loading !== true" class="messages"><li class="error-msg">{{ image.error }}</li></ul>
+                                </td>
+                                <td class="cell-label">{{ image.label }}</td>
+                                <td>
+                                    <input type="text" v-bind:name="'cloudinary_free[' + image.id + ']'" v-model="image.free_transformation" v-on:keyup="clearWhitespace(image.id)" v-on:change="clearWhitespace(image.id)" style="width: 80%;" />
+                                    <input type="hidden" v-bind:name="'cloudinary_free_file[' + image.id + ']'" v-model="image.file" />
+                                    <input type="hidden" v-bind:name="'cloudinary_free_updated[' + image.id + ']'" v-model="image.updated" />
+                                </td>
+                                <td>
+                                    <button v-bind:class="{ 'disabled': !hasTransformationDiff(image.id) }" type="button" v-on:click="updatePreview(image.id)" :disabled="!hasTransformationDiff(image.id)">
+                                        Preview
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <ul v-if="!images.length" class="messages">
+                    <li class="notice-msg" style="background-image: none !important; margin: 10px 0;">
+                        <p>
+                            The Cloudinary module has not been configured. To use this feature please visit the
+                            <a href="<?php echo $this->getCloudinaryConfigurationLink(); ?>">
+                                Cloudinary Configuration page
+                            </a>
+                            and add an environment variable, then enable auto upload mapping or perform a
+                            manual migration.
+                        </p>
+                    </li>
+                </ul>
+
+            <?php else: ?>
+                <ul class="messages">
+                    <li class="notice-msg" style="background-image: none !important; margin: 10px 0;">
+                        <p>No product images are available</p>
+                    </li>
+                </ul>
+
+            <?php endif; ?>
+
+            <p>
+                Product image transformations will be added to the the site-wide default image transformation options
+                chosen from dropdowns on the Cloudinary config page. Product image transformations will override any
+                free form transformation options that have been specified in the 'Global custom transform' field
+                of the Cloudinary config page.
+            </p>
+            <p>
+                For information about the full range of transforms available see the
+                <a href="http://cloudinary.com/documentation/image_transformation_reference" target="_blank">
+                    Cloudinary documentation
+                </a>.
+            </p>
+            <p>
+                You may need to clear or rebuild the Magento block, full page and Cloudinary caches to see the changes in the front end.
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
+<script language="javascript">
+
+    Vue.prototype.$http = axios;
+
+    window._cloudinary_transformation_tab_images = window._cloudinary_transformation_tab_images || {};
+    window.cloudinary_transformation_tab_images = <?php echo Mage::helper('core')->jsonEncode((object)$imagesData); ?>;
+    for (var id in window._cloudinary_transformation_tab_images) {
+        if (!window._cloudinary_transformation_tab_images.hasOwnProperty(id)) continue;
+        window.cloudinary_transformation_tab_images[id] = window._cloudinary_transformation_tab_images[id];
+    }
+
+    window.cloudinaryTransformationTabApp = new Vue({
+        el: '#cloudinary_transformation_tab',
+        data: {
+            images: window.cloudinary_transformation_tab_images,
+            ajaxUrl: '<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/cloudinaryajax/image/key/') . $this->ajaxSampleSecretKey() ?>?isAjax=1',
+            images_count: <?php echo count($imagesData); ?>
+        },
+        mounted: function () {
+            for (var id in this.images) {
+                if (!this.images.hasOwnProperty(id)) continue;
+                Vue.set(this.images[id], 'free_transformation', this.images[id].free_transformation || '');
+                Vue.set(this.images[id], 'orig_free_transformation', this.images[id].orig_free_transformation || '');
+                this.updatePreview(id);
+            }
+        },
+        updated: function () {
+            if(this.images.length !== this.images_count){
+                this.images_count = this.images.length;
+                for (var id in this.images) {
+                    if (!this.images.hasOwnProperty(id)) continue;
+                    Vue.set(this.images[id], 'free_transformation', this.images[id].free_transformation || '');
+                    Vue.set(this.images[id], 'orig_free_transformation', this.images[id].orig_free_transformation || '');
+                    this.updatePreview(id);
+                }
+            }
+            document.body.style.overflow = 'initial';
+        },
+        methods: {
+            showLoader: function(id){
+                document.getElementById("loading-mask").style.display = "block";
+                Vue.set(this.images[id], 'is_loading', true);
+            },
+
+            hideLoader: function(id){
+                document.getElementById("loading-mask").style.display = "none";
+                Vue.set(this.images[id], 'is_loading', false);
+            },
+
+            setPreviewDisabled: function(id, val){
+                Vue.set(this.images[id], 'preview_disabled', val);
+            },
+
+            setUpdated: function(id, val){
+                Vue.set(this.images[id], 'updated', val);
+            },
+
+            setError: function(id, val){
+                Vue.set(this.images[id], 'error', val);
+            },
+
+            setImageUrl: function(id, val){
+                Vue.set(this.images[id], 'image_url', val);
+            },
+
+            setFreeTransformation: function(id, val){
+                Vue.set(this.images[id], 'free_transformation', val);
+            },
+
+            setOrigFreeTransformation: function(id, val){
+                Vue.set(this.images[id], 'orig_free_transformation', val);
+            },
+
+            clearWhitespace: function (id) {
+                this.setFreeTransformation(id, this.images[id].free_transformation.replace(/\s/g, ''));
+            },
+
+            updatePreview: function (id) {
+                this.showLoader(id);
+                this.clearWhitespace(id);
+                this.setPreviewDisabled(id, true);
+
+                if (/\.tmp$/.test(this.images[id].file)) {
+                    this.setImageUrl(id, this.images[id].image_url.replace(new RegExp('\/image\/upload(\/v[0-9]{1,10})?(\/' + this.images[id].orig_free_transformation + ')?(\/v[0-9]{1,10})?\/'), '/image/upload/' + this.images[id].free_transformation + '/'));
+                    this.setOrigFreeTransformation(id, this.images[id].free_transformation);
+                    this.hideLoader(id);
+                    return true;
+                }
+                if(this.hasTransformationDiff(id)){
+                    this.setUpdated(id, 1);
+                }
+                this.setOrigFreeTransformation(id, this.images[id].free_transformation);
+
+                var fd = new FormData();
+                fd.append('free', this.images[id].free_transformation);
+                fd.append('image', this.images[id].file);
+                fd.append('form_key', window.FORM_KEY);
+
+                this.$http.post(
+                    this.ajaxUrl,
+                    fd,
+                    {headers: {'Content-Type': 'multipart/form-data'}}
+                ).then(response => {
+                    this.setError(id, false);
+                    this.setImageUrl(id, response.data.url);
+                    this.hideLoader(id);
+                }).catch(error => {
+                    this.setError(id, error.response.data.error);
+                    this.hideLoader(id);
+                });
+            },
+
+            hasTransformationDiff: function(id){
+                return (this.images[id].orig_free_transformation !== this.images[id].free_transformation);
+            },
+
+            addImage: function(image){
+                Vue.set(this.images, image.id, image);
+            },
+
+            removeImage: function(id){
+                this.images.splice(id, 1);
+            }
+        }
+    });
+
+</script>

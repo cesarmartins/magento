@@ -1,0 +1,50 @@
+@screen-xxs-max: 480px;
+@screen-xs-max: 767px;
+@screen-sm-min: 768px;
+@screen-sm-max: 991px;
+@screen-md-min: 992px;
+@screen-md-max: 1199px;
+@screen-lg-min: 1200px;
+@screen-llg-max: 1299px;
+@screen-llg-min: 1300px;
+@screen-slg-max: 1420px;
+
+//
+// Example
+//-----------------------
+
+/* Portrait phones and smaller */
+//xs only
+@media(max-width: @screen-xs-max) {
+
+}
+
+/* Landscape phones and portrait tablets */
+//small and up
+@media(min-width: @screen-sm-min) {
+
+}
+
+/* Portrait tablets and small desktops */
+//sm only
+@media(min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+
+}
+
+/* Small desktops */
+//md and up
+@media(min-width: @screen-md-min) {
+
+}
+
+/* Landscape tablets and medium desktops */
+//md only
+@media(min-width: @screen-md-min) and (max-width: @screen-md-max) {
+
+}
+
+/* Large desktops and laptops */
+//lg and up
+@media(min-width: @screen-lg-min) {
+
+}

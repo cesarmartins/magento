@@ -1,0 +1,103 @@
+<?php
+    $actions = $this->getActions();
+?>
+
+<p> Tipo :</p>
+<select name="type" id="type" width="200px">
+    <option value="0">Father</option>
+    <option value="1">Father1</option>
+    <option value="2">Father2</option>
+</select>
+<br/> <br/>
+
+<ul id="sortable">
+    <?php foreach($actions as $action) : ?>
+        <li class="ui-state-default" id ="<?php echo $action["id"];?>" ><?php echo $action['name'];?></li>
+    <?php endforeach; ?>
+</ul>
+
+
+<br/><br/><br/>
+<button  title="Save sortable" type="button" class="scalable add-action "  id="save-sortable" style="">
+    <span>
+        <span>
+            <span>Save sortable</span>
+        </span>
+    </span>
+</button>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+
+
+<script>
+
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+    jQuery( function() {
+        jQuery( "#sortable" ).sortable({
+            revert: true,
+            update: function (event, ui) {
+                console.log(jQuery(this).data('id'));
+            }
+        });
+
+
+
+
+
+        jQuery(document).on("click" , "#save-sortable" , function(){
+            var sortedIDs = jQuery( "#sortable" ).sortable( "toArray" );
+            var url = 'tree/adminhtml_tree/saveSortable/';
+            var type = jQuery("#type").val();
+            var sort  = sortedIDs.join();
+            sort = sort.replace(/,/g , '-');
+
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: 'type='+type+'&sortable='+sort,
+                onSuccess: function(r) {
+
+
+
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+
+        });
+
+
+        jQuery(document).on('change','#type',function(sf){
+
+            var url = 'tree/adminhtml_tree/loadFatherType/';
+            var val = jQuery(this).val();
+
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters: 'type='+val,
+                onSuccess: function(r) {
+                    if(r.responseJSON.status == true){
+                        var actions = r.responseJSON.actions;
+                        var x = 0;
+
+                        var html = "";
+                        for( x in actions ){
+                            if(jQuery.isNumeric(x)){
+                                html += '<li class="ui-state-default" id ="'+actions[x]["id"]+'" >'+actions[x]["name"]+'</li>';
+                            }
+                        }
+                        jQuery("#sortable").html("");
+                        jQuery("#sortable").html(html);
+                    }
+                },
+                onFailure: function() { alert('Something went wrong...'); }
+            });
+
+            return false;
+        });
+
+
+
+
+
+        jQuery( "ul, li" ).disableSelection();
+    } );
+</script>

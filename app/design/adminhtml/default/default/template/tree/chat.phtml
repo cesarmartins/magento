@@ -1,0 +1,493 @@
+<?php
+
+$instagram      = $this->getInstagram();
+$type      = $this->getType();
+$idMsg     = $this->getIdmsg();
+$messages  = $this->getMessages();
+
+$img = Mage::getBaseUrl('skin').DS.'frontend'.DS.'seaway'.DS.'iphone'.DS.'images'.DS.'experience'.DS.'promoscore'.DS.'surf-icon-blue-v1.png';
+$imgChatOther = Mage::getBaseUrl('skin').DS.'frontend'.DS.'seaway'.DS.'iphone'.DS.'images'.DS.'experience'.DS.'promoscore'.DS.'loguito.png';
+
+?>
+
+
+<div id="body-chat">
+    <div class="menu">
+        <img class="onwer-avatar" src="<?php echo $img ?>" draggable="false"/>
+        <div class="name"><?php echo $instagram;?> <!--<br/><span class="last"><?php /*echo date('d/m/Y - H:i' , strtotime($message['created_at']));*/?></span>--></div>
+
+    </div>
+    <ol class="chat">
+
+        <?php foreach ( $messages as $message) {
+                  $className = 'other';
+                  $imgChat   = $img;
+                  if(strcasecmp($message['user'] , 'seaway') == 0){
+                      $className = 'self';
+                      $imgChat   = $imgChatOther;
+                  }
+            ?>
+            <li class="<?php echo $className; ?>">
+                <div class="avatar"><img src="<?php echo $imgChat; ?>" draggable="false"/></div>
+                <div class="msg">
+                    <p><?php echo $message['msg']; ?></p>
+                    <time><?php  echo date('d/m/Y H:i:s' , strtotime($message['date'])); ?></time>
+                </div>
+            </li>
+        <?php } ?>
+
+    </ol>
+    <!--<form  method="post" action="" >-->
+        <input class="textarea" name="msg" type="text" placeholder="Escreva aqui!"/><div class="back">  <button class="nopush send-push">Enviar</button> <button class="withpush send-push" disabled="disabled">Enviar com push</button><input type="checkbox" class="enable-push-button" name="enable" value="false" checked="checked" />&nbsp;</div>
+        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+        <input type="hidden" name="tree_id" value="<?php echo $tree['id'];?>" />
+        <input type="hidden" name="type" value="<?php echo $type;?>" />
+    <!--</form>-->
+    </div>
+<style>
+
+    @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+    @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+    html, #body-chat {
+        background: #e5e5e5;
+        font-family: 'Lato', sans-serif;
+        margin: 0px auto;
+    }
+    ::selection{
+        background: rgba(82,179,217,0.3);
+        color: inherit;
+    }
+    a{
+        color: rgba(82,179,217,0.9);
+    }
+
+    /* M E N U */
+
+.menu {
+    right: 0px;
+    width: 100%;
+    height: 80px;
+    background: rgba(82,179,217,0.9);
+    /*z-index: 100;*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.onwer-avatar {
+    float: left;
+    margin-top: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255,255,255,0.98);
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    margin-left: 5px;
+}
+.back:active {
+    background: rgba(255,255,255,0.2);
+}
+.name{
+    /*position: absolute;*/
+    float: left;
+    margin-top: 23px;
+    margin-left: 10px;
+    font-family: 'Lato';
+    font-size: 25px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.98);
+    cursor: default;
+}
+.last{
+    /*position: absolute;*/
+    float: left;
+    font-family: 'Lato';
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    cursor: default;
+}
+
+/* M E S S A G E S */
+
+.chat {
+    list-style: none;
+    background: none;
+    margin: 0;
+    padding: 0 0 50px 0;
+    margin-top: 60px;
+    margin-bottom: 10px;
+}
+.chat li {
+    padding: 0.5rem;
+    overflow: hidden;
+    display: flex;
+}
+.chat .avatar {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: block;
+    z-index: 2;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    background-color: rgba(255,255,255,0.9);
+}
+.chat .avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    background-color: rgba(255,255,255,0.9);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.chat .day {
+    position: relative;
+    display: block;
+    text-align: center;
+    color: #c0c0c0;
+    height: 20px;
+    text-shadow: 7px 0px 0px #e5e5e5, 6px 0px 0px #e5e5e5, 5px 0px 0px #e5e5e5, 4px 0px 0px #e5e5e5, 3px 0px 0px #e5e5e5, 2px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 0px 0px 0px #e5e5e5, -1px 0px 0px #e5e5e5, -2px 0px 0px #e5e5e5, -3px 0px 0px #e5e5e5, -4px 0px 0px #e5e5e5, -5px 0px 0px #e5e5e5, -6px 0px 0px #e5e5e5, -7px 0px 0px #e5e5e5;
+    box-shadow: inset 20px 0px 0px #e5e5e5, inset -20px 0px 0px #e5e5e5, inset 0px -2px 0px #d7d7d7;
+    line-height: 38px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.other .msg {
+    order: 1;
+    border-top-left-radius: 0px;
+    box-shadow: -1px 2px 0px #D4D4D4;
+}
+.other:before {
+    content: "";
+    position: relative;
+    top: 0px;
+    right: 0px;
+    left: 40px;
+    width: 0px;
+    height: 0px;
+    border: 5px solid #fff;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+}
+
+.self {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.self .msg {
+    order: 1;
+    border-bottom-right-radius: 0px;
+    box-shadow: 1px 2px 0px #D4D4D4;
+}
+
+.not-send .msg {
+    background: red;
+    color:white;
+}
+
+.self .avatar {
+    order: 2;
+}
+.self .avatar:after {
+    content: "";
+    position: relative;
+    display: inline-block;
+    bottom: 19px;
+    right: 0px;
+    width: 0px;
+    height: 0px;
+    border: 5px solid #fff;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    box-shadow: 0px 2px 0px #D4D4D4;
+}
+
+.msg {
+    background: white;
+    min-width: 50px;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
+}
+.msg p {
+    font-size: 0.8rem;
+    margin: 0 0 0.2rem 0;
+    color: #777;
+}
+.msg img {
+    position: relative;
+    display: block;
+    width: 450px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px #eee;
+    transition: all .4s cubic-bezier(0.565, -0.260, 0.255, 1.410);
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+@media screen and (max-width: 800px) {
+    .msg img {
+        width: 300px;
+    }
+}
+@media screen and (max-width: 550px) {
+    .msg img {
+        width: 200px;
+    }
+}
+
+.msg time {
+    font-size: 0.7rem;
+    color: #ccc;
+    margin-top: 3px;
+    float: right;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.msg time:before{
+    content:"\f017";
+    color: #ddd;
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+
+
+::-webkit-scrollbar {
+    min-width: 12px;
+    width: 12px;
+    max-width: 12px;
+    min-height: 12px;
+    height: 12px;
+    max-height: 12px;
+    background: #e5e5e5;
+    box-shadow: inset 0px 50px 0px rgba(82,179,217,0.9), inset 0px -52px 0px #fafafa;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border: none;
+    border-radius: 100px;
+    border: solid 3px #e5e5e5;
+    box-shadow: inset 0px 0px 3px #999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b0b0b0;
+    box-shadow: inset 0px 0px 3px #888;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #aaa;
+    box-shadow: inset 0px 0px 3px #7f7f7f;
+}
+
+::-webkit-scrollbar-button {
+    display: block;
+    height: 26px;
+}
+
+/* T Y P E */
+
+input.textarea {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 82px;
+    z-index: 99;
+    background: #fafafa;
+    border: none;
+    outline: none;
+    padding-left: 55px;
+    padding-right: 55px;
+    color: #666;
+    font-weight: 400;
+}
+
+
+.back {
+    position: fixed;
+    display: block;
+    bottom: 8px;
+    left: 82%;
+    width: 259px;
+    height: 74px;
+    color: #000;
+    line-height: 68px;
+    font-size: 30px;
+    padding-left: 5px;
+    z-index: 100;
+    cursor: pointer;
+
+}
+.enable-push-button{
+
+    margin-left: 10px;
+
+}
+.withpush{
+
+    margin-left: 38px;
+}
+
+    #loading-mask{display: none !important;}
+</style>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+
+<script type="application/javascript">
+
+    jQuery('.enable-push-button').on('change' , function(e){
+        if(jQuery(this).is(':checked')){
+            jQuery('.withpush').attr('disabled' , 'disabled');
+        }else{
+            jQuery('.withpush').removeAttr('disabled');
+        }
+    });
+
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+    jQuery('.send-push').on('click', function(e) {
+
+
+
+        var sendPush =  0;
+        if(jQuery(this).hasClass('withpush')){
+            sendPush =  1;
+        }
+        var url = 'messageapp/adminhtml_index/saveMsgChat';
+        var instagram = "<?php echo $instagram; ?>";
+        var msg     = jQuery('input[name="msg"]').val();
+        var type    = jQuery('input[name="type"]').val();
+
+
+        if(instagram && msg && type){
+
+            var dateNow  = dateNowformated();
+            var idMsgSend = jQuery.md5(msg+dateNow);
+            message = '<li class="self self-'+idMsgSend+'"><div class="avatar"><img src="<?php echo $imgChatOther; ?>" draggable="false"/></div><div class="msg"><p>'+msg+'</p><time>'+dateNow+'</time></div></li>';
+            jQuery('.chat').append(message);
+            jQuery("html,body").animate({scrollTop : 99999}, 700);
+            jQuery('.textarea').val("");
+
+            var URI  =  'insta='+instagram+'&msg='+msg+'&type='+type+'&sendPush='+sendPush;
+            var URIencoded = encodeURI(URI);
+
+            new Ajax.Request(baseUrl+url, {
+                method:'post',
+                parameters:URIencoded,
+                onSuccess: function(r) {
+                    var resp = r.responseJSON;
+                    if(resp.status){
+                       //window.location.reload();
+                    }else{
+                        jQuery('.self-'+ idMsgSend).addClass('not-send');
+                    }
+
+                },
+                onFailure: function() {
+                    jQuery('.self-'+ idMsgSend).addClass('not-send');
+                }
+            });
+
+        }
+
+        e.preventDefault();
+
+    });
+
+
+    function updateMessage(){
+        var instagram = "<?php echo  $instagram; ?>";
+        var url = 'messageapp/adminhtml_index/getmsgchat';
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters:'insta='+instagram,
+            onSuccess: function(r) {
+                var resp = r.responseJSON;
+
+                console.log(resp);
+
+                if(resp.status){
+                    var x = 0;
+                    for (x in resp.messages){
+                        if(jQuery.isNumeric(x)){
+                            var message = "";
+                            if(!jQuery( "li" ).hasClass('other'+resp.messages[x].id )){
+                                message = '<li class="other other'+resp.messages[x].id+'" "><div class="avatar"><img src="<?php echo $img; ?>" draggable="false"/></div><div class="msg"><p>'+resp.messages[x].msg+'</p><time>'+resp.messages[x].date_formated+'</time></div> </li>';
+                                jQuery('.chat').append(message);
+
+                                //jQuery("html,body").animate({scrollTop : 99999}, 700);
+
+                            }
+
+
+
+                        }
+
+                    }
+
+                }
+
+            },
+            onFailure: function() {
+                alert('Something went wrong...'); }
+        });
+
+
+
+    }
+    //setInterval
+    setInterval(function(){
+        updateMessage();
+    }, 5000);
+
+
+    function dateNowformated(){
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var H  = today.getHours();
+        var i  = today.getMinutes();
+        var s  = today.getSeconds();
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd;
+        }
+        if(mm<10){
+            mm='0'+mm;
+        }
+
+        var today = dd+'/'+mm+'/'+yyyy+ ' '+H+':'+i+':'+s;
+
+        return today;
+    }
+
+</script>

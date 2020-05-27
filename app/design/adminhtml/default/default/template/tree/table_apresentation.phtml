@@ -1,0 +1,331 @@
+
+
+<div>
+
+    <table cellspacing="0" class="actions">
+        <tbody>
+        <tr>
+            <td class="pager">
+                Página
+                <a href="# title="Página anterior" id="ant-pag"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>adminhtml/default/default/images/pager_arrow_left.gif" alt="Go to Previous page" class="arrow"></a>
+                <input type="text" name="page" value="1" class="input-text page" />
+                <a href="#" title="Próxima página" id="prox-pag"><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN);?>adminhtml/default/default/images/pager_arrow_right.gif" alt="Go to Next page" class="arrow"></a>
+                de <span id="tot-pag"><?php echo $this->total_pag; ?></span> páginas
+                <span class="separator">|</span>
+                Visualizar <select name="limit">
+                    <option value="20" >20</option>
+                    <option value="10">10</option>
+                    <option value="30" selected="selected">30</option>
+                    <option value="50" >50</option>
+                    <option value="100" >100</option>
+                    <option value="200">200</option>
+                </select>
+                por página<span class="separator">|</span>
+                Total <span id="tot-reg"><?php echo $this->total; ?></span> registros encontrados <span id="sales_order_grid-total-count" class="no-display">2034</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class = 'grid'>
+    <div class = 'hor-scroll'>
+        <table cellspacing="0" class="data" id="treeGrid_table">
+            <thead>
+            <tr class="headings">
+                <th><span class="nobr"><span><a href="#" class="sort-title" data-value="id" data-order="desc">ID</a></span></span></th>
+                <th width="15%"><span class="nobr"><span><a href="#" class="sort-title active" data-value="nome" data-order="asc">Nome</a></span></span></th>
+                <th width="5%"><span class="nobr"><span><a href="#" class="sort-title" data-value="buy" data-order="desc">Qtd Compras Usuário</a></span></span></th>
+                <th width="10%"><span class="nobr"><span><a href="#" class="sort-title" data-value="friend" data-order="desc">Qtd Compras Amigo</a></span></span></th>
+                <th width="25%"><span class="nobr"><span><a href="#" class="sort-title " data-value="parent" data-order="asc">Qtd dos 1º Filhos</a></span></span></th>
+                <th width="25%"><span class="nobr"><span class="future"><a href="#" class="sort-title" data-value="child" data-order="desc">Qtd Todos os Filhos</a></span></span></th>
+             </tr>
+            </thead>
+            <tbody>
+                <tr class="even pointer" >
+                    <td class=" a-right a-id"></td>
+                    <td class=" a-nome"></td>
+                    <td class=" a-right "></td>
+                    <td class=" a-right a-parent"></td>
+                    <td class=" a-right "></td>
+                    <td class=" a-right "></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+
+    table tbody .even:nth-child(2n+1) td {background: #FFF !important;}
+
+    table tbody tr td a {
+        padding: 5px 5px 5px 20px;
+    }
+
+    .grid tr.even td, .grid tr.even tr td {
+        vertical-align: middle;
+    }
+
+    .coupons {
+        padding: 50px 0;
+    }
+    .coupons li {
+        margin: 20px 0;
+        width: 450px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+    .coupons li:last-child {
+        border-bottom: none;
+    }
+    .coupons li textarea {
+        width: 400px;
+        height: 170px;
+        float: left;
+        text-align: justify;
+        margin: 0 10px 10px 0;
+        display: block;
+        background: transparent none repeat;
+    }
+    .coupons li input {
+        float: left;
+    }
+    .coupons li .copiar {
+        float: right;
+    }
+    .input-form{
+        padding: 9px 0px 13px;
+        width: 200px;
+    }
+    .input-form input[type='text']{
+        width: 100%;
+        height: 22px;
+    }
+    .show-msg{
+        height: 100px;
+    }
+    .show-msg textarea {
+        height: 122px;
+        width: 426px;
+    }
+    .btn-cadastrar{
+        float: right;
+    }
+    .a-id{
+        width: 10px;
+    }
+    .a-nome{
+        width: 200px;
+    }
+    .a-parent{
+        width: 150px;
+    }
+    .a-check{
+        width: 20px;
+    }
+    .remove-future{
+        float:right;
+    }
+    .grid tr.headings th .remove-future {
+        font-weight: bold;
+        display: inline-block;
+        float:right;
+    }
+    .grid tr.headings th a {
+        display: inline-block;
+        float:left;
+    }
+    .exceeded-limit{
+
+    }
+
+</style>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+
+<script type="application/javascript">
+
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+
+    function pagination(pag, limit, lastLine){
+        var url = 'tree/adminhtml_exhibition/pagination';
+        var orders = [];
+        jQuery('.sort-title').each(function(indx){
+            var order = "";
+            var value = "";
+            if(jQuery(this).hasClass('active')) {
+                order = jQuery(this).data('order');
+                if (order != undefined) {
+                    value = jQuery(this).data('value');
+                    orders.push({name: value, value: order});
+                }
+            }
+        })
+
+        // console.log(parent_id);
+        var strOrders = JSON.stringify(orders);
+
+
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: 'pag='+pag+'&limit='+limit+'&orders='+strOrders,
+            onSuccess: function(r) {
+
+                var valores  = r.responseJSON.valores;
+
+                var html = "";
+                var i = 0;
+
+                for( x in valores ){
+
+                    if(Number.isInteger(parseInt(x))){
+
+
+                        var idViz = "";
+                        idViz = valores[x].id;
+                        // console.log(idViz.length);
+                        if(idViz.length < 4){
+                            var z = 0;
+                            var z = Math.abs(idViz.length - 4);
+                            var strZ = "";
+                            for(var y = 0 ; y < z ; y++ ){
+                                strZ += "0";
+                            }
+                            idViz = strZ+idViz;
+                        }
+
+                        html += '<tr class="even pointer" >';
+                        html += '<td class=" a-right a-id">'+idViz+'</td>';
+                        html += '<td class="a-nome ">';
+                        html +=  valores[x].nome;
+                        html += '</td>';
+                        html += '<td class=" a-right ">'+valores[x].qtd_buy+'</td>';
+                        html += '<td class=" a-right ">'+valores[x].qtd_friend+'</td>';
+                        html += '<td class=" a-right ">'+valores[x].qtd_parent+'</td>';
+                        html += '<td class=" a-right ">'+valores[x].qtd_child+'</td>';
+                        html += '</tr>';
+
+
+                    }
+
+                }
+
+                jQuery(".page").val(pag);
+                jQuery("#tot-reg").html( r.responseJSON.total);
+                totalPag =  Math.ceil( parseInt(jQuery('#tot-reg').html())/limit);
+                jQuery('#tot-pag').html(totalPag);
+
+
+                if(html == "" || html == undefined ) {
+                    jQuery('#treeGrid_table tbody').html(lastLine);
+                }else{
+                    //alert(1);
+                    jQuery('#treeGrid_table tbody > tr').remove();
+                    jQuery('#treeGrid_table tbody').append(html);
+                }
+
+
+               /* if(limita_primeiro_nivel){
+                    jQuery(".customer-check").each(function(){
+                        jQuery(this).prop('checked',true);
+                    });
+                }*/
+
+
+               //  var resp  = r.responseJSON
+                //updateSituation(resp);
+
+
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+    }
+
+
+    jQuery(document).on('click','.sort-title' , function (ecvt) {
+        var field =  jQuery(this).data('value');
+        if(field != undefined){
+            var orderNow = jQuery(this).data('order');
+            if(orderNow == 'desc'){
+                jQuery(this).data('order' , 'asc');
+            }else{
+                jQuery(this).data('order' , 'desc');
+            }
+
+            jQuery('.sort-title').removeClass('active');
+            jQuery(this).addClass('active');
+
+            var pagAtual = 1;
+            var limit  = jQuery('select[name="limit"]').val();
+
+            pagination(pagAtual,limit, "");
+        }
+    });
+
+
+    jQuery(document).on("keyup",'.page', function( event ) {
+        if((event.keyCode >= 48 && event.keyCode <= 57)|| event.keyCode >= 96 && event.keyCode <= 105  ) {
+            var pagAtual = parseInt(jQuery(this).val());
+            if(pagAtual > totalPag ||  pagAtual <  1 )
+                return false;
+            var limit  = jQuery('select[name="limit"]' ).val();
+            pagination(pagAtual ,limit , "");
+        }
+    });
+
+
+    jQuery(document).on('change', 'select[name="limit"]' , function() {
+        var pagAtual = 1;
+        var limit  = parseInt(jQuery(this).val());
+        totalPag =  Math.ceil( parseInt(jQuery('#tot-reg').html())/limit);
+        jQuery('#tot-pag').html(totalPag);
+
+        if(pagAtual > totalPag ||  pagAtual <  1 )
+            return false;
+
+        pagination(pagAtual, limit , "");
+
+    });
+
+
+    jQuery("#prox-pag").on('click',function(){
+        var pagAtual = parseInt(jQuery(".page").val());
+        var proxPag = pagAtual+1;
+        if(proxPag > totalPag )
+            return false;
+        var limit  = jQuery('select[name="limit"]' ).val();
+        pagination(proxPag, limit, "");
+
+    });
+
+
+    jQuery("#ant-pag").on('click',function(){
+        var pagAtual = parseInt(jQuery(".page").val());
+        if(pagAtual == 1 )
+            return false;
+        var proxPag = pagAtual-1;
+        var limit  = jQuery('select[name="limit"]' ).val();
+        pagination(proxPag,limit, "");
+    });
+
+
+
+   jQuery(document).ready(function(){
+        var pagAtual = 1;
+        var limit  = parseInt(jQuery("select[name='limit']").val());
+        //var parent_type  = jQuery("select[name='parent_type']").val();
+
+        pagination(pagAtual ,limit , "");
+        //if(parent_type)
+            //loadAction(parent_type);
+
+        // updateSituation();
+
+    });
+
+
+ </script>

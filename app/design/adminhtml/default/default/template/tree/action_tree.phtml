@@ -1,0 +1,371 @@
+<!-- informações do participante -->
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+        <tr>
+            <td style="width:50%;">
+                <h3 class="icon-head head-customer">Cadastrar</h3>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="messages"></div>
+
+<form id="submitChildrens" method="post" action="">
+
+    <p> Tipo :</p>
+    <select name="type[]" multiple="multiple" width="200px">
+        <option value="0">Father</option>
+        <option value="1">Father1</option>
+        <option value="2">Father2</option>
+    </select>
+    <br/> <br/>
+
+    <div class="box-action">
+        <!-- add action-->
+        <button id="addActions" title="Add Ação" type="button" class="scalable add-action" style="">
+            <span>
+                <span>
+                    <span>Add Ação</span>
+                </span>
+            </span>
+        </button>
+        <br/> <br/>
+        <div class="add-new-action">
+            <button title="Remover Ação" type="button"  class="scalable minus removeAction" style="float:right;">
+                <span>
+                    <span>
+                        <span>Remove</span>
+                    </span>
+                </span>
+            </button>
+            <div class="grid div-form-parent">
+                <div class="hor-scroll">
+                    <table cellspacing="0">
+                        <thead>
+                            <tr class="headings">
+                                <th><span class="nobr">Nome</span></th>
+                               <!-- <th><span class="nobr">Ordem</span></th>-->
+                            </tr>
+                            <tr class="filter">
+                                <th>
+                                    <input type="text" name="parent[name][]"   class="input-form-parent" style="width: 100%" />
+                                </th>
+                                <!--<th>
+                                    <input type="text" name="parent[order][]"  class="input-form-parent" style="width: 100%" />
+                                </th>-->
+                            </tr>
+
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
+            <div id="sales_order_grid_massaction">
+                <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 0 10px;">
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button  title="Add Subníveis" type="button"  data-order="0" class="scalable add addChildrens" style="">
+                                    <span>
+                                        <span>
+                                            <span>Add Observação</span>
+                                        </span>
+                                    </span>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="grid div-form-inputs" style="display: none;">
+                <div class="hor-scroll">
+                    <table cellspacing="0">
+                        <thead>
+                        <tr class="headings">
+                            <th><span class="nobr">Nome Observação</span></th>
+                            <th><span class="nobr">Ação</span></th>
+                        </tr>
+                        <tr class="filter"></tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+       </div>
+    </div>
+  <div id="sales_order_grid_massaction">
+        <table cellspacing="0" cellpadding="0" style="width: 100%">
+            <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <button id="submitFormButton" title="Cadastrar" type="button"  class="scalable add right" >
+                            <span>
+                                <span>
+                                    <span>Cadastrar</span>
+                                </span>
+                            </span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+
+
+<div class="add-new-action-hide"  style="display:none;">
+    <button title="Remover Ação" type="button" class="scalable minus removeAction" style="float:right;">
+                <span>
+                    <span>
+                        <span>Remove</span>
+                    </span>
+                </span>
+    </button>
+    <div class="grid div-form-parent">
+        <div class="hor-scroll">
+            <table cellspacing="0">
+                <thead>
+                    <tr class="headings">
+                        <th><span class="nobr">Nome</span></th>
+                        <!-- <th><span class="nobr">Ordem</span></th>-->
+                    </tr>
+                    <tr class="filter">
+                        <th>
+                            <input type="text" name="parent[name][]"   class="input-form-parent" style="width: 100%" />
+                        </th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+    <div id="sales_order_grid_massaction">
+        <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 0 10px;">
+            <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <button  title="Add Subníveis" type="button" class="scalable add addChildrens" data-order="0" style="">
+                                    <span>
+                                        <span>
+                                            <span>Add Observação</span>
+                                        </span>
+                                    </span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="grid div-form-inputs" style="display: none;">
+        <div class="hor-scroll">
+            <table cellspacing="0">
+                <thead>
+                <tr class="headings">
+                    <th><span class="nobr">Nome Observação</span></th>
+                    <th><span class="nobr">Ação</span></th>
+                </tr>
+                <tr class="filter"></tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .coupons {
+        padding: 50px 0;
+    }
+    .coupons li {
+        margin: 20px 0;
+        width: 450px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+    .coupons li:last-child {
+        border-bottom: none;
+    }
+    .coupons li textarea {
+        width: 400px;
+        height: 170px;
+        float: left;
+        text-align: justify;
+        margin: 0 10px 10px 0;
+        display: block;
+        background: transparent none repeat;
+    }
+    .coupons li input {
+        float: left;
+    }
+    .coupons li .copiar {
+        float: right;
+    }
+
+    .input-form{
+        margin-top: 20px;
+        padding: 9px 13px 13px;
+        width: 200px;
+    }
+
+
+    .input-form input[type='text']{
+        width: 100%;
+        height: 22px;
+    }
+    .input-form-add{
+        padding: 9px 13px 58px;
+        width: 275px;
+
+    }
+    .input-form-add input[type='text']{
+        width: 120px;
+        height: 22px;
+
+    }
+    .input-form-add.remove{
+        float:left;
+    }
+    .input-form input[type='text'].qtd{
+        margin-right: 10px;
+        width: 30px;
+    }
+
+    .input-form-parent{
+        width: 120px;
+        height: 22px;
+    }
+
+    .input-form-parent-qtd{
+        height: 22px;
+        width:58px;
+
+    }
+
+    .div-form-parent > .left{
+        padding-left:13px ;
+    }
+
+    input[name*="childrens"] {
+        border: 1px solid green;
+    }
+
+    input[name*="childrens"].fail{
+        border: 1px solid red;
+    }
+</style>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+<script type="text/javascript">
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+
+    jQuery(document).on('click' , '#addActions' ,function(d){
+
+        var orderNumber = jQuery('.add-new-action-hide').find('.addChildrens').data('order');
+        orderNumber = parseInt(orderNumber) + 1;
+
+        jQuery('.add-new-action-hide').find('.addChildrens').data('order',orderNumber);
+
+        var html = jQuery('.add-new-action-hide').html();
+        var valueAdd  = 'data-order="'+orderNumber+'"';
+
+        html = html.replace(/data-order=["](\d*)["]/,valueAdd );
+
+        var newHtml = "<div class='add-new-action'>"+html+"</div>";
+        jQuery('.box-action').append(newHtml);
+    });
+
+    jQuery(document).on( 'click' , '.removeAction' , function(d){
+        var value = jQuery('.add-new-action').size();
+        if(value > 1){
+            jQuery(this).parent().remove();
+        }
+    });
+
+    jQuery(document).on('click' , '.addChildrens' ,function(c){
+
+
+        var buttonRemove = '<button  title="remove" type="button" class="scalable remove"><span><span><span>Remover</span></span></span></button>';
+
+        var valueKey = jQuery(this).data('order');
+
+        var html = '';
+        html += '<tr class="filter">';
+        html += '<td>';
+        html += '<input class="child input-form-parent" type="text" value="" name="childrens[name]['+valueKey+'][]" style="width: 100%"/>';
+        html += '</td>';
+        html += '<td>';
+        html += buttonRemove;
+        html += '</td>';
+        html += '</tr>';
+
+        var reference  = jQuery(this)
+            .parent()
+            .parent()
+            .parent()
+            .parent()
+            .parent().parent();
+
+        reference.find('.div-form-inputs table thead').append(html);
+        reference.find('.div-form-inputs').show();
+
+
+    });
+
+    jQuery(document).on('click','.remove',function(ev){
+        var a = jQuery(this).parents('tr.filter');
+        a.remove();
+        var tam =  jQuery('.remove').size();
+        if(tam == 0 ){
+            jQuery('.div-form-inputs').hide();
+        }
+
+    });
+
+
+    jQuery(document).on('click','#submitFormButton',function(sf){
+        //   sf.preventDefault();
+
+        var url = 'tree/adminhtml_tree/actionsave/';
+        var param = jQuery('#submitChildrens').serialize();
+
+        jQuery('.child').each(function (e) {
+            if(jQuery(this).val() == ""){
+                jQuery(this).addClass('fail');
+            }
+        });
+
+        if(jQuery('.fail').size() > 0 ){
+            return false;
+        }
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: param,
+            onSuccess: function(r) {
+                jQuery('.input-form-add').remove();
+
+                if(r.responseJSON.status == false){
+                    alert(r.responseJSON.msg);
+                }
+
+                if(r.responseJSON.status == true){
+                    location.reload();
+                }
+
+
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+        return false;
+    });
+
+</script>
+

@@ -1,0 +1,30 @@
+a:5:{i:0;s:1763:"getChildrens :SQLSTATE[42S02]: Base table or view not found: 1146 Table 'camelli1_mage.t_tree' doesn't exist, query was: SELECT t.id ,(0) as limite_ultrapassado,
+                                 (IF(DATEDIFF(DATE(NOW()),DATE(t.last_action_date)) >= 15 , 1 , 0)) as limite_ultrapassado_action,
+                                 (IF( t.new_list_app = 1 , 1 , 0)) as is_new_suggest,
+                                 (IF( t.new_list_app = 2 , 1 , 0)) as is_suggest_confirm,
+                                 (IF( t.new_list_app = 3 , 1 , 0)) as is_suggest_refused,
+                                 (IF(DATEDIFF(DATE(NOW()),DATE(t.last_action_date)) >= 5 AND last_action_id in (246, 245, 244), 1, 0)) as is_cutucar,
+                                 t.last_action ,
+                                 t.future_action ,
+                                 IF((t.last_exception_des = '' or t.last_exception_des is null ) , t.last_exception , t.last_exception_des) as last_exception  ,
+                                 t.parent_name as parent,
+                                 t.parent_id ,
+                                 IF(t.atleta = 1 ,CONCAT(t.nome , ' - ', 'atleta') , t.nome ) as child ,
+                                 t.estado ,
+                                 t.telefone ,
+                                 t.status ,
+                                 t.old_process ,
+                                 t.cod_gerado_1 ,
+                                 t.cod_gerado_2 ,
+                                 t.cod_gerado_3 ,
+                                 t.codigo_ref,
+                                 t.current_step
+
+            FROM t_tree t  WHERE  1 = 1  AND (status = 1 or status = 0)   AND situation = 0    AND t.parent_id = 0      limit 0,100 ";i:1;s:970:"#0 /Applications/MAMP/htdocs/camellia/app/code/local/TotalMetrica/Tree/controllers/Adminhtml/TreeController.php(255): TotalMetrica_Tree_Model_Tree->getChildrens()
+#1 /Applications/MAMP/htdocs/camellia/app/code/core/Mage/Core/Controller/Varien/Action.php(418): TotalMetrica_Tree_Adminhtml_TreeController->indexAction()
+#2 /Applications/MAMP/htdocs/camellia/app/code/core/Mage/Core/Controller/Varien/Router/Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#3 /Applications/MAMP/htdocs/camellia/app/code/core/Mage/Core/Controller/Varien/Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#4 /Applications/MAMP/htdocs/camellia/app/code/core/Mage/Core/Model/App.php(365): Mage_Core_Controller_Varien_Front->dispatch()
+#5 /Applications/MAMP/htdocs/camellia/app/Mage.php(686): Mage_Core_Model_App->run(Array)
+#6 /Applications/MAMP/htdocs/camellia/index.php(82): Mage::run('', 'store')
+#7 {main}";s:3:"url";s:83:"/camellia/index.php/tree/adminhtml_tree/index/key/30c015623cc7198e8ce69f5a7af9259c/";s:11:"script_name";s:19:"/camellia/index.php";s:4:"skin";s:5:"admin";}

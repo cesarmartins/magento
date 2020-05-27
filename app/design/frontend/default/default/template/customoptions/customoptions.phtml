@@ -1,0 +1,51 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_CustomOptions
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+
+/**
+ * Customoptions template
+ *
+ * @see LA_CustomOptions_Block_Customoptions
+ */
+$productId = Mage::app()->getRequest()->getParam('id');
+$checkAttribute = $this->checkAttributeProduct($productId);
+if (!$checkAttribute) {
+    return;
+}
+?>
+<div style="padding-bottom: 20px">
+    <dt><label<?php  echo ' class="required"' ?>><?php  echo '<em>*</em>' ?><?php echo  $this->escapeHtml('Name') ?></label>
+        <?php echo $this->getFormatedPriceCustomName() ?></dt>
+    <dd class="last" style="padding-bottom: 10px">
+        <div class="input-box">
+            <input type="text" onchange="opConfig.reloadPrice()" id="options_name_text" class="input-text required-entry  validate-length product-custom-option" name="options_name" value=" " />
+            <!--<p class="note"><?php /*echo Mage::helper('catalog')->__('Maximum number of characters:')*/?> <strong>10</strong></p>-->
+        </div>
+    </dd>
+
+    <dt><label<?php  echo ' class="required"' ?>><?php  echo '<em>*</em>' ?><?php echo  $this->escapeHtml('Number') ?></label>
+        <?php echo $this->getFormatedPriceCustomNumber() ?></dt>
+    <dd class="last">
+        <div class="input-box">
+            <input type="text" onchange="opConfig.reloadPrice()" id="options_number_text" class="input-text required-entry  validate-length product-custom-option" name="options_number" value=" " />
+            <!--<p class="note"><?php /*echo Mage::helper('catalog')->__('Maximum number of characters:')*/?> <strong>10</strong></p>-->
+        </div>
+    </dd>
+</div>

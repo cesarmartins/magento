@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  	<menu>
+		<tree translate="Tree" module="tree">
+			<title>Importação</title>
+			<sort_order>130</sort_order>
+			<children>
+				<index translate="Arvore" module="tree">
+					<title>Enviar Arquivo</title>
+					<action>tree/adminhtml_tree/index</action>
+					<sort_order>1</sort_order>
+				</index>
+				<!--<apresentation translate="Apresentação Arvore" module="tree">-->
+					<!--<title>Apresentação Árvore</title>-->
+					<!--<action>tree/adminhtml_tree/apresentation</action>-->
+					<!--<sort_order>2</sort_order>-->
+				<!--</apresentation>-->
+				<!--<tableApresentation translate="Apresentação árvore tabela" module="tree">-->
+					<!--<title>Apresentação Árvore Tabela</title>-->
+					<!--<action>tree/adminhtml_exhibition/tableApresentation</action>-->
+					<!--<sort_order>3</sort_order>-->
+				<!--</tableApresentation>-->
+				<messageapp translate="Messages" module="tree">
+					<title>List of Messages</title>
+					<action>tree/adminhtml_messageapp/index</action>
+					<sort_order>2</sort_order>
+				</messageapp>
+			</children>
+		</tree>
+	</menu>	
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<!-- To save on role, all tags to lower case (i.e. - seaway_track, logapp , etc... 
+				     Must mach menu section -->
+				<children>	
+					<tree translate="Tree" module="tree">
+						<title>Tree</title>
+						<sort_order>130</sort_order>
+						<children>
+							<index translate="Arvore" module="tree">
+								<title>Árvores de Usuários</title>
+								<!-- <action>tree/adminhtml_tree/index</action> -->
+								<sort_order>1</sort_order>
+							</index>
+							<!--<apresentation translate="Apresentação Arvore" module="tree">-->
+								<!--<title>Apresentação Árvore</title>-->
+								<!--<action>tree/adminhtml_tree/apresentation</action>-->
+								<!--<sort_order>2</sort_order>-->
+							<!--</apresentation>-->
+							<!--<tableApresentation translate="Apresentação árvore tabela" module="tree">-->
+								<!--<title>Apresentação Árvore Tabela</title>-->
+								<!--<action>tree/adminhtml_exhibition/tableApresentation</action>-->
+								<!--<sort_order>3</sort_order>-->
+							<!--</tableApresentation>-->
+							<messageapp translate="Messages" module="tree">
+								<title>List of Messages</title>
+								<!-- <action>tree/adminhtml_messageapp/index</action> -->
+								<sort_order>2</sort_order>
+							</messageapp>
+						</children>
+					</tree>
+				</children>
+			</admin>
+		</resources>			
+	</acl>
+</config>

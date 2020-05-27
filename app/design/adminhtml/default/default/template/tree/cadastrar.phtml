@@ -1,0 +1,350 @@
+<!-- informações do participante -->
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width:50%;">
+                    <h3 class="icon-head head-customer">Cadastrar</h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="messages"></div>
+
+<form id="submitChildrens" method="post" action="">
+
+    <div class="grid div-form-parent">
+        <div class="hor-scroll">
+            <table cellspacing="0">
+
+                <thead>
+
+                    <tr class="headings">
+                        <th><span class="nobr">Nome 1º nível</span></th>
+                        <th><span class="nobr">Quantidade</span></th>
+                    </tr>
+
+                    <tr class="filter">
+                        <th>
+                            <input type="text" id="parent" class="ui-autocomplete-input input-form-parent" style="width: 100%" />
+                            <input type="hidden" name="parent_id" id="parent_id"/>
+                        </th>
+                        <th>
+                            <input type="text" title="Quantidade permitida de aprovados" name="qtd" id="qtd" class=" input-form-parent-qtd" style="width: 100%" />
+                        </th>
+                    </tr>
+                    
+                </thead>
+
+            </table>
+        </div>
+    </div>
+
+    <div id="sales_order_grid_massaction">
+        <table cellspacing="0" cellpadding="0" style="width: 100%; margin: 0 0 10px;">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button id="addChildrens" title="Add Subníveis" type="button" class="scalable add" style="">
+                            <span>
+                                <span>
+                                    <span>Add Subnível</span>
+                                </span>
+                            </span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="grid div-form-inputs" style="display: none;">
+        <div class="hor-scroll">
+            <table cellspacing="0">
+                <thead>
+                    <tr class="headings">
+                        <th><span class="nobr">Nome Subnível</span></th>
+                        <th><span class="nobr">Telefone</span></th>
+                        <th><span class="nobr">Instagram</span></th>
+                        <th><span class="nobr">Lista</span></th>
+                        <th><span class="nobr">Possui o instagram bloqueado?</span></th>
+                        <th><span class="nobr">Ação</span></th>
+                    </tr>
+                    <tr class="filter"></tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div id="sales_order_grid_massaction">
+        <table cellspacing="0" cellpadding="0" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button id="submitFormButton" title="Cadastrar" type="button"  class="scalable add right" style="display:none;">
+                        <span>
+                            <span>
+                                <span>Cadastrar</span>
+                            </span>
+                        </span>
+                    </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</form>
+
+<style>
+    .coupons {
+        padding: 50px 0;
+    }
+    .coupons li {
+        margin: 20px 0;
+        width: 450px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+    .coupons li:last-child {
+        border-bottom: none;
+    }
+    .coupons li textarea {
+        width: 400px;
+        height: 170px;
+        float: left;
+        text-align: justify;
+        margin: 0 10px 10px 0;
+        display: block;
+        background: transparent none repeat;
+    }
+    .coupons li input {
+        float: left;
+    }
+    .coupons li .copiar {
+        float: right;
+    }
+    
+    .input-form{
+        margin-top: 20px;
+        padding: 9px 13px 13px;
+        width: 200px;
+    }
+
+
+    .input-form input[type='text']{
+        width: 100%;
+        height: 22px;
+    }
+    .input-form-add{
+        padding: 9px 13px 58px;
+        width: 275px;
+
+    }
+   .input-form-add input[type='text']{
+        width: 120px;
+        height: 22px;
+
+    }
+    .input-form-add.remove{
+        float:left;
+    }
+    .input-form input[type='text'].qtd{
+        margin-right: 10px;
+        width: 30px;
+    }
+
+    .input-form-parent{
+        width: 120px;
+        height: 22px;
+     }
+
+    .input-form-parent-qtd{
+        height: 22px;
+        width:58px;
+
+    }
+
+    .div-form-parent > .left{
+        padding-left:13px ;
+    }
+
+    input[name*="childrens"] {
+        border: 1px solid green;
+    }
+
+    input[name*="childrens"].fail{
+         border: 1px solid red;
+    }
+</style>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+<script type="text/javascript">
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+    var urlParent = '<?php echo Mage::getModel('adminhtml/url')->getUrl('tree/adminhtml_tree/getParents/'); ?>';
+
+    jQuery('#parent').on( "keydown", function( event ) {
+        if ( event.keyCode === jQuery.ui.keyCode.TAB &&
+            jQuery( this ).autocomplete( "instance" ).menu.active ) {
+            event.preventDefault();
+        }
+    }).autocomplete({
+        source: function( request, response ) {
+            jQuery.getJSON(urlParent, {
+                term: request.term
+           }, response );
+        },
+        search: function() {
+            // custom minLength
+            var term =  this.value ;
+            if ( term.length < 2 ) {
+                return false;
+            }
+        },
+        focus: function() {
+            // prevent value inserted on focus
+            return false;
+        },
+        select: function( event, ui ) {
+            this.value = ui.item.value;
+            jQuery("#parent_id").val(ui.item.id);
+            jQuery('#qtd').val(ui.item.qtd);
+            jQuery('#addChildrens').attr('style','display:block');
+            return false;
+        }
+    });
+
+    jQuery('#addChildrens').on('click' , function(c){
+
+
+        var buttonRemove = '<button  title="remove" type="button" class="scalable remove"><span><span><span>Remover</span></span></span></button>';
+
+        var html = '';
+        html += '<tr class="filter">';
+            html += '<td>';
+                html += '<input class="input-form-parent" type="text" value="" name="childrens[name][]" style="width: 100%"/>';
+            html += '</td>';
+            html += '<td>';
+                html += '<input class="input-form-parent" type="text" value="" name="childrens[telephone][]" style="width: 100%"/>';
+            html += '</td>';
+
+             html += '<td>';
+                 html += '<input class="child input-form-parent" type="text" value="" name="childrens[instagram][]" style="width: 100%"/>';
+             html += '</td>';
+
+
+            html += '<td>';
+            html += '<select class="input-form-parent" required="" name="childrens[instagram_list][]" style="width: 100%">';
+              html +=     '<option selected = "selected" value="">Todos usuários</option>';
+              html +=     '<option value="1">Segue o pai</option>';
+              html +=     '<option value="2">Seguido pelo pai</option>';
+              html +=     '<option value="3">Mútuo</option>';
+              html +=  '</select>';
+            html += '</td>';
+
+
+             html += '<td>';
+                html += '<select class="input-form-parent" required="" name="childrens[instagram_status][]" style="width: 100%">';
+                html +=     '<option selected = "selected" value="">Todos usuários</option>';
+                html +=     '<option value="1">Instagram bloqueado</option>';
+                html +=     '<option value="2">Instagram desbloqueado</option>';
+                //html +=     '<option value="3">Aceitou a Seaway seguir o Instagram</option>';
+                html +=  '</select>';
+             html += '</td>';
+
+
+
+
+            html += '<td>';
+                    html += buttonRemove;
+                html += '</td>';
+            html += '</tr>';
+
+        jQuery('.div-form-inputs table thead').append(html);
+        jQuery('.div-form-inputs, #submitFormButton').show();
+
+    });
+
+    jQuery(document).on('click','.remove',function(ev){
+        var a = jQuery(this).parents('tr.filter');
+        a.remove();
+        var tam =  jQuery('.remove').size();
+        if(tam == 0 ){
+            jQuery('.div-form-inputs, #submitFormButton').hide();
+        }
+
+    });
+
+    jQuery(document).on("keyup",'.child', function( event ) {
+
+        if(	event.keyCode >= 48 && event.keyCode <= 90 || event.keyCode == 32) {
+
+            var obj = jQuery(this);
+            var name = obj.val();
+            if (name.length > 3) {
+                var url = 'tree/adminhtml_tree/isExists';
+                new Ajax.Request(baseUrl + url, {
+                    method: 'post',
+                    parameters: 'instagram=' + name,
+                    onSuccess: function (r) {
+                        if (!r.responseJSON.status) {
+                            obj.addClass('fail');
+                        }else if(r.responseJSON.status){
+                            obj.removeClass('fail');
+                        }
+                    },
+                    onFailure: function () {
+                        alert('Something went wrong...');
+                    }
+                });
+            }
+        }
+     });
+
+    jQuery(document).on('click','#submitFormButton',function(sf){
+     //   sf.preventDefault();
+
+
+
+
+        var url = 'tree/adminhtml_tree/salvar/';
+        var param = jQuery('#submitChildrens').serialize();
+
+        jQuery('.child').each(function (e) {
+            if(jQuery(this).val() == ""){
+                jQuery(this).addClass('fail');
+            }
+        });
+
+        if(jQuery('.fail').size() > 0 ){
+            return false;
+        }
+
+        new Ajax.Request(baseUrl+url, {
+            method:'post',
+            parameters: param,
+            onSuccess: function(r) {
+                jQuery('.input-form-add').remove();
+
+                if(r.responseJSON.status == false){
+                    alert(r.responseJSON.msg);
+                }
+
+                if(r.responseJSON.status == true){
+                    location.reload();
+                }
+
+
+            },
+            onFailure: function() { alert('Something went wrong...'); }
+        });
+
+        return false;
+    });
+
+</script>
+

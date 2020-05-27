@@ -1,0 +1,9 @@
+app/code/community/Cloudinary/Cloudinary app/code/community/Cloudinary/Cloudinary
+app/design/adminhtml/default/default/layout/cloudinary app/design/adminhtml/default/default/layout/cloudinary
+app/design/adminhtml/default/default/template/cloudinary app/design/adminhtml/default/default/template/cloudinary
+app/design/frontend/base/default/layout/cloudinary app/design/frontend/base/default/layout/cloudinary
+app/design/frontend/base/default/template/cloudinary app/design/frontend/base/default/template/cloudinary
+app/etc/modules/Cloudinary_Cloudinary.xml app/etc/modules/Cloudinary_Cloudinary.xml
+js/cloudinary js/cloudinary
+lib/CloudinaryExtension lib/CloudinaryExtension
+skin/adminhtml/default/default/images/cloudinary skin/adminhtml/default/default/images/cloudinary
