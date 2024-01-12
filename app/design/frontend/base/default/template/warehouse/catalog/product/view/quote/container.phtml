@@ -1,0 +1,121 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = Mage::helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<?php if ($config->isCatalogInformationVisible()) : ?>
+
+<h2><?php //echo $helper->__('Quote') ?></h2>
+<div id="product-quote-container" class="std product-quote-container">
+<?php //echo $this->getChildHtml('quote') ?>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+var ProductQuoteClass = Class.create();
+ProductQuoteClass.prototype = {
+    
+    initialize : function(containerId, productFormId, refreshUrl)
+    {
+        this.container      = $(containerId);
+        this.productForm    = $(productFormId);
+        this.refreshUrl     = refreshUrl;
+        if (this.productForm) {
+            var self = this;
+            this.productForm.select('input', 'select', 'textarea', 'button').each(function (element) {
+                Event.observe($(element), 'change', self.refresh.bind(self));
+            });
+            this.productForm.select('ul.configurable-swatch-list a').each(function (element) {
+                Event.observe($(element), 'click', function () {
+                    self.refresh();
+                });
+            });
+        }
+    }, 
+    
+    setLoading : function(flag)
+    {
+        if (flag) {
+            this.container.addClassName('disabled');
+            this.container.setStyle({opacity: 0.5});
+        } else {
+            this.container.removeClassName('disabled');
+            this.container.setStyle({opacity: 1});
+        }
+    }, 
+    
+    onRefreshFailure : function(transport)
+    {
+        
+    }, 
+    
+    onRefreshSuccess : function(transport)
+    {
+        if (transport && transport.responseText) {
+            try {
+                response = eval('(' + transport.responseText + ')');
+            } catch (e) {
+                response = {};
+            }
+            if (response.html) {
+                this.container.update(response.html);
+            }
+        }
+    }, 
+    
+    onRefreshComplete : function(transport)
+    {
+        this.setLoading(false);
+    }, 
+    
+    refresh : function()
+    {
+        this.setLoading(true);
+        new Ajax.Request(this.refreshUrl, {
+            method:         'post', 
+            onFailure:      this.onRefreshFailure.bind(this), 
+            onSuccess:      this.onRefreshSuccess.bind(this), 
+            onComplete:     this.onRefreshComplete.bind(this), 
+            parameters:     this.productForm.serialize(true)
+        });
+    }
+}
+
+productQuote = new ProductQuoteClass(
+    'product-quote-container', 
+    'product_addtocart_form', 
+    '<?php echo $this->getUrl('warehouse/warehouse/refreshProductQuote') ?>'
+);
+
+//]]>
+</script>
+
+<?php endif ?>

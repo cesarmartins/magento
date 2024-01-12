@@ -1,0 +1,681 @@
+<div id="promo" class="calculadora-app">
+
+    <fieldset id="fieldset-1" class="step is-active" data-step="1" data-container="step" data-active-step="">
+        <h1 class="article-title">1. Em qual ambiente a tinta será aplicada</h1>
+        <fieldset class="m-input-fieldset">
+            <label class="radio-group-label"></label>
+            <div data-field-container="superficie" data-message="true" data-error-message="Selecione uma opção">
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="superficie" value="interno" id="superficie_0" data-required="" data-validate="radio">
+                            <label for="superficie_0">
+                                <img src="" alt="">
+                                    <p class="radio-item-text">Ambiente Interno</p>
+                            </label>
+                    </span>
+                </div>
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="superficie" value="externo" id="superficie_1" data-required="" data-validate="radio">
+                        <label for="superficie_1">
+                            <img src="" alt=""><p class="radio-item-text">Ambiente Externo</p>
+                        </label>
+                    </span>
+                </div>
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="superficie" value="internoexterno" id="superficie_2" data-required="" data-validate="radio">
+                        <label for="superficie_2"><img src="" alt=""><p class="radio-item-text">Ambiente Interno e Externo</p></label>
+                    </span>
+                </div>
+                <span class="m-input-info no-background" data-message-container=""></span>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.proximoPasso(2)">Continuar</button>
+        </div>
+    </fieldset>
+    <fieldset id="fieldset-2" class="step is-done" data-step="2" data-container="step">
+        <h1 class="article-title">2. Em qual superfície a tinta será aplicada?</h1>
+        <fieldset class="m-input-fieldset">
+            <label class="radio-group-label"></label>
+            <div class="m-select-box" data-field-container="tipo" data-message="true">
+                <select data-required="" data-validate="select" name="tipo">
+                    <option value="">Escolha uma opção</option>
+                    <option value="paredes">Parede</option>
+                    <option value="gessoedrywall">Gesso e Drywall</option>
+                    <option value="azulejos">Azulejo</option>
+                    <option value="pisos">Piso</option>
+                    <option value="madeiras">Madeira</option>
+                    <option value="metais">Metal</option>
+                    <option value="telhado">Telhado</option>
+                </select>
+                <span class="m-input-info no-background" data-message-container=""></span>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(1)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.proximoPasso(3)">Continuar</button>
+        </div>
+    </fieldset>
+    <fieldset id="fieldset-3" class="step is-done" data-step="3" data-container="step">
+        <h1 class="article-title">3. Qual a dimensão da área que pretende pintar?</h1>
+        <p class="lead">Nos campos abaixo informe em metros altura e a largura da área onde será pintada.</p>
+      
+        <div class="itens-calc">
+        <fieldset class="m-input-fieldset">
+            <label for="altura" id="altura">Altura da Parede</label>
+            <div data-field-container="altura" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" class="btn is-inverted is-disabled" data-action="subtract" disabled="" id="btn-subtract-altura-parede" onclick="Calculadora.subtrairAlturaParede()">
+                        -
+                    </button>
+                    <input type="text" id="altura_imput" class="text-input" name="altura" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button type="button" class="btn is-inverted" data-action="sum" id="btn-somar-altura" onclick="Calculadora.somarAlturaParede()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">Informe a largura em metros. Ex: 5.50</span>
+            </div>
+        </fieldset>
+      
+        <fieldset class="m-input-fieldset">
+            <label for="largura" id="largura">Largura da Parede</label>
+            <div data-field-container="largura" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" class="btn is-inverted is-disabled" data-action="subtract" disabled="" id="btn-subtract-largura" onclick="Calculadora.subtrairLargura()">
+                        -
+                    </button>
+                    <input type="text" id="input-largura" class="text-input" name="largura" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button type="button" class="btn is-inverted" data-action="sum" id="btn-somar-largura" onclick="Calculadora.somarLargura()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">Informe a largura em metros. Ex: 5.50</span>
+            </div>
+        </fieldset>
+      
+        <fieldset class="m-input-fieldset">
+            <label for="porta" id="porta">
+                Altura da Porta
+            </label>
+            <div data-field-container="porta" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" id="btn-subtrair-altura-porta" class="btn is-inverted is-disabled" data-action="subtract" disabled="" onclick="Calculadora.subtrairAlturaPorta()">
+                        -
+                    </button>
+                    <input id="imput_altura_porta" type="text" class="text-input" name="porta" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button id="btn-somar-altura-porta" type="button" class="btn is-inverted" data-action="sum" onclick="Calculadora.somarAlturaPorta()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">Se não houver digite 0.</span>
+            </div>
+        </fieldset>
+</div>
+<div class="itens-calc">
+
+        <fieldset class="m-input-fieldset">
+            <label for="porta2" id="porta2">Largura da Porta</label>
+            <div data-field-container="porta2" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button id="btn-subtrair-largura-porta" type="button" class="btn is-inverted is-disabled" data-action="subtract" disabled="" onclick="Calculadora.subtrairLarguraPorta()">
+                        -
+                    </button>
+                    <input id="imput_largura_porta" type="text" class="text-input" name="porta2" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button type="button" class="btn is-inverted" data-action="sum" onclick="Calculadora.somarLarguraPorta()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">Se não houver digite 0.</span>
+            </div>
+        </fieldset>
+      
+        <fieldset class="m-input-fieldset">
+            <label for="janela" id="janela">Altura da Janela</label>
+            <div data-field-container="janela" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" class="btn is-inverted is-disabled" data-action="subtract" disabled="" id="btn-subtract-altura-janela" onclick="Calculadora.subtrairAlturaJanela()">
+                        -
+                    </button>
+                    <input type="text" class="text-input" id="input-altura-janela" name="input-altura-janela" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button type="button" class="btn is-inverted" data-action="sum" onclick="Calculadora.somarAlturaJanela()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">Se não houver digite 0.</span>
+            </div>
+        </fieldset>
+      
+        <fieldset class="m-input-fieldset">
+            <label for="janela2" id="janela2">Largura da Janela</label>
+            <div>
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" class="btn is-inverted is-disabled" data-action="subtract" disabled="" id="btn-subtract-largura-janela" onclick="Calculadora.subtrairLarguraJanela()">
+                        -
+                    </button>
+                    <input type="text" class="text-input" id="input-largura-janela" name="janela2" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button type="button" class="btn is-inverted" onclick="Calculadora.somarLarguraJanela()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">Se não houver digite 0.</span>
+            </div>
+        </fieldset>
+</div>
+      
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(2)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.proximoPasso(4)">Continuar</button>
+        </div>
+    </fieldset>
+    <fieldset id="fieldset-4" class="step is-done" data-step="4" data-container="step">
+        <h1 class="article-title">4. Quantas demãos você precisa?</h1>
+        <p class="lead">1 Demão: recomendada apenas para repintura e quando se mantem a cor original.
+            2 Demãos: em quase todas as superfícies são necessárias pelo menos duas demãos para obter um bom resultado. Porém há superfícies em que é necessário até mais demãos, dependendo da cor da tinta que será aplicada.
+            3 Demãos: recomendado quando a cor escolhida for escura ou quando se pretende pintar com uma cor clara sobre um fundo escuro.</p>
+        <fieldset class="m-input-fieldset">
+            <label class="radio-group-label"></label>
+            <div data-field-container="demao" data-message="true" data-error-message="Selecione uma opção">
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group " data-tooltip="O número de demãos varia de acordo com a cor do revestimento selecionado, a superfície e se é a pintura original ou um retoque.">
+                        <input type="radio" name="demao" value="0.1" id="demao_0" data-required="" data-validate="radio">
+                        <label for="demao_0">
+                            <img src="" alt=""><p class="radio-item-text">1</p>
+                        </label>
+                    </span>
+                </div>
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group " data-tooltip="O número de demãos varia de acordo com a cor do revestimento selecionado, a superfície e se é a pintura original ou um retoque.">
+                        <input type="radio" name="demao" value="0.2" id="demao_1" data-required="" data-validate="radio">
+                        <label for="demao_1"><img src="" alt=""><p class="radio-item-text">2</p></label>
+                    </span>
+                </div>
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group " data-tooltip="O número de demãos varia de acordo com a cor do revestimento selecionado, a superfície e se é a pintura original ou um retoque.">
+                        <input type="radio" name="demao" value="0.3" id="demao_2" data-required="" data-validate="radio">
+                        <label for="demao_2"><img src="" alt=""><p class="radio-item-text">3</p></label>
+                    </span>
+                </div>
+                <span class="m-input-info no-background" data-message-container=""></span>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(3)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.proximoPasso(5)">Continuar</button>
+        </div>
+    </fieldset>
+    <fieldset id="fieldset-5" class="step is-done" data-step="5" data-container="step">
+        <h1 class="article-title">5. Selecione a cor da tinta que você deseja usar</h1>
+        <fieldset class="m-input-fieldset">
+            <label class="radio-group-label"></label>
+            <div class="m-select-box" data-field-container="tom" data-message="true">
+                <select data-required="" data-validate="select" name="tom">
+                    <option value="">Escolha uma opção</option>
+                    <option value="branco">Branco</option>
+                    <option value="amarelo">Amarelo</option>
+                    <option value="bege">Bege</option>
+                    <option value="laranja">Laranja</option>
+                    <option value="preto">Preto</option>
+                    <option value="cinza">Cinza</option>
+                    <option value="incolor">Incolor</option>
+                    <option value="vermelho">Vermelho</option>
+                    <option value="verde">Verde</option>
+                    <option value="azul">Azul</option>
+                    <option value="rosa">Rosa</option>
+                    <option value="marrom">Marrom</option>
+                    <option value="roxo">Roxo</option>
+                </select>
+                <span class="m-input-info no-background" data-message-container=""></span>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(4)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.realizarCalculoTintas()">Continuar</button>
+        </div>
+    </fieldset>
+
+    <div id="div-resultado" data-container="scroll" class="is-done">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="m-table " data-output-list="">
+                    <tbody>
+                    <tr>
+                        <td>Soma da suas portas e janelas:</td>
+                        <td data-output-item="medidas" data-output-append="true">200m²</td>
+                    </tr>
+                    <tr>
+                        <td>Tamanho da área de seu ambiente:</td>
+                        <td data-output-item="area" data-output-append="true">-100m²</td>
+                    </tr>
+                    <tr>
+                        <td>Litros de Tinta:</td>
+                        <td data-output-item="litros" data-output-append="true">-20L</td>
+                    </tr>
+                    <tr>
+                        <td>A cor escolhida foi:</td>
+                        <td data-output-item="cor">Laranja</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<div class="row section-spacing" data-container="product">
+            <h2 class="col-xs-12 title-2" data-description="">Hmm, não encontramos nenhum produto para sua necessidade.
+                Que tal uma passadinha na loja? : )</h2>
+        </div>
+        <div class="row" data-container="complementary">
+            <h2 class="col-xs-12 title-2" data-description=""></h2>
+        </div>-->
+    </div>
+
+</div>
+
+<script>
+
+    Calculadora = {
+        Tamanho : "",
+        Largura : "",
+        Portas : "",
+        PortasLargura : "",
+        Resultado: "",
+
+        proximoPasso(passo){
+
+            let anterior = passo - 1;
+            let fieldsetAnterior = "#fieldset-" + anterior;
+            let fieldsetAtual = "#fieldset-" + passo;
+            jQuery(fieldsetAnterior).removeClass("is-active").addClass("is-done");
+            jQuery(fieldsetAtual).removeClass("is-done").addClass("is-active");
+
+        },
+
+        voltarPasso(passo){
+
+            let anterior = passo + 1;
+            let fieldsetAnterior = "#fieldset-" + anterior;
+            let fieldsetAtual = "#fieldset-" + passo;
+            jQuery(fieldsetAnterior).removeClass("is-active").addClass("is-done");
+            jQuery(fieldsetAtual).removeClass("is-done").addClass("is-active");
+
+        },
+
+        subtrairAlturaParede: function (){
+
+            var valorImput = jQuery("#altura_imput").val();
+            valorImput = parseFloat(valorImput) - 0.5;
+            jQuery("#altura_imput").val(valorImput);
+            if(valorImput == 0){
+                jQuery("#btn-subtract-altura-parede").attr("disabled","disabled");
+            }
+        },
+
+        somarAlturaParede: function(){
+
+            var valorImput = jQuery("#altura_imput").val();
+            jQuery("#btn-subtract-altura-parede").attr("disabled",false);
+            if(valorImput == ""){
+                jQuery("#altura_imput").val(1);
+            }else{
+                valorImput = parseFloat(valorImput) + 0.5;
+                jQuery("#altura_imput").val(valorImput);
+            }
+        },
+
+        subtrairAlturaPorta: function (){
+
+            var valorImput = jQuery("#imput_altura_porta").val();
+            valorImput = parseFloat(valorImput) - 0.5;
+            jQuery("#imput_altura_porta").val(valorImput);
+            if(valorImput == 0){
+                jQuery("#btn-subtrair-altura-porta").attr("disabled","disabled");
+            }
+        },
+
+        somarAlturaPorta: function(){
+
+            var valorImput = jQuery("#imput_altura_porta").val();
+            jQuery("#btn-subtrair-altura-porta").attr("disabled",false);
+            if(valorImput == ""){
+                jQuery("#imput_altura_porta").val(1);
+            }else{
+                valorImput = parseFloat(valorImput) + 0.5;
+                jQuery("#imput_altura_porta").val(valorImput);
+            }
+        },
+
+        subtrairLarguraPorta: function (){
+
+            var valorImput = jQuery("#imput_largura_porta").val();
+            valorImput = parseFloat(valorImput) - 0.5;
+            jQuery("#imput_largura_porta").val(valorImput);
+            if(valorImput == 0){
+                jQuery("#btn-subtrair-largura-porta").attr("disabled","disabled");
+            }
+        },
+
+        somarLarguraPorta: function(){
+
+            var valorImput = jQuery("#imput_largura_porta").val();
+            jQuery("#btn-subtrair-largura-porta").attr("disabled",false);
+            if(valorImput == ""){
+                jQuery("#imput_largura_porta").val(1);
+            }else{
+                valorImput = parseFloat(valorImput) + 0.5;
+                jQuery("#imput_largura_porta").val(valorImput);
+            }
+        },
+
+        subtrairLargura: function (){
+
+            var valorImput = jQuery("#input-largura").val();
+            valorImput = parseFloat(valorImput) - 0.5;
+            jQuery("#input-largura").val(valorImput);
+            if(valorImput == 0){
+                jQuery("#btn-subtract-largura").attr("disabled","disabled");
+            }
+        },
+
+        somarLargura: function(){
+
+            var valorImput = jQuery("#input-largura").val();
+            jQuery("#btn-subtract-largura").attr("disabled",false);
+            if(valorImput == ""){
+                jQuery("#input-largura").val(1);
+            }else{
+                valorImput = parseFloat(valorImput) + 0.5;
+                jQuery("#input-largura").val(valorImput);
+            }
+        },
+
+        subtrairLargura: function (){
+
+            var valorImput = jQuery("#input-largura").val();
+            valorImput = parseFloat(valorImput) - 0.5;
+            jQuery("#input-largura").val(valorImput);
+            if(valorImput == 0){
+                jQuery("#btn-subtract-largura").attr("disabled","disabled");
+            }
+        },
+
+        somarLargura: function(){
+
+            var valorImput = jQuery("#input-largura").val();
+            jQuery("#btn-subtract-largura").attr("disabled",false);
+            if(valorImput == ""){
+                jQuery("#input-largura").val(1);
+            }else{
+                valorImput = parseFloat(valorImput) + 0.5;
+                jQuery("#input-largura").val(valorImput);
+            }
+        },
+
+        subtrairAlturaJanela: function (){
+
+            var valorImput = jQuery("#input-altura-janela").val();
+            valorImput = parseFloat(valorImput) - 0.5;
+            jQuery("#input-altura-janela").val(valorImput);
+            if(valorImput == 0){
+                jQuery("#btn-subtract-altura-janela").attr("disabled","disabled");
+            }
+        },
+
+        somarAlturaJanela: function(){
+
+            var nomeImput = "#input-altura-janela";
+            var valorImput = jQuery(nomeImput).val();
+            jQuery("#btn-subtract-altura-janela").attr("disabled",false);
+            if(valorImput == ""){
+                jQuery(nomeImput).val(1);
+            }else{
+                valorImput = parseFloat(valorImput) + 0.5;
+                jQuery(nomeImput).val(valorImput);
+            }
+        },
+
+        subtrairLarguraJanela: function (){
+
+            var valorImput = jQuery("#input-largura-janela").val();
+            valorImput = parseFloat(valorImput) - 0.5;
+            jQuery("#input-largura-janela").val(valorImput);
+            if(valorImput == 0){
+                jQuery("#btn-subtract-largura-janela").attr("disabled","disabled");
+            }
+        },
+
+        somarLarguraJanela: function(){
+            console.log("chegou aqui");
+            var nomeImput = "#input-largura-janela";
+            var valorImput = jQuery(nomeImput).val();
+            jQuery("#btn-subtract-largura-janela").attr("disabled",false);
+            if(valorImput == ""){
+                jQuery(nomeImput).val(1);
+            }else{
+                valorImput = parseFloat(valorImput) + 0.5;
+                jQuery(nomeImput).val(valorImput);
+            }
+        },
+
+        salvarTamanho: function (passo) {
+
+            this.Tamanho = jQuery("#comp_imput").val();
+            this.Largura = jQuery("#larg_imput").val();
+            this.proximoPasso(passo);
+
+        },
+        salvarPortas: function (){
+
+            this.Portas = jQuery("#portas_imput").val();
+            this.PortasLargura = jQuery("#largura_imput").val();
+            this.realizarCalculoPiso();
+
+        },
+        realizarCalculoTintas: function (){
+
+            jQuery("#fieldset-5").removeClass("is-active").addClass("is-done");
+            jQuery("#div-resultado").removeClass("is-done").addClass("is-active");
+            this.Resultado = this.Tamanho * this.Largura;
+            jQuery("#resultado").html("<span> " + this.Resultado + " m²</span>");
+
+        }
+
+    }
+
+    function somarComprimento(){
+
+        var valorImput = jQuery("#comp_imput").val();
+        jQuery("#btn-subtract-comp").attr("disabled",false);
+        if(valorImput == ""){
+            jQuery("#comp_imput").val(1);
+        }else{
+            valorImput = parseFloat(valorImput) + 0.5;
+            jQuery("#comp_imput").val(valorImput);
+        }
+    }
+
+    function subtrairComprimento(){
+
+        var valorImput = jQuery("#comp_imput").val();
+        valorImput = parseFloat(valorImput) - 0.5;
+        jQuery("#comp_imput").val(valorImput);
+        if(valorImput == 0){
+            jQuery("#btn-subtract-comp").attr("disabled","disabled");
+        }
+    }
+
+    function somarTamanho(){
+
+        var valorImput = jQuery("#larg_imput").val();
+        jQuery("#btn-subtract-larg").attr("disabled",false);
+        if(valorImput == ""){
+            jQuery("#larg_imput").val(1);
+        }else{
+            valorImput = parseFloat(valorImput) + 0.5;
+            jQuery("#larg_imput").val(valorImput);
+        }
+    }
+
+    function subtrairTamanho(){
+
+        var valorImput = jQuery("#larg_imput").val();
+        valorImput = parseFloat(valorImput) - 0.5;
+        jQuery("#larg_imput").val(valorImput);
+        if(valorImput == 0){
+            jQuery("#btn-subtract-larg").attr("disabled","disabled");
+        }
+    }
+
+    function somarQtdPortas(){
+
+        var valorImput = jQuery("#portas_imput").val();
+        jQuery("#btn-subtract-portas").attr("disabled",false);
+        if(valorImput == ""){
+            jQuery("#portas_imput").val(1);
+        }else{
+            valorImput = parseFloat(valorImput) + 0.5;
+            jQuery("#portas_imput").val(valorImput);
+        }
+    }
+
+    function subtrairQtdPortas(){
+
+        var valorImput = jQuery("#portas_imput").val();
+        valorImput = parseFloat(valorImput) - 0.5;
+        jQuery("#portas_imput").val(valorImput);
+        if(valorImput == 0){
+            jQuery("#btn-subtract-portas").attr("disabled","disabled");
+        }
+    }
+
+    function somarLargPortas(){
+
+        var valorImput = jQuery("#largura_imput").val();
+        jQuery("#btn-subtract-larguras").attr("disabled",false);
+        if(valorImput == ""){
+            jQuery("#largura_imput").val(1);
+        }else{
+            valorImput = parseFloat(valorImput) + 0.5;
+            jQuery("#largura_imput").val(valorImput);
+        }
+    }
+
+    function subtrairLargPortas(){
+
+        var valorImput = jQuery("#largura_imput").val();
+        valorImput = parseFloat(valorImput) - 0.5;
+        jQuery("#largura_imput").val(valorImput);
+        if(valorImput == 0){
+            jQuery("#btn-subtract-larguras").attr("disabled","disabled");
+        }
+    }
+
+</script>
+<style>
+    .is-done{
+        display: none;
+    }
+    .is-active{
+        display: block;
+    }
+    .espaco-texto{
+        padding-left: 5px;
+    }
+</style>
+
+<style>
+      fieldset#fieldset-1 ,fieldset#fieldset-2 ,fieldset#fieldset-3 ,fieldset#fieldset-4, fieldset#fieldset-5{
+        padding: 25px;
+    box-shadow: 0px 0px 10px 1px #dedede;
+    border-radius: 10px;
+}
+h1.article-title {
+    color: #ff0014!important;
+    font-family: "Roboto","Helvetica","Arial",sans-serif!important;
+    font-weight: 100!important;
+    padding-top: 15px;
+}
+p.lead, p.radio-item-text{
+    font-family: "Roboto","Helvetica","Arial",sans-serif!important;
+    font-weight: 100!important;
+    padding-left: 15px;
+}
+div#promo {
+    max-width: 1200px!important;
+    margin: 0 auto;
+}
+.m-input-box.m-radio-box {
+    box-shadow: 0px 0px 7px 0px #bfbfbf;
+    border-radius: 10px;
+    margin: 15px 0px;
+    padding: 15px;
+}
+p.radio-item-text {
+    margin: 0;
+}
+button.btn.is-medium {
+    background-color: #ff0014;
+    border: 1px solid #ff0014;
+    color: white;
+}
+.banner-calculadora{
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.m-select-box {
+    box-shadow: 0px 0px 5px 0px #d2d2d2;
+    border-radius: 10px;
+    width: 500px;
+    margin-bottom: 30px;
+}
+.itens-calc fieldset.m-input-fieldset {
+    width: 40%;
+    box-shadow: 0px 0px 5px 0px #c5c5c5;
+    margin: 10px 20px;
+    padding: 17px;
+    border-radius: 10px;
+    text-align: center;
+}
+.itens-calc {
+    justify-content: center;
+    display: flex;
+}
+fieldset.m-input-fieldset label {
+    font-size: 20px;
+}
+.m-quantity-field {
+    display: flex;
+    padding: 10px 0px;
+    justify-content: center;
+}
+input#altura_imput, input#input-largura, input#imput_altura_porta, input#imput_largura_porta, input#input-altura-janela, input#input-largura-janela {
+    width: 50px;
+    height: 30px;
+    line-height: 40px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 4px 0px #ababab;
+    padding: 0!important;
+    /* margin: 0 auto; */
+    text-align: center;
+    color: black;
+    margin: 1px;
+}
+.m-quantity-field button {
+    border: 1px solid #ff0014;
+    border-radius: 10px;
+    margin: 0 10px;
+    background-color: #ff0014;
+    color: white;
+}
+.m-quantity-field button:hover{
+    color: #f9f9f9;
+    text-decoration: none;
+    background-color: #c12f3b;
+    border: 1px solid #c12f3b;
+}
+.novo_box{
+    background-color: red;
+}
+td.result-title {
+    font-size: 22px;
+    color: #ff0014;
+
+}
+td#resultado {
+    font-size: 30px;
+    color: #ff0014;
+    font-weight: 600;
+    padding-left: 10px;
+}
+img.banner-result {
+    width: 100%;
+}
+</style>

@@ -1,0 +1,4 @@
+Codazon - Infinit - Magento 1.9.x - Theme Package - version 0.2.2
+Copyright © 2018 Codazon
+Documentation: http://codazon.com/document/infinit/magento1
+Changelog: http://codazon.com/document/infinit/magento1#changelog

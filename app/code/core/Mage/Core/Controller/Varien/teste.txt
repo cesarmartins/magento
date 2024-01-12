@@ -1,0 +1,1121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>New Warehouse / Manage Warehouses / Catálogo / OpenMage Admin</title>
+<link rel="icon" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/favicon.ico" type="image/x-icon"/>
+
+<script type="text/javascript">
+    var BLANK_URL = 'http://localhost:8888/veneza_warehouse/js/blank.html';
+    var BLANK_IMG = 'http://localhost:8888/veneza_warehouse/js/spacer.gif';
+    var BASE_URL = 'http://localhost:8888/veneza_warehouse/index.php/admin/index/index/key/58c8bc4dc12facd0a2fc59ece857b3be/';
+    var SKIN_URL = 'http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/';
+    var FORM_KEY = 'fwPo0Ks0wyY2w1BL';
+</script>
+
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/js/extjs/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/js/extjs/resources/css/ytheme-magento.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/js/prototype/windows/themes/default.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/boxes.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/custom.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/aw_all/css/window.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/aw_blog/css/style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/warehouse/boxes.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/shippingtablerate/boxes.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/override.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/form.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/calendar-blue2.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/lib/prototype/windows/themes/magento.css" media="all" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/menu.css" media="screen, projection" />
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/prototype/prototype.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/extjs/fix-defer-before.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/prototype/window.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/scriptaculous/builder.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/scriptaculous/effects.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/scriptaculous/dragdrop.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/scriptaculous/controls.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/scriptaculous/slider.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/lib/ccard.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/prototype/validation.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/varien/js.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/translate.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/hash.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/events.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/loader.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/grid.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/tabs.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/form.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/accordion.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/tools.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/uploader.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/product.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/calendar/calendar-setup.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/extjs/ext-tree.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/extjs/fix-defer.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/extjs/ext-tree-checkbox.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/variables.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/wysiwyg/widget.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/lib/uploader/flow.min.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/lib/uploader/fusty-flow.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/lib/uploader/fusty-flow-factory.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/uploader/instance.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mage/adminhtml/browser.js"></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/mp/core/adminhtml.js"></script>
+<!--[if lt IE 8]>
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/iestyles.css" media="all" />
+<![endif]-->
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/below_ie7.css" media="all" />
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/lib/ds-sleight.js" defer></script>
+<script type="text/javascript" src="http://localhost:8888/veneza_warehouse/js/varien/iehover-fix.js"></script>
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/ie7.css" media="all" />
+<![endif]-->
+
+<script type="text/javascript">
+    Ext.BLANK_IMAGE_URL = BLANK_IMG;
+    Ext.UpdateManager.defaults.loadScripts = false;
+    Ext.UpdateManager.defaults.disableCaching = true;
+</script>
+
+
+<script type="text/javascript">
+    Fieldset.addToPrefix(1);
+</script>
+
+<script type="text/javascript">//<![CDATA[
+        var Translator = new Translate({"HTML tags are not allowed":"Tags HTML n\u00e3o s\u00e3o permitidas","Please select an option.":"Selecione uma op\u00e7\u00e3o.","This is a required field.":"Campo obrigat\u00f3rio.","Please enter a valid number in this field.":"Informe um n\u00famero v\u00e1lido.","The value is not within the specified range.":"O valor n\u00e3o est\u00e1 dentro do limite especificado.","Please use numbers only in this field. Please avoid spaces or other characters such as dots or commas.":"Utilize apenas n\u00fameros. Evite espa\u00e7os ou outros caracteres como pontos ou v\u00edrgulas.","Please use letters only (a-z or A-Z) in this field.":"Utilize apenas letras (a-z ou A-Z).","Please use only letters (a-z), numbers (0-9) or underscore(_) in this field, first character should be a letter.":"Utilize apenas letras (a-z), n\u00fameros (0-9) ou underline(_), primeiro car\u00e1cter precisa ser uma letra.","Please use only letters (a-z or A-Z) or numbers (0-9) only in this field. No spaces or other characters are allowed.":"Utilize apenas letras (a-z ou A-Z) ou n\u00fameros (0-9). Espa\u00e7os ou outros caracteres n\u00e3o ser\u00e3o permitidos.","Please use only letters (a-z or A-Z) or numbers (0-9) or spaces and # only in this field.":"Utilize apenas letras (a-z ou A-Z) ou n\u00fameros (0-9) ou espa\u00e7os e #.","Please enter a valid phone number. For example (123) 456-7890 or 123-456-7890.":"Informe um n\u00famero de telefone v\u00e1lido. Por exemplo, (123) 456-7890 ou 123-456-7890.","Please enter a valid fax number. For example (123) 456-7890 or 123-456-7890.":"Informe um n\u00famero de celular v\u00e1lido. Por exemplo, (123) 456-7890 ou 123-456-7890.","Please enter a valid date.":"Informe uma data v\u00e1lida.","The From Date value should be less than or equal to the To Date value.":"A Data de In\u00e9cio deve ser menor ou igual \u00e0 Data Final.","Please enter a valid email address. For example johndoe@domain.com.":"Informe um endere\u00e7o de email v\u00e1lido. Por exemplo, johndoe@domain.com.","Please use only visible characters and spaces.":"Utilize apenas caracteres vis\u00edveis e espa\u00e7os.","Please make sure your passwords match.":"Verifique se as senhas conferem.","Please enter a valid URL. Protocol is required (http:\/\/, https:\/\/ or ftp:\/\/)":"Informe uma URL v\u00e1lida. Protocolo obrigat\u00f3rio (http:\/\/, https:\/\/ ou ftp:\/\/)","Please enter a valid URL. For example http:\/\/www.example.com or www.example.com":"Informe uma URL v\u00e1lida. Por exemplo, http:\/\/www.example.com ou www.example.com","Please enter a valid URL Key. For example \"example-page\", \"example-page.html\" or \"anotherlevel\/example-page\".":"Informe uma URL v\u00e1lida. Por exemplo, \"exemplo-pagina\", \"exemplo-pagina.html\" ou \"umacategoria\/exemplo-pagina\".","Please enter a valid XML-identifier. For example something_1, block5, id-4.":"Informe um identificador XML v\u00e1lido. Por exemplo, algumacoisa_1, block5, id-4.","Please enter a valid social security number. For example 123-45-6789.":"Informe um CPF v\u00e1lido. Por exemplo, 123.455.678-9.","Please enter a valid zip code. For example 90602 or 90602-1234.":"Informe um CEP v\u00e1lido. Por exemplo, 90602 ou 90602-1234.","Please enter a valid zip code.":"Informe um CEP v\u00e1lido.","Please use this date format: dd\/mm\/yyyy. For example 17\/03\/2006 for the 17th of March, 2006.":"Utilize este formato de data: dd\/mm\/yyyy. Por exemplo, 17\/03\/2006 para informar 17th de Mar\u00e7o, 2006.","Please enter a valid $ amount. For example $100.00.":"Informe um valor $ . Por exemplo, $100.00.","Please select one of the above options.":"Selecione uma das op\u00e7\u00f5es abaixo.","Please select one of the options.":"Selecione uma das op\u00e7\u00f5es.","Please select State\/Province.":"Selecione Estado...","Please enter a number greater than 0 in this field.":"Informe um n\u00famero maior que zero.","Please enter a number 0 or greater in this field.":"Informe um n\u00famero igual ou maior que zero.","Please enter a valid credit card number.":"Informe um n\u00famero de cart\u00e3o de cr\u00e9dito v\u00e1lido.","Credit card number does not match credit card type.":"N\u00famero do cart\u00e3o de cr\u00e9dito n\u00e3o condiz com tipo de cart\u00e3o.","Card type does not match credit card number.":"Tipo de cart\u00e3o n\u00e3o condiz com n\u00famero do cart\u00e3o de cr\u00e9dito.","Incorrect credit card expiration date.":"Data de expira\u00e7\u00e3o do cart\u00e3o n\u00e3o \u00e9 v\u00e1lido.","Please enter a valid credit card verification number.":"Informe um n\u00famero de verifica\u00e7\u00e3o de cart\u00e3o de cr\u00e9dito v\u00e1lido.","Please input a valid CSS-length. For example 100px or 77pt or 20em or .5ex or 50%.":"Informe um tamanho v\u00e1lido de CSS no campo. Por exemplo, 100px ou 77pt ou 20em ou .5ex ou 50%.","Text length does not satisfy specified text range.":"Tamanho do texto n\u00e3o satisfaz o espa\u00e7o de texto especificado.","Please enter a number lower than 100.":"Informe um n\u00famero menor que 100.","Please select a file":"Selecione um arquivo","Please enter issue number or start date for switch\/solo card type.":"Informe um n\u00famero de seguran\u00e7a ou data de validade para o tipo de cart\u00e3o switch\/solo.","Please wait, loading...":"Carregando...","This date is a required value.":"A data \u00e9 um valor obrigat\u00f3rio.","Please enter a valid day (1-%d).":"Informe um dia v\u00e1lido (1-%d).","Please enter a valid month (1-12).":"Informe um m\u00eas v\u00e1lido (1-12).","Please enter a valid year (1900-%d).":"Informe um ano v\u00e1lido (1900-%d).","Please enter a valid full date":"Informe uma data completa","Please enter a valid date between %s and %s":"Informe uma data v\u00e1lida entre %s e %s","Please enter a valid date equal to or greater than %s":"Informe uma data v\u00e1lida igual ou maior que %s","Please enter a valid date less than or equal to %s":"Informe uma data v\u00e1lida menor ou igual a %s","Complete":"Finalizado","Upload Security Error":"Erro de Seguran\u00e7a Upload","Upload HTTP Error":"Erro de Upload HTTP","Upload I\/O Error":"Erro Upload I\/O","SSL Error: Invalid or self-signed certificate":"Erro SSL: Inv\u00e1lido ou certificado auto-assinado","Add Products":"Adicionar Produtos","Please choose to register or to checkout as a guest":"Criar conta ou continuar como visitante","Your order cannot be completed at this time as there is no shipping methods available for it. Please make necessary changes in your shipping address.":"Seu pedido n\u00e3o pode ser finalizado no momento pois n\u00e3o h\u00e1 formas de entrega dispon\u00edveis para ele. Talvez seja necess\u00e1rio alterar seu endere\u00e7o de entrega.","Please specify shipping method.":"Informe um meio de entrega.","Your order cannot be completed at this time as there is no payment methods available for it.":"Seu pedido n\u00e3o pode ser finalizado neste momento pois n\u00e3o h\u00e1 formas de pagamento dispon\u00edveis para ele.","Please specify payment method.":"Informe uma forma de pagamento.","Insert Widget...":"Inserir Widget...","Add to Cart":"Comprar","In Stock":"Em estoque","Out of Stock":"Esgotado"});
+        //]]></script>
+
+<script type="text/javascript">
+//<![CDATA[
+enUS = {"m":{"wide":["January","February","March","April","May","June","July","August","September","October","November","December"],"abbr":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}}; // en_US locale reference
+Calendar._DN = ["domingo","segunda-feira","ter\u00e7a-feira","quarta-feira","quinta-feira","sexta-feira","s\u00e1bado"]; // full day names
+Calendar._SDN = ["dom","seg","ter","qua","qui","sex","s\u00e1b"]; // short day names
+Calendar._FD = 0; // First day of the week. "0" means display Sunday first, "1" means display Monday first, etc.
+Calendar._MN = ["janeiro","fevereiro","mar\u00e7o","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"]; // full month names
+Calendar._SMN = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"]; // short month names
+Calendar._am = "AM"; // am/pm
+Calendar._pm = "PM";
+
+// tooltips
+Calendar._TT = {};
+Calendar._TT["INFO"] = "Sobre o calendário";
+
+Calendar._TT["ABOUT"] =
+"Selecionar Data/Hora DHTML\n" +
+"(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" +
+"Para última versão visite: http://www.dynarch.com/projects/calendar/\n" +
+"Distribuído sob a licença GNU LGPL. Mais detalhes em http://gnu.org/licenses/lgpl.html." +
+"\n\n" +
+"Selecionar data:\n" +
+"- Use o \xab, \xbb botão para selecionar o ano\n" +
+"- Use the \u2039, \u203a buttons to select month\n" +
+"- Segure o botão do mouse ou qualquer outro botão para selecionar rapidamente.";
+Calendar._TT["ABOUT_TIME"] = "\n\n" +
+"Selecionar hora:\n" +
+"- Clique em qualquer área para aumentar\n" +
+"- ou Shift-clique para diminuir\n" +
+"- ou clique e arraste para uma seleção rápida.";
+
+Calendar._TT["PREV_YEAR"] = "Ano Anterior (segurar para menu)";
+Calendar._TT["PREV_MONTH"] = "Mês Anterior (segurar para menu)";
+Calendar._TT["GO_TODAY"] = "Visitar";
+Calendar._TT["NEXT_MONTH"] = "Próximo mês (segurar para menu)";
+Calendar._TT["NEXT_YEAR"] = "Próximo ano (segurar para menu)";
+Calendar._TT["SEL_DATE"] = "Selecionar data";
+Calendar._TT["DRAG_TO_MOVE"] = "Arrastar para mover";
+Calendar._TT["PART_TODAY"] = ' (' + "hoje" + ')';
+
+// the following is to inform that "%s" is to be the first day of week
+Calendar._TT["DAY_FIRST"] = "Mostrar %s primeiro";
+
+// This may be locale-dependent. It specifies the week-end days, as an array
+// of comma-separated numbers. The numbers are from 0 to 6: 0 means Sunday, 1
+// means Monday, etc.
+Calendar._TT["WEEKEND"] = "0,6";
+
+Calendar._TT["CLOSE"] = "Fechar";
+Calendar._TT["TODAY"] = "hoje";
+Calendar._TT["TIME_PART"] = "(Shift-)Clique ou arraste para alterar o valor";
+
+// date formats
+Calendar._TT["DEF_DATE_FORMAT"] = "%d\/%m\/%Y";
+Calendar._TT["TT_DATE_FORMAT"] = "%e '%ee' %B '%ee' %Y";
+
+Calendar._TT["WK"] = "Semana";
+Calendar._TT["TIME"] = "Hora:";
+
+CalendarDateObject._LOCAL_TIMZEONE_OFFSET_SECONDS = -10800;
+CalendarDateObject._SERVER_TIMZEONE_SECONDS = 1630513214;
+
+//]]>
+</script>
+</head>
+
+<body id="html-body" class=" adminhtml-warehouse-edit">
+<div class="wrapper">
+        <noscript>
+        <div class="noscript">
+            <div class="noscript-inner">
+                <p><strong>Aparentemente o javaScript foi desabilitado no seu navegador.</strong></p>
+                <p>Você precisa ter o Javascript habilitado no seu navegador para utilizar as funcionalidades deste site.</p>
+            </div>
+        </div>
+    </noscript>
+        <div class="header">
+            <div class="header-top">
+    <a href="http://localhost:8888/veneza_warehouse/index.php/admin/index/index/key/58c8bc4dc12facd0a2fc59ece857b3be/" class="logo" title="OpenMage ver. 19.4.11">
+        <svg version="1.1" id="magentologo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="40px" viewBox="0 0 20 40" enable-background="new 0 0 20 40" xml:space="preserve">
+            <path fill="#FFFFFF" d="M12.9,23.4V30H7.5v-6.3c0-1,0.3-1.8,0.8-2.3c0.5-0.5,1.2-0.8,2-0.8c0.8,0,1.5,0.2,1.9,0.7 C12.7,21.8,12.9,22.5,12.9,23.4z M3.8,21.3c-0.5-0.5-1.1-0.7-1.9-0.7c-0.8,0-1.4,0.2-1.9,0.7V30h4.5v-6.6 C4.5,22.5,4.3,21.8,3.8,21.3z M16.2,10H0v9.1c0.2-0.2,0.4-0.4,0.6-0.5C1.3,18.2,2.1,18,3,18c1,0,1.8,0.2,2.5,0.7 c0.7,0.5,1.2,1.1,1.6,2c0.4-0.8,0.9-1.5,1.7-1.9c0.7-0.5,1.6-0.7,2.5-0.7c1.4,0,2.6,0.4,3.4,1.3c0.8,0.9,1.3,2.2,1.3,3.8V30H20V13.8 C20,11.7,18.3,10,16.2,10z"/>
+        </svg>
+	</a>
+    <div class="header-right">
+        <ul id="usermenu">
+        	<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="parent level0 usermenulabel">
+        		<a href="#" onclick="return false" title="User Menu">
+                    <svg version="1.1" id="burger" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                        <rect opacity="0.25" fill="#FFFFFF" width="40" height="40"></rect>
+                        <path fill="#FFFFFF" d="M31,21H9v-2h22V21z M31,17H9v-2h22V17z M31,25H9v-2h22V25z"></path>
+                    </svg>
+                </a>
+			    <ul>
+			    	<li><span>01/09/2021</span></li>
+                    <li><a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_account/index/key/2a1de55363ed65fb83cf2af37c46ea50/"><span>Usuário: admin</span></a></li>
+			    	<li><a href="http://localhost:8888/veneza_warehouse/index.php/" target="_blank"><span>Exibir: Default</span></a></li>
+			    	<li class="last"><a href="http://localhost:8888/veneza_warehouse/index.php/admin/index/logout/key/76474a2a910eabb1262dfcfc0ab1fcc1/"><span>Sair</span></a></li>
+		        </ul>
+		    </li>
+		</ul>
+                <fieldset>
+            <legend>Search</legend>
+            <span id="global_search_indicator" class="autocomplete-indicator" style="display: none">
+                <img src="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/default/images/ajax-loader.gif" alt="Carregando..." class="v-middle"/>
+            </span>
+                        <input id="global_search" name="query" type="text" class="input-text" value="Procurar no Sistema" onfocus="if(this.value=='Procurar no Sistema')this.value=''; " onblur="if(this.value=='')this.value='Procurar no Sistema';" autocomplete="off" />
+            <div id="global_search_autocomplete" class="autocomplete"></div>
+            <script type="text/javascript">
+                new Ajax.Autocompleter(
+                    'global_search',
+                    'global_search_autocomplete',
+                    'http://localhost:8888/veneza_warehouse/index.php/admin/index/globalSearch/key/2f3ec1240489c58253f8008f2997f5b7/',
+                    {
+                        paramName:"query",
+                        minChars:2,
+                        indicator:"global_search_indicator",
+                        updateElement:getSelectionId,
+                        evalJSON:'force'
+                    }
+                );
+                function getSelectionId(li) {
+                    location.href = li.getAttribute('url');
+                }
+            </script>
+        </fieldset>
+            </div>
+</div>
+        <div class="clear"></div>
+
+<div class="nav-bar">
+<!-- menu start -->
+<ul id="nav">
+<li  class="  level0"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/dashboard/index/key/290cc7c6394459b4e77b97af1a1e4861/"   class=""><span>Painel</span></a>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Vendas</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_order/index/key/bf57ab4c01b498c8caeb368cd48529cf/"   class=""><span>Pedidos</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_invoice/index/key/a44cfd85655b09ef7d104c7fd9ab8500/"   class=""><span>Faturas</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_shipment/index/key/a5bb5127f1bd3d3d8f54bc8b9be921e7/"   class=""><span>Entregas</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_creditmemo/index/key/9516f85abca94223d29aa1e907019f72/"   class=""><span>Reembolsos</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_transactions/index/key/45d9d13422f3e1e90029802faf6745c7/"   class=""><span>Transações</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_recurring_profile/index/key/d6326cac453454df432288f4d573fb75/"   class=""><span>Perfil Recorrente (beta)</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_billing_agreement/index/key/b2e18497b1f826d15061ce915ad57dc1/"   class=""><span>Termos de Cobrança</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/checkout_agreement/index/key/0db7c6753de668a5b3061ff5e53ec4ae/"   class=""><span>Termos e Condições</span></a>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Imposto</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tax_rule/index/key/1797b98c6818701ce9953efcd3f55a04/"   class=""><span>Regras de Impostos</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tax_rate/index/key/bb908a62dd3aa3bbce53f4f7db5ee649/"   class=""><span>Gerenciar Cálculo e Área de Imposto</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tax_rate/importExport/key/062409df4f63c8b8fd34baab66d3eafc/"   class=""><span>Importar / Exportar Cálculo de Imposto</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tax_class_customer/index/key/7a341f0f896d19a888035e05555f22b5/"   class=""><span>Classe de Clientes</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tax_class_product/index/key/ebbcb259ade0fd26e799a04f2f5d94e7/"   class=""><span>Classe de Imposto do Produto</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent last level1"> <a href="#"  onclick="return false" class=""><span>Frete</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tablerate/index/key/b4a7f8b8d51069c0f1115e369a3288d6/"   class=""><span>Manage Table Rates</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tablerate_method/index/key/ee6bb3f9993501739b79457ff9471699/"   class=""><span>Manage Table Rate Methods</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class=" active  parent level0"> <a href="#"  onclick="return false" class="active"><span>Catálogo</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/catalog_product/index/key/651705dd07f36442d11cfe67b6e2f2ef/"   class=""><span>Gerenciar Produtos</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/catalog_category/index/key/ac446b99e2eeb5233ddb10330390c45f/"   class=""><span>Gerenciar Categorias</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/warehouse/index/key/d696de86b56e2dd252d02c6032058f0a/"   class=""><span>Manage Warehouses</span></a>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Atributos</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/catalog_product_attribute/index/key/2c366b2c2ffefab3e67bfc484aecf80e/"   class=""><span>Gerenciar Atributos</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/catalog_product_set/index/key/31a465872cc8e1750fa59fda5ad9eae2/"   class=""><span>Gerenciar Grupo de Atributos</span></a>
+</li>
+</ul>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/urlrewrite/index/key/517048f5c53c28aadf54787716c453b1/"   class=""><span>Gerenciar Reescrita de URL</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/catalog_search/index/key/c78537d2c06dd22e914a7cc361ae1e86/"   class=""><span>Termos de Pesquisa</span></a>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Avaliações e Comentários</span></a>
+<ul >
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level2"> <a href="#"  onclick="return false" class=""><span>Comentários do Cliente</span></a>
+<ul >
+<li  class="  level3"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/catalog_product_review/pending/key/0aac0dc2fe7b2833f5bb1c8c8047ad58/"   class=""><span>Comentários Pendentes</span></a>
+</li>
+<li  class="  last level3"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/catalog_product_review/index/key/69c59baffa0bf500f4da7d852172f115/"   class=""><span>Todos Comentários</span></a>
+</li>
+</ul>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/rating/index/key/74acce386076511917468fc86e90d389/"   class=""><span>Gerenciar Avaliações</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Tags</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tag/index/key/32bdfee928e4a9f7c57c5c7f392312ab/"   class=""><span>Todas Tags</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/tag/pending/key/1ea8f48b3333a0650867149880258d9b/"   class=""><span>Tags Pendentes</span></a>
+</li>
+</ul>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sitemap/index/key/ef5eec67a81ee6409b8af3aed7d79cb4/"   class=""><span>Google Sitemap</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Importacao</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/tree/adminhtml_tree/index/key/0898503c2aac64a7d9b0781cd7dd9155/"   class=""><span>Produtos</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/tree/adminhtml_tree/clientes/key/7b8445a3e64f332619cf62aae6a3bda7/"   class=""><span>Clientes</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Clientes</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/customer/index/key/08a15b0baeec906fe76e9f3e564a7f6f/"   class=""><span>Gerenciar Clientes</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/customer_group/index/key/a682969bab2a09d489396b7f8c0ea9f8/"   class=""><span>Grupos de Clientes</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/customer_online/index/key/087703dab097fd42e62b47bab0f115a4/"   class=""><span>Clientes Online</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Promoções</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/promo_catalog/index/key/a1662becd8299335aea3dc20a4d8ac66/"   class=""><span>Regras de Preços</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/promo_quote/index/key/ee154dd5d0db13e518331b45b59d9ac4/"   class=""><span>Regras da Promoção</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Newsletter</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/newsletter_template/index/key/7058edfe7e719f88ba8b4287510759a6/"   class=""><span>Modelos</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/newsletter_queue/index/key/16ccb3d05326298aacdc82c5d52ae349/"   class=""><span>Fila de Envio</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/newsletter_subscriber/index/key/061c89af7eca89e25c1bc577940e8f8b/"   class=""><span>Assinaturas</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/newsletter_problem/index/key/8892b23c4fd15ffefc8a70bff64d6e0a/"   class=""><span>Relatório de Problemas</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>CMS</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/cms_page/index/key/ff6775d32dbe91c5447086cf9751c59d/"   class=""><span>Páginas</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/cms_block/index/key/0a3788617250e7a832b1dd6ed84145ea/"   class=""><span>Blocos Estáticos</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/widget_instance/index/key/f0eb4226b3c8a161e91e1ed9f27c1aef/"   class=""><span>Widgets</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/poll/index/key/7c4cf5263381078fb0d5edc0e02acf63/"   class=""><span>Enquetes</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Importação WebService</span></a>
+<ul >
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/importacao/adminhtml_importacao/index/key/5276a0264e65d0066540917bfb6eb104/"   class=""><span>Produtos</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Blog</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/awblog_manage_blog/new/key/5c70f7012053eb80c12bfd339b7de12c/"   class=""><span>Add Post</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/awblog_manage_blog/index/key/38d402f530975cdd587829617247e754/"   class=""><span>Posts</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/awblog_manage_comment/index/key/cea70b11fdc7d741d49d946d14a29126/"   class=""><span>Comentários</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/awblog_manage_cat/index/key/1f3e09a4f67558255b28be35e2923961/"   class=""><span>Categorias</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_config/edit/section/blog/key/6ab824fda5039a00713eec526769269c/"   class=""><span>Configurações</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Postcode</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/postcodeadmin/adminhtml_postcode/index/key/aab5ed7445e06a84c1bc93d1bd5b66b8/"   class=""><span>Manage Items</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_config/edit/section/postcode/key/6ab824fda5039a00713eec526769269c/"   class=""><span>Configurações</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Parcelamento</span></a>
+<ul >
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_config/edit/section/parcelamento/key/6ab824fda5039a00713eec526769269c/"   class=""><span>Configurações</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Relatórios</span></a>
+<ul >
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Vendas</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_sales/sales/key/72b634f0cd65dfab978098c7aff98dae/"   class=""><span>Pedidos</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_sales/tax/key/007e8ba18fd8cee4c8f211ce54961121/"   class=""><span>Imposto</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_sales/invoiced/key/1f1837efb9f310c0040f9e7428fd8c53/"   class=""><span>Faturado</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_sales/shipping/key/a02b01c8a1459d423bf00dba7b2dc3b8/"   class=""><span>Entrega</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_sales/refunded/key/70568502f4505eba3b4ac2f7e2f82461/"   class=""><span>Restituições</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_sales/coupons/key/0a6d5dd0d37cbfb9bff87209b21866fc/"   class=""><span>Cupons</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/paypal_reports/index/key/6598e659b07a34706f192e4e5657713b/"   class=""><span>PayPal Relatórios de Liquidação</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Carrinho</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_shopcart/product/key/9994ad0c9e049ced8ebfb56e011c9e2d/"   class=""><span>Produtos em carrinho</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_shopcart/abandoned/key/357417b034b0bd9a6727017249cfab50/"   class=""><span>Carrinhos abandonados</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Produtos</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_sales/bestsellers/key/de8ef1e6eef594966e7b43a378db530e/"   class=""><span>Mais Vendidos</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_product/sold/key/b8b893c0bb67dc16fbaade88e42c58a9/"   class=""><span>Produtos Comprados</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_product/viewed/key/2b45fa69cd543169efb0bcbd6fc3d526/"   class=""><span>Mais Populares</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_product/lowstock/key/38a3d16a92f6fcdb67c13a49932e82f9/"   class=""><span>Baixo estoque</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_product/downloads/key/0267d10b4102624b29cd59731f544994/"   class=""><span>Downloads</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Clientes</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_customer/accounts/key/5fd8dd78382b9ca27ad33abdd8afdf2a/"   class=""><span>Novos Cadastros</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_customer/totals/key/4b0098874f05a65966804fd73deaf87f/"   class=""><span>Clientes por total de pedidos</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_customer/orders/key/79140b5b0c7a991eb4ff9b4bc0145a49/"   class=""><span>Clientes por Número de Pedidos</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Tags</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_tag/customer/key/ba796e0165b13379840fc12cb873244b/"   class=""><span>Clientes</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_tag/product/key/acec0d738585431aa2c9975f390c91ca/"   class=""><span>Produtos</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_tag/popular/key/dfeb5adde59ed3c3d4ee919bd630ea9a/"   class=""><span>Popular</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Análises</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_review/customer/key/300033ec200736f09d24c6af036041f4/"   class=""><span>Comentários dos Clientes</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_review/product/key/6317c77f901c2f13394b5769124ea49f/"   class=""><span>Comentários dos Produtos</span></a>
+</li>
+</ul>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report/search/key/194e9f65055546cda38069606d855b5c/"   class=""><span>Termos Pesquisados</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/report_statistics/index/key/aed8ef88b80c9e01a431e60cd49cfd39/"   class=""><span>Atualizar Estatísticas</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Sistema</span></a>
+<ul >
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_account/index/key/2a1de55363ed65fb83cf2af37c46ea50/"   class=""><span>Minha Conta</span></a>
+</li>
+<li  class="  level1"> <a href="#"  onclick="return false" class=""><span>Ferramentas</span></a>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Compartilhar Recursos</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/api_user/index/key/90954046e144c61393dc4412743d4371/"   class=""><span>SOAP/XML-RPC - Usuários</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/api_role/index/key/b6d7d8ec76ce1ba02b73e1091637f5bc/"   class=""><span>SOAP/XML-RPC - Regras</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/api2_role/index/key/79895623bc4c560dc0360384cbebdfc2/"   class=""><span>REST - Roles</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/api2_attribute/index/key/7ecd733e9a29c1db687aaca3bcdb42e9/"   class=""><span>REST - Attributes</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/oauth_consumer/index/key/1aefd29e7bc1b4b73b6d7d4d6f287e0c/"   class=""><span>REST - OAuth Consumidores</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/oauth_authorizedTokens/index/key/f4df6b8ed6a2447f5f1f88ef8084fa47/"   class=""><span>REST - OAuth Tokens Autorizados</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/oauth_admin_token/index/key/3f4ef702c7f871092cc37f845a6c5bad/"   class=""><span>REST - Meus Apps</span></a>
+</li>
+</ul>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_design/index/key/6edd65203e6256096a40380647fbf640/"   class=""><span>Visual</span></a>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Importar/Exportar</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/import/index/key/acee8ed199e8861e73797d7642344d3e/"   class=""><span>Importar</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/export/index/key/5c82d04ab78c961dca27f630250b0e78/"   class=""><span>Exportar</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_convert_gui/index/key/4613a8502e2cb9858a88759e653b034e/"   class=""><span>Dataflow - Modelo</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_convert_profile/index/key/0bf9b5b7fab5eb8738eed298a1dddc60/"   class=""><span>Dataflow - Modelo Avançado</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_currency/index/key/5992f527e603c66eb18cc8df8673a38b/"   class=""><span>Gerenciar Moeda</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_currency/index/key/5992f527e603c66eb18cc8df8673a38b/"   class=""><span>Tarifas</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_currencysymbol/index/key/52d462bc7a639ebd1afd15d2d8a5e010/"   class=""><span>Símbolos</span></a>
+</li>
+</ul>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_email_template/index/key/27441ffe0e785f38ddd95c97c4643c53/"   class=""><span>Emails de Transação</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_variable/index/key/69139901f2f673e144304333d544275d/"   class=""><span>Variáveis Personalizadas</span></a>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Permissões</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/permissions_user/index/key/ab67b78a5805cfbe02a95e905bbded84/"   class=""><span>Usuários</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/permissions_role/index/key/b4ef5e498912a3329ea5a42c15671caa/"   class=""><span>Nível de Acesso</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/permissions_variable/index/key/ac03f92ebc1c66528cb8c688ae0e8f48/"   class=""><span>Variables</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/permissions_block/index/key/fbae932a74f3749b86946aaddd6a3c2c/"   class=""><span>Blocks</span></a>
+</li>
+</ul>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/cache/index/key/ebb5cc9195cd7a066463766a6692a514/"   class=""><span>Gerenciar Cache</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/process/list/key/77517dffd1b63f1d3d44f0ca87939b9a/"   class=""><span>Gerenciar Índices</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_store/index/key/03818c41e124d52d9455be39f9f5eb72/"   class=""><span>Gerenciar Lojas</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/sales_order_status/index/key/b82e21777452c63c9c9525ecea4a3834/"   class=""><span>Status do Pedido</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_config/index/key/29e4486b98c6bf216a7eb503aa4bfacf/"   class=""><span>Configuração</span></a>
+</li>
+</ul>
+</li>
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level0"> <a href="#"  onclick="return false" class=""><span>Codazon</span></a>
+<ul >
+<li onmouseover="Element.addClassName(this,'over')" onmouseout="Element.removeClassName(this,'over')" class="  parent level1"> <a href="#"  onclick="return false" class=""><span>Theme Elements</span></a>
+<ul >
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/flexibletheme_header/index/key/57124192bdc92634377f6dcd4391a304/"   class=""><span>Manage Headers</span></a>
+</li>
+<li  class="  level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/flexibletheme_content/index/key/bc74dbf1f6939da85fffa60dd92769fb/"   class=""><span>Manage Main Contents</span></a>
+</li>
+<li  class="  last level2"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/flexibletheme_footer/index/key/05fe58913864c944c8feb9818b3028d9/"   class=""><span>Manage Footers</span></a>
+</li>
+</ul>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/flexibletheme_config/index/key/a35330461984dc199729432ccdca1203/"   class=""><span>Theme Settings</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/megamenupro_index/index/key/bb247ec5e809438207dfe4f953135c8f/"   class=""><span>Megamenu Pro</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_config/edit/section/codazon_ajaxlayerednavpro/key/6ab824fda5039a00713eec526769269c/"   class=""><span>Ajax Layered Navigation</span></a>
+</li>
+<li  class="  level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_config/edit/section/cdz_ajax_block/key/6ab824fda5039a00713eec526769269c/"   class=""><span>Ajax Cart</span></a>
+</li>
+<li  class="  last level1"> <a href="http://localhost:8888/veneza_warehouse/index.php/admin/system_config/edit/section/codazon_developer/key/6ab824fda5039a00713eec526769269c/"   class=""><span>Theme Developer</span></a>
+</li>
+</ul>
+</li>
+</ul>
+<!-- menu end -->
+
+    <a id="page-help-link" href="http://magento.com/help/documentation">Ajuda</a>
+    <script type="text/javascript">$('page-help-link').target = 'magento_page_help'</script>
+
+</div>
+        </div>
+        <div class="notification-global">
+    <strong>Um ou mais índices não estão atualizados:</strong>
+    Sistema de Busca, Tags dos Produtos.
+    Clique aqui para ir a página de <a href="http://localhost:8888/veneza_warehouse/index.php/admin/process/list/key/77517dffd1b63f1d3d44f0ca87939b9a/">Gerenciamento de Índices</a> e reconstruir os índices obrigatórios.</div>
+
+
+
+
+        <div class="middle" id="anchor-content">
+            <div id="page:main-container">
+
+                <div class="columns ">
+                    <div class="side-col" id="page:left">
+                            <h3>Warehouse Information</h3>
+<ul id="warehouse_tabs" class="tabs">
+    <li >
+        <a href="#" id="warehouse_tabs_main" name="main" title="Geral" class="tab-item-link ">
+            <span><span class="changed" title="A informação desta guia foi alterada."></span><span class="error" title="Este guia possui conteúdo inválido. Verifique as informações antes de salvar."></span>Geral</span>
+        </a>
+        <div id="warehouse_tabs_main_content" style="display:none;"><div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend">Geral</h4>
+    <div class="form-buttons"></div>
+</div>
+    <div class="fieldset " id="warehouse_main_fieldset">
+    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+            <tbody>
+                <tr>
+        <td class="label"><label for="warehouse_code">Código <span class="required">*</span></label></td>
+    <td class="value">
+        <input id="warehouse_code" name="warehouse[code]" value="" title="Código" type="text" class=" input-text required-entry"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_title">Título <span class="required">*</span></label></td>
+    <td class="value">
+        <input id="warehouse_title" name="warehouse[title]" value="" title="Título" type="text" class=" input-text required-entry"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_description">Descrição</label></td>
+    <td class="value">
+        <textarea id="warehouse_description" name="warehouse[description]" title="Descrição" rows="2" cols="15" class=" textarea" ></textarea>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_marca">Selecione a Marca <span class="required">*</span></label></td>
+    <td class="value">
+        <select id="warehouse_marca" name="warehouse[marca]" title="Marca" class=" required-entry select">
+<option value="" selected="selected"></option>
+</select>            </td>
+    </tr>
+            </tbody>
+        </table>
+            </div>
+        </div>
+</div>
+</div>
+    </li>
+    <li >
+        <a href="#" id="warehouse_tabs_contact" name="contact" title="Contact" class="tab-item-link ">
+            <span><span class="changed" title="A informação desta guia foi alterada."></span><span class="error" title="Este guia possui conteúdo inválido. Verifique as informações antes de salvar."></span>Contact</span>
+        </a>
+        <div id="warehouse_tabs_contact_content" style="display:none;"><div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend">Contact</h4>
+    <div class="form-buttons"></div>
+</div>
+    <div class="fieldset " id="warehouse_contact_fieldset">
+    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+            <tbody>
+                <tr>
+        <td class="label"><label for="warehouse_notify">Notify?</label></td>
+    <td class="value">
+        <input id="warehouse_notify" name="warehouse[notify]" value="1" title="Notify?" type="checkbox"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_contact_name">Nome</label></td>
+    <td class="value">
+        <input id="warehouse_contact_name" name="warehouse[contact_name]" value="" title="Nome" type="text" class=" input-text"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_contact_email">Email</label></td>
+    <td class="value">
+        <input id="warehouse_contact_email" name="warehouse[contact_email]" value="" title="Email" type="text" class=" input-text"/>            </td>
+    </tr>
+            </tbody>
+        </table>
+            </div>
+        </div>
+</div>
+</div>
+    </li>
+    <li >
+        <a href="#" id="warehouse_tabs_origin" name="origin" title="Origem do Envio" class="tab-item-link ">
+            <span><span class="changed" title="A informação desta guia foi alterada."></span><span class="error" title="Este guia possui conteúdo inválido. Verifique as informações antes de salvar."></span>Origem do Envio</span>
+        </a>
+        <div id="warehouse_tabs_origin_content" style="display:none;"><div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend">Origem do Envio</h4>
+    <div class="form-buttons"></div>
+</div>
+    <div class="fieldset " id="warehouse_origin_fieldset">
+    <div class="hor-scroll">
+                        <table cellspacing="0" class="form-list">
+            <tbody>
+                <tr>
+        <td class="label"><label for="warehouse_origin_country_id">País <span class="required">*</span></label></td>
+    <td class="value">
+        <select id="warehouse_origin_country_id" name="warehouse[origin_country_id]" title="País" class="origin_country_id required-entry select">
+<option value="" selected="selected">Selecione...</option>
+<option value="AF">Afeganistão</option>
+<option value="AL">Albânia</option>
+<option value="DE">Alemanha</option>
+<option value="AD">Andorra</option>
+<option value="AO">Angola</option>
+<option value="AI">Anguilla</option>
+<option value="AN">Antilhas Holandesas</option>
+<option value="AQ">Antártida</option>
+<option value="AG">Antígua e Barbuda</option>
+<option value="AR">Argentina</option>
+<option value="DZ">Argélia</option>
+<option value="AM">Armênia</option>
+<option value="AW">Aruba</option>
+<option value="SA">Arábia Saudita</option>
+<option value="AU">Austrália</option>
+<option value="AZ">Azerbaijão</option>
+<option value="BS">Bahamas</option>
+<option value="BH">Bahrein</option>
+<option value="BD">Bangladesh</option>
+<option value="BB">Barbados</option>
+<option value="BZ">Belize</option>
+<option value="BJ">Benin</option>
+<option value="BM">Bermudas</option>
+<option value="BY">Bielorrússia</option>
+<option value="BO">Bolívia</option>
+<option value="BW">Botsuana</option>
+<option value="BR">Brasil</option>
+<option value="BN">Brunei</option>
+<option value="BG">Bulgária</option>
+<option value="BF">Burquina Faso</option>
+<option value="BI">Burundi</option>
+<option value="BT">Butão</option>
+<option value="BE">Bélgica</option>
+<option value="BA">Bósnia e Herzegovina</option>
+<option value="CV">Cabo Verde</option>
+<option value="KH">Camboja</option>
+<option value="CA">Canadá</option>
+<option value="QA">Catar</option>
+<option value="KZ">Cazaquistão</option>
+<option value="TD">Chade</option>
+<option value="CL">Chile</option>
+<option value="CN">China</option>
+<option value="CY">Chipre</option>
+<option value="VA">Cidade do Vaticano</option>
+<option value="SG">Cingapura</option>
+<option value="CO">Colômbia</option>
+<option value="KM">Comores</option>
+<option value="CG">Congo - Brazzaville</option>
+<option value="CD">Congo - Kinshasa</option>
+<option value="KP">Coreia do Norte</option>
+<option value="KR">Coreia do Sul</option>
+<option value="CR">Costa Rica</option>
+<option value="CI">Costa do Marfim</option>
+<option value="HR">Croácia</option>
+<option value="CU">Cuba</option>
+<option value="DK">Dinamarca</option>
+<option value="DJ">Djibuti</option>
+<option value="DM">Dominica</option>
+<option value="EG">Egito</option>
+<option value="SV">El Salvador</option>
+<option value="AE">Emirados Árabes Unidos</option>
+<option value="EC">Equador</option>
+<option value="ER">Eritreia</option>
+<option value="SK">Eslováquia</option>
+<option value="SI">Eslovênia</option>
+<option value="ES">Espanha</option>
+<option value="US">Estados Unidos</option>
+<option value="EE">Estônia</option>
+<option value="ET">Etiópia</option>
+<option value="FJ">Fiji</option>
+<option value="PH">Filipinas</option>
+<option value="FI">Finlândia</option>
+<option value="FR">França</option>
+<option value="GA">Gabão</option>
+<option value="GH">Gana</option>
+<option value="GE">Geórgia</option>
+<option value="GS">Geórgia do Sul e Ilhas Sandwich do Sul</option>
+<option value="GI">Gibraltar</option>
+<option value="GD">Granada</option>
+<option value="GL">Groênlandia</option>
+<option value="GR">Grécia</option>
+<option value="GP">Guadalupe</option>
+<option value="GU">Guam</option>
+<option value="GT">Guatemala</option>
+<option value="GG">Guernsey</option>
+<option value="GY">Guiana</option>
+<option value="GF">Guiana Francesa</option>
+<option value="GN">Guiné</option>
+<option value="GW">Guiné Bissau</option>
+<option value="GQ">Guiné Equatorial</option>
+<option value="GM">Gâmbia</option>
+<option value="HT">Haiti</option>
+<option value="NL">Holanda</option>
+<option value="HN">Honduras</option>
+<option value="HK">Hong Kong, RAE da China</option>
+<option value="HU">Hungria</option>
+<option value="BV">Ilha Bouvet</option>
+<option value="HM">Ilha Heard e Ilhas McDonald</option>
+<option value="NF">Ilha Norfolk</option>
+<option value="IM">Ilha de Man</option>
+<option value="KY">Ilhas Caiman</option>
+<option value="CC">Ilhas Coco</option>
+<option value="CK">Ilhas Cook</option>
+<option value="UM">Ilhas Distantes dos EUA</option>
+<option value="FO">Ilhas Faroe</option>
+<option value="FK">Ilhas Malvinas</option>
+<option value="MP">Ilhas Marianas do Norte</option>
+<option value="MH">Ilhas Marshall</option>
+<option value="CX">Ilhas Natal</option>
+<option value="PN">Ilhas Pitcairn</option>
+<option value="SB">Ilhas Salomão</option>
+<option value="TC">Ilhas Turks e Caicos</option>
+<option value="VG">Ilhas Virgens Britânicas</option>
+<option value="VI">Ilhas Virgens dos EUA</option>
+<option value="AX">Ilhas Åland</option>
+<option value="ID">Indonésia</option>
+<option value="IQ">Iraque</option>
+<option value="IE">Irlanda</option>
+<option value="IR">Irã</option>
+<option value="IS">Islândia</option>
+<option value="IL">Israel</option>
+<option value="IT">Itália</option>
+<option value="YE">Iêmen</option>
+<option value="JM">Jamaica</option>
+<option value="JP">Japão</option>
+<option value="JE">Jersey</option>
+<option value="JO">Jordânia</option>
+<option value="KW">Kuwait</option>
+<option value="LA">Laos</option>
+<option value="LS">Lesoto</option>
+<option value="LV">Letônia</option>
+<option value="LR">Libéria</option>
+<option value="LI">Liechtenstein</option>
+<option value="LT">Lituânia</option>
+<option value="LU">Luxemburgo</option>
+<option value="LB">Líbano</option>
+<option value="LY">Líbia</option>
+<option value="MO">Macau, RAE da China</option>
+<option value="MK">Macedônia</option>
+<option value="MG">Madagascar</option>
+<option value="MW">Malawi</option>
+<option value="MV">Maldivas</option>
+<option value="ML">Mali</option>
+<option value="MT">Malta</option>
+<option value="MY">Malásia</option>
+<option value="MA">Marrocos</option>
+<option value="MQ">Martinica</option>
+<option value="MR">Mauritânia</option>
+<option value="MU">Maurício</option>
+<option value="YT">Mayotte</option>
+<option value="MM">Mianmar (Birmânia)</option>
+<option value="FM">Micronésia</option>
+<option value="MD">Moldávia</option>
+<option value="MN">Mongólia</option>
+<option value="ME">Montenegro</option>
+<option value="MS">Montserrat</option>
+<option value="MZ">Moçambique</option>
+<option value="MX">México</option>
+<option value="MC">Mônaco</option>
+<option value="NA">Namíbia</option>
+<option value="NR">Nauru</option>
+<option value="NP">Nepal</option>
+<option value="NI">Nicarágua</option>
+<option value="NG">Nigéria</option>
+<option value="NU">Niue</option>
+<option value="NO">Noruega</option>
+<option value="NC">Nova Caledônia</option>
+<option value="NZ">Nova Zelândia</option>
+<option value="NE">Níger</option>
+<option value="OM">Omã</option>
+<option value="PW">Palau</option>
+<option value="PA">Panamá</option>
+<option value="PG">Papua-Nova Guiné</option>
+<option value="PK">Paquistão</option>
+<option value="PY">Paraguai</option>
+<option value="PE">Peru</option>
+<option value="PF">Polinésia Francesa</option>
+<option value="PL">Polônia</option>
+<option value="PR">Porto Rico</option>
+<option value="PT">Portugal</option>
+<option value="KG">Quirguistão</option>
+<option value="KI">Quiribati</option>
+<option value="KE">Quênia</option>
+<option value="GB">Reino Unido</option>
+<option value="CF">República Centro-Africana</option>
+<option value="DO">República Dominicana</option>
+<option value="CZ">República Tcheca</option>
+<option value="CM">República dos Camarões</option>
+<option value="RE">Reunião</option>
+<option value="RO">Romênia</option>
+<option value="RW">Ruanda</option>
+<option value="RU">Rússia</option>
+<option value="EH">Saara Ocidental</option>
+<option value="PM">Saint Pierre e Miquelon</option>
+<option value="WS">Samoa</option>
+<option value="AS">Samoa Americana</option>
+<option value="SM">San Marino</option>
+<option value="SH">Santa Helena</option>
+<option value="LC">Santa Lúcia</option>
+<option value="SN">Senegal</option>
+<option value="SL">Serra Leoa</option>
+<option value="SC">Seychelles</option>
+<option value="SO">Somália</option>
+<option value="LK">Sri Lanka</option>
+<option value="SZ">Suazilândia</option>
+<option value="SD">Sudão</option>
+<option value="SR">Suriname</option>
+<option value="SE">Suécia</option>
+<option value="CH">Suíça</option>
+<option value="SJ">Svalbard e Jan Mayen</option>
+<option value="BL">São Bartolomeu</option>
+<option value="KN">São Cristovão e Nevis</option>
+<option value="MF">São Martinho</option>
+<option value="ST">São Tomé e Príncipe</option>
+<option value="VC">São Vicente e Granadinas</option>
+<option value="RS">Sérvia</option>
+<option value="SY">Síria</option>
+<option value="TJ">Tadjiquistão</option>
+<option value="TH">Tailândia</option>
+<option value="TW">Taiwan</option>
+<option value="TZ">Tanzânia</option>
+<option value="IO">Território Britânico do Oceano Índico</option>
+<option value="TF">Territórios Franceses do Sul</option>
+<option value="PS">Territórios palestinos</option>
+<option value="TL">Timor-Leste</option>
+<option value="TG">Togo</option>
+<option value="TK">Tokelau</option>
+<option value="TO">Tonga</option>
+<option value="TT">Trinidad e Tobago</option>
+<option value="TN">Tunísia</option>
+<option value="TM">Turcomenistão</option>
+<option value="TR">Turquia</option>
+<option value="TV">Tuvalu</option>
+<option value="UA">Ucrânia</option>
+<option value="UG">Uganda</option>
+<option value="UY">Uruguai</option>
+<option value="UZ">Uzbequistão</option>
+<option value="VU">Vanuatu</option>
+<option value="VE">Venezuela</option>
+<option value="VN">Vietnã</option>
+<option value="WF">Wallis e Futuna</option>
+<option value="ZW">Zimbábue</option>
+<option value="ZM">Zâmbia</option>
+<option value="ZA">África do Sul</option>
+<option value="AT">Áustria</option>
+<option value="IN">Índia</option>
+</select>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_origin_region_id">Estado <span class="required">*</span></label></td>
+    <td class="value">
+        <input id="warehouse_origin_region_id" name="warehouse[origin_region_id]" value="" title="Estado" class="origin_region_id input-text required-entry" type="text"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_origin_postcode">CEP <span class="required">*</span></label></td>
+    <td class="value">
+        <input id="warehouse_origin_postcode" name="warehouse[origin_postcode]" value="" title="CEP" type="text" class=" input-text required-entry"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_origin_city">Cidade <span class="required">*</span></label></td>
+    <td class="value">
+        <input id="warehouse_origin_city" name="warehouse[origin_city]" value="" title="Cidade" type="text" class=" input-text required-entry"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_origin_street1">Rua <span class="required">*</span></label></td>
+    <td class="value">
+        <input id="warehouse_origin_street1" name="warehouse[origin_street1]" value="" title="Rua" type="text" class=" input-text required-entry"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_origin_street2">Número</label></td>
+    <td class="value">
+        <input id="warehouse_origin_street2" name="warehouse[origin_street2]" value="" title="Número" type="text" class=" input-text"/>            </td>
+    </tr>
+<tr>
+        <td class="label"><label for="warehouse_prazo_envio">Prazo de envio</label></td>
+    <td class="value">
+        <input id="warehouse_prazo_envio" name="warehouse[prazo_envio]" value="" title="Prazo de envio" class="validate-digits input-text" type="text"/>            </td>
+    </tr>
+            </tbody>
+        </table>
+            </div>
+        </div>
+</div>
+</div>
+    </li>
+</ul>
+<script type="text/javascript">
+    warehouse_tabsJsTabs = new varienTabs('warehouse_tabs', 'edit_form', 'warehouse_tabs_main', []);
+</script>
+                    </div>
+                    <div class="main-col" id="content">
+                        <div class="main-col-inner">
+                            <div id="messages"></div>
+                            <div class="content-header">
+    <h3 class="icon-head head-warehouse">New Warehouse</h3>    <p class="form-buttons"><button  id="id_73da2738a5bd428dc2f7c9e763d4ef88" title="Voltar" type="button" class="scalable back" onclick="setLocation('http://localhost:8888/veneza_warehouse/index.php/admin/warehouse/index/key/d696de86b56e2dd252d02c6032058f0a/')" style=""><span><span><span>Voltar</span></span></span></button><button  id="id_fafe90fe3af9a0fc1c115dc725d63109" title="Reiniciar" type="button" class="scalable " onclick="setLocation(window.location.href)" style=""><span><span><span>Reiniciar</span></span></span></button><button  id="id_60d22101183d67aa2c759bb417514778" title="Save Warehouse" type="button" class="scalable save" onclick="editForm.submit();" style=""><span><span><span>Save Warehouse</span></span></span></button><button  id="id_8da45f22c15f86ab28756b21e8fbc618" title="Save Warehouse and Continue Edit" type="button" class="scalable save" onclick="saveAndContinueEdit('http://localhost:8888/veneza_warehouse/index.php/admin/warehouse/save/back/edit/active_tab/{{tab_id}}/key/504422d43589505080c3f0b761b362d7/')" style=""><span><span><span>Save Warehouse and Continue Edit</span></span></span></button></p>
+</div>
+<div class="entry-edit">
+    <form id="edit_form" action="http://localhost:8888/veneza_warehouse/index.php/admin/warehouse/save/key/504422d43589505080c3f0b761b362d7/" method="post"><div><input name="form_key" type="hidden" value="fwPo0Ks0wyY2w1BL" /></div></form></div>
+<script type="text/javascript">
+    editForm = new varienForm('edit_form', '');
+</script>
+<script type="text/javascript">function saveAndContinueEdit(urlTemplate) {
+    var tabsIdValue = warehouse_tabsJsTabs.activeTab.id;
+    var tabsBlockPrefix = 'warehouse_tabs_';
+    if (tabsIdValue.startsWith(tabsBlockPrefix)) {
+        tabsIdValue = tabsIdValue.substr(tabsBlockPrefix.length);
+    }
+    var template = new Template(urlTemplate, /(^|.|\r|\n)({{(\w+)}})/);
+    var url = template.evaluate({tab_id:tabsIdValue});
+    editForm.submit(url);
+}
+var warehouseOriginModel = Class.create();
+warehouseOriginModel.prototype = {
+    initialize : function() {
+        this.reload = false;
+        this.loader = new varienLoader(true);
+        this.regionsUrl = 'http://localhost:8888/veneza_warehouse/index.php/admin/warehouse/regions/key/120ee48811a6a861e791108788f90b5f/';
+        this.bindCountryRegionRelation();
+    },
+    bindCountryRegionRelation : function(parentId) {
+        if(parentId) {var countryElements = $$('#'+parentId+' .origin_country_id');}
+        else {var countryElements = $$('.origin_country_id');}
+        for (var i=0; i<countryElements.size(); i++) {
+            Event.observe(countryElements[i], 'change', this.reloadRegionField.bind(this));
+            this.initRegionField(countryElements[i]);
+            if ($(countryElements[i].id+'_inherit')) {
+                Event.observe($(countryElements[i].id+'_inherit'), 'change', this.enableRegionZip.bind(this));
+            }
+        }
+    },
+    enableRegionZip : function(event) {
+        this.reload = true;
+        var countryElement = Event.element(event);
+        if (countryElement && countryElement.id && !countryElement.checked) {
+            var regionElement  = $(countryElement.id.replace(/country_id/, 'region_id'));
+            var zipElement  = $(countryElement.id.replace(/country_id/, 'postcode'));
+            if (regionElement && regionElement.checked) {regionElement.click();}
+            if (zipElement && zipElement.checked) {zipElement.click();}
+        }
+    },
+    initRegionField : function(element) {
+        var countryElement = element;
+        if (countryElement && countryElement.id) {
+            var regionElement = $(countryElement.id.replace(/country_id/, 'region_id'));
+            if (regionElement) {
+                this.regionElement = regionElement;
+                var url = this.regionsUrl+'parent/'+countryElement.value;
+                this.loader.load(url, {}, this.refreshRegionField.bind(this));
+            }
+        }
+    },
+    reloadRegionField : function(event) {
+        this.reload = true;
+        var countryElement = Event.element(event);
+        if (countryElement && countryElement.id) {
+            var regionElement  = $(countryElement.id.replace(/country_id/, 'region_id'));
+            if (regionElement) {
+                this.regionElement = regionElement;
+                var url = this.regionsUrl+'parent/'+countryElement.value;
+                this.loader.load(url, {}, this.refreshRegionField.bind(this));
+            }
+        }
+    },
+    refreshRegionField : function(serverResponse) {
+        if (serverResponse) {
+            var data = eval('(' + serverResponse + ')');
+            var value = this.regionElement.value;
+            var disabled = this.regionElement.disabled;
+            if (data.length) {
+                var html = '<select name="'+this.regionElement.name+'" id="'+this.regionElement.id+'" class="required-entry select" title="'+this.regionElement.title+'"'+(disabled?" disabled":"")+'>';
+                for (var i in data) {
+                    if(data[i].label) {
+                        html+= '<option value="'+data[i].value+'"';
+                        if(this.regionElement.value && (this.regionElement.value == data[i].value || this.regionElement.value == data[i].label)) {
+                            html+= ' selected';
+                        }
+                        html+='>'+data[i].label+'<\/option>';
+                    }
+                }
+                html+= '<\/select>';
+                var parentNode = this.regionElement.parentNode;
+                var regionElementId = this.regionElement.id;
+                parentNode.innerHTML = html;
+                this.regionElement = $(regionElementId);
+            } else if (this.reload) {
+                var html = '<input type="text" name="'+this.regionElement.name+'" id="'+this.regionElement.id+'" class="input-text" title="'+this.regionElement.title+'"'+(disabled?" disabled":"")+'>';
+                var parentNode = this.regionElement.parentNode;
+                var regionElementId = this.regionElement.id;
+                parentNode.innerHTML = html;
+                this.regionElement = $(regionElementId);
+                //this.regionElement.replace(html);
+            }
+        }
+    }
+}
+warehouseOrigin = new warehouseOriginModel();</script>                        </div>
+                    </div>
+                </div>
+
+                        </div>
+        </div>
+        <div class="footer">
+            <p class="bug-report">
+    <a href="https://github.com/OpenMage/magento-lts/issues" id="footer_bug_tracking">Help Us Keep OpenMage Healthy - Report All Bugs</a><br/>
+    Idioma do Sistema: <select name="locale" id="interface_locale" class="" title="Idioma do Sistema" style="width:200px"><option value="af_ZA" >Afrikaans (Suid-Afrika) / africâner (África do Sul)</option><option value="az_AZ" >Azərbaycan (Azərbaycan) / azerbaijano (Azerbaijão)</option><option value="id_ID" >Bahasa Indonesia (Indonesia) / indonésio (Indonésia)</option><option value="ms_MY" >Bahasa Melayu (Malaysia) / malaio (Malásia)</option><option value="bs_BA" >Bosanski (Bosna i Hercegovina) / bósnio (Bósnia e Herzegovina)</option><option value="ca_ES" >Català (Espanya) / catalão (Espanha)</option><option value="cy_GB" >Cymraeg (Y Deyrnas Unedig) / galês (Reino Unido)</option><option value="da_DK" >Dansk (Danmark) / dinamarquês (Dinamarca)</option><option value="de_DE" >Deutsch (Deutschland) / alemão (Alemanha)</option><option value="de_CH" >Deutsch (Schweiz) / alemão (Suíça)</option><option value="de_AT" >Deutsch (Österreich) / alemão (Áustria)</option><option value="et_EE" >Eesti (Eesti) / estoniano (Estônia)</option><option value="en_AU" >English (Australia) / inglês (Austrália)</option><option value="en_CA" >English (Canada) / inglês (Canadá)</option><option value="en_IE" >English (Ireland) / inglês (Irlanda)</option><option value="en_NZ" >English (New Zealand) / inglês (Nova Zelândia)</option><option value="en_GB" >English (United Kingdom) / inglês (Reino Unido)</option><option value="en_US" >English (United States) / inglês (Estados Unidos)</option><option value="es_AR" >Español (Argentina) / espanhol (Argentina)</option><option value="es_CL" >Español (Chile) / espanhol (Chile)</option><option value="es_CO" >Español (Colombia) / espanhol (Colômbia)</option><option value="es_CR" >Español (Costa Rica) / espanhol (Costa Rica)</option><option value="es_ES" >Español (España) / espanhol (Espanha)</option><option value="es_MX" >Español (México) / espanhol (México)</option><option value="es_PA" >Español (Panamá) / espanhol (Panamá)</option><option value="es_PE" >Español (Perú) / espanhol (Peru)</option><option value="es_VE" >Español (Venezuela) / espanhol (Venezuela)</option><option value="fil_PH" >Filipino (Pilipinas) / filipino (Filipinas)</option><option value="fr_CA" >Français (Canada) / francês (Canadá)</option><option value="fr_FR" >Français (France) / francês (França)</option><option value="fr_CH" >Français (Suisse) / francês (Suíça)</option><option value="gl_ES" >Galego (España) / galego (Espanha)</option><option value="hr_HR" >Hrvatski (Hrvatska) / croata (Croácia)</option><option value="it_IT" >Italiano (Italia) / italiano (Itália)</option><option value="it_CH" >Italiano (Svizzera) / italiano (Suíça)</option><option value="sw_KE" >Kiswahili (Kenya) / suaíli (Quênia)</option><option value="lv_LV" >Latviešu (Latvija) / letão (Letônia)</option><option value="lt_LT" >Lietuvių (Lietuva) / lituano (Lituânia)</option><option value="hu_HU" >Magyar (Magyarország) / húngaro (Hungria)</option><option value="nl_NL" >Nederlands (Nederland) / holandês (Holanda)</option><option value="nb_NO" >Norsk Bokmål (Norge) / bokmål norueguês (Noruega)</option><option value="nn_NO" >Nynorsk (Noreg) / nynorsk norueguês (Noruega)</option><option value="pl_PL" >Polski (Polska) / polonês (Polônia)</option><option value="pt_BR" selected="selected" >Português (Brasil) / português (Brasil)</option><option value="pt_PT" >Português (Portugal) / português (Portugal)</option><option value="ro_RO" >Română (România) / romeno (Romênia)</option><option value="sq_AL" >Shqip (Shqipëri) / albanês (Albânia)</option><option value="sk_SK" >Slovenčina (Slovensko) / eslovaco (Eslováquia)</option><option value="sl_SI" >Slovenščina (Slovenija) / esloveno (Eslovênia)</option><option value="sr_RS" >Srpski (Srbija) / sérvio (Sérvia)</option><option value="fi_FI" >Suomi (Suomi) / finlandês (Finlândia)</option><option value="sv_SE" >Svenska (Sverige) / sueco (Suécia)</option><option value="vi_VN" >Tiếng Việt (Việt Nam) / vietnamita (Vietnã)</option><option value="tr_TR" >Türkçe (Türkiye) / turco (Turquia)</option><option value="is_IS" >íslenska (Ísland) / islandês (Islândia)</option><option value="cs_CZ" >čeština (Česká republika) / tcheco (República Tcheca)</option><option value="el_GR" >Ελληνικά (Ελλάδα) / grego (Grécia)</option><option value="be_BY" >беларуская (Беларусь) / bielo-russo (Bielorrússia)</option><option value="bg_BG" >български (България) / búlgaro (Bulgária)</option><option value="mk_MK" >македонски (Македонија) / macedônio (Macedônia)</option><option value="mn_MN" >монгол (Монгол) / mongol (Mongólia)</option><option value="ru_RU" >русский (Россия) / russo (Rússia)</option><option value="uk_UA" >українська (Україна) / ucraniano (Ucrânia)</option><option value="he_IL" >עברית (ישראל) / hebraico (Israel)</option><option value="ar_DZ" >العربية (الجزائر) / árabe (Argélia)</option><option value="ar_KW" >العربية (الكويت) / árabe (Kuwait)</option><option value="ar_MA" >العربية (المغرب) / árabe (Marrocos)</option><option value="ar_SA" >العربية (المملكة العربية السعودية) / árabe (Arábia Saudita)</option><option value="ar_EG" >العربية (مصر) / árabe (Egito)</option><option value="fa_IR" >فارسی (ایران) / persa (Irã)</option><option value="hi_IN" >हिंदी (भारत) / híndi (Índia)</option><option value="bn_BD" >বাংলা (বাংলাদেশ) / bengali (Bangladesh)</option><option value="gu_IN" >ગુજરાતી (ભારત) / guzerate (Índia)</option><option value="th_TH" >ไทย (ไทย) / tailandês (Tailândia)</option><option value="lo_LA" >ລາວ (ລາວ) / laosiano (Laos)</option><option value="ka_GE" >ქართული (საქართველო) / georgiano (Geórgia)</option><option value="km_KH" >ខ្មែរ (កម្ពុជា) / cmer (Camboja)</option><option value="zh_CN" >中文 (中国) / chinês (China)</option><option value="zh_HK" >中文 (中華人民共和國香港特別行政區) / chinês (Hong Kong, RAE da China)</option><option value="zh_TW" >中文 (台灣) / chinês (Taiwan)</option><option value="ja_JP" >日本語 (日本) / japonês (Japão)</option><option value="ko_KR" >한국어 (대한민국) / coreano (Coreia do Sul)</option></select></p>
+<p class="legality">
+    <a href="https://www.openmage.org/" id="footer_connect">Connect with the OpenMage Community</a>
+</p>
+OpenMage LTS 19.4.11<script type="text/javascript">
+    $('footer_bug_tracking').target = 'Varien_External';
+    $('footer_connect').target = 'Varien_External';
+    function setInterfaceLanguage(evt){
+        var elem = Event.element(evt);
+        if(elem){
+            setLocation('http://localhost:8888/veneza_warehouse/index.php/admin/index/changeLocale/key/72d21f2e4fb1f07ffad5036024ce08a5/locale/'+elem.value+'/uenc/aHR0cDovL2xvY2FsaG9zdDo4ODg4L3ZlbmV6YV93YXJlaG91c2UvaW5kZXgucGhwL2FkbWluL3dhcmVob3VzZS9lZGl0L2tleS82MjU5YWY4NDdmMTYxZjgxYjBiZWI3YTkwNWFiMzQwMC8,');
+        }
+    }
+    Event.observe('interface_locale', 'change', setInterfaceLanguage)
+</script>
+        </div>
+    </div>
+        <div id="loading-mask" style="display:none">
+    <p class="loader" id="loading_mask_loader"><img src="http://localhost:8888/veneza_warehouse/skin/adminhtml/default/openmage/images/ajax-loader-tr.gif" alt="Carregando..."/><br/>Carregando...</p>
+</div>
+
+
+</body>
+</html>

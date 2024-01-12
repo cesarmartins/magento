@@ -1,0 +1,213 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php
+/**
+ * @var $this MP_Warehouse_Block_Adminhtml_Catalog_Product_Edit_Tab_Price_Group_Renderer
+ */
+?>
+<?php $helper            = $this->helper('warehouse') ?>
+<?php $element           = $this->getElement() ?>
+<?php $elementHtmlId     = $element->getHtmlId() ?>
+<?php $elementName       = $element->getName() ?>
+<?php $elementClass      = $element->getClass() ?>
+<?php $elementReadonly   = $element->getReadonly() ?>
+<?php $isShowWebsite     = $this->isShowWebsiteColumn() ?>
+<?php $isGroupPriceFixed = $this->isGroupPriceFixed() ?>
+<?php $priceValidator    = $this->getPriceValidation('validate-zero-or-greater') ?>
+<?php $argumentsCount    = 5 ?>
+<?php $tableColSpan      = 4 ?>
+
+<?php if (!$isShowWebsite) $tableColSpan++ ?>
+
+<tr>
+    <td class="label"><?php echo $element->getLabel() ?></td>
+    <td colspan="10" class="grid tier">
+        <table cellspacing="0" class="data border" id="group_prices_table">
+            <?php if ($isShowWebsite) : ?>
+                <col width="190"/>
+            <?php endif ?>
+            <col width="130"/>
+            <col width="110"/>
+            <col width="130" />
+            <col width="1"/>
+            <thead>
+                <tr class="headings">
+                    <th<?php if (!$isShowWebsite) : ?> style="display: none;"<?php endif ?>>
+                        <?php echo $this->__('Website') ?>
+                    </th>
+                    <th><?php echo $helper->__('Warehouse') ?></th>
+                    <th><?php echo $this->__('Customer Group') ?></th>
+                    <th><?php echo $this->getPriceColumnHeader($this->__('Price')) ?></th>
+                    <th class="last"><?php echo $this->__('Action') ?></th>
+                </tr>
+            </thead>
+            <tbody id="<?php echo $elementHtmlId ?>_container"></tbody>
+            <tfoot>
+                <tr>
+                    <td <?php if (!$isShowWebsite) : ?>style="display: none;"<?php endif ?>></td>
+                    <td colspan="<?php echo $tableColSpan ?>" class="a-right"><?php echo $this->getAddButtonHtml() ?></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var groupPriceRowTemplate = '<tr>'
+                /** Website */
+                + '<td<?php if (!$isShowWebsite) : ?> style="display:none"<?php endif ?>>'
+                + '<select class="<?php echo $elementClass ?> required-entry" name="<?php echo $elementName ?>[{{index}}][website_id]" id="group_price_row_{{index}}_website">'
+                <?php foreach ($this->getWebsites() as $_websiteId => $_info) : ?>
+                + '<option value="<?php echo $_websiteId ?>"><?php echo $this->jsQuoteEscape($this->escapeHtml($_info['name'])) ?><?php if (!empty($_info['currency'])) : ?> [<?php echo $this->escapeHtml($_info['currency']) ?>]<?php endif ?></option>'
+                <?php endforeach ?>
+                + '</select></td>'
+                /** Warehouse */
+                + '<td><select class="<?php echo $elementClass ?> stock" name="<?php echo $elementName ?>[{{index}}][stock_id]" id="group_price_row_{{index}}_stock">'
+                + '<option value=""><?php echo $this->jsQuoteEscape($helper->__('All Warehouses')) ?></option>'
+                <?php foreach ($this->getStockIds() as $stockId) : ?>
+                + '<option value="<?php echo $stockId ?>"><?php echo $this->jsQuoteEscape($this->htmlEscape($this->getWarehouseTitleByStockId($stockId))) ?></option>'
+                <?php endforeach ?>
+                + '</select></td>'
+                /** Customer Group */
+                + '<td><select class="<?php echo $elementClass ?> custgroup required-entry" name="<?php echo $elementName ?>[{{index}}][cust_group]" id="group_price_row_{{index}}_cust_group">'
+                <?php foreach ($this->getCustomerGroups() as $_groupId => $_groupName) : ?>
+                + '<option value="<?php echo $_groupId ?>"><?php echo $this->jsQuoteEscape($this->escapeHtml($_groupName)) ?></option>'
+                <?php endforeach ?>
+                + '</select></td>'
+                /** Price */
+                + '<td><input class="<?php echo $elementClass ?> required-entry <?php echo $_priceValueValidation ?>" type="text" name="<?php echo $elementName ?>[{{index}}][price]" value="{{price}}" id="group_price_row_{{index}}_price"/>'
+                /** Is Percent */
+                + '<input type="hidden" name="<?php echo $elementName ?>[{{index}}][is_percent]" value="<?php if ($this->getIsPercent()) : ?>1<?php else: ?>0<?php endif ?>" id="group_price_row_{{index}}_is_percent"/></td>'
+                /** Delete */
+                + '<td class="last"><input type="hidden" name="<?php echo $elementName ?>[{{index}}][delete]" class="delete" value="" id="group_price_row_{{index}}_delete"/>'
+                + '<button title="<?php echo $this->jsQuoteEscape($this->__('Delete Group Price')) ?>" type="button" class="scalable delete icon-btn delete-product-option" id="group_price_row_{{index}}_delete_button" onclick="return groupPriceControl.deleteItem(event);">'
+                + '<span><?php echo $this->jsQuoteEscape($this->__('Delete')) ?></span></button></td>'
+                + '</tr>';
+
+            var groupPriceControl = {
+                template: new Template(groupPriceRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', '')),
+                itemsCount: 0,
+                addItem: function () {
+                    <?php if ($elementReadonly) : ?>
+                        if (arguments.length < <?php echo $argumentsCount ?>) {
+                            return;
+                        }
+                    <?php endif ?>
+
+                    var data = {
+                        website_id : '<?php echo $this->getDefaultWebsite() ?>',
+                        stock_id   : '<?php echo $this->getDefaultStockId() ?>',
+                        group      : '<?php echo $this->getDefaultCustomerGroup() ?>',
+                        price      : '',
+                        readOnly   : false,
+                        index      : this.itemsCount++
+                    };
+
+                    if (arguments.length >= <?php echo $argumentsCount ?>) {
+                        data.website_id = arguments[0];
+                        data.stock_id   = arguments[1];
+                        data.group      = arguments[2];
+                        data.price      = arguments[3];
+                    }
+
+                    if (arguments.length == <?php echo $argumentsCount + 1 ?>) {
+                        data.readOnly = arguments[<?php echo $argumentsCount ?>];
+                    }
+
+                    Element.insert($('<?php echo $elementHtmlId ?>_container'), {
+                        bottom : this.template.evaluate(data)
+                    });
+
+                    $('group_price_row_' + data.index + '_cust_group').value = data.group;
+                    $('group_price_row_' + data.index + '_stock').value      = data.stock_id;
+                    $('group_price_row_' + data.index + '_website').value    = data.website_id;
+
+                    <?php if ($this->isShowWebsiteColumn() && !$this->isAllowChangeWebsite()) : ?>
+                        var websiteElement = $('group_price_row_' + data.index + '_website');
+                        var websiteCaption = websiteElement.options[websiteElement.selectedIndex].text;
+
+                        websiteElement.insert({after:'<span class="website-name">' + websiteCaption + '</span>'});
+                        websiteElement.hide();
+                    <?php endif ?>
+
+                    if (data.readOnly == '1') {
+                        ['website', 'stock', 'cust_group', 'price', 'delete'].each(function(element_suffix) {
+                            $('group_price_row_' + data.index + '_' + element_suffix).disabled = true;
+                        });
+
+                        $('group_price_row_' + data.index + '_delete_button').hide();
+                    }
+
+                    <?php if ($elementReadonly) : ?>
+                        $('<?php echo $elementHtmlId ?>_container').select('input', 'select')
+                            .each(this.disableElement);
+
+                        $('<?php echo $elementHtmlId ?>_container').up('table').select('button')
+                            .each(this.disableElement);
+                    <?php else: ?>
+                        $('<?php echo $elementHtmlId ?>_container').select('input', 'select').each(function(element) {
+                            Event.observe(element, 'change', element.setHasChanges.bind(element));
+                        });
+                    <?php endif ?>
+                },
+                disableElement: function(element) {
+                    element.disabled = true;
+                    element.addClassName('disabled');
+                },
+                deleteItem: function(event) {
+                    var tr = Event.findElement(event, 'tr');
+                    if (tr) {
+                        Element.select(tr, '.delete').each(function(element) {
+                            element.value='1';
+                        });
+                        Element.select(tr, ['input', 'select']).each(function(element) {
+                            element.hide();
+                        });
+                        Element.hide(tr);
+                        Element.addClassName(tr, 'no-display template');
+                    }
+                    return false;
+                }
+            };
+
+            <?php foreach ($this->getValues() as $_item) : ?>
+                groupPriceControl.addItem(
+                    '<?php echo $_item['website_id'] ?>',
+                    '<?php echo $_item['stock_id'] ?>',
+                    '<?php echo $_item['cust_group'] ?>',
+                    '<?php echo sprintf('%.2f', $_item['price']) ?>',
+                    <?php echo (int)!empty($_item['readonly']) ?>
+                );
+            <?php endforeach ?>
+
+            <?php if ($elementReadonly) : ?>
+                $('<?php echo $elementHtmlId ?>_container').up('table').select('button')
+                    .each(groupPriceControl.disableElement);
+            <?php endif ?>
+            //]]>
+        </script>
+    </td>
+</tr>

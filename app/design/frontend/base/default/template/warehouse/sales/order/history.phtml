@@ -1,0 +1,145 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<?php if ($helper->getVersionHelper()->isGe1910()) : ?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php else : ?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php endif ?>
+
+<?php $_orders                      = $this->getOrders() ?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Orders') ?></h1>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php if($_orders->getSize()): ?>
+
+    <div class="bloco-pedido">
+        <?php $_odd = ''; ?>
+        <?php foreach ($_orders as $_order): ?>
+            <div class="item-pedido">
+                <div class="span-title">Pedido: <?php echo $_order->getRealOrderId() ?></div>
+                <?php
+                $items = $_order->getAllVisibleItems();
+                foreach ($items as $item){
+                    $product = $item->getProduct(); ?>
+                    <div class="contente">
+                        <img src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(75, 75);?>">
+                        <span><?php echo $item->getName()?></span>
+                        <span><?php echo Mage::helper('core')->currency($item->getPrice(), true, false); ?></span>
+                        <span class="status"><?php echo $_order->getStatusLabel() ?></span>
+                    </div>
+                    <div class="separator-history"></div>
+                <?php } ?>
+                <div class="detalhes-pedidos">
+                    <table class="data-table orders" id="my-orders-table" style="width: 50%;float: right;">
+                        <thead>
+                        <tr>
+                            <th class="date"><?php echo $this->__('Date') ?></th>
+                            <th class="total"><span class="nobr"><?php echo $this->__('Order Total') ?></span></th>
+                            <th class="view">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="date"><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+                            <td class="total"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                            <td class="a-center view" style="width: 300px;">
+                                <span class="nobr">
+                                    <a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
+                                    <?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
+                                    <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+                                        <span class="separator">|</span> <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+                                    <?php endif ?>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+<?php endif ?>
+<style>
+    .item-pedido {
+        clear: both;
+        border: 1px solid #e4e4e4;
+        /* padding: 5%; */
+        margin: 10px 0px;
+    }
+    .span-title {
+        background-color: #ff0013;
+        padding: 15px;
+        font-size: 20px;
+        color: white;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    .contente {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 10px;
+    }
+    .contente img {
+        width: 100px;
+    }
+    .main-container.col2-left-layout .main .col-left.sidebar.col-left-first {
+        display: none;
+    }
+    span.status {
+        font-size: 18px;
+        font-weight: 600;
+        color: green;
+        text-transform: uppercase;
+    }
+    .status-cancelado{
+        color: red;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .separator-history{
+        border-bottom: 1px solid #cccc;
+    }
+
+    .detalhes-pedidos{
+        margin-bottom: 105px;
+        margin-right: 7px;
+        height: 16px;
+    }
+</style>

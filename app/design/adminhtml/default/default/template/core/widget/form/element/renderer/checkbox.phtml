@@ -1,0 +1,59 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php $helper             = $this->helper('warehouse/core_data') ?>
+<?php $element            = $this->getElement() ?>
+<?php $elementHtmlId      = $element->getHtmlId() ?>
+<?php $elementLabel       = $element->getLabel() ?>
+<?php $elementDependent   = $element->getDependent() ?>
+
+<?php $controlId          = $this->getControlHtmlId() ?>
+<?php $controlJsObject    = $this->getControlJsObjectName() ?>
+
+<tr>
+    <td class="label"><label for="<?php echo $elementHtmlId ?>"><?php echo $elementLabel ?></label></td>
+    <td id="<?php echo $controlId ?>" class="value control">
+        <div class="control-body">
+            <?php echo $element->getElementHtml() ?>
+        </div>
+        
+<script type="text/javascript">
+//<![CDATA[
+
+var <?php echo $controlJsObject ?> = {};
+
+document.observe("dom:loaded", function () {
+    <?php echo $controlJsObject ?> = new CheckboxControl({
+        elementId:          '<?php echo $controlId ?>', 
+        dependent:          <?php echo $helper->jsonEncode($elementDependent) ?>
+    });
+});
+
+//]]>
+</script>
+        
+    </td>
+</tr>

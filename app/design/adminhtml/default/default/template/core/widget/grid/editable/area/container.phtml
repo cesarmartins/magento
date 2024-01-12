@@ -1,0 +1,75 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php if ($this->hasForm()) : ?>
+<div id="<?php echo $this->getFormHtmlId() ?>" class="editable-grid-form">
+<?php echo $this->getFormHtml() ?>
+</div>
+<?php endif; ?>
+<?php if ($this->hasGrid()) : ?><?php echo $this->getGridHtml() ?><?php endif; ?>
+<?php if ($this->hasGrid() && $this->hasForm()) : ?>
+<script type="text/javascript">
+//<![CDATA[
+
+var EditableGridAreaFormControl = Class.create(EditableGridFormControl, {
+    initialize : function($super, grid, formId, elementIdPrefix, elementNames, defaults, regionUpdater, validationUrl) {
+        $super(grid, formId, elementIdPrefix, elementNames, defaults, validationUrl);
+        this.regionUpdater = regionUpdater;
+    }, 
+    setValue : function(name, value) {
+        if (this.hasElement(name)) {
+            if ((name == 'country_id') || (name == 'region_id')) {
+                if (value === '0') value = '';
+            } else if (name == 'zip') {
+                if (!value) value = '*';
+            }
+            this.getElement(name).setValue(value);
+            if (name == 'country_id') {
+                if (this.regionUpdater) {
+                    this.regionUpdater.update();
+                }
+            }
+        }
+    }
+});
+var editableGridAreaFormRegionUpdater = new RegionUpdater(
+    '<?php echo $this->getFormHtmlIdPrefix() ?>country_id', 
+    'none', 
+    '<?php echo $this->getFormHtmlIdPrefix() ?>region_id', 
+    <?php echo $this->getRegionsJson(); ?>, 
+    'disable'
+);
+var <?php echo $this->getFormJsObjectName() ?> = new EditableGridAreaFormControl(
+    <?php echo $this->getGridJsObjectName() ?>, 
+    '<?php echo $this->getFormHtmlId() ?>', 
+    '<?php echo $this->getFormHtmlIdPrefix() ?>', 
+    <?php echo $this->getFormFieldNamesJson() ?>, 
+    <?php echo $this->getFormDefaultsJson() ?>, 
+    editableGridAreaFormRegionUpdater
+);
+//]]>
+</script>
+<?php endif; ?>

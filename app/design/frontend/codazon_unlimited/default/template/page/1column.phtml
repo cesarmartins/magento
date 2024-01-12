@@ -1,0 +1,156 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2017 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+
+
+<!DOCTYPE html>
+
+<!--[if lt IE 7 ]> <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js"> <!--<![endif]-->
+
+<head>
+<?php echo $this->getChildHtml('head') ?>
+</head>
+<body id="body_cep" <?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+
+
+<?php echo $this->getChildHtml('after_body_start') ?>
+
+<!-- <div id="fundo">
+</div>
+<div id="poppup-cep">
+		<h4>Onde você esta?</h4>
+		<input type="number" name="">
+		<button onclick="ocultar();">Pesquisar</button>
+		
+	</div> -->
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header') ?>
+        <div class="main-container col1-layout">
+            <div class="main">
+                <?php echo $this->getChildHtml('breadcrumbs') ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php echo $this->getChildHtml('content') ?>
+                </div>
+            </div>
+        </div>
+        <?php echo $this->getChildHtml('footer_before') ?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>
+
+<!-- 
+<style>
+body{
+    overflow: hidden;
+}
+</style>
+
+
+<style>
+
+	#fundo{
+		
+    background-image:url("fundo.png") ;
+    height: 100vh;
+    filter: blur(10px);
+
+	}
+
+	#poppup-cep {
+    position: absolute;
+    width: 600px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 30%;
+    background-color: red;
+    padding: 70px;
+    border-radius: 15px;
+}
+
+</style>
+
+<script>
+
+var div_fundo = document.getElementById("fundo");
+
+var div_popup = document.getElementById("poppup-cep");
+
+
+
+window.onload = function() {
+
+var home = window.location.href;
+
+if ( home == "http://localhost/veneza/"){
+
+    window.scrollTo(0, 0);
+    fundo.style.height="100vh";
+    }
+    else
+    {
+        div_popup.style.display = "none";
+        fundo.style.display = "none";
+        $('#body_cep').removeAttr('id');
+
+    }
+};
+
+	function ocultar(){
+
+		div_popup.style.display="none";
+
+		var div_fundo = document.getElementById("div_popup");
+		fundo.style.display="none";
+
+		fundo.style.display="none";
+
+        var body = document.getElementById("body_cep");
+        body.style.overflow="initial";
+
+	};
+
+</script> -->

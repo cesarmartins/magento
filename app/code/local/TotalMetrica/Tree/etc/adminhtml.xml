@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  	<menu>
+		<tree translate="Tree" module="tree">
+			<title>Importacao</title>
+			<sort_order>30</sort_order>
+			<children>
+				<index translate="Arvore" module="tree">
+					<title>Produtos</title>
+					<action>tree/adminhtml_tree/index</action>
+					<sort_order>1</sort_order>
+				</index>
+				<clientes translate="Arvore" module="tree">
+					<title>Clientes</title>
+					<action>tree/adminhtml_tree/clientes</action>
+					<sort_order>1</sort_order>
+				</clientes>
+				<estoque translate="Arvore" module="tree">
+					<title>Estoque</title>
+					<action>tree/adminhtml_tree/estoque</action>
+					<sort_order>1</sort_order>
+				</estoque>
+			</children>
+		</tree>
+	</menu>	
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<!-- To save on role, all tags to lower case (i.e. - seaway_track, logapp , etc... 
+				     Must mach menu section -->
+				<children>	
+					<tree translate="Tree" module="tree">
+						<title>Tree</title>
+						<sort_order>130</sort_order>
+						<children>
+							<index translate="Arvore" module="tree">
+								<title>Árvores de Usuários</title>
+								<sort_order>1</sort_order>
+							</index>
+						</children>
+					</tree>
+				</children>
+			</admin>
+		</resources>			
+	</acl>
+</config>

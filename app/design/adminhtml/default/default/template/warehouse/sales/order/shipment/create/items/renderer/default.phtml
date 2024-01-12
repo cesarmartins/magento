@@ -1,0 +1,71 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = $this->helper('warehouse') ?>
+<!-- End Warehouse -->
+
+<?php $_item = $this->getItem() ?>
+<tr class="border">
+    <td><?php echo $this->getColumnHtml($_item, 'name') ?></td>
+    
+    <!-- Warehouse -->
+    <td class="a-left">
+        <?php if ($_item->getWarehouse()) : ?>
+            <?php $warehousesOptions = Mage::helper('warehouse/sales_shipment')->getWarehousesOptions($_item->getWarehouseId()); ?>
+
+            <?php if (count($warehousesOptions)) : ?>
+                <select name="shipment[warehouses][<?php echo $_item->getOrderItemId() ?>]" id="shipment_warehouse">
+                    <?php foreach ($warehousesOptions as $id => $warehouse) : ?>
+                        <option <?php echo ($warehouse['selected'])? 'selected' : ''; ?> value="<?php echo $id ?>"><?php echo $warehouse['name'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php else : ?>
+                <?php echo $_item->getWarehouseTitle() ?>
+            <?php endif; ?>
+        <?php else : ?>
+            <?php echo $helper->__('No warehouse') ?>
+        <?php endif; ?>
+    </td>
+    <!-- End Warehouse -->
+
+    <td><?php echo $this->getColumnHtml($_item, 'qty') ?></td>
+
+    <td class="<?php if ($this->isShipmentRegular()): ?>last<?php endif; ?> a-center">
+        <?php if ($this->canShipPartiallyItem()): ?>
+            <input type="text" class="input-text" name="shipment[items][<?php echo $_item->getOrderItemId() ?>]" value="<?php echo $_item->getQty()*1 ?>" />
+        <?php else: ?>
+            <?php echo $_item->getQty()*1 ?>
+        <?php endif; ?>
+    </td>
+    <?php if (!$this->canShipPartiallyItem()): ?>
+    <td class="a-center last">
+        <input type="hidden" name="shipment[items][<?php echo $_item->getOrderItemId() ?>]" value="0" />
+        <input type="checkbox" name="shipment[items][<?php echo $_item->getOrderItemId() ?>]" value="<?php echo $_item->getQty()*1 ?>" checked />
+    </td>
+    <?php endif; ?>
+</tr>

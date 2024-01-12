@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  	<menu>
+		<importacao translate="importacao" module="importacao">
+			<title>Importação WebService</title>
+			<sort_order>70</sort_order>
+			<children>
+				<index translate="importacao" module="importacao">
+					<title>Produtos</title>
+					<action>importacao/adminhtml_importacao/index</action>
+					<sort_order>1</sort_order>
+				</index>
+			</children>
+		</importacao>
+	</menu>	
+	<acl>
+		<resources>
+			<all>
+				<title>Allow Everything</title>
+			</all>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<importacao module="importacao" translate="title">
+										<title>Importacao</title>
+										<sort_order>70</sort_order>
+									</importacao>
+								</children>
+							</config>
+						</children>
+					</system>
+					<importacao module="importacao" translate="title">
+						<title>Importacao</title>
+						<sort_order>70</sort_order>
+						<children>
+							<importacao module="importacao" translate="title">
+								<title>Manage Items</title>
+								<sort_order>0</sort_order>
+							</importacao>
+							<settings module="importacao" translate="title">
+								<title>Configurações</title>
+								<sort_order>1000</sort_order>
+							</settings>
+						</children>
+					</importacao>
+				</children>
+			</admin>
+		</resources>			
+	</acl>
+</config>

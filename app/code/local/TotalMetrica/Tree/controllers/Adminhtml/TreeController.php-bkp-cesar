@@ -1,0 +1,363 @@
+
+<?php
+class TotalMetrica_Tree_Adminhtml_TreeController extends Mage_Adminhtml_Controller_Action {
+
+   const PATH_FILE_IMG_EXPERIENCE = '/adminhtml/default/default/images/experience';
+
+    protected function _isAllowed(){
+        return true;
+    }
+
+   public function indexAction(){
+
+		$this->loadLayout();
+        $tree = new TotalMetrica_Tree_Model_Tree();
+        $uploader = new Mage_Uploader_Block_Single();
+        $uploader->getUploaderConfig()->setTarget("tree/adminhtml_tree/saveFuture");
+        $childrens = $tree->getChildrens();
+
+		$this->getLayout()->getBlock('treeindex')->setData("uploader", $uploader);
+		$this->renderLayout();
+
+	}
+
+	public function saveFutureAction(){
+
+        if(isset($_FILES['arquivo']['name']) && $_FILES['arquivo']['name'] != '') {
+            try {
+                $fileName       = date('dmyhis') . "_" . $_FILES['arquivo']['name'];
+                $fileExt        = strtolower(substr(strrchr($fileName, "."), 1));
+                $fileNamewoe    = rtrim($fileName, $fileExt);
+                $fileName       = str_replace(' ', '', $fileNamewoe) . $fileExt;
+
+                $uploader       = new Varien_File_Uploader('arquivo');
+                $uploader->setAllowedExtensions(array('xlsx','csv')); //allowed extensions
+                $uploader->setAllowRenameFiles(false);
+                $uploader->setFilesDispersion(false);
+                $path = Mage::getBaseDir('media') . DS . 'arquivos_csv';
+                if(!is_dir($path)){
+                    mkdir($path, 0777, true);
+                }
+                $arquivo = $path . DS . $fileName;
+                $uploader->save($path . DS, $fileName );
+
+                $csv = $this->getCsvData($arquivo);
+                $produtos = $this->insertProducts($csv);
+
+                $valores['sucess'] = true;
+                $valores['produtos'] = $produtos;
+
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('postcode')->__('Dados importados com sucesso!')
+                );
+
+            } catch (Exception $e) {
+                $valores['sucess'] = false;
+                $valores['msn'] = $e->getMessage();
+
+                Mage::getSingleton('adminhtml/session')->addError(
+                    Mage::helper('postcode')->__($e->getMessage())
+                );
+
+            }
+        }
+
+        $this->_redirect('*/*/');
+        return;
+	}
+
+    public function getCsvData($file){
+        $csvObject = new Varien_File_Csv();
+        try {
+            return $csvObject->getData($file);
+        } catch (Exception $e) {
+            Mage::log('Csv: ' . $file . ' - getCsvData() error - '. $e->getMessage(), Zend_Log::ERR, 'exception.log', true);
+            return false;
+        }
+
+    }
+
+    public function lerarquivocsvAction(){
+
+        $arquivo = Mage::getSingleton("core/session")->getData('arquivo');
+        $csv = $this->getCsvData($arquivo);
+        $this->insertProducts($csv);
+
+    }
+
+    public function validateDados($csv){
+
+        $contador = 0;
+        foreach ($csv as $lines => $linha) {
+
+            $dadosExplode = $linha;//explode(';', $linha[0]);
+            //$dadosExplode = explode(';', $linha[0]);
+
+            if($dadosExplode[0] == "SKU") {
+                continue;
+            }else{
+                $tipo = $dadosExplode[2];
+                if($tipo == 'PAI' || $tipo == 'pai'){
+                    $contador++;
+                    $arrayProdutos[$contador][] = $dadosExplode;
+                }else{
+                    $arrayProdutos[$contador][] = $dadosExplode;
+                }
+            }
+        }
+        return $arrayProdutos;
+    }
+
+    public function pegarGruposAtributos($produtosSelecionado){
+
+        //$setId = 12; //12,13,14 Attribute set Id
+        //Varia Tamanho - Bermuda, Calça, Short (13)
+        //Varia Tamanho - Camisas, Camisetas, Polos (12)
+        //Varia Tamanho - Underwear (14)
+        $bermudas = 'bermuda calça short';
+        $camisas  = 'camisas camisa camisetas camiseta polos polo';
+        $underwe  = 'Underwear';
+        $findme   = explode(' ', strtolower($produtosSelecionado[1]));
+        $pos = strpos($bermudas, $findme[0]);
+        if($pos ==! false){
+            return 13;
+        }
+        $pos = strpos($camisas, $findme[0]);
+        if($pos ==! false){
+            return 12;
+        }
+        $pos = strpos($underwe, $findme[0]);
+        if($pos ==! false){
+            return 14;
+        }
+
+    }
+
+
+    public function pegarValoresAttribute($entidade, $nome){
+
+        $retorno = "";
+        $attribute = Mage::getSingleton('eav/config')
+            //->getAttribute(Mage_Catalog_Model_Product::ENTITY, 'color'); // color is the attribute code here
+            ->getAttribute(Mage_Catalog_Model_Product::ENTITY, $entidade); // color is the attribute code here
+
+        if ($attribute->usesSource()) {
+            $options = $attribute->getSource()->getAllOptions(false);
+
+            foreach ($options as $opt){
+                if($opt["label"] == $nome){
+                    $retorno = $opt["value"];
+                    break;
+                }
+            }
+            return $retorno;
+        }
+    }
+
+    public function insertProducts($csv){
+
+	    $configuravel = "";
+        $arrayProdutos = $this->validateDados($csv);
+
+        $produtoConfiguravel = '';
+        foreach ($arrayProdutos as $rows => $linhaProdtudos) {
+
+            $produtoSimples = array();
+            foreach ($linhaProdtudos as $lines => $linha) {
+
+                $dadosExplode = $linha;
+                //$dadosExplode = explode(';', $linha);
+
+                    $tipo = $dadosExplode[2];
+
+                    if($tipo == 'PAI' || $tipo == 'pai'){
+                        $produtoConfiguravel = $this->insertProdutoConfiguravel($dadosExplode);
+                        //echo $dadosExplode[1] . " - OK<br>";
+                    } else {
+                        $produtoSimplesId = $this->insertProdutoSimples($dadosExplode, $produtoConfiguravel);
+                        $produtoSimples[$produtoSimplesId] = array( //['920'] = id of a simple product associated with this configurable
+                            '0' => array(
+                                'label' => '', //attribute label
+                                'attribute_id' => '92', //attribute ID of attribute 'color' in my store
+                                'value_index' => '', //value of 'Green' index of the attribute 'color'
+                                'is_percent' => '0', //fixed/percent price for this option
+                                'pricing_value' => '' //value for the pricing
+                            )
+                        );
+                        //echo $dadosExplode[1] . " - OK<br>";
+                    }
+            }
+
+            $configProduct = Mage::getModel('catalog/product')->load($produtoConfiguravel);
+            $configProduct->setConfigurableProductsData($produtoSimples);
+            $configProduct->save();
+
+        }
+        return $arrayProdutos;
+    }
+
+    public function trataValor($preco){
+
+        $formatValor = '';
+        $arrayString = str_split($preco);
+        foreach ($arrayString as $kes => $values){
+            $achei = array_search($values, array('0','1','2','3','4','5','6','7','8','9',"0",'.',','));
+            if($achei !== false){
+                $formatValor .= $values;
+            }
+        }
+        //$preco = number_format($formatValor,'2');
+        return $formatValor;
+    }
+
+    public function insertProdutoConfiguravel($linha){
+
+        $sku        = $linha[0];
+        $nome       = $linha[1];
+        $descrico   = $linha[7];
+        $desresumida= $linha[8];
+        $tamanho    = $linha[3];
+        $quantidade = $linha[4];
+        $peso       = $linha[6];
+        $preco      = $this->trataValor($linha[5]);
+        $material   = $linha[9];//$this->pegarValoresAttribute("marca", $linha[9]);
+
+        //$ean        = $linha[7];
+        //$ncm        = $linha[8];
+        //$marca      = $this->pegarValoresAttribute("marca", $linha[9]);
+        //$cor        = $this->pegarValoresAttribute("color", $linha[10]);
+        //$genero     = $this->pegarValoresAttribute("genero", $linha[11]);
+        //$link       = $linha[12];
+
+        $product = Mage::getModel('catalog/product');
+
+        $grupoAtrocu = $this->pegarGruposAtributos($linha);
+        if(!$grupoAtrocu){
+            $grupoAtrocu = 12;
+        }
+
+        try{
+            $product
+                ->setWebsiteIds(array(1)) //website ID the product is assigned to, as an array
+                ->setAttributeSetId($grupoAtrocu) //ID of a attribute set named 'default'
+                ->setTypeId('configurable')
+                ->setCreatedAt(strtotime('now')) //product creation time
+                ->setSku($sku) //SKU
+                ->setName($nome) //product name
+                ->setStatus(2) //product status (1 - enabled, 2 - disabled)
+                ->setTaxClassId(0) //tax class (0 - none, 1 - default, 2 - taxable, 4 - shipping)
+                ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH) //catalog and search visibility
+                ->setManufacturer(28) //manufacturer id
+                ->setPrice($preco) //price in form 11.22
+
+
+                ->setMetaTitle('')
+                ->setMetaKeyword('')
+                ->setMetaDescription('')
+
+                ->setDescription($descrico)
+                ->setShortDescription($desresumida)
+
+                ->setStockData(array(
+                        'use_config_manage_stock' => 0, //'Use config settings' checkbox
+                        'manage_stock' => 1, //manage stock
+                        'is_in_stock' => 1, //Stock Availability
+                    )
+                );
+
+            $configProduct = $product;
+            //$configProduct->setCategoryIds(array(3, 10)); //assign product to categories
+            $configProduct->getTypeInstance()->setUsedProductAttributeIds(array(149)); //SELECT * FROM n10sports.catalog_product_super_attribute;
+            $configurableAttributesData = $configProduct->getTypeInstance()->getConfigurableAttributesAsArray();
+
+            $configProduct->setCanSaveConfigurableAttributes(true);
+            $configProduct->setConfigurableAttributesData($configurableAttributesData);
+
+            $configProduct->save();
+
+            $collection = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addAttributeToSort('created_at', 'desc');
+            $collection->getSelect()->limit(1);
+
+            $latestItemId = $collection->getLastItem()->getId();
+
+            return $latestItemId;
+
+        }catch(Exception $e){
+            Mage::log($e->getMessage());
+        }
+
+    }
+
+    public function insertProdutoSimples($linha, $produtoConfiguravel){
+
+        $sku        = $linha[0] . "-" . $linha[3];
+        $nome       = $linha[1];
+        $descrico   = $linha[7];
+        $desresumida= $linha[8];
+        $tamanho    = $linha[3];
+        $quantidade = 0;//$linha[4];
+        $peso       = $linha[6] / 1000;
+        $preco      = $this->trataValor($linha[5]);
+        $material   = $linha[9];//$this->pegarValoresAttribute("marca", $linha[9]);
+
+        $product = Mage::getModel('catalog/product');
+
+        $grupoAtrocu = $this->pegarGruposAtributos($linha);
+        if(!$grupoAtrocu){
+            $grupoAtrocu = 12;
+        }
+
+        try{
+            $product
+                ->setWebsiteIds(array(1)) //website ID the product is assigned to, as an array
+                ->setAttributeSetId($grupoAtrocu) //Grupo de atributos
+                ->setTypeId('simple') //product type
+                ->setCreatedAt(strtotime('now')) //product creation time
+                ->setSku($sku) //SKU
+                ->setName($nome) //product name
+                ->setWeight($peso)
+                ->setTamanho($tamanho)
+                ->setStatus(2) //product status (1 - enabled, 2 - disabled)
+                ->setTaxClassId(0) //tax class (0 - none, 1 - default, 2 - taxable, 4 - shipping)
+                ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE) //catalog and search visibility
+
+                ->setPrice($preco) //price in form 11.22
+                ->setMaterial($material)
+                ->setMetaTitle($desresumida)
+                ->setMetaKeyword($desresumida)
+                ->setMetaDescription($desresumida)
+
+                ->setDescription($descrico)
+                ->setShortDescription($desresumida)
+
+                ->setStockData(array(
+                        'use_config_manage_stock' => 0, //'Use config settings' checkbox
+                        'manage_stock'=>1, //manage stock
+                        'min_sale_qty'=>1, //Minimum Qty Allowed in Shopping Cart
+                        'max_sale_qty'=>100, //Maximum Qty Allowed in Shopping Cart
+                        'is_in_stock' => 1, //Stock Availability
+                        'qty' => $quantidade //qty
+                    )
+                );
+
+                //->setCategoryIds(array(3, 10)); //assign product to categories
+            $product->save();
+
+            $collection = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->addAttributeToSort('created_at', 'desc');
+            $collection->getSelect()->limit(1);
+
+            $latestItemId = $collection->getLastItem()->getId();
+
+            return $latestItemId;
+
+        }catch(Exception $e){
+            Mage::log($e->getMessage());
+        }
+
+    }
+
+}

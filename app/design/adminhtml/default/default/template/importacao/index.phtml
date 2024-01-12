@@ -1,0 +1,62 @@
+    <div>
+        <div class="grid">
+            <div class = 'hor-scroll'>
+                <table cellspacing="0" id="">
+
+                    <thead>
+                    <tr class="headings">
+                        <th><span class="nobr">Importar Arquivo</span></th>
+                    </tr>
+
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+
+        <div id="sales_order_grid_massaction">
+            <form id="formulario_cesar" method="post" enctype="multipart/form-data" action="<?php echo Mage::getBaseUrl('web')?>tree/adminhtml_tree/saveFuture">
+                <input id="form_key" name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+                <input id="sortpicture" name="arquivo" type="file" />
+                <button id="upload" class="action-future-save">Enviar</button>
+            </form>
+        </div>
+
+    </div>
+
+<script>var $_ = jQuery.noConflict(); jQuery.noConflict();</script>
+<script>jQuery('#anchor-content').css('max-width','100%');</script>
+
+<script type="text/javascript">
+
+    var baseUrl = "<?php echo Mage::getBaseUrl('web')?>";
+    var urlParentInsta = '<?php echo Mage::getModel('adminhtml/url')->getUrl('tree/adminhtml_tree/getParentsByInsta/'); ?>';
+    var url = 'tree/adminhtml_tree/saveFuture';
+
+    jQuery('#upload').on('click', function() {
+
+        var file_data = jQuery('#arquivo').prop('files');
+        var imput_data = jQuery('#form_key').val();
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        form_data.append('form_key', imput_data);
+        console.log(form_data);
+        jQuery.ajax({
+            url: baseUrl+url,
+            contentType: 'multipart/form-data',
+            cache: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function(response){
+                console.log(response);
+            }
+        });
+    });
+
+
+
+
+</script>
+
+</div>

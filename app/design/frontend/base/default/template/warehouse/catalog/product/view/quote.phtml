@@ -1,0 +1,257 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = Mage::helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<?php $shippingHelper               = $helper->getShippingHelper() ?>
+<?php $taxHelper                    = $helper->getTaxHelper() ?>
+<?php $displayShippingPriceIncTax   = $taxHelper->displayShippingPriceIncludingTax() ?>
+<?php $displayShippingBothPrices    = $taxHelper->displayShippingBothPrices() ?>
+<?php $currentStockId               = $this->getCurrentStockId() ?>
+<?php $colSpan                      = 3 ?>
+<?php $product                      = $this->getProduct() ?>
+<?php $productId                    = $product->getId() ?>
+<!-- End Warehouse -->
+
+<?php $quoteHtmlId      = 'product-quote' ?>
+<?php $options          = $this->getDefaultQuoteConfigurationOptions() ?>
+<?php $stockIds         = $this->getStockIds() ?>
+
+<?php if ($config->isCatalogInformationVisible()) : ?>
+
+<?php if ($this->isAllowAdjustment()) : ?>
+<form action="<?php echo $this->getUrl('warehouse/warehouse/updateProductQuote') ?>" method="post" id="product-quote-form">
+<input class="hidden product" name="product" type="hidden" value="<?php echo $productId ?>" />
+<?php endif ?>
+
+<table class="data-table product-quote" id="<?php echo $quoteHtmlId ?>">
+
+    <col />
+
+    <?php if ($this->isAllowAdjustment()) : ?>
+    <col width="15" />
+    <?php $colSpan++ ?>
+    <?php endif ?>
+
+    <col />
+
+    <?php if ($config->isCatalogAvailabilityVisible()) : ?>
+    <?php $colSpan++ ?>
+    <col width="65" />
+    <?php endif ?>
+
+    <?php if ($config->isCatalogQtyVisible()) : ?>
+    <?php $colSpan++ ?>
+    <col width="50" />
+    <?php endif ?>
+
+    <col width="80" />
+
+    <?php if ($config->isCatalogTaxVisible()) : ?>
+    <?php $colSpan++ ?>
+    <col width="80" />
+    <?php endif ?>
+
+    <?php if (!$this->isVirtual() && $config->isCatalogShippingVisible()) : ?>
+    <?php $colSpan++ ?>
+    <col width="200" />
+    <?php endif ?>
+
+    <thead>
+        <tr>
+
+            <th><?php echo $helper->__('Product Name') ?></th>
+
+            <?php if ($this->isAllowAdjustment()) : ?>
+            <th></th>
+            <?php endif ?>
+
+            <th><?php echo $helper->__('Warehouse') ?></th>
+
+            <?php if ($config->isCatalogAvailabilityVisible()) : ?>
+            <th><?php echo $helper->__('In Stock') ?></th>
+            <?php endif ?>
+
+            <?php if ($config->isCatalogQtyVisible()) : ?>
+            <th><?php echo $helper->__('Qty') ?></th>
+            <?php endif ?>
+
+            <th><?php echo $helper->__('Subtotal') ?></th>
+
+            <?php if ($config->isCatalogTaxVisible()) : ?>
+            <th><?php echo $helper->__('Tax') ?></th>
+            <?php endif ?>
+
+            <?php if (!$this->isVirtual() && $config->isCatalogShippingVisible()) : ?>
+            <th><?php echo $helper->__('Shipping') ?></th>
+            <?php endif ?>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+            <td rowspan="<?php echo count($stockIds) + 1 ?>">
+                <h3 class="product-name"><?php echo $this->htmlEscape($this->getProductName()) ?></h3>
+                <?php if ($options && count($options)): ?>
+                <dl class="item-options">
+                    <?php foreach ($options as $option) : ?>
+                    <?php $optionValue = $this->getFormatedConfigurationOptionValue($option) ?>
+                    <dt><?php echo $this->htmlEscape($option['label']) ?></dt>
+                    <dd<?php if (isset($optionValue['full_view'])): ?> class="truncated"<?php endif ?>>
+                        <?php echo $optionValue['value'] ?>
+                        <?php if (isset($optionValue['full_view'])): ?>
+                        <div class="truncated_full_value">
+                            <dl class="item-options">
+                                <dt><?php echo $this->htmlEscape($option['label']) ?></dt>
+                                <dd><?php echo $optionValue['full_view'] ?></dd>
+                            </dl>
+                        </div>
+                        <?php endif ?>
+                    </dd>
+                    <?php endforeach ?>
+                </dl>
+                <?php endif ?>
+            </td>
+        </tr>
+        <?php foreach ($stockIds as $stockId) : ?>
+        <?php $warehouse = $helper->getWarehouseByStockId($stockId);
+        if(!empty($warehouse)){?>
+        <tr class="warehouse<?php if ($currentStockId == $stockId) : ?> current<?php endif ?>">
+
+            <?php if ($this->isAllowAdjustment()) : ?>
+            <td>
+                <input class="radio" name="stock_id" type="radio" value="<?php echo $stockId ?>"<?php if ($stockId === $currentStockId) : ?> checked="checked"<?php endif ?> />
+            </td>
+            <?php endif ?>
+
+            <td>
+                <?php if(!empty($warehouse->getTitle())){ ?>
+                    <span class="warehouse-name"><?php echo $this->htmlEscape($warehouse->getTitle()) ?></span>
+                <?php } ?>
+                <?php if ($config->isCatalogOriginVisible()) : ?>
+                <span class="warehouse-origin"><?php echo $this->htmlEscape($warehouse->getOriginString()) ?></span>
+                <?php endif ?>
+
+                <?php if ($config->isCatalogDistanceVisible()) : ?>
+                <span class="warehouse-distance"><?php echo $this->htmlEscape($this->getCustomerAddressStockDistanceString($stockId)) ?></span>
+                <?php endif ?>
+
+                <?php if ($config->isCatalogDescriptionVisible()) : ?>
+                <span class="warehouse-description"><?php echo $this->htmlEscape($warehouse->getDescription()) ?></span>
+                <?php endif ?>
+            </td>
+
+            <?php if ($config->isCatalogAvailabilityVisible()) : ?>
+            <?php $isInStock = $this->getQuoteIsInStock($stockId) ?>
+            <td><?php echo ($isInStock) ? $helper->__('Yes') : $helper->__('No') ?></td>
+            <?php endif ?>
+
+            <?php if ($config->isCatalogQtyVisible()) : ?>
+            <?php $isInStock = $this->getQuoteIsInStock($stockId) ?>
+            <?php $qty = $this->getQuoteMaxQty($stockId) ?>
+            <td><?php echo ($isInStock && ($qty > 0)) ? $qty : 0 ?></td>
+            <?php endif ?>
+
+            <?php $price = $this->getQuoteSubtotal($stockId) ?>
+            
+            <td><?php echo $this->formatPrice($price) ?></td>
+
+            <?php if ($config->isCatalogTaxVisible()) : ?>
+            <?php $taxAmount        = $this->getQuoteTaxAmount($stockId) ?>
+            <td><?php echo $this->formatPrice($taxAmount) ?></td>
+            <?php endif ?>
+
+            <?php if (!$this->isVirtual() && $config->isCatalogShippingVisible()) : ?>
+            <?php $shippingRates = $this->getQuoteShippingRates($stockId) ?>
+            <td>
+                <?php if (count($shippingRates)) : ?>
+                <dl class="sp-methods warehouse-shipping-methods shipping-methods">
+                    <?php foreach ($shippingRates as $carrierCode => $carrierShippingRates): ?>
+                    <dt><?php echo $this->escapeHtml($shippingHelper->getCarrierName($carrierCode)) ?></dt>
+                    <dd>
+                        <ul>
+                            <?php foreach ($carrierShippingRates as $rate): ?>
+                            <li>
+                            <?php if ($rate->getErrorMessage()): ?>
+                            <ul class="messages">
+                                <li class="error-msg">
+                                    <ul><li><?php echo $this->escapeHtml($rate->getErrorMessage()) ?></li></ul>
+                                </li>
+                            </ul>
+                            <?php else: ?>
+                            <?php echo $this->escapeHtml($rate->getMethodTitle()) ?>
+                            <?php $priceExcTax = $rate->getPriceExcTax() ?>
+                            <?php $priceIncTax = $rate->getPriceIncTax() ?>
+                            <?php if (!$displayShippingPriceIncTax) : ?>
+                            <?php echo $this->convertPrice($priceExcTax) ?>
+                            <?php else : ?>
+                            <?php echo $this->convertPrice($priceIncTax) ?>
+                            <?php endif ?>
+                            <?php if ($displayShippingBothPrices && $priceIncTax != $priceExcTax): ?>
+                            (<?php echo $helper->__('Incl. Tax') ?> <?php echo $this->convertPrice($priceIncTax) ?>)
+                            <?php endif ?>
+                            <?php endif ?>
+                            </li>
+                            <?php endforeach ?>
+                        </ul>
+                    </dd>
+                    <?php endforeach ?>
+                </dl>
+                <?php else : ?>
+                <p><?php echo sprintf($helper->__('There are no shipping methods available.')) ?></p>
+                <?php endif ?>
+            </td>
+            <?php endif ?>
+
+        </tr>
+        <?php }
+        endforeach ?>
+
+    </tbody>
+
+    <?php if ($this->isAllowAdjustment()) : ?>
+    <tfoot>
+        <tr>
+            <td colspan="<?php echo $colSpan ?>" class="a-right">
+                <button type="submit" title="<?php echo $helper->__('Reset') ?>" class="button button-reset" name="update_product_quote" value="<?php echo 'reset' ?>"><span><span><?php echo $helper->__('Reset') ?></span></span></button>
+                <button type="submit" title="<?php echo $helper->__('Update') ?>" class="button button-update" name="update_product_quote" value="<?php echo 'update' ?>"><span><span><?php echo $helper->__('Update') ?></span></span></button>
+            </td>
+        </tr>
+    </tfoot>
+    <?php endif ?>
+
+</table>
+    
+<?php if ($this->isAllowAdjustment()) : ?>
+</form>
+<?php endif ?>
+    
+<script type="text/javascript">decorateTable('<?php echo $quoteHtmlId ?>')</script>
+
+<?php endif ?>

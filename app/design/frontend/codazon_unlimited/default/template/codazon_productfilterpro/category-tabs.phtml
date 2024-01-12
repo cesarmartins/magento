@@ -1,0 +1,24 @@
+<?php
+/**
+ * Copyright © 2020 Codazon, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+$tabs = $this->getCategoryTabsItems();
+?>
+<?php if (count($tabs)) : ?>
+<div class="cdz-tabs-wrap tabs-style-01" >
+    <div class="cdz-block-content" data-role="js-tab-dc-container">
+        <div class="hidden" data-role="tab-links-placeholder"></div>
+        <div class="cdz-tabs df-tabs hidden" data-role="tabs-dynamic-control">
+        <?php foreach ($tabs as $tab) : ?>
+            <div class="tab-item">
+                <div class="tab-title"><span class="tab-text"><?php echo $tab['title'] ?></span></div>
+                <div class="tab-content"><?php echo $tab['content'] ?></div>
+            </div>
+        <?php endforeach ?>
+        </div>
+    </div>
+</div>
+<?php endif ?>

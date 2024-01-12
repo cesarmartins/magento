@@ -1,0 +1,163 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php $helper = $this->helper('warehouse/customerLocator_data'); ?>
+
+<?php if ($helper->isAllowModification()) : ?>
+<?php $hasAddresses = $this->hasAddresses(); ?>
+<div class="block block-customer-address">
+    <div class="block-title">
+        <strong><span><?php echo $helper->__('Your Location') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <?php if ($hasAddresses) : ?>
+        <form action="<?php echo $this->getUrl('customer/account/applyAddressId') ?>" method="post" id="customer-address-id-form">
+            <ul class="form-list customer-address-id-form-list">
+                <li><strong><?php echo $helper->__('Select from address book') ?></strong></li>
+                <li>
+                    <div class="input-box">
+                        <?php echo $this->getAddressHtmlSelect() ?>
+                    </div>
+                </li>
+            </ul>
+        </form>
+        <script type="text/javascript">
+        //<![CDATA[
+            var customerAddressIdForm = new VarienForm('customer-address-id-form');
+            customerAddressIdForm.submit = function () {
+                var address_id = $('address_id');
+                if (address_id != '') {
+                    return VarienForm.prototype.submit.bind(customerAddressIdForm)();
+                } else {
+                    return false;
+                }
+            }
+        //]]>
+        </script>
+        <?php endif; ?>
+        <form action="<?php echo $this->getUrl('customer/account/applyAddress') ?>" method="post" id="customer-address-form">
+            <ul class="form-list customer-address-form-list">
+            <?php if ($hasAddresses) : ?>
+            <li><strong><?php echo $helper->__('or enter') ?></strong></li>
+            <?php endif; ?>
+            <?php if ($helper->isCountryAllowed()) : ?>
+            <li>
+                <label for="country"<?php if ($helper->isCountryRequired()) : ?> class="required"<?php endif; ?>>
+                    <?php if ($helper->isCountryRequired()) : ?><em>*</em><?php endif; ?>
+                    <?php echo $helper->__('Country') ?>
+                </label>
+                <div class="input-box">
+                    <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($this->getCountryId()) ?>
+                </div>
+            </li>
+            <?php endif; ?>
+            <?php if ($helper->isPostcodeAllowed()) : ?>
+            <li>
+                <label for="postcode"<?php if ($helper->isPostcodeRequired()) : ?> class="required"<?php endif; ?>>
+                    <?php if ($helper->isPostcodeRequired()) : ?><em>*</em><?php endif; ?>
+                    <?php echo $helper->__('Zip / Postal Code') ?>
+                </label>
+                <div class="input-box">
+                    <input class="input-text validate-postcode<?php if ($helper->isPostcodeRequired()): ?> required-entry<?php endif; ?>" type="text" id="postcode" name="postcode" value="<?php echo $this->htmlEscape($this->getPostcode()) ?>" />
+                </div>
+            </li>
+            <?php endif; ?>
+            <?php if ($helper->isRegionAllowed()) : ?>
+            <li>
+                <label for="region_id"<?php if ($helper->isRegionRequired()) : ?> class="required"<?php endif; ?>>
+                    <?php if ($helper->isRegionRequired()) : ?><em>*</em><?php endif; ?><?php echo $helper->__('State / Province') ?>
+                </label>
+                <div class="input-box">
+                    <select id="region_id" name="region_id" title="<?php echo $helper->__('State / Province') ?>" style="display:none;"<?php if ($helper->isRegionRequired()) : ?> class="validate-select"<?php endif; ?>>
+                        <option value=""><?php echo $helper->__('Please select region') ?></option>
+                    </select>
+                    <script type="text/javascript">
+                    //<![CDATA[
+                        $('region_id').setAttribute('defaultValue', "<?php echo $this->getRegionId() ?>");
+                    //]]>
+                    </script>
+                    <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getRegion()) ?>"  title="<?php echo $helper->__('State/Province') ?>" class="input-text<?php if ($helper->isRegionRequired()) : ?> required-entry<?php endif; ?>" style="display:none;" />
+                </div>
+            </li>
+            <?php endif; ?>
+            <?php if ($helper->isCityAllowed()) : ?>
+            <li>
+                <label for="city"<?php if ($helper->isCityRequired()) : ?> class="required"<?php endif; ?>>
+                    <?php if ($helper->isCityRequired()) : ?><em>*</em><?php endif; ?>
+                    <?php echo $helper->__('City') ?>
+                </label>
+                <div class="input-box">
+                    <input class="input-text<?php if ($helper->isCityRequired()) : ?> required-entry<?php endif; ?>" id="city" type="text" name="city" value="<?php echo $this->htmlEscape($this->getCity()) ?>" />
+                </div>
+            </li>
+            <?php endif; ?>
+            <?php if ($helper->isStreetAllowed()) : ?>
+            <li>
+                <label for="street1"<?php if ($helper->isStreetRequired()) : ?> class="required"<?php endif; ?>>
+                    <?php if ($helper->isStreetRequired()) : ?><em>*</em><?php endif; ?>
+                    <?php echo $helper->__('Address') ?>
+                </label>
+                <div class="input-box">
+                    <input class="input-text<?php if ($helper->isStreetRequired()) : ?> required-entry<?php endif; ?>" id="street1" type="text" name="street1" value="<?php echo $this->htmlEscape($this->getStreet1()) ?>" />
+                </div>
+            </li>
+            <li>
+                <div class="input-box">
+                    <input class="input-text" id="street2" type="text" name="street2" value="<?php echo $this->htmlEscape($this->getStreet2()) ?>" />
+                </div>
+            </li>
+            <?php endif; ?>
+        </ul>
+        <div class="actions">
+            <button type="submit" title="<?php echo $helper->__('Apply') ?>" class="button" name="apply" value="<?php echo $helper->__('Apply') ?>"><span><span><?php echo $helper->__('Apply') ?></span></span></button>
+        </div>
+        </form>
+        <?php if ($helper->isCountryAllowed() && $helper->isRegionAllowed()) : ?>
+        <script type="text/javascript">
+        //<![CDATA[
+            new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+        //]]>
+        </script>
+        <?php endif; ?>
+        <?php if ($helper->isCountryAllowed() && $helper->isPostcodeRequired()) : ?>
+        <script type="text/javascript">
+        //<![CDATA[
+            var customerAddressForm = new VarienForm('customer-address-form');
+            var countriesWithOptionalZip = <?php echo $this->helper('directory')->getCountriesWithOptionalZip(true) ?>;
+            customerAddressForm.submit = function () {
+                var country = $F('country');
+                var optionalZip = false;
+                for (i = 0; i < countriesWithOptionalZip.length; i++) { if (countriesWithOptionalZip[i] == country) { optionalZip = true; } }
+                if (optionalZip) { $('postcode').removeClassName('required-entry'); }
+                else { $('postcode').addClassName('required-entry'); }
+                return VarienForm.prototype.submit.bind(customerAddressForm)();
+            }
+        //]]>
+        </script>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>

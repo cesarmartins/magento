@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+-->
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <warehouses translate="title" module="warehouse">
+                    <title>Manage Warehouses</title>
+                    <action>adminhtml/warehouse/</action>
+                    <sort_order>17</sort_order>
+                </warehouses>
+            </children>
+        </catalog>
+        <sales>
+            <children>
+                <shipping translate="title" module="tax">
+                    <title>Shipping</title>
+                    <sort_order>600</sort_order>
+                    <children>
+                        <tablerates translate="title">
+                            <title>Manage Table Rates</title>
+                            <sort_order>0</sort_order>
+                            <action>adminhtml/tablerate/</action>
+                        </tablerates>
+                        <methods translate="title">
+                            <title>Manage Table Rate Methods</title>
+                            <sort_order>10000</sort_order>
+                            <action>adminhtml/tablerate_method/</action>
+                        </methods>
+                    </children>
+                </shipping>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <warehouses translate="title" module="warehouse">
+                                <title>Manage Warehouses</title>
+                                <children>
+                                    <save translate="title">
+                                        <title>Save Warehouse</title>
+                                        <sort_order>0</sort_order>
+                                    </save>
+                                    <delete translate="title">
+                                        <title>Delete Warehouse</title>
+                                        <sort_order>10</sort_order>
+                                    </delete>
+                                </children>
+                            </warehouses>
+                        </children>
+                    </catalog>
+                    <sales>
+                        <children>
+                            <shipping translate="title" module="warehouse">
+                                <title>Shipping</title>
+                                <sort_order>90</sort_order>
+                                <children>
+                                    <tablerates translate="title">
+                                        <title>Table Rates</title>
+                                        <sort_order>0</sort_order>
+                                        <children>
+                                            <save translate="title">
+                                                <title>Save Rate</title>
+                                                <sort_order>0</sort_order>
+                                            </save>
+                                            <delete translate="title">
+                                                <title>Delete Rate</title>
+                                                <sort_order>10</sort_order>
+                                            </delete>
+                                            <tablerates translate="title">
+                                                <title>Manage Table Rates</title>
+                                                <sort_order>0</sort_order>
+                                            </tablerates>
+                                            <methods translate="title">
+                                                <title>Manage Table Rate Methods</title>
+                                                <sort_order>1000</sort_order>
+                                            </methods>
+                                        </children>
+                                    </tablerates>
+                                </children>
+                            </shipping>
+                        </children>
+                    </sales>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <warehouse translate="title" module="warehouse">
+                                        <title>Warehouses Section</title>
+                                    </warehouse>
+                                    <mp_customerlocator translate="title" module="warehouse">
+                                        <title>Customer Locator</title>
+                                    </mp_customerlocator>
+                                    <mp_geoip translate="title" module="warehouse">
+                                        <title>IP Geolocation</title>
+                                    </mp_geoip>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

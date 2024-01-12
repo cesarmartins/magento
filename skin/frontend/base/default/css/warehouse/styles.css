@@ -1,0 +1,142 @@
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+
+/**
+ * Warehouse 
+ */
+.warehouse {  }
+.warehouse .warehouse-name { 
+    font-weight: bold; 
+}
+.warehouse .warehouse-origin { 
+    display: block; 
+    font-style: italic; 
+}
+.warehouse .warehouse-distance { 
+    display: block; 
+    font-style: italic; 
+}
+.warehouse .warehouse-description { 
+    display: block; 
+}
+/**
+ * Product Quote
+ */
+.product-quote tfoot td { 
+    padding: 5px 10px; 
+}
+.product-quote .current { 
+    
+}
+.product-quote .button-update { 
+    margin-left: 5px; 
+}
+/**
+ * Cart 
+ */
+.cart-table .cart-item-product-quote-button { 
+    margin-left: 10px; 
+}
+.cart-table .product-quote { 
+    
+}
+.cart-table .product-quote .odd  { 
+    
+}
+.cart-table .product-quote .even { 
+    
+}
+.cart-table .product-quote thead th { 
+    
+}
+.cart-table .button-reset-cart span { 
+    
+}
+.cart-table .button-reset-cart { 
+    
+}
+.cart-table .btn-update { 
+     
+}
+/**
+ * Warehouse Block 
+ */
+.warehouse-block {  }
+.warehouse-block .block-title strong {
+    background-position: 0 0; 
+    background-repeat: no-repeat; 
+}
+.warehouse-block .block-title strong {
+    
+}
+.warehouse-block .current, 
+.warehouse-block .current.odd, 
+.warehouse-block .current.even { 
+    
+}
+.warehouse-block input.radio { 
+    float: left; 
+    margin: 3px -18px 0 0; 
+}
+.warehouse-block .label { 
+    display: block; 
+    margin-left: 18px; 
+}
+.warehouse-block li { 
+    padding: 3px 9px; 
+}
+.warehouse-block .actions .button-update { 
+    margin-left: 5px; 
+}
+/**
+ * Warehouse Shipping Method 
+ */
+.warehouse-shipping-methods .warehouse {
+    padding-top: 15px;
+}
+.warehouse-shipping-methods .warehouse .warehouse-name {
+    font-size: 1.125em;
+}
+.warehouse-shipping-methods .warehouse-content {
+    padding-bottom: 10px;
+}
+.warehouse-shipping-methods .warehouse-content .shipping-methods {
+    padding-left: 15px;
+}
+/**
+ * Checkout 
+ */
+.block-progress dl.warehouse-shipping-methods { 
+    border: 0; 
+    padding: 0;
+}
+.block-progress dl.warehouse-shipping-methods dt {
+    border: 0; 
+    padding: 0;
+}
+.block-progress dl.warehouse-shipping-methods dd {
+    border: 0; 
+    padding: 0 0 0 5px;
+}

@@ -1,0 +1,444 @@
+<?php
+$customerSession = Mage::getSingleton('customer/session');
+$customerSession->setAfterAuthUrl("listafavoritos");
+if (!$customerSession->isLoggedIn()) {
+    ?>
+    <div class="container wishlist-home-screen">
+        <div class="wishlist-loggin"><h1 class="title">Minhas Listas de Favoritos</h1>
+            <!--<h2 class="align-center">Faça o login para visualizar e começar a adicionar seus produtos favoritos</h2>-->
+            <ul class="wishlist-collection">
+                <li class="wishlist-collection-item" style="    width: 500px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 17px 2px #c1c1">
+                    
+                
+                <form action="<?php echo Mage::getBaseUrl() . "customer/account/loginPost/referer/" . Mage::helper('core')->urlEncode(Mage::getBaseUrl() . "/listafavoritos")?>" method="post"
+                          id="login-form" class="scaffold-form">
+                        <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>">
+                        <input name="referer" type="hidden" value="<?php echo Mage::helper('core')->urlEncode(Mage::getBaseUrl() . "/listafavoritos"); ?>" />
+                        <div class="col2-set">
+                           
+                            <div class="registered-users">
+                                <div class="content fieldset">
+                                    <h2>Já possui uma conta?</h2>
+                                    <p class="form-instructions">Se você já possui uma conta, informe os dados de
+                                        acesso.</p>
+                                    <p class="required">*Campos Obrigatórios</p>
+                                    <ul class="form-list">
+                                        <li>
+                                            <label for="email" class="required"><em>*</em>Email</label>
+                                            <div class="input-box">
+                                                <input type="email" autocapitalize="off" autocorrect="off"
+                                                       spellcheck="false" name="login[username]" value="" id="email"
+                                                       class="input-text required-entry validate-email" title="Email">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label for="pass" class="required"><em>*</em>Senha</label>
+                                            <div class="input-box">
+                                                <input type="password" name="login[password]"
+                                                       class="input-text required-entry validate-password" id="pass"
+                                                       title="Senha">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo Mage::getBaseUrl() . "/customer/account/forgotpassword/"; ?>"
+                                               class="f-left">Esqueceu Sua Senha?</a>
+                                        </li>
+                                    </ul>
+
+                                  
+                                    <div class="remember-me-popup">
+                                        <div class="remember-me-popup-head">
+                                            <h3>O que é isso?</h3>
+                                            <a href="#" class="remember-me-popup-close" title="Fechar">Fechar</a>
+                                        </div>
+                                        <div class="remember-me-popup-body">
+                                            <p>Marcando "Lembrar" permite que você acesse seu carrinho de compras mesmo
+                                                quando não estiver logado</p>
+                                            <div class="remember-me-popup-close-button a-right">
+                                                <a href="#" class="remember-me-popup-close button" title="Fechar"><span>Fechar</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="buttons-set login-lista">
+                                    <button type="submit" class="button" title="Entrar" name="send" id="send2">
+                                        <span><span>Entrar</span></span></button>
+                                </div>
+
+                                <div class="new-users list">
+                                <div class="content">
+                                    <h2>Novo Aqui?</h2>
+                                </div>
+                                <div class="buttons-set new-user">
+                                    <a title="Criar Conta" class="button"
+                                       href="<?php echo Mage::getBaseUrl() . "/customer/account/create/"; ?>"><span><span>Criar Conta</span></span></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+<?php }else{
+
+    $collection = $this->getData("collection");
+    //$customer = Mage::getSingleton('customer/session')->getCustomer();
+    //echo "<p>Olá: " . $customer->getName() . "</p>";
+
+    ?>
+    <div class="container">
+        <ul class="wishlist-collection">
+            <li class="wishlist-collection-item add-list">
+                <button class="color-primary" id="btn-nova-lista"><i class="align-middle glyph glyph-plus"></i>
+                    <h2>Criar Nova Lista</h2></button>
+            </li>
+        </ul>
+        <div class="wishlist-drawer-content" style="display: none;">
+            <!-- CADASTRO DE LISTA-->
+            <div style="opacity: 1;">
+                <div style="float: right; margin: 15px; padding-top: 5px;">
+                    <span class="edit-icon-list">
+                        <a href="#" id="btn-fechar-cadastro-lista"><i class="far fa-times-circle"></i></a>
+                    </span>
+                </div>
+                <form id="step-two-form" class="wishlist-drawer-finish wishlist-drawer-">
+                    <input name="userid" id="userid" type="hidden" value="<?php echo $customerSession->getId(); ?>">
+                    <input id="base_url" name="base_url" type="hidden" value="<?php echo Mage::getBaseUrl(); ?>" />
+                    <input id="alterar-lista" name="alterar-lista" type="hidden" value="false" />
+                    <div class="wishlist-drawer-title">
+                        <h4>Criar lista de favoritos</h4></div>
+                    <div class="wishlist-drawer-choose-name wishlist-drawer-border"><h4>Dê um nome para sua lista:</h4>
+                        <input type="text" id="wishlist-name" name="wishlist-name" class="wishlist-drawer-input" placeholder="Ex: Minha Cozinha" required=""></div>
+                    <div class="wishlist-drawer-send">
+                        <button id="cadastrarLista" class="button button-full wishlist-drawer-button no-shadow">Criar lista de favoritos</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="minhas-listas">
+            <?php foreach ($collection as $lista){
+                $url = Mage::getBaseUrl() . "listafavoritos/MinhaLista/listagem/" . $lista["favoritos"]["lista_favoritos_id"];
+                ?>
+                <div class="item-list" id="minha-lista-<?php echo $lista["favoritos"]["lista_favoritos_id"];?>">
+                <ul class="wishlist-collection" style="border: 1px solid #cccccc;
+    margin-top: 15px;
+    background-image: url(https://melhorlojavirtual.online/veneza_homologacao/media/wysiwyg/lista-favoritos/fundo.png);
+    height: 150px;
+    width: 100%;
+    /* margin: 0 auto; */
+    padding: -5%;
+    background-size: contain;">
+                    <li class="wishlist-collection-item add-list">
+                        
+                    </li>
+                    <?php if(count($lista["produtos"][0]) >= 1){ ?>
+                        <li class="wishlist-collection-item add-list">
+                            <!-- <button class="color-primary" onclick="setLocation('<?php echo $url; ?>')">
+                                Mostrar Produtos (<?php echo count($lista["produtos"][0]); ?>)
+                            </button> -->
+                        </li>
+                    <?php }else{ ?>
+                        <li class="wishlist-collection-item add-list">
+                            <!-- <button class="color-primary" onclick="setLocation('<?php echo Mage::getBaseUrl(); ?>')">
+                               +
+                            </button> -->
+                        </li>
+                    <?php } ?>
+                </ul>
+                <div class="info-edit">
+                    <h2><a href="<?php echo $url; ?>"><?php echo $lista["favoritos"]["lista_favoritos_nome"]; ?></a></h2>
+                    <span class="count-favoritos"><?php echo count($lista["produtos"][0]); ?> produto(s)</span>
+                    <span class="edit-icon-list">
+                        <a href="#" onclick="editarCadastro(<?php echo $lista["favoritos"]["lista_favoritos_id"]; ?>,<?php echo $customerSession->getId(); ?>)"><i class="far fa-edit"></i></a>
+                        <a href="#" onclick="deletarCadastro(<?php echo $lista["favoritos"]["lista_favoritos_id"]; ?>,<?php echo $customerSession->getId(); ?>)"><i class="far fa-trash-alt"></i></a>
+                    </span>
+                </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+    <?php
+}?>
+
+<script>
+
+    jQuery("#btn-nova-lista").on("click", function (e){
+
+        jQuery(".wishlist-collection").hide();
+        jQuery(".wishlist-drawer-content").show();
+
+        var texto = "Criar lista de favoritos";
+
+        jQuery("#wishlist-name").val("");
+        jQuery(".wishlist-drawer-title > h4").html(texto);
+        jQuery("#alterar-lista").val("false");
+        jQuery("#cadastrarLista").html(texto);
+
+    });
+
+    jQuery("#btn-fechar-cadastro-lista").on("click", function (e){
+
+        jQuery(".wishlist-collection").show();
+        jQuery(".wishlist-drawer-content").hide();
+
+    });
+
+    function editarCadastro(id, userid){
+
+        console.log("editar" + id);
+        var base_url = jQuery("#base_url").val();
+        var retornoDados;
+        var texto = "Altera sua lista de favoritos";
+        jQuery.ajax({
+            method: "POST",
+            dataType: "json",
+            url: base_url + "listafavoritos/ajax/getListaFavoritos",
+            data: { id: id, user: userid }
+        })
+            .done(function( msg ) {
+                console.log(msg.retorno);
+                if(msg.retorno){
+
+                    jQuery(".wishlist-collection").hide();
+                    jQuery(".wishlist-drawer-content").show();
+
+                    retornoDados = msg.dados;
+                    console.log(retornoDados);
+
+                    jQuery("#wishlist-name").val(retornoDados[0].lista_favoritos_nome);
+                    jQuery(".wishlist-drawer-title > h4").html(texto);
+                    jQuery("#alterar-lista").val(retornoDados[0].lista_favoritos_id);
+                    jQuery("#cadastrarLista").html(texto);
+
+                }
+            });
+    }
+
+    function deletarCadastro(id, userid){
+
+        console.log("deletar" + id);
+
+        if(confirm("Todos os produtos favoritados serão deletados, tá?")){
+
+            var base_url = jQuery("#base_url").val();
+
+            jQuery.ajax({
+                method: "POST",
+                dataType: "json",
+                url: base_url + "listafavoritos/ajax/deleteListaFavoritos",
+                data: { id: id, user: userid }
+            })
+                .done(function( msg ) {
+                    console.log(msg.msg);
+                    if(msg.retorno){
+                        var minhaLista = "#minha-lista-" + id;
+                        jQuery(minhaLista).remove();
+                    }
+                });
+        }
+
+    }
+
+    jQuery("#cadastrarLista").on("click", function (e){
+
+        e.preventDefault();
+        var nomeFavorito = jQuery("#wishlist-name").val();
+        var alterarLista = jQuery("#alterar-lista").val();
+        var userid = jQuery("#userid").val();
+        var base_url = jQuery("#base_url").val();
+
+        console.log("nomeFavorito: " + nomeFavorito + " userid: " + userid);
+
+        if(nomeFavorito != ""){
+            jQuery.ajax({
+                method: "POST",
+                dataType: "json",
+                url: base_url + "listafavoritos/ajax/cadastrarListaFavoritos",
+                data: { name: nomeFavorito, user: userid, alterar: alterarLista }
+            })
+                .done(function( msg ) {
+                    //jQuery("#minhas-listas").html(msg.msg);
+                    alert(msg.msg);
+                    window.location = base_url + "listafavoritos";
+                    console.log(msg.msg);
+                });
+        }
+    });
+
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    function toggleRememberMePopup() {
+        var formParent = jQuery(this).parents('form:first');
+        formParent.find('.remember-me-box a').toggleClass('hide');
+        formParent.find('.remember-me-popup').toggleClass('show');
+        return false;
+    }
+
+    var rememberMeToggleSetup = false;
+    jQuery(document).ready(function () {
+        if (!rememberMeToggleSetup) {
+            jQuery('.remember-me-box a, .remember-me-popup a').on('click', toggleRememberMePopup);
+            rememberMeToggleSetup = true;
+        }
+    });
+    //]]>
+</script>
+<style>
+
+.count-favoritos {
+    position: absolute;
+    margin-top: 25px;
+    padding-left: 2px;
+    color: #a6a6a6;
+    font-size: .875rem;
+}
+
+li.wishlist-collection-item {
+margin: 0 auto;
+border: none!important;
+box-shadow: 0px 0px 10px 1px #d2d2d2;
+border-radius: 10px;
+
+}
+.wishlist-loggin {
+    box-shadow: 0px 0px 10px 1px #d2d2d2;
+    border-radius: 10px;
+    padding: 30px;
+}
+p.form-instructions, ul.benefits {
+    display: none;
+}
+li.wishlist-collection-item a.button, .col-2.registered-users button#send2 {
+    text-align: center;
+    background-color: red;
+    border-color: red;
+    color: white;
+    width: 250px;
+    border-radius: 10px;
+    text-align: center;
+}
+.col-2.registered-users .buttons-set{
+    text-align: center;
+}
+.col-2.registered-users .buttons-set button.button
+{
+    float: none;
+}
+ul.wishlist-collection li.wishlist-collection-item.add-list {
+    padding: 30px;
+}
+button#btn-nova-lista h2 {
+    margin: 0!important;
+    color: white;
+}
+button#btn-nova-lista {
+    border-color: #ff0013;
+    border-radius: 10px;
+    background-color: #ff0013;
+    color: white;
+}
+#minhas-listasul .wishlist-collection{
+    box-shadow: 0px 0px 10px 1px #d2d2d2;
+    border: none!important;
+}
+    ul.wishlist-collection li {
+    box-shadow: none;
+    padding: 10px!important;
+}
+div#minhas-listas ul.wishlist-collection li {
+    padding: 5px!important;
+    text-align: center;
+}
+div#minhas-listas ul.wishlist-collection li button.color-primary{
+    text-align: center;
+    background-color: red;
+    border-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    padding: 0;
+    width: 40px;
+}
+div#minhas-listas ul.wishlist-collection {
+    width: 33%;
+    border-radius: 10px;
+}
+div#minhas-listas {
+    display: flex;
+}
+div#minhas-listas ul{
+margin: 0 10px;
+}
+form#step-two-form {
+    box-shadow: 0px 0px 10px 1px #cacaca;
+    border-radius: 10px;
+    padding: 30px;
+}
+form#step-two-form .wishlist-drawer-choose-name.wishlist-drawer-border {
+    margin: 20px 0px;
+}
+input#wishlist-name {
+    border: none;
+    box-shadow: 0px 0px 10px 1px #9a9a9a;
+    border-radius: 10px;
+    width: 400px;
+}
+div#minhas-listas ul.wishlist-collection {
+    display: flex;
+}
+.buttons-set.login-lista {
+    text-align: center!important;
+}
+.buttons-set.login-lista > button#send2 {
+    float: none!important;
+}
+.buttons-set.login-lista > button#send2, .buttons-set.new-user a {
+    float: none!important;
+    background-color: #ff0026;
+    border-color: #ff0026;
+    width: 300px!important;
+    border-radius: 10px;
+    color: white;
+}
+.new-users.list {
+    /* margin: 10px 0px; */
+    margin-top: 20px;
+}
+.buttons-set.new-user {
+    text-align: center;
+}
+.item-list {
+    width: 31%;
+    margin: 1%;
+}
+.info-edit {
+    display: flex;
+    justify-content: space-between;
+    padding: 3%;
+}
+span.edit-icon-list i {
+    color: red;
+    font-size: 20px;
+    margin: 0px 7px;
+}
+.info-edit h2 {
+    color: #ff0013;
+    font-weight: 500;
+}
+span.edit-icon-list i:hover {
+    color: #7d0000;
+}
+button#cadastrarLista {
+    background-color: #ff0013;
+    border-color: #ff0013;
+    border-radius: 10px;
+    color: white;
+}
+</style>

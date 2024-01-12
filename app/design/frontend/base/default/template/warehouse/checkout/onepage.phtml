@@ -1,0 +1,163 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<?php $helper = Mage::helper('warehouse') ?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Checkout') ?></h1>
+</div>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
+
+<!-- Warehouse -->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/warehouse/checkout/onepage.js') ?>"></script>
+<!-- End Warehouse -->
+
+<?php if (!$helper->getVersionHelper()->isGe1700()) : ?>
+    <script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+<?php endif; ?>
+
+<ol class="opc" id="checkoutSteps">
+    <?php
+
+    $passos = $this->getSteps();
+
+    //billing
+    //shipping
+    //shipping_method
+    //payment
+    //review
+
+    ?>
+    <div class="info_user">
+
+        <li id="opc-<?php echo "billing" ?>" class="section allow active">
+            <div class="step-title">
+                <span class="number"><?php echo "1"; ?></span>
+                <a href="#"><?php echo $this->__('Edit') ?></a>
+            </div>
+            <div id="checkout-step-<?php echo "billing" ?>" class="step a-item">
+                <?php echo $this->getChildHtml("billing") ?>
+            </div>
+        </li>
+
+        <li id="opc-<?php echo "shipping" ?>" class="section allow active" style="display:none!important;">
+            <div class="step-title">
+                <span class="number"><?php echo "1"; ?></span>
+                <a href="#"><?php echo $this->__('Edit') ?></a>
+            </div>
+            <div id="checkout-step-<?php echo "shipping" ?>" class="step a-item">
+                <?php echo $this->getChildHtml("shipping") ?>
+            </div>
+        </li>
+    </div>
+
+    <div class="shipping_payment">
+        <li id="opc-<?php echo "shipping_method" ?>" class="section allow active">
+            <div class="step-title">
+                <span class="number"><?php echo "1"; ?></span>
+                <a href="#"><?php echo $this->__('Edit') ?></a>
+            </div>
+            <div id="checkout-step-<?php echo "shipping_method" ?>" class="step a-item">
+                <?php echo $this->getChildHtml("shipping_method") ?>
+            </div>
+        </li>
+        <li id="opc-<?php echo "payment" ?>" class="section allow active">
+            <div class="step-title">
+                <span class="number"><?php echo "1"; ?></span>
+                <a href="#"><?php echo $this->__('Edit') ?></a>
+            </div>
+            <div id="checkout-step-<?php echo "payment" ?>" class="step a-item">
+                <?php echo $this->getChildHtml("payment") ?>
+            </div>
+        </li>
+    </div>
+
+    <div class="review_order">
+
+        <li id="opc-<?php echo "review" ?>" class="section allow active">
+            <div class="step-title">
+                <span class="number"><?php echo "1"; ?></span>
+                <a href="#"><?php echo $this->__('Edit') ?></a>
+            </div>
+            <div id="checkout-step-<?php echo "review" ?>" class="step a-item">
+                <?php echo $this->getChildHtml("review") ?>
+            </div>
+        </li>
+    </div>
+
+</ol>
+<script type="text/javascript">
+    //<![CDATA[
+    var accordion = new Accordion('checkoutSteps', '.step-title', true);
+    <?php if($this->getActiveStep()): ?>
+    accordion.openSection('opc-<?php echo $this->getActiveStep() ?>');
+    <?php endif ?>
+    var checkout = new Checkout(accordion,{
+        progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
+        review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
+        saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
+        failure: '<?php echo $this->getUrl('checkout/cart') ?>'}
+    );
+    //]]>
+</script>
+
+<style>
+    .opc li.section{
+        display: block!important;
+
+    }
+    ol#checkoutSteps {
+        /* display: flex; */
+    }
+    .opc li.section .step{
+        width: 95%;
+    }
+
+    ol#checkoutSteps {
+        display: flex;
+    }
+    .shipping_payment, .info_user,.review_order{
+        width: 33%;
+    }
+    .opc li.section .step .buttons-set {
+        margin: 0 -20px -20px;
+        background: #73cac2;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    .opc li.section .step .buttons-set {
+        margin: 0 -20px -20px;
+        background: #73cac2;
+        padding: 20px 20px;
+        text-align: center;
+        color: white;
+    }
+    /* body.checkout-onepage-index .main {
+        width: 95%!important;
+    } */
+</style>

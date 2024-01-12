@@ -1,0 +1,441 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+-->
+<layout>
+
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <name>warehouse/boxes.css</name>
+            </action>
+        </reference>
+    </default>
+    
+    <adminhtml_warehouse_index>
+        <reference name="content">
+            <block type="warehouse/adminhtml_warehouse" name="warehouses"/>
+        </reference>
+    </adminhtml_warehouse_index>
+    
+    <adminhtml_warehouse_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouse/adminhtml_warehouse_grid" name="warehouses.grid"/>
+        </block>
+    </adminhtml_warehouse_grid>
+    
+    <adminhtml_warehouse_new>
+        <update handle="warehouse_adminhtml_warehouse_edit"/>
+    </adminhtml_warehouse_new>
+    
+    <adminhtml_warehouse_edit>
+        <update handle="editor"/>
+        <reference name="head">
+            <action method="addJs"><script>mp/core/adminhtml.js</script></action>
+            <action method="addJs"><script>mp/core/functions.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="warehouse/adminhtml_warehouse_edit" name="warehouse_edit" as="warehouse_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="warehouse/adminhtml_warehouse_edit_tabs" name="warehouse_edit_tabs" as="warehouse_edit_tabs"/>
+        </reference>
+    </adminhtml_warehouse_edit>
+    
+    <adminhtml_warehouse_productsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouse/adminhtml_warehouse_edit_tab_products" name="warehouse.edit.tab.products"/>
+        </block>
+    </adminhtml_warehouse_productsgrid>
+    
+    <adminhtml_warehouse_salesordersgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouse/adminhtml_warehouse_edit_tab_sales_orders" name="warehouse.edit.tab.sales.orders"/>
+        </block>
+    </adminhtml_warehouse_salesordersgrid>
+    
+    <adminhtml_warehouse_salesinvoicesgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouse/adminhtml_warehouse_edit_tab_sales_invoices" name="warehouse.edit.tab.sales.invoices"/>
+        </block>
+    </adminhtml_warehouse_salesinvoicesgrid>
+    
+    <adminhtml_warehouse_salesshipmentsgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouse/adminhtml_warehouse_edit_tab_sales_shipments" name="warehouse.edit.tab.sales.shipments"/>
+        </block>
+    </adminhtml_warehouse_salesshipmentsgrid>
+    
+    <adminhtml_warehouse_salescreditmemosgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouse/adminhtml_warehouse_edit_tab_sales_creditmemos" name="warehouse.edit.tab.sales.creditmemos"/>
+        </block>
+    </adminhtml_warehouse_salescreditmemosgrid>
+    
+    <adminhtml_warehouse_areagrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="warehouse/adminhtml_warehouse_edit_tab_area_grid" name="warehouse.edit.tab.area.grid"/>
+        </block>
+    </adminhtml_warehouse_areagrid>
+    
+    <adminhtml_catalog_product_action_attribute_edit>
+        <reference name="left">
+            <reference name="attributes_tabs">
+                <action method="removeTab"><name>inventory</name></action>
+            </reference>
+        </reference>
+    </adminhtml_catalog_product_action_attribute_edit>
+    
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs"><file>mp/warehouse/adminhtml/sales.js</file></action>
+        </reference>
+        <reference name="root">
+            <reference name="content">
+                <reference name="form">
+                    <action method="setTemplate"><template>warehouse/sales/order/create/form.phtml</template></action>
+                    <reference name="data">
+                        <action method="setTemplate"><template>warehouse/sales/order/create/data.phtml</template></action>
+                        <reference name="shipping_method">
+                            <reference name="form">
+                                <action method="setTemplate"><template>warehouse/sales/order/create/shipping/method/form.phtml</template></action>
+                            </reference>
+                        </reference>
+                        <reference name="items">
+                            <reference name="items_grid">
+                                <action method="setTemplate"><template>warehouse/sales/order/create/items/grid.phtml</template></action>
+                            </reference>
+                        </reference>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_create_index>
+    
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="content">
+            <reference name="data">
+                <action method="setTemplate"><template>warehouse/sales/order/create/data.phtml</template></action>
+                <reference name="items">
+                    <reference name="items_grid">
+                        <action method="setTemplate"><template>warehouse/sales/order/create/items/grid.phtml</template></action>
+                    </reference>
+                </reference>
+                <reference name="shipping_method">
+                    <reference name="form">
+                        <action method="setTemplate"><template>warehouse/sales/order/create/shipping/method/form.phtml</template></action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+    
+    <adminhtml_sales_order_create_load_block_shipping_method>
+        <reference name="content">
+            <reference name="shipping_method">
+                <reference name="form">
+                    <action method="setTemplate"><template>warehouse/sales/order/create/shipping/method/form.phtml</template></action>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_create_load_block_shipping_method>
+    
+    <adminhtml_sales_order_create_load_block_items>
+        <reference name="content">
+            <reference name="items">
+                <reference name="items_grid">
+                    <action method="setTemplate"><template>warehouse/sales/order/create/items/grid.phtml</template></action>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_create_load_block_items>
+
+    <adminhtml_sales_order_view>
+        <reference name="left">
+            <reference name="sales_order_tabs">
+                <reference name="order_tab_info">
+                    <reference name="order_info">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/info.phtml</template></action>
+                    </reference>
+                    <reference name="order_items">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/items.phtml</template></action>
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>adminhtml/sales_order_view_items_renderer_default</block>
+                            <template>warehouse/sales/order/view/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/adminhtml_sales_order_view_items_renderer</block>
+                            <template>warehouse/bundle/sales/order/view/items/renderer.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>downloadable</type>
+                            <block>adminhtml/sales_order_view_items_renderer_default</block>
+                            <template>warehouse/downloadable/sales/order/view/items/renderer/downloadable.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_view>
+
+    <adminhtml_sales_order_invoice_new>
+        <reference name="content">
+            <reference name="sales_invoice_create">
+                <reference name="form">
+                    <reference name="order_info">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/info.phtml</template></action>
+                    </reference>
+                    <reference name="order_items">
+                        <action method="setTemplate"><template>warehouse/sales/order/invoice/create/items.phtml</template></action>
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/sales/order/invoice/create/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/adminhtml_sales_order_items_renderer</block>
+                            <template>warehouse/bundle/sales/invoice/create/items/renderer.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>downloadable</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/downloadable/sales/order/invoice/create/items/renderer/downloadable.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_invoice_new>
+    
+    <adminhtml_sales_order_invoice_updateqty>
+        <reference name="order_items">
+            <action method="setTemplate"><template>warehouse/sales/order/invoice/create/items.phtml</template></action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>warehouse/sales/order/invoice/create/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>bundle/adminhtml_sales_order_items_renderer</block>
+                <template>warehouse/bundle/sales/invoice/create/items/renderer.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>downloadable</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>warehouse/downloadable/sales/order/invoice/create/items/renderer/downloadable.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_invoice_updateqty>
+
+    <adminhtml_sales_order_invoice_view>
+        <reference name="content">
+            <reference name="sales_invoice_view">
+                <reference name="form">
+                    <reference name="order_info">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/info.phtml</template></action>
+                    </reference>
+                    <reference name="invoice_items">
+                        <action method="setTemplate"><template>warehouse/sales/order/invoice/view/items.phtml</template></action>
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/sales/order/invoice/view/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/adminhtml_sales_order_items_renderer</block>
+                            <template>warehouse/bundle/sales/invoice/view/items/renderer.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>downloadable</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/downloadable/sales/order/invoice/view/items/renderer/downloadable.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+
+    <adminhtml_sales_order_shipment_new>
+        <reference name="content">
+            <reference name="sales_shipment_create">
+                <reference name="form">
+                    <reference name="order_info">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/info.phtml</template></action>
+                    </reference>
+                    <reference name="order_items">
+                        <action method="setTemplate"><template>warehouse/sales/order/shipment/create/items.phtml</template></action>
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/sales/order/shipment/create/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/adminhtml_sales_order_items_renderer</block>
+                            <template>warehouse/bundle/sales/shipment/create/items/renderer.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_shipment_new>
+
+    <adminhtml_sales_order_shipment_view>
+        <reference name="content">
+            <reference name="sales_shipment_view">
+                <reference name="form">
+                    <reference name="order_info">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/info.phtml</template></action>
+                    </reference>
+                    <reference name="shipment_items">
+                        <action method="setTemplate"><template>warehouse/sales/order/shipment/view/items.phtml</template></action>
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/sales/order/shipment/view/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/adminhtml_sales_order_items_renderer</block>
+                            <template>warehouse/bundle/sales/shipment/view/items/renderer.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <reference name="content">
+            <reference name="sales_creditmemo_create">
+                <reference name="form">
+                    <reference name="order_info">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/info.phtml</template></action>
+                    </reference>
+                    <reference name="order_items">
+                        <action method="setTemplate"><template>warehouse/sales/order/creditmemo/create/items.phtml</template></action>
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/sales/order/creditmemo/create/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/adminhtml_sales_order_items_renderer</block>
+                            <template>warehouse/bundle/sales/creditmemo/create/items/renderer.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>downloadable</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/downloadable/sales/order/creditmemo/create/items/renderer/downloadable.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_creditmemo_new>
+    
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <reference name="order_items">
+            <action method="setTemplate"><template>warehouse/sales/order/creditmemo/create/items.phtml</template></action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>warehouse/sales/order/creditmemo/create/items/renderer/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>bundle/adminhtml_sales_order_items_renderer</block>
+                <template>warehouse/bundle/sales/creditmemo/create/items/renderer.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>downloadable</type>
+                <block>adminhtml/sales_items_renderer_default</block>
+                <template>warehouse/downloadable/sales/order/creditmemo/create/items/renderer/downloadable.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_creditmemo_updateqty>
+    
+    <adminhtml_sales_order_creditmemo_view>
+        <reference name="content">
+            <reference name="sales_creditmemo_view">
+                <reference name="form">
+                    <reference name="order_info">
+                        <action method="setTemplate"><template>warehouse/sales/order/view/info.phtml</template></action>
+                    </reference>
+                    <reference name="creditmemo_items">
+                        <action method="setTemplate"><template>warehouse/sales/order/creditmemo/view/items.phtml</template></action>
+                        <action method="addItemRender">
+                            <type>default</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/sales/order/creditmemo/view/items/renderer/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle</type>
+                            <block>bundle/adminhtml_sales_order_items_renderer</block>
+                            <template>warehouse/bundle/sales/creditmemo/view/items/renderer.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>downloadable</type>
+                            <block>adminhtml/sales_items_renderer_default</block>
+                            <template>warehouse/downloadable/sales/order/creditmemo/view/items/renderer/downloadable.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    
+    <adminhtml_tablerate_method_index>
+        <reference name="content">
+            <block type="shippingtablerate/adminhtml_tablerate_method" name="tablerates.methods"/>
+        </reference>
+    </adminhtml_tablerate_method_index>
+    
+    <adminhtml_tablerate_method_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="shippingtablerate/adminhtml_tablerate_method_grid" name="tablerates.methods.grid"/>
+        </block>
+    </adminhtml_tablerate_method_grid>
+    
+    <adminhtml_tablerate_method_new>
+        <update handle="shippingtablerate_adminhtml_tablerate_method_edit"/>
+    </adminhtml_tablerate_method_new>
+    
+    <adminhtml_tablerate_method_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="shippingtablerate/adminhtml_tablerate_method_edit" name="tablerates.methods.edit"></block>
+        </reference>
+    </adminhtml_tablerate_method_edit>
+    
+</layout>

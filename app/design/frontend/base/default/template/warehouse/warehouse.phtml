@@ -1,0 +1,76 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php $helper       = $this->helper('warehouse') ?>
+<?php $config       = $helper->getConfig() ?>
+
+<?php if ($this->isEnabled()) : ?>
+
+<?php $currentStockId = $this->getCurrentStockId() ?>
+
+<div class="block block-list warehouse-block">
+    <div class="block-title">
+        <strong>
+            <span><?php echo $helper->__('Choose Warehouse') ?></span>
+        </strong>
+    </div>
+    <div class="block-content">
+        <form action="<?php echo $this->getUrl('warehouse/warehouse/setStock') ?>" method="post" id="warehouse-form">
+            <ul id="warehouses">
+            <?php foreach ($this->getWarehouses() as $warehouse) : ?>
+            <?php $stockId          = (int) $warehouse->getStockId() ?>
+            <?php $stockHtmlId      = 'stock_id_'.$stockId ?>
+            
+            <li class="warehouse<?php if ($currentStockId == $stockId) : ?> current<?php endif; ?>">
+                <input type="radio" name="stock_id" class="radio" id="<?php echo $stockHtmlId ?>" value="<?php echo $stockId ?>" <?php if ($stockId === $currentStockId) : ?> checked="checked"<?php endif; ?>/>
+                <span class="label"><label for="<?php echo $stockHtmlId ?>">
+                    <span class="warehouse-name"><?php echo $this->htmlEscape($warehouse->getTitle()); ?></span>
+                    
+                    <?php if ($config->isOriginVisible()) : ?>
+                    <span class="warehouse-origin"><?php echo $this->htmlEscape($warehouse->getOriginString()) ?></span>
+                    <?php endif ?>
+                    
+                    <?php if ($config->isDistanceVisible()) : ?>
+                    <span class="warehouse-distance"><?php echo $this->htmlEscape($this->getCustomerAddressStockDistanceString($stockId)); ?></span>
+                    <?php endif; ?>
+
+                    <?php if ($config->isDescriptionVisible()) : ?>
+                    <span class="warehouse-description"><?php echo $this->htmlEscape($warehouse->getDescription()); ?></span>
+                    <?php endif; ?>
+                </label></span>
+            </li>
+            <?php endforeach; ?>
+            </ul>
+            <script type="text/javascript">decorateList('warehouses');</script>
+            <div class="actions">
+                <button type="submit" name="set_stock" value="update" title="<?php echo $helper->__('Update') ?>" class="button button-update"><span><span><?php echo $helper->__('Update') ?></span></span></button>
+                <button type="submit" name="set_stock" value="reset" title="<?php echo $helper->__('Reset') ?>" class="button button-reset"><span><span><?php echo $helper->__('Reset') ?></span></span></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<?php endif; ?>

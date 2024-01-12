@@ -1,0 +1,63 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php $helper             = $this->helper('warehouse'); ?>
+<?php $element            = $this->getElement(); ?>
+<?php $elementHtmlId      = $element->getHtmlId(); ?>
+<?php $elementName        = $element->getName(); ?>
+<?php $elementClass       = $element->getClass(); ?>
+<?php $elementReadonly    = $element->getReadonly(); ?>
+<?php $elementValue       = $element->getValue(); ?>
+<?php if (!is_array($elementValue)) $elementValue = array(); ?>
+<tr>
+    <td colspan="11" class="warehouse-stores">
+    <fieldset id="warehouse-store-fields">
+        <?php foreach ($this->getWebsites() as $website) : ?>
+        <div>
+            <div class="website-name">
+                <big><strong><label><?php echo $website->getName() ?></label></strong></big>
+            </div>
+            <div class="webiste-groups">
+            <?php foreach ($website->getGroups() as $storeGroup) : ?>
+                <h4><?php echo $storeGroup->getName() ?></h4>
+                <div class="group-stores">
+                <table>
+                <?php foreach ($storeGroup->getStores() as $store): ?>
+                    <tr>
+                        <td>
+                            <input class="checkbox <?php echo $elementClass ?>" name="<?php echo $elementName ?>[]" value="<?php echo $store->getId() ?>" <?php if ($elementReadonly):?> disabled="disabled"<?php endif;?> id="<?php echo $elementHtmlId.'_'.$store->getId() ?>" type="checkbox"<?php if (in_array($store->getId(), $elementValue)) : ?> checked="checked"<?php endif; ?> />
+                            <?php echo $store->getName() ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </table>
+                </div>
+            <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </fieldset>
+</td></tr>

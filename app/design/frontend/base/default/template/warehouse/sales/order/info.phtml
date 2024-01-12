@@ -1,0 +1,330 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse Mage::helper('melhorLoja_shipping') -->
+
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $orderHelper                  = $helper->getOrderHelper() ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<?php  $_order = $this->getOrder() ?>
+
+<?php $orderHistorys = $this->helper('CesarMartins_OrderHistory')->getOrderHistory($_order->getId()); ?>
+<?php if ($helper->getVersionHelper()->isGe1910()) : ?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php else : ?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php endif ?>
+
+<div class="page-title title-buttons">
+    <h1><?php echo $this->__('Order #%s - %s', $_order->getRealOrderId(), $_order->getStatusLabel()) ?></h1>
+    
+    <?php if ($helper->getVersionHelper()->isGe1600()) : ?>
+    <?php echo $this->getChildHtml('buttons') ?>
+    <?php else : ?>
+    <?php if($this->helper('rss/order')->isStatusNotificationAllow()): ?>
+        <a href="<?php echo $this->helper('rss/order')->getStatusHistoryRssUrl($_order) ?>" class="link-rss"><?php echo $this->__('Subscribe to Order Status') ?></a>
+        <span class="separator">|</span>
+    <?php endif; ?>
+    <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+        <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+        <span class="separator">|</span>
+    <?php endif ?>
+    <a href="<?php echo $this->getPrintUrl($_order) ?>" class="link-print" onclick="this.target='_blank';"><?php echo $this->__('Print Order') ?></a>
+    <?php endif; ?>
+    
+    <!-- Warehouse -->
+    <?php if ($orderHelper->isPendingPayment($_order)) : ?>
+    <span class="separator">|</span>
+    <a href="<?php echo $orderHelper->getMakePaymentUrl($_order) ?>" class="link-make-payment" onclick="this.target='_blank';"><?php echo $helper->__('Make Payment') ?></a>
+    <?php endif; ?>
+    <!-- End Warehouse -->
+    
+</div>
+<div id="timeline-wrap">
+    <div id="timeline"></div>
+
+    <!-- This is the individual marker-->
+    <div class="marker mfirst timeline-icon one">
+        <i class="fa fa-pencil"></i>
+    </div>
+    <span class="texto-history">Pedido Realizado</span>
+    <!-- / marker -->
+
+    <!-- This is the individual marker-->
+    <div class="marker m2 timeline-icon two desabilidado">
+        <i class="fa fa-usd"></i>
+    </div>
+    <span class="texto-history">Aguardando pagamento</span>
+    <!-- / marker -->
+
+    <!-- This is the individual panel-->
+
+    <!-- / panel -->
+
+    <!-- This is the individual marker-->
+    <div class="marker m3 timeline-icon three desabilidado">
+        <i class="fa fa-list"></i>
+    </div>
+    <span class="texto-history">Preparando entrega</span>
+    <!-- / marker -->
+
+
+    <!-- This is the individual marker-->
+    <div class="marker mlast timeline-icon four desabilidado">
+        <i class="fa fa-check"></i>
+    </div>
+    <span class="texto-history">Entregue</span>
+    <!-- / marker -->
+
+
+
+</div>
+<?php echo $this->getStatusHistoryRssUrl($_order) ?>
+<dl class="order-info">
+    <dt><?php echo $this->__('About This Order:') ?></dt>
+    <dd>
+        <?php $_links = $this->getLinks(); ?>
+        <ul id="order-info-tabs">
+            <li class="current">
+                <button>Informações do Pedido</button>
+            </li>
+        <?php /*foreach ($_links as $_link): */?><!--
+            <?php /*if($_link->getUrl()): */?>
+                <li><a href="<?php /*echo $_link->getUrl() */?>"><?php /*echo $_link->getLabel() */?></a></li>
+            <?php /*else: */?>
+                <li class="current"><?php /*echo $_link->getLabel() */?></li>
+            <?php /*endif; */?>
+        --><?php /*endforeach; */?>
+        </ul>
+        <script type="text/javascript">decorateGeneric($('order-info-tabs').select('LI'),['first','last']);</script>
+    </dd>
+</dl>
+<div class="div-order-control" style="display: none">
+    <p class="order-date">
+        <?php echo $this->__('Order Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p>
+
+    <!-- Warehouse -->
+    <?php if ($config->isInformationVisible()) : ?>
+        <p class="order-warehouse">
+            <?php echo $helper->__('Order Warehouse: ') ?>
+            <?php if ($_order->isMultipleWarehouse()) : ?>
+                <?php echo implode($helper->__(', '), $_order->getWarehouseTitles()) ?>
+            <?php elseif ($_order->getWarehouse()) : ?>
+                <?php echo $_order->getWarehouseTitle() ?>
+            <?php else : ?>
+                <?php echo $helper->__('No warehouse') ?>
+            <?php endif ?>
+        </p>
+    <?php endif ?>
+    <!-- End Warehouse -->
+
+    <?php if (!$_order->getIsVirtual()): ?>
+        <div class="col2-set order-info-box">
+            <div class="col-1">
+                <div class="box">
+                    <div class="box-title">
+                        <h2><?php echo $this->__('Shipping Address') ?></h2>
+                    </div>
+                    <div class="box-content">
+                        <address><?php echo $_order->getShippingAddress()->format('html') ?></address>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="box">
+                    <div class="box-title">
+                        <h2><?php echo $this->__('Shipping Method') ?></h2>
+                    </div>
+                    <div class="box-content">
+                        <?php if ($_order->getShippingDescription()): ?>
+                            <?php echo $this->escapeHtml($_order->getShippingDescription()) ?>
+                        <?php else: ?>
+                            <p><?php echo $this->helper('sales')->__('No shipping information available'); ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="col2-set order-info-box">
+        <div class="col-1">
+            <div class="box">
+                <div class="box-title">
+                    <h2><?php echo $this->__('Billing Address') ?></h2>
+                </div>
+                <div class="box-content">
+                    <address><?php echo $_order->getBillingAddress()->format('html') ?></address>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="box box-payment">
+                <div class="box-title">
+                    <h2><?php echo $this->__('Payment Method') ?></h2>
+                </div>
+                <div class="box-content">
+                    <?php echo $this->getPaymentInfoHtml() ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    #timeline-wrap{
+        /* margin:20% 20%; */
+        margin: 10% 10%;
+        top:-30px;
+        position:relative;
+
+    }
+
+    #timeline{
+        height:1px;
+        width: 100%;
+        background-color:#aabbc4;
+        position:relative;
+
+    }
+
+    .marker{
+        z-index:1000;
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.4em;
+        text-align: center;
+        position: absolute;
+        margin-left: -25px;
+        background-color: #999999;
+        border-radius: 50%;
+    }
+
+    .marker:hover{
+        -moz-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+
+        -webkit-transition: all 300ms ease;
+        -moz-transition: all 300ms ease;
+        -ms-transition: all 300ms ease;
+        -o-transition: all 300ms ease;
+        transition: all 300ms ease;
+    }
+
+    .texto-history {
+        color: #0b0b0b;
+        position: relative;
+        margin: 31px;
+        font-size: 17px;
+    }
+
+    .timeline-icon.one {
+        background-color: #e63d32 !important;
+    }
+    .timeline-icon.one desabilidado {
+        background-color: #ddd !important;
+    }
+    .timeline-icon.two {
+        background-color: #e63d32 !important;
+    }
+    .timeline-icon.two.desabilidado {
+        background-color: #ddd !important;
+    }
+    .timeline-icon.three{
+        background-color: #e63d32 !important;
+    }
+    .timeline-icon.three.desabilidado {
+        background-color: #ddd !important;
+    }
+    .timeline-icon.four {
+        background-color: #e63d32 !important;
+    }
+    .timeline-icon.four.desabilidado {
+        background-color: #ddd !important;
+    }
+
+    .mfirst{
+        top:-25px;
+    }
+
+    .m2{
+        top:-25px;
+        left:32.5%
+    }
+
+    .m3{
+        top:-25px;
+        left:66%
+    }
+
+
+    .mlast{
+        top:-25px;
+        left:100%
+    }
+
+    .timeline-panel {
+        margin-top: 20%;
+        width: 500px;
+        height: 200px;
+        background-color: #cbd0df;
+        border-radius:2px;
+        position:relative;
+        text-align:left;
+        padding:10px;
+        font-size:20px;
+        font-weight:bold;
+        line-height:20px;
+        float:left;
+    }
+
+    .timeline-panel:after {
+        content:'';
+        position:absolute;
+        margin-top: -12%;
+        left:10%;
+        width:0;
+        height:0;
+        border:12px solid transparent;
+        border-bottom: 15px solid #cbd0df;
+    }
+
+</style>
+<script>
+    //$(".timeline-panel").hide(0);
+
+    $("i").click(function() {
+        $('.timeline-panel').show(0);
+    });
+</script>

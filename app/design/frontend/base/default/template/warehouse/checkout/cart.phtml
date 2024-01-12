@@ -1,0 +1,199 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2017 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $this Mage_Checkout_Block_Cart
+ */
+?>
+<!-- Warehouse -->
+<?php $helper                   = Mage::helper('warehouse') ?>
+<?php $config                   = $helper->getConfig();
+$stockIds = array(1=>1,2=>2);?>
+<!-- End Warehouse -->
+<div class="cart">
+    <!-- Warehouse -->
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/warehouse/checkout/cart.js') ?>"></script>
+    <!-- End Warehouse -->
+
+    <?php /* ?>
+    <div class="page-title title-buttons">
+        <h1><?php echo $this->__('Shopping Cart') ?></h1>
+        <?php if (!$this->hasError()) : ?>
+            <ul class="checkout-types">
+                <?php foreach ($this->getMethods('top_methods') as $method): ?>
+                    <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                        <li><?php echo $methodHtml ?></li>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </ul>
+        <?php endif ?>
+    </div>
+    <?php */ ?>
+
+    <div class="col-md-24">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="page-title title-buttons">
+                        <h1><?php echo $this->__('Meu Carrinho') ?></h1>
+                    </div>
+                    <!--                    --><?php //if ($helper->getVersionHelper()->isGe1910()) : ?>
+                    <!--                        --><?php //echo $this->getMessagesBlock()->toHtml() ?>
+                    <!--                    --><?php //else : ?>
+                    <!--                        --><?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+                    <!--                    --><?php //endif ?>
+
+                    <?php echo $this->getChildHtml('form_before') ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-18">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="box-finzalizar">
+                        <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping');endif?>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-24">
+                    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+                        <?php echo $this->getBlockHtml('formkey'); ?>
+                        <?php //foreach ($this->getItensDocas() as $stockId => $doca) { ?>
+
+                        <fieldset class="box-resumo table-responsive">
+                            <table id="shopping-cart-table-<?php //echo $stockId?>" class="data-table cart-table table">
+                                <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                                    <th class="a-center"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
+                                    <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                                    <th class="a-center"><?php echo $this->__('Subtotal') ?></th>
+                                    <th class="a-center">&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php //foreach($doca['itens'] as $_item): ?>
+                                <?php //echo $this->getItemHtml($_item) ?>
+                                <?php //endforeach ?>
+                                <?php foreach($this->getItems() as $_item): ?>
+                                    <?php echo $this->getItemHtml($_item) ?>
+                                <?php endforeach ?>
+                                <?php foreach ($stockIds as $stockId => $doca) { ?>
+                                    <?php echo $this->getShippingHtml($stockId) ?>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                        <script type="text/javascript">decorateTable('shopping-cart-table-<?php echo $stockId?>')</script>
+                        <?php //}?>
+                        <input type="hidden" name="update_cart_action" id="update_cart_action" value="" title="<?php echo $this->__('Update Shopping Cart') ?>" class="button btn-update"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-24">
+
+                    <div class="box-finzalizar">
+                        <div class="totals">
+                            <?php echo $this->getChildHtml('totals') ?>
+                            <?php if (!$this->hasError()): ?>
+                                <ul class="checkout-type">
+                                    <?php foreach ($this->getMethods('methods') as $method): ?>
+                                        <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                            <li><?php echo $methodHtml ?></li>
+                                        <?php endif?>
+                                    <?php endforeach?>
+                                    <p class="safe-buy text-center">
+                                        <i class="fa fa-icon fa-lock" aria-hidden="true" style="color: #71cac2;"></i>
+                                        Compra Segura
+                                    </p>
+                                    <img style="margin: 0 auto;padding: 10px;" src="<?php echo Mage::getUrl() ?>/fm.png">
+                                </ul>
+                            <?php endif?>
+                        </div>
+                        <div class="box-cupom">
+                            <label class="title_cupom">Possui CUPOM de desconto? </label>
+                            <div class="cupom-toggle">
+                                <?php echo $this->getChildHtml('coupon') ?>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+
+    .title_cupom{
+        color: #282828;
+        font: 400 13px/1.35 Lato, Helvetica Neue, Verdana, Arial, sans-serif;
+        font-weight: 600;
+        min-width: 0;
+        margin: 0 0 10px;
+    }
+    label.title_cupom {
+        display: block;
+        margin: 10px auto;
+        width: 65%;
+        font-size: 13px;
+        border: 1px solid white;
+        padding: 10px;
+        box-shadow: 0px 0px 10px 1px #dedede;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+    .cupom-toggle {
+        display: none;
+    }
+</style>
+
+<script>
+
+    jQuery("label.title_cupom").on("click", function(){
+
+        jQuery(".cupom-toggle").toggle( "slow", function(){});
+    });
+
+</script>

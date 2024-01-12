@@ -1,0 +1,43 @@
+<div class="container wishlist-home-screen">
+    <div class="wishlist-loggin"><h1 class="title">Minhas Listas de Favoritos</h1>
+        <h2 class="align-center">Faça o login para visualizar e começar a adicionar seus produtos favoritos</h2>
+        <ul class="wishlist-collection">
+            <li class="wishlist-collection-item">
+                <input id="base-url" type="hidden" value="<?php echo Mage::getBaseUrl(); ?>">
+                <button class="button button-primary button-full no-shadow radius">Fazer Login</button>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <!-- <figure><img src="/assets/frontend/images/wishlist-empty-desktop.svg"
+                     alt="Faça o login para visualizar e começar a adicionar seus produtos favoritos" width="100%">
+        </figure> -->
+    </div>
+</div>
+<script>
+
+    jQuery(".button").on("click", function (e){
+
+        var url = jQuery("#base-url").val() + "listafavoritos/index/inicio";
+        setLocation(url);
+
+    });
+
+</script>
+
+<style>
+    button.button.button-primary.button-full.no-shadow.radius {
+    border-color: #ff0013;
+    background-color: #ff0013;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 10px;
+    width: 400px;
+    margin: 30px 0px;
+}
+.container.wishlist-home-screen {
+    box-shadow: 0px 0px 10px 1px #c1c1c1;
+    border-radius: 10px;
+    padding: 20px;
+}
+</style>

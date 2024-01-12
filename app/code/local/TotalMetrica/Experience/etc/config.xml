@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <TotalMetrica_Experience>
+            <version>1.6.0.0</version>
+        </TotalMetrica_Experience>
+    </modules>
+    
+    <frontend>
+        <routers>
+            <experience>
+                <use>standard</use>
+                <args>
+                    <module>TotalMetrica_Experience</module>
+                    <frontName>experience</frontName>
+                </args>
+            </experience>
+        </routers>
+
+        <layout>
+            <updates>
+                <experience>
+                    <file>experience.xml</file>
+                </experience>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <global>
+
+        <rewrite>
+
+            <experience_promoscoreurl_index>
+                <from><![CDATA[#^((/insta([0-9]+)/)|(/facebook([0-9]+)/)|(/whatsapp([0-9]+)/)|(/direct([0-9]+)/)|(/sms([0-9]+)/)|(/email([0-9]+)/)|(/pessoalmente([0-9]+)/))(.*)#]]></from>
+                <to><![CDATA[/experience/promoscoreurl/index]]></to>
+                <complete>1</complete>
+            </experience_promoscoreurl_index>
+
+            <experience_index>
+                <from><![CDATA[#^/(experience)/?$#]]></from>
+                <to><![CDATA[/experience/index]]></to>
+                <complete>1</complete>
+            </experience_index>
+
+            <experience_index_login>
+                <from><![CDATA[#^/(experience/login(/)?(id/)?)#]]></from>
+                <to><![CDATA[/experience/index/login/id/]]></to>
+                <complete>1</complete>
+            </experience_index_login>
+
+            <experience_shopapp>
+                <from><![CDATA[#^/(experience/shopapp(/))#]]></from>
+                <to><![CDATA[/experience/shopapp/index/]]></to>
+                <complete>1</complete>
+            </experience_shopapp>
+
+            <experience_freeboardshortforfriends>
+                <from><![CDATA[#^/(experience/freeboardshortforfriends(/)?(id/)?)#]]></from>
+                <to><![CDATA[/experience/freeboardshortforfriends/index/id/]]></to>
+                <complete>1</complete>
+            </experience_freeboardshortforfriends>
+
+            <experience_app_login>
+                <from><![CDATA[#^/(loginfromapp(/)?(id/)?)#]]></from>
+                <to><![CDATA[/experience/app/login/id/]]></to>
+                <complete>1</complete>
+            </experience_app_login>
+
+            <experience_app_free>
+                <from><![CDATA[#^/(free/)#]]></from>
+                <to><![CDATA[/experience/app/free/id/]]></to>
+                <complete>1</complete>
+            </experience_app_free>
+
+            <experience_app_invite>
+                <from><![CDATA[#^/(indicate(/)?(id/)?)#]]></from>
+                <to><![CDATA[/experience/app/invite/id/]]></to>
+                <complete>1</complete>
+            </experience_app_invite>
+
+            <experience_app_promoscore>
+                <from><![CDATA[#^/(promoscore(/)?(id/)?)#]]></from>
+                <to><![CDATA[/experience/app/promoscore/id/]]></to>
+                <complete>1</complete>
+            </experience_app_promoscore>
+
+
+            <experience_index_code>
+                <from><![CDATA[#^/(freeboardshortsforfriends/)#]]></from>
+                <to><![CDATA[/experience/index/login/code/]]></to>
+                <complete>1</complete>
+            </experience_index_code>
+
+            <experience_index_code_sms>
+                <from><![CDATA[#^/(s/freeboardshortsforfriends/)#]]></from>
+                <to><![CDATA[/experience/index/login/code/]]></to>
+                <complete>1</complete>
+            </experience_index_code_sms>
+
+            <experience_friend>
+                <from><![CDATA[#^/(experience/friend)/?$#]]></from>
+                <to><![CDATA[/experience/friend]]></to>
+                <complete>1</complete>
+            </experience_friend>
+
+            <experience_surfscore>
+                <from><![CDATA[#^/(experience/surfscore)/?$#]]></from>
+                <to><![CDATA[/experience/awards]]></to>
+                <complete>1</complete>
+            </experience_surfscore>
+
+
+            <promoscorefacebook_index>
+                <from><![CDATA[#^/(face(/)?(id/)?)#]]></from>
+                <to><![CDATA[/experience/promoscorefacebook/index]]></to>
+                <complete>1</complete>
+            </promoscorefacebook_index>
+
+
+            <experience_friendimage>
+                <from><![CDATA[#^/(friendimage)/?#]]></from>
+                <to><![CDATA[/experience/friendimage/index]]></to>
+                <complete>1</complete>
+            </experience_friendimage>
+
+        </rewrite>
+
+        <models>
+            <experience>
+                <class>TotalMetrica_Experience_Model</class>
+            </experience>
+        </models>
+        <helpers>
+            <experience>
+                <class>TotalMetrica_Experience_Helper</class>
+            </experience>
+        </helpers>
+
+    </global>
+    
+</config>

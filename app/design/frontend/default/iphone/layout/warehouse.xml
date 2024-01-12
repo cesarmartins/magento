@@ -1,0 +1,997 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+-->
+<layout>
+    
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <name>css/warehouse/styles.css</name>
+            </action>
+        </reference>
+        <reference name="right">
+            <block type="warehouse/warehouse" name="warehouse" before="-" template="warehouse/warehouse.phtml"/>
+        </reference>
+    </default>
+    
+    <!-- Warehouse -->
+    <warehouse_sales_email_order_items>
+        <block type="warehouse/sales_order_email_items" name="items" template="warehouse/email/order/items.phtml">
+            <action method="addItemRender">
+                <type>default</type>
+                <block>sales/order_email_items_order_default</block>
+                <template>email/order/items/order/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>sales/order_email_items_order_grouped</block>
+                <template>email/order/items/order/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>bundle/sales_order_items_renderer</block>
+                <template>bundle/email/order/items/order/default.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>downloadable</type>
+                <block>downloadable/sales_order_email_items_order_downloadable</block>
+                <template>downloadable/email/order/items/order/downloadable.phtml</template>
+            </action>
+        </block>
+    </warehouse_sales_email_order_items>
+    
+    <!-- Product View -->
+    <catalog_product_view>
+        <reference name="content">
+            <reference name="product.info">
+                <block type="warehouse/catalog_product_view_quote_container" name="product.quote" as="quote" template="warehouse/catalog/product/view/quote/container.phtml">
+                    <action method="addToParentGroup"><group>detailed_info</group></action>
+                </block>
+            </reference>
+        </reference>
+    </catalog_product_view>
+    
+    <!-- Product View -->
+    <PRODUCT_TYPE_grouped>
+        <reference name="product.info">
+            <remove name="product.quote" />
+        </reference>
+    </PRODUCT_TYPE_grouped>
+    
+    <!-- Cart -->
+    <checkout_cart_index>
+        <reference name="content">
+            <reference name="checkout.cart">
+                <action method="setCartTemplate">
+                    <value>warehouse/checkout/cart.phtml</value>
+                </action>
+                <action method="chooseTemplate"/>
+                <action method="addItemRender">
+                    <type>simple</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>warehouse/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>virtual</type>
+                    <block>checkout/cart_item_renderer</block>
+                    <template>warehouse/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>checkout/cart_item_renderer_grouped</block>
+                    <template>warehouse/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>configurable</type>
+                    <block>checkout/cart_item_renderer_configurable</block>
+                    <template>warehouse/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/checkout_cart_item_renderer</block>
+                    <template>warehouse/checkout/cart/item/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>downloadable/checkout_cart_item_renderer</block>
+                    <template>warehouse/downloadable/checkout/cart/item/default.phtml</template>
+                </action>
+                <reference name="checkout.cart.shipping">
+                    <action method="setTemplate">
+                        <template>warehouse/checkout/cart/shipping.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </checkout_cart_index>
+    
+    <!-- One Page Checkout -->
+    <checkout_onepage_index>
+        <reference name="right">
+            <reference name="checkout.progress.wrapper">
+                <reference name="checkout.progress">
+                    <action method="setTemplate">
+                        <template>warehouse/checkout/onepage/progress.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+        <reference name="content">
+            <reference name="checkout.onepage">
+                <action method="setTemplate">
+                    <template>warehouse/checkout/onepage.phtml</template>
+                </action>
+                <reference name="checkout.onepage.shipping_method">
+                    <action method="setTemplate">
+                        <template>warehouse/checkout/onepage/shipping_method.phtml</template>
+                    </action>
+                    <reference name="checkout.onepage.shipping_method.available">
+                        <action method="setTemplate">
+                            <template>warehouse/checkout/onepage/shipping_method/available.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </checkout_onepage_index>
+    
+    <!-- One Page Checkout Progress -->
+    <checkout_onepage_progress>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>warehouse/checkout/onepage/progress.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_progress>
+    
+    <!-- One Page Checkout Shipping Method -->
+    <checkout_onepage_shippingmethod>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>warehouse/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+            <action method="setSingleModeRenderer">
+                <block>warehouse/checkout_onepage_shipping_method_available_singlemode</block>
+                <template>warehouse/checkout/onepage/shipping_method/available/single_mode.phtml</template>
+            </action>
+            <action method="setMultipleModeRenderer">
+                <block>warehouse/checkout_onepage_shipping_method_available_multiplemode</block>
+                <template>warehouse/checkout/onepage/shipping_method/available/multiple_mode.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_shippingmethod>
+    
+    <!-- One Page Checkout Review -->
+    <checkout_onepage_review>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>warehouse/checkout/onepage/review/info.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>checkout/cart_item_renderer</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>checkout/cart_item_renderer_grouped</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>configurable</type>
+                <block>checkout/cart_item_renderer_configurable</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>bundle/checkout_cart_item_renderer</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>downloadable</type>
+                <block>downloadable/checkout_cart_item_renderer</block>
+                <template>warehouse/downloadable/checkout/onepage/review/item.phtml</template>
+            </action>
+            <reference name="checkout.onepage.review.info.totals">
+                <action method="setTemplate">
+                    <template>warehouse/checkout/onepage/review/totals.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </checkout_onepage_review>
+    
+    <!-- Paypal Express Review -->
+    <paypal_express_review>
+        <reference name="content">
+            <reference name="paypal.express.review">
+                <reference name="paypal.express.review.details">
+                    <action method="setTemplate">
+                        <template>warehouse/paypal/express/review/details.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>checkout/cart_item_renderer</block>
+                        <template>warehouse/checkout/onepage/review/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>checkout/cart_item_renderer_grouped</block>
+                        <template>warehouse/checkout/onepage/review/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>configurable</type>
+                        <block>checkout/cart_item_renderer_configurable</block>
+                        <template>warehouse/checkout/onepage/review/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/checkout_cart_item_renderer</block>
+                        <template>warehouse/checkout/onepage/review/item.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/checkout_cart_item_renderer</block>
+                        <template>warehouse/downloadable/checkout/onepage/review/item.phtml</template>
+                    </action>
+                    <reference name="paypal.express.review.details.totals">
+                        <action method="setTemplate">
+                            <template>warehouse/checkout/onepage/review/totals.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </paypal_express_review>
+    
+    <!-- Paypal Express Review Detais -->
+    <paypal_express_review_details>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>warehouse/paypal/express/review/details.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>default</type>
+                <block>checkout/cart_item_renderer</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>grouped</type>
+                <block>checkout/cart_item_renderer_grouped</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>configurable</type>
+                <block>checkout/cart_item_renderer_configurable</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>bundle</type>
+                <block>bundle/checkout_cart_item_renderer</block>
+                <template>warehouse/checkout/onepage/review/item.phtml</template>
+            </action>
+            <action method="addItemRender">
+                <type>downloadable</type>
+                <block>downloadable/checkout_cart_item_renderer</block>
+                <template>warehouse/downloadable/checkout/onepage/review/item.phtml</template>
+            </action>
+            <reference name="paypal.express.review.details.totals">
+                <action method="setTemplate">
+                    <template>warehouse/checkout/onepage/review/totals.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </paypal_express_review_details>
+    
+    <!-- One Page Checkout Success -->
+    <checkout_onepage_success>
+        <reference name="checkout.success">
+            <action method="setTemplate">
+                <template>warehouse/checkout/onepage/success.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_success>
+    
+    <!-- Customer Account -->
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="warehouse">
+                <name>order_pending_payment</name>
+                <path>warehouse/sales_order/pendingpayment</path>
+                <label>My Pending Payments</label>
+            </action>
+        </reference>
+    </customer_account>
+    
+    <!-- Customer Account Index -->
+    <customer_account_index>
+        <reference name="customer_account_dashboard">
+            <reference name="customer_account_dashboard_top">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/recent.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </customer_account_index>
+    
+    <!-- Order Pending Payment -->
+    <warehouse_sales_order_pendingpayment translate="label" module="warehouse">
+        <label>Customer Pending Payments</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="warehouse/sales_order_pendingpayment" name="warehouse.sales.order.pendingpayment">
+                <block type="core/text_list" name="warehouse.sales.order.pendingpayment.info" as="info" translate="label" module="warehouse">
+                    <label>Pending Payments Info</label>
+                </block>
+            </block>
+            <block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+        </reference>
+    </warehouse_sales_order_pendingpayment>
+    
+    <!-- Order History -->
+    <sales_order_history>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.history">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/history.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_order_history>
+    
+    <!-- Order View -->
+    <sales_order_view>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference type="sales/order_view" name="sales.order.view">
+                <reference name="order_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/items/renderer.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/sales_order_item_renderer_downloadable</block>
+                        <template>warehouse/downloadable/sales/order/items/renderer/downloadable.phtml</template>
+                    </action>
+                    <reference name="order_totals">
+                        <action method="setTemplate">
+                            <template>warehouse/sales/order/totals.phtml</template>
+                        </action>
+                        <reference name="tax">
+                            <action method="setTemplate">
+                                <template>warehouse/tax/order/tax.phtml</template>
+                            </action>
+                        </reference>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_view>
+    
+    <!-- Invoice -->
+    <sales_order_invoice>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.invoice">
+                <reference name="invoice_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/invoice/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/invoice/items/renderer.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/sales_order_item_renderer_downloadable</block>
+                        <template>warehouse/downloadable/sales/order/invoice/items/renderer/downloadable.phtml</template>
+                    </action>
+                    <reference name="invoice_totals">
+                        <action method="setTemplate">
+                            <template>warehouse/sales/order/totals.phtml</template>
+                        </action>
+                        <reference name="tax">
+                            <action method="setTemplate">
+                                <template>warehouse/tax/order/tax.phtml</template>
+                            </action>
+                        </reference>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_invoice>
+    
+    <!-- Shipment -->
+    <sales_order_shipment>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.shipment">
+                <reference name="shipment_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/shipment/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/shipment/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/shipment/items/renderer.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_shipment>
+    
+    <!-- Credit Memo -->
+    <sales_order_creditmemo>
+        <reference name="my.account.wrapper">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.creditmemo">
+                <reference name="creditmemo_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/creditmemo/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/creditmemo/items/renderer.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/sales_order_item_renderer_downloadable</block>
+                        <template>warehouse/downloadable/sales/order/creditmemo/items/renderer/downloadable.phtml</template>
+                    </action>
+                    <reference name="creditmemo_totals">
+                        <action method="setTemplate">
+                            <template>warehouse/sales/order/totals.phtml</template>
+                        </action>
+                        <reference name="tax">
+                            <action method="setTemplate">
+                                <template>warehouse/tax/order/tax.phtml</template>
+                            </action>
+                        </reference>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_creditmemo>
+    
+    <!-- Print Order -->
+    <sales_order_print>
+        <reference name="content">
+            <reference name="sales.order.print">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/items/renderer.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>downloadable/sales_order_item_renderer_downloadable</block>
+                    <template>warehouse/downloadable/sales/order/items/renderer/downloadable.phtml</template>
+                </action>
+                <reference name="order_totals">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/totals.phtml</template>
+                    </action>
+                    <reference name="tax">
+                        <action method="setTemplate">
+                            <template>warehouse/tax/order/tax.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_print>
+    
+    <!-- Print Invoice -->
+    <sales_order_printinvoice>
+        <reference name="content">
+            <block name="sales.order.print.invoice">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print/invoice.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/invoice/items/renderer.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>downloadable/sales_order_item_renderer_downloadable</block>
+                    <template>warehouse/downloadable/sales/order/invoice/items/renderer/downloadable.phtml</template>
+                </action>
+                <reference name="invoice_totals">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/totals.phtml</template>
+                    </action>
+                    <reference name="tax">
+                        <action method="setTemplate">
+                            <template>warehouse/tax/order/tax.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </block>
+        </reference>
+    </sales_order_printinvoice>
+    
+    <!-- Print Shipment -->
+    <sales_order_printshipment>
+        <reference name="content">
+            <reference name="sales.order.print.shipment">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print/shipment.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/shipment/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/shipment/items/renderer.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_order_printshipment>
+    
+    <!-- Print Credit Memo -->
+    <sales_order_printcreditmemo>
+        <reference name="content">
+            <reference name="sales.order.print.creditmemo">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print/creditmemo.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/creditmemo/items/renderer.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>downloadable/sales_order_item_renderer_downloadable</block>
+                    <template>warehouse/downloadable/sales/order/creditmemo/items/renderer/downloadable.phtml</template>
+                </action>
+                <reference name="creditmemo_totals">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/totals.phtml</template>
+                    </action>
+                    <reference name="tax">
+                        <action method="setTemplate">
+                            <template>warehouse/tax/order/tax.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_order_printcreditmemo>
+    
+    <!-- Guest Order View -->
+    <sales_guest_view>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference type="sales/order_view" name="sales.order.view">
+                <reference name="order_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/items/renderer.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/sales_order_item_renderer_downloadable</block>
+                        <template>warehouse/downloadable/sales/order/items/renderer/downloadable.phtml</template>
+                    </action>
+                    <reference name="order_totals">
+                        <action method="setTemplate">
+                            <template>warehouse/sales/order/totals.phtml</template>
+                        </action>
+                        <reference name="tax">
+                            <action method="setTemplate">
+                                <template>warehouse/tax/order/tax.phtml</template>
+                            </action>
+                        </reference>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_view>
+    
+    <!-- Guest Invoice -->
+    <sales_guest_invoice>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.invoice">
+                <reference name="invoice_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/invoice/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/invoice/items/renderer.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/sales_order_item_renderer_downloadable</block>
+                        <template>warehouse/downloadable/sales/order/invoice/items/renderer/downloadable.phtml</template>
+                    </action>
+                    <reference name="invoice_totals">
+                        <action method="setTemplate">
+                            <template>warehouse/sales/order/totals.phtml</template>
+                        </action>
+                        <reference name="tax">
+                            <action method="setTemplate">
+                                <template>warehouse/tax/order/tax.phtml</template>
+                            </action>
+                        </reference>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_invoice>
+    
+    <!-- Guest Shipment -->
+    <sales_guest_shipment>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.shipment">
+                <reference name="shipment_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/shipment/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/shipment/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/shipment/items/renderer.phtml</template>
+                    </action>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_shipment>
+    
+    <!-- Guest Credit Memo -->
+    <sales_guest_creditmemo>
+        <reference name="content">
+            <reference name="sales.order.info">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/info.phtml</template>
+                </action>
+            </reference>
+            <reference name="sales.order.creditmemo">
+                <reference name="creditmemo_items">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/creditmemo/items.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>default</type>
+                        <block>sales/order_item_renderer_default</block>
+                        <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>grouped</type>
+                        <block>sales/order_item_renderer_grouped</block>
+                        <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>bundle</type>
+                        <block>bundle/sales_order_items_renderer</block>
+                        <template>warehouse/bundle/sales/order/creditmemo/items/renderer.phtml</template>
+                    </action>
+                    <action method="addItemRender">
+                        <type>downloadable</type>
+                        <block>downloadable/sales_order_item_renderer_downloadable</block>
+                        <template>warehouse/downloadable/sales/order/creditmemo/items/renderer/downloadable.phtml</template>
+                    </action>
+                    <reference name="creditmemo_totals">
+                        <action method="setTemplate">
+                            <template>warehouse/sales/order/totals.phtml</template>
+                        </action>
+                        <reference name="tax">
+                            <action method="setTemplate">
+                                <template>warehouse/tax/order/tax.phtml</template>
+                            </action>
+                        </reference>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_creditmemo>
+    
+    <!-- Print Guest Order -->
+    <sales_guest_print>
+        <reference name="content">
+            <reference name="sales.order.print">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>warehouse/sales/order/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/items/renderer.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>downloadable/sales_order_item_renderer_downloadable</block>
+                    <template>warehouse/downloadable/sales/order/items/renderer/downloadable.phtml</template>
+                </action>
+                <reference name="order_totals">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/totals.phtml</template>
+                    </action>
+                    <reference name="tax">
+                        <action method="setTemplate">
+                            <template>warehouse/tax/order/tax.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_print>
+    
+    <!-- Print Guest Invoice -->
+    <sales_guest_printinvoice>
+        <reference name="content">
+            <reference name="sales.order.print.invoice">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print/invoice.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>warehouse/sales/order/invoice/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/invoice/items/renderer.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>downloadable/sales_order_item_renderer_downloadable</block>
+                    <template>warehouse/downloadable/sales/order/invoice/items/renderer/downloadable.phtml</template>
+                </action>
+                <reference name="invoice_totals">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/totals.phtml</template>
+                    </action>
+                    <reference name="tax">
+                        <action method="setTemplate">
+                            <template>warehouse/tax/order/tax.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_printinvoice>
+    
+    <!-- Print Guest Shipment -->
+    <sales_guest_printshipment>
+        <reference name="content">
+            <reference name="sales.order.print.shipment">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print/shipment.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/shipment/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/shipment/items/renderer.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </sales_guest_printshipment>
+    
+    <!-- Print Guest Credit Memo -->
+    <sales_guest_printcreditmemo>
+        <reference name="content">
+            <reference name="sales.order.print.creditmemo">
+                <action method="setTemplate">
+                    <template>warehouse/sales/order/print/creditmemo.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>default</type>
+                    <block>sales/order_item_renderer_default</block>
+                    <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>grouped</type>
+                    <block>sales/order_item_renderer_grouped</block>
+                    <template>warehouse/sales/order/creditmemo/items/renderer/default.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>bundle</type>
+                    <block>bundle/sales_order_items_renderer</block>
+                    <template>warehouse/bundle/sales/order/creditmemo/items/renderer.phtml</template>
+                </action>
+                <action method="addItemRender">
+                    <type>downloadable</type>
+                    <block>downloadable/sales_order_item_renderer_downloadable</block>
+                    <template>warehouse/downloadable/sales/order/creditmemo/items/renderer/downloadable.phtml</template>
+                </action>
+                <reference name="creditmemo_totals">
+                    <action method="setTemplate">
+                        <template>warehouse/sales/order/totals.phtml</template>
+                    </action>
+                    <reference name="tax">
+                        <action method="setTemplate">
+                            <template>warehouse/tax/order/tax.phtml</template>
+                        </action>
+                    </reference>
+                </reference>
+            </reference>
+        </reference>
+    </sales_guest_printcreditmemo>
+    
+</layout>

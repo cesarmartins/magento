@@ -1,0 +1,386 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<?php $element                      = $this->getElement() ?>
+<?php $product                      = $this->getProduct() ?>
+<?php $elementHtmlId                = $element->getHtmlId() ?>
+<?php $elementName                  = $element->getName() ?>
+<?php $elementClass                 = $element->getClass() ?>
+<?php $isComposite                  = $product->isComposite() ?>
+<?php $canUseQtyDecimals            = $product->getTypeInstance()->canUseQtyDecimals(); ?>
+
+<tr>
+    <td class="value" colspan="3">
+        <div id="<?php echo $elementHtmlId ?>">
+            <div class="grid">
+                <table cellspacing="0" class="data border" id="<?php echo $elementHtmlId ?>_grid" width="100%">
+                    
+                    <!-- Warehouse -->
+                    <col />
+                    
+                    <!-- Manage Stock -->
+                    <?php if ($config->isCatalogBackendManageStockVisible()) : ?>
+                    <col width="85" />
+                    <?php endif ?>
+                    
+                    <?php if (!$isComposite) : ?>
+                    <!-- Qty -->
+                    <col width="55" />
+                    
+                    <!-- Out of Stock Qty -->
+                    <?php if ($config->isCatalogBackendMinQtyVisible()) : ?>
+                    <col width="65" />
+                    <?php endif ?>
+                    
+                    <!-- Min Allowed Qty -->
+                    <?php if ($config->isCatalogBackendMinSaleQtyVisible()) : ?>
+                    <col width="75" />
+                    <?php endif ?>
+                    
+                    <!-- Max Allowed Qty -->
+                    <?php if ($config->isCatalogBackendMaxSaleQtyVisible()) : ?>
+                    <col width="75" />
+                    <?php endif ?>
+                    
+                    <?php if ($canUseQtyDecimals) : ?>
+                    <!-- Decimals -->
+                    <?php if ($config->isCatalogBackendIsQtyDecimalVisible()) : ?>
+                    <col width="55" />
+                    <?php endif ?>
+                    <?php endif ?>
+                    
+                    <!-- Backorders -->
+                    <?php if ($config->isCatalogBackendBackordersVisible()) : ?>
+                    <col width="95" />
+                    <?php endif ?>
+                    
+                    <!-- Notify Qty Below -->
+                    <?php if ($config->isCatalogBackendNotifyStockQtyVisible()) : ?>
+                    <col width="95" />
+                    <?php endif ?>
+                    <?php endif ?>
+                    
+                    <!-- Enable Qty Inc -->
+                    <?php if ($config->isCatalogBackendEnableQtyIncrementsVisible()) : ?>
+                    <col width="95" />
+                    <?php endif ?>
+                    
+                    <!-- Qty Inc -->
+                    <?php if ($config->isCatalogBackendQtyIncrementsVisible()) : ?>
+                    <col width="95" />
+                    <?php endif ?>
+                    
+                    <!-- Stock Availability -->
+                    <col width="95" />
+                    
+                    <thead>
+                        <tr class="headings">
+                            
+                            <!-- Warehouse -->
+                            <th title="<?php echo $helper->__('Warehouse') ?>">
+                                <?php echo $helper->__('Warehouse') ?>
+                            </th>
+                            
+                            <!-- Manage Stock -->
+                            <?php if ($config->isCatalogBackendManageStockVisible()) : ?>
+                            <th title="<?php echo $helper->__('Manage Stock') ?>">
+                                <?php echo $helper->__('Manage Stock') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            
+                            <?php if (!$isComposite) : ?>
+                            <!-- Qty -->
+                            <th title="<?php echo $helper->__('Qty') ?>">
+                                <?php echo $helper->__('Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            
+                            <!-- Out of Stock Qty -->
+                            <?php if ($config->isCatalogBackendMinQtyVisible()) : ?>
+                            <th title="<?php echo $helper->__('Qty for Item\'s Status to become Out of Stock') ?>">
+                                <?php echo $helper->__('Out of Stock Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            
+                            <!-- Min Allowed Qty -->
+                            <?php if ($config->isCatalogBackendMinSaleQtyVisible()) : ?>
+                            <th title="<?php echo $helper->__('Minimum Qty Allowed in Shopping Cart') ?>">
+                                <?php echo $helper->__('Min Allowed Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            
+                            <!-- Max Allowed Qty -->
+                            <?php if ($config->isCatalogBackendMaxSaleQtyVisible()) : ?>
+                            <th title="<?php echo $helper->__('Maximum Qty Allowed in Shopping Cart') ?>">
+                                <?php echo $helper->__('Max Allowed Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            
+                            <?php if ($canUseQtyDecimals) : ?>
+                            <!-- Decimals -->
+                            <?php if ($config->isCatalogBackendIsQtyDecimalVisible()) : ?>
+                            <th title="<?php echo $helper->__('Qty Uses Decimals') ?>">
+                                <?php echo $helper->__('Decimals') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            <?php endif ?>
+                            
+                            <!-- Backorders -->
+                            <?php if ($config->isCatalogBackendBackordersVisible()) : ?>
+                            <th title="<?php echo $helper->__('Backorders') ?>">
+                                <?php echo $helper->__('Backorders') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            
+                            <!-- Notify Qty Below -->
+                            <?php if ($config->isCatalogBackendNotifyStockQtyVisible()) : ?>
+                            <th title="<?php echo $helper->__('Notify for Quantity Below') ?>">
+                                <?php echo $helper->__('Notify Qty Below') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            <?php endif ?>
+                            
+                            <!-- Enable Qty Inc -->
+                            <?php if ($config->isCatalogBackendEnableQtyIncrementsVisible()) : ?>
+                            <th title="<?php echo $helper->__('Enable Qty Increments') ?>">
+                                <?php echo $helper->__('Enable Qty Inc') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            
+                            <!-- Qty Inc -->
+                            <?php if ($config->isCatalogBackendQtyIncrementsVisible()) : ?>
+                            <th title="<?php echo $helper->__('Qty Increments') ?>">
+                                <?php echo $helper->__('Qty Inc') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif ?>
+                            
+                            <!-- Stock Availability -->
+                            <th class="last" title="<?php echo $helper->__('Stock Availability') ?>">
+                                <?php echo $helper->__('Stock Availability') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="<?php echo $elementHtmlId ?>_list">
+                        <?php foreach ($this->getValues() as $item) : ?>
+                        <?php $stockId                      = $item['stock_id'] ?>
+                        <tr>
+                            
+                            <!-- Warehouse -->
+                            <td>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][stock_id]" value="<?php echo $stockId ?>" />
+                                <?php echo $helper->getWarehouseTitleByStockId($stockId) ?>
+                                
+                                <?php if (!$config->isCatalogBackendManageStockVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][manage_stock]" value="<?php echo $item['manage_stock'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_manage_stock]" value="<?php echo $item['use_config_manage_stock'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendMinQtyVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][min_qty]" value="<?php echo $item['min_qty'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_min_qty]" value="<?php echo $item['use_config_min_qty'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendMinSaleQtyVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][min_sale_qty]" value="<?php echo $item['min_sale_qty'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_min_sale_qty]" value="<?php echo $item['use_config_min_sale_qty'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendMaxSaleQtyVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][max_sale_qty]" value="<?php echo $item['max_sale_qty'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_max_sale_qty]" value="<?php echo $item['use_config_max_sale_qty'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendIsQtyDecimalVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][is_qty_decimal]" value="<?php echo $item['is_qty_decimal'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendBackordersVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][backorders]" value="<?php echo $item['backorders'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_backorders]" value="<?php echo $item['use_config_backorders'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendNotifyStockQtyVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][notify_stock_qty]" value="<?php echo $item['notify_stock_qty'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_notify_stock_qty]" value="<?php echo $item['use_config_notify_stock_qty'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendEnableQtyIncrementsVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][enable_qty_increments]" value="<?php echo $item['enable_qty_increments'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_enable_qty_increments]" value="<?php echo $item['use_config_enable_qty_increments'] ?>" />
+                                <?php endif ?>
+                                
+                                <?php if (!$config->isCatalogBackendQtyIncrementsVisible()) : ?>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][qty_increments]" value="<?php echo $item['qty_increments'] ?>" />
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_qty_increments]" value="<?php echo $item['use_config_qty_increments'] ?>" />
+                                <?php endif ?>
+                                
+                            </td>
+                            
+                            <!-- Manage Stock -->
+                            <?php if ($config->isCatalogBackendManageStockVisible()) : ?>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select manage-stock required-entry" name="<?php echo $elementName ?>[<?php echo $stockId ?>][manage_stock]"<?php if ($item['use_config_manage_stock']) : ?> disabled="disabled"<?php endif ?> style="width: 80px;">
+                                    <option value="1"<?php if ($item['manage_stock'] == 1) : ?> selected="selected"<?php endif ?>>
+                                        <?php echo $helper->__('Yes') ?>
+                                    </option>
+                                    <option value="0"<?php if ($item['manage_stock'] == 0) : ?> selected="selected"<?php endif ?>>
+                                        <?php echo $helper->__('No') ?>
+                                    </option>
+                                </select><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_manage_stock]" value="1"<?php if ($item['use_config_manage_stock']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            
+                            <?php if(!$isComposite): ?>
+                            <!-- Qty -->
+                            <td class="nobr">
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][original_inventory_qty]" value="<?php echo $item['qty'] ?>"/>
+                                <input class="<?php echo $elementClass ?> qty required-entry validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][qty]" value="<?php echo $item['qty'] ?>"/>
+                            </td>
+                            
+                            <!-- Out of Stock Qty -->
+                            <?php if ($config->isCatalogBackendMinQtyVisible()) : ?>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][min_qty]" value="<?php echo $item['min_qty'] ?>"<?php if ($item['use_config_min_qty']) : ?> disabled="disabled"<?php endif ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_min_qty]" value="1"<?php if ($item['use_config_min_qty']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            
+                            <!-- Min Allowed Qty -->
+                            <?php if ($config->isCatalogBackendMinSaleQtyVisible()) : ?>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][min_sale_qty]" value="<?php echo $item['min_sale_qty'] ?>"<?php if ($item['use_config_min_sale_qty']) : ?> disabled="disabled"<?php endif ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_min_sale_qty]" value="1"<?php if ($item['use_config_min_sale_qty']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            
+                            <!-- Max Allowed Qty -->
+                            <?php if ($config->isCatalogBackendMaxSaleQtyVisible()) : ?>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][max_sale_qty]" value="<?php echo $item['max_sale_qty'] ?>"<?php if ($item['use_config_max_sale_qty']) : ?> disabled="disabled"<?php endif ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_max_sale_qty]" value="1"<?php if ($item['use_config_max_sale_qty']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            
+                            <?php if ($canUseQtyDecimals) : ?>
+                            <!-- Decimals -->
+                            <?php if ($config->isCatalogBackendIsQtyDecimalVisible()) : ?>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select is-qty-decimal" name="<?php echo $elementName ?>[<?php echo $stockId ?>][is_qty_decimal]" style="width: 50px;">
+                                    <option value="1"<?php if ($item['is_qty_decimal'] == 1) : ?> selected="selected"<?php endif ?>>
+                                        <?php echo $helper->__('Yes') ?>
+                                    </option>
+                                    <option value="0"<?php if ($item['is_qty_decimal'] == 0) : ?> selected="selected"<?php endif ?>>
+                                        <?php echo $helper->__('No') ?>
+                                    </option>
+                                </select>
+                            </td>
+                            <?php endif ?>
+                            <?php endif ?>
+                            
+                            <!-- Backorders -->
+                            <?php if ($config->isCatalogBackendBackordersVisible()) : ?>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select backorders required-entry" name="<?php echo $elementName ?>[<?php echo $stockId ?>][backorders]"<?php if ($item['use_config_backorders']) : ?> disabled="disabled"<?php endif ?> style="width: 90px;">
+                                    <?php foreach ($this->getBackordersValues() as $option): ?>
+                                    <option value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $item['backorders']) : ?> selected="selected"<?php endif ?>>
+                                        <?php echo $option['label'] ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_backorders]" value="1"<?php if ($item['use_config_backorders']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            
+                            <!-- Notify Qty Below -->
+                            <?php if ($config->isCatalogBackendNotifyStockQtyVisible()) : ?>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][notify_stock_qty]" value="<?php echo $item['notify_stock_qty'] ?>"<?php if ($item['use_config_notify_stock_qty']) : ?> disabled="disabled"<?php endif ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_notify_stock_qty]" value="1"<?php if ($item['use_config_notify_stock_qty']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            <?php endif ?>
+                            
+                            <!-- Enable Qty Inc -->
+                            <?php if ($config->isCatalogBackendEnableQtyIncrementsVisible()) : ?>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select enable-qty-increments required-entry" name="<?php echo $elementName ?>[<?php echo $stockId ?>][enable_qty_increments]"<?php if ($item['use_config_enable_qty_increments']) : ?> disabled="disabled"<?php endif ?> style="width: 90px;">
+                                    <option value="1"<?php if ($item['enable_qty_increments'] == 1) : ?> selected="selected"<?php endif ?>><?php echo $helper->__('Yes') ?></option>
+                                    <option value="0"<?php if ($item['enable_qty_increments'] == 0) : ?> selected="selected"<?php endif ?>><?php echo $helper->__('No') ?></option>
+                                </select><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_enable_qty_increments]" value="1"<?php if ($item['use_config_enable_qty_increments']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            
+                            <!-- Qty Inc -->
+                            <?php if ($config->isCatalogBackendQtyIncrementsVisible()) : ?>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][qty_increments]" value="<?php echo $item['qty_increments'] ?>"<?php if ($item['use_config_qty_increments']) : ?> disabled="disabled"<?php endif ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_qty_increments]" value="1"<?php if ($item['use_config_qty_increments']) : ?> checked="checked"<?php endif ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif ?>
+                            
+                            <!-- Stock Availability -->
+                            <td class="nobr last">
+                                <select class="<?php echo $elementClass ?> select is-in-stock" name="<?php echo $elementName ?>[<?php echo $stockId ?>][is_in_stock]" style="width: 70px;">
+                                    <?php foreach ($this->getIsInStockValues() as $option): ?>
+                                    <option value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $item['is_in_stock']) : ?> selected="selected"<?php endif ?>>
+                                        <?php echo $option['label'] ?>
+                                    </option> 
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                            
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </td>
+</tr>

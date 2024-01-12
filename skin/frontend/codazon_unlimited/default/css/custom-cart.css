@@ -1,0 +1,291 @@
+        /**
+ * Austes checkout
+ */
+        /* .cart>.col-md-18>.container-fluid {
+            box-shadow: 0px 0px 10px 1px #d0d0d0;
+            border-radius: 10px;
+        }
+         */
+        
+        .box-resumo {
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 1px #d8d8d8;
+            border-top: 2px solid #71cac2
+        }
+        
+        .box-cupom {
+            padding-top: 15px;
+            margin-top: 15px;
+            border-top: 1px solid #ebebeb;
+        }
+        
+        .box-finzalizar {
+            box-shadow: 0px 0px 10px 1px #d8d8d8;
+            border-top: 2px solid #71cac2;
+            padding: 14px 10px;
+            background: #fff;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .cart-table h2.product-name {
+            height: auto;
+        }
+        
+        tr.first.odd>td>a.product-image {
+            width: 100px!important;
+        }
+        
+        tr.first.odd>td>.a.product-image>img {
+            width: 100px!important;
+        }
+        
+        @media only screen and (max-width:600px) {
+            .box-finzalizar {
+                margin-top: 20px;
+            }
+            .box-cupom,
+            .box-finzalizar {
+                width: 100%!important;
+            }
+            .col-2.box-inferior {
+                display: block!important;
+            }
+            button.button,
+            button#empty_cart_button,
+            button.button.btn-continue,
+            button.button.btn-update,
+            button.button.button-reset-cart,
+            button.button-carrinho {
+                width: 100%!important;
+                margin: 5px 0px!important;
+            }
+        }
+        
+        button.button,
+        button#empty_cart_button,
+        button.button.btn-continue,
+        button.button.btn-update,
+        button.button.button-reset-cart,
+        button.button-carrinho {
+            border: 1px solid #9a7b5e!important;
+            background-color: #9a7b5e;
+            color: #fff;
+        }
+        
+        button.button>span>span,
+        button#empty_cart_button>span>span,
+        button.button.btn-continue>span>span,
+        button.button.btn-update>span>span,
+        button.button.button-reset-cart>span>span,
+        button.button-carrinho>span>span {
+            color: #fff;
+        }
+        
+        button.button.button-reset-cart>span>span,
+        button.button-carrinho:hover>span>span {
+            color: #fff;
+        }
+        
+        button#empty_cart_button:hover,
+        button.button.btn-continue:hover,
+        button.button.btn-update:hover,
+        button.button.button-reset-cart:hover,
+        button.button-carrinho:hover {
+            background-color: #71cac2!important;
+            color: #fff;
+        }
+        
+        button.button.btn-proceed-checkout.btn-checkout {
+            background-color: #71cac2!important;
+            border-color: #71cac2!important;
+            outline: none!important;
+        }
+        
+        button.button.btn-proceed-checkout.btn-checkout>span>span {
+            color: white!important;
+            border-color: #71cac2!important;
+        }
+        
+        form#co-shipping-method-form>.buttons-set>button.button,
+        form#shipping-zip-form>.buttons-set>button.button {
+            background-color: #71cac2!important;
+            border: 1px solid #71cac2!important;
+        }
+        
+        .main-container.col1-layout {
+            background: #ffffff !important;
+        }
+        
+        .cart .cart-table {
+            border: 0;
+            margin-bottom: 0;
+        }
+        
+        fieldset.box-resumo {
+            margin-bottom: 15px;
+            background: #fff;
+            padding: 0 15px;
+        }
+        
+        .cart .data-table tr th {
+            border: 0;
+        }
+        
+        input.btn.btn-success.button-postcode {
+            padding: 15px;
+            border: 0;
+            color: #fff;
+            border-radius: 10px;
+            background: #71cac2;
+        }
+        
+        .checkout-cart-index #postcode {
+            border: 1px solid #a9a9a9;
+            border-radius: 10px;
+            height: 48px;
+            margin-right: 65px;
+        }
+        
+        form#shipping-zip-form span.input-group-btn {
+            padding-left: 10px;
+        }
+        
+        input.btn.btn-success.button.button-postcode:active,
+        input.btn.btn-success.button.button-postcode:focus,
+        input.btn.btn-success.button.button-postcode:hover {
+            background: #71cac2;
+            border-color: #71cac2;
+            outline: none;
+        }
+        
+        table#shopping-cart-totals-table {
+            width: 100%;
+        }
+        
+        fieldset.box-resumo tr {
+            border-top: 0;
+        }
+        
+        fieldset.box-resumo tr td {
+            border: 0;
+        }
+        
+        p.safe-buy.text-center {
+            padding: 10px 0;
+        }
+        
+        tbody.summary-payment tr {
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        ul.checkout-type {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        #discount-coupon-form,
+        .cart .giftcard {
+            height: inherit;
+        }
+        
+        .cart .page-title h1 {
+            display: block!important;
+            text-align: left;
+        }
+        
+        #discount-coupon-form .button-wrapper {
+            text-align: center;
+        }
+        
+        #discount-coupon-form .button-wrapper>button {
+            float: inherit;
+        }
+        
+        #discount-coupon-form .input-text {
+            height: auto;
+            border-color: #282828;
+            border-radius: 10px;
+        }
+        
+        .warehouse-shipping-methods tr {
+            border: 0;
+            vertical-align: middle;
+        }
+        
+        .warehouse-shipping-methods tr>th {
+            line-height: 20px;
+            vertical-align: middle;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .warehouse-shipping-methods tr th:first-child:before {
+            border-left: 5px solid #71cac2;
+            content: '';
+            height: 40px;
+            position: absolute;
+            top: 0px;
+            left: 0;
+            bottom: 0px;
+        }
+        
+        .warehouse-shipping-methods input {
+            margin-right: 10px;
+            top: 0;
+        }
+        
+        .warehouse-shipping-methods label span {
+            color: #71cac2;
+            font-weight: bolder;
+            font-size: 16px;
+        }
+        
+        a.btn-remove2:before,
+        a.btn-remove:before {
+            display: none;
+        }
+        
+        a.btn-remove {
+            background-position: center;
+            width: 50px!important;
+            border: 0!important;
+            text-align: left;
+            background: none!important;
+            text-align: center;
+        }
+        
+        a.btn-remove2:before {
+            background: url('../images/lixeira.png') center!important;
+            width: 100%!important;
+            height: 29px!important;
+            background-repeat: no-repeat!important;
+        }
+        
+        a.btn-remove2:before,
+        a.btn-remove:before {
+            content: ' '!important;
+        }
+        
+        a.btn-remove span {
+            font-size: 12px;
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .qty_input .plus,
+        .qty_input .less {
+            cursor: pointer;
+        }
+        
+        @media only screen and (max-width: 767px) {
+            .cart .data-table tfoot tr {
+                border: none;
+                display: grid;
+                border-bottom: 1px solid #e7e7e7;
+            }
+            .cart .data-table tfoot tr label span,
+            .cart .data-table tfoot tr label {
+                font-size: 12px;
+            }
+        }

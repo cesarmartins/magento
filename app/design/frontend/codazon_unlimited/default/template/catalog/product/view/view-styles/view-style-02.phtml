@@ -1,0 +1,374 @@
+<?php
+/**
+ * Copyright © 2018 Codazon, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php
+$submitUrl = method_exists($this, '_isSecure') ? $this->getSubmitUrl($_product, array('_secure' => $this->_isSecure())) : $this->getSubmitUrl($_product, array());
+?>
+<?php echo $this->getChildHtml('product_custom_script'); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
+<div class="product-view product-view-style-02">
+    <div class="product-main">
+        <div class="product-essential product-main-top">
+            <form action="<?php echo $submitUrl ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                <?php echo $this->getBlockHtml('formkey') ?>
+                <div class="no-display">
+                    <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                    <input type="hidden" name="related_product" id="related-products-field" value="" />
+                </div>
+                <div class="row product-info-main full-width">
+                    <div class="product-col product-right col-sm-14 col-sm-pull-right">
+                        <div class="product-img-box">
+                            <?php echo $this->getChildHtml('media') ?>
+                        </div>
+                    </div>
+                    <div class="product-col product-left col-sm-10">
+                        <div class="product-shop">
+                            <div class="product-name">
+                                <span class="h1"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></span>
+                            </div>
+                            <div class="extra-info">
+                                <?php echo $this->getReviewsSummaryHtml($_product, 'default', false)?>
+                                <div class="product-sku">
+                                    <strong class="type"><?= $this->__('Referência:') ?></strong>
+                                    <div class="value" itemprop="sku"><?= $_product->getSku(); ?></div>
+                                </div>
+                                <?php echo $this->getChildHtml('product_type_availability'); ?>
+                            </div>
+
+                            <?php echo $this->getChildHtml('alert_urls') ?>
+
+                            <?php echo $this->getChildHtml('other'); ?>
+
+                            <div class="price-info">
+                                <?php echo $this->getPriceHtml($_product); ?>
+                                <?php echo $this->getChildHtml('bundle_prices') ?>
+                                <?php echo $this->getTierPriceHtml() ?>
+                            </div>
+                            
+                            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                            <?php endif;?>
+                        </div>
+
+                        <div class="add-to-cart-wrapper">
+                            <?php echo $this->getChildHtml('product_type_data') ?>
+                            <?php echo $this->getChildHtml('extrahint') ?>
+                            <?php if (!$this->hasOptions()):?>
+                                <div class="add-to-box">
+                                    <?php if($_product->isSaleable()): ?>
+                                        <?php echo $this->getChildHtml('addtocart') ?>
+                                        <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                            <span class="or"><?php echo $this->__('OR') ?></span>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php echo $this->getChildHtml('addto') ?>
+                                    <?php echo $this->getChildHtml('sharing') ?>
+                                </div>
+
+                                <div class="outros-botoes">
+                                    
+                                <button class="btn button"><i class="fas fa-house-user"></i>Comprar e Receber em Casa</button>
+                                <button class="btn button"><i class="fas fa-store"></i>Comprar e Retirar na Loja</button>
+
+                                <button class="btn button"><i class="fab fa-whatsapp"></i>Comprar Pelo WhatsApp</button>
+
+                                <button class="btn button" style="float: none;"><i class="fas fa-phone-alt"></i>Comprar por telefone</button>
+
+                                </div>
+                                <h3 style="    margin-top: 10px;">Desconto Especial</h3>    
+                                <div class="price-boleto" style="display: flex;">
+                                <div class="ft-boleto">
+                                    <img style="width:50px;margin-right: 10px;" src="https://melhorlojavirtual.online/veneza_homologacao/media/wysiwyg/layout-veneza/boleto.png">
+                                </div>
+                                <div class="txt-boleto">
+                                <p style="margin: 0;line-height: 25px;">Desconto de <strong>5%</strong> no boleto: <span style="    font-weight: 800;
+    color: red;
+    font-size: 20px;
+}">
+                                    R$ <?php 
+                                    
+                                        $preco_prod =  $_product->getPrice();
+                                        $preco_final =   $preco_prod - ( ( $preco_prod * 5 / 100));
+                                        echo str_replace(".", ",", round($preco_final,2));
+                                    ?>
+                                    </span></p>
+                                    
+                                </div>
+                                  
+                                </div>
+                                
+                                <div class="calculo-frete">
+
+                                <?php echo $this->getChildHtml('product_additional_data') ?>
+
+                                </div>
+
+                                <?php echo $this->getChildHtml('extra_buttons') ?>
+                            <?php elseif (!$_product->isSaleable()): ?>
+                                <div class="add-to-box">
+                                    <?php echo $this->getChildHtml('addto') ?>
+                                    <?php echo $this->getChildHtml('sharing') ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php echo $this->getChildHtml('related_products') ?>
+                    </div>
+                </div>
+                <div class="clearer"></div>
+            </form>
+            <script type="text/javascript">
+            //<![CDATA[
+                var productAddToCartForm = new VarienForm('product_addtocart_form');
+                productAddToCartForm.submit = function(button, url) {
+                    if (this.validator.validate()) {
+                        var form = this.form;
+                        var oldUrl = form.action;
+
+                        if (url) {
+                           form.action = url;
+                        }
+                        var e = null;
+                        try {
+                            this.form.submit();
+                        } catch (e) {
+                        }
+                        this.form.action = oldUrl;
+                        if (e) {
+                            throw e;
+                        }
+
+                        if (button && button != 'undefined') {
+                            button.disabled = true;
+                        }
+                    }
+                }.bind(productAddToCartForm);
+
+                productAddToCartForm.submitLight = function(button, url){
+                    if(this.validator) {
+                        var nv = Validation.methods;
+                        delete Validation.methods['required-entry'];
+                        delete Validation.methods['validate-one-required'];
+                        delete Validation.methods['validate-one-required-by-name'];
+                        // Remove custom datetime validators
+                        for (var methodName in Validation.methods) {
+                            if (methodName.match(/^validate-datetime-.*/i)) {
+                                delete Validation.methods[methodName];
+                            }
+                        }
+
+                        if (this.validator.validate()) {
+                            if (url) {
+                                this.form.action = url;
+                            }
+                            this.form.submit();
+                        }
+                        Object.extend(Validation.methods, nv);
+                    }
+                }.bind(productAddToCartForm);
+            //]]>
+            </script>
+        </div>
+        <center><h2 style="margin-top: 60px;">Saiba mais sobre <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2></center>
+       
+        <div class="product-main-bottom">
+            <div class="row product-info-main full-width">
+                <div class="product-bottom-left col-sm-10">
+                <?php if ($_product->getShortDescription()) : ?>
+                    <div class="short-description">
+                        <div class="std">
+                            
+                        <?php echo 
+                        // $_product->getAttributeText("description");
+                        $_product->getData("description");
+                        // $_product->getDescription()?>
+                        
+                    </div>
+
+
+                    </div>
+                <?php endif;?>
+                </div>
+                <div class="product-bottom-right col-sm-14">
+                    <?php echo $this->getChildHtml('product_custom_text'); ?>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="div_dup">
+        <div class="infos-tec carateristicas">
+
+        <h2>Características</h2>
+        <p>Possui moldura de alumínio nas portas e cantoneiras para um melhor acabamento, evitando os cantos vivos.</p>
+        <p>Espelho em toda a superfície do armário.</p>
+        <p>Divisão interna com porta-escova e prateleiras embutidas para armazenar os objetos do dia a dia.</p>
+        <p>Leve, resistente e de fácil limpeza.</p>
+        <p>Pode ser instalado embutido ou sobreposto à parede.</p>
+        
+        </div>
+
+        <div class="infos-tec uso">
+
+        <h2>Uso</h2>
+        <p>Para guardar os produtos de higiene no banheiro e auxiliar no momento da higiene pessoal.</p>
+        <p>As cores do produto podem sofrer variações de acordo com o monitor, a iluminação do ambiente ou a sua percepção visual.</p>
+        <p>Fotos meramente ilustrativas.</p>
+        <p>Os objetos que compõe a foto ambientada não acompanham o produto.</p>
+        
+        </div>
+
+        </div>
+
+        <div class="div_dup">
+
+
+        <div class="infos-tec car-tec">
+
+        <h2>Características Técnicas</h2>
+        
+        <p><strong class="nome_atr">Marca: </strong> Astra</p>
+        <p><strong class="nome_atr">Material: </strong>Plástico</p>
+        <p><strong class="nome_atr">Altura: </strong>36 cm</p>
+        <p><strong class="nome_atr">Largura: </strong>31 cm</p>
+        <p><strong class="nome_atr">Cor: </strong>Cinza</p>
+        <p><strong class="nome_atr">Peso do Produto: </strong>1 kg</p>
+        <p><strong class="nome_atr">Garantia do Fabricante: </strong>12 mes(es)</p>   
+           
+        </div>
+
+        <div class="infos-tec img">
+
+        <h2>Instruções e Manual</h2>
+        
+       <a href="https://cdn2.madeiramadeira.com.br/atributo/astra-aquecedores-assentos-cubas-chuveiro-gabinetes/473969-al41-cz2.pdf"><img src="https://melhorlojavirtual.online/veneza_homologacao/media/wysiwyg/layout2/inst2.png"></a>
+           
+        </div>
+
+
+        </div>
+
+     
+        <div class="infos-tec">
+
+        <iframe width="100%" height="620" src="https://www.youtube.com/embed/B8G8p6R1Eas" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+        </div>
+
+    </div>
+    <div class="product-collateral toggle-content tabs">
+        <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+            <dl id="collateral-tabs" class="collateral-tabs">
+                <?php foreach ($detailedInfoGroup as $alias => $html):?>
+                    <dt class="tab"><span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span></dt>
+                    <dd class="tab-container">
+                        <div class="tab-content"><?php echo $html ?></div>
+                    </dd>
+                <?php endforeach;?>
+            </dl>
+        <?php endif; ?>
+    </div>
+
+    <?php echo $this->getChildHtml('upsell_products') ?>
+
+</div>
+
+<style>
+.calculo-frete {
+    margin-top: 20px;
+}
+.outros-botoes > button.btn.button {
+    width: 300px;
+    margin: 0;
+    margin: 5px;
+    font-size: 10px;
+}
+button.btn.button i {
+    margin: 0 7px;
+    font-size: 15px!important;
+}
+.outros-botoes > button.btn.button {
+    width: 47%;
+    float: left;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: #e4e4e4;
+    color: red;
+    border-color: darkgrey;
+}
+.product-view .product-essential .product-info-main .btn-cart {
+
+    border-color: #ff0000!important;
+    background: #ff0000!important;
+    border-radius: 10px!important;
+}
+.infos-tec.carateristicas, .infos-tec.uso {
+    width: 50%;
+}
+.infos-tec {
+    margin: 20px 0px;
+    padding: 20px
+}
+.div_dup {
+    display: flex;
+}
+strong.nome_atr {
+    width: 200px;
+    display: inline-flex;
+}
+.infos-tec.car-tec {
+    width: 40%;
+}
+.infos-tec.img {
+    width: 60%;
+}
+.product-collateral.toggle-content.tabs.js-toggle-content {
+    padding: 10px;
+}
+dl#collateral-tabs {
+    padding: 10px;
+}
+.box-collateral.box-up-sell.product-list-style-17 {
+    padding: 30px;
+}
+.calculo-frete {
+    border-radius: 8px;
+    background-color: white;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 10px 1px #dadada;
+}
+.block-title span {
+    color: black;
+    display: none;
+}
+ul#shipping-estimation-form {
+    width: 50%;
+    float: left;
+}
+.block.block-shipping-estimate .actions {
+    /* height: 18px; */
+    display: inline-flex;
+    margin-top: 31px!important;
+}
+.product-view .product-collateral .toggle-tabs li span:after {
+
+    background: #e63d32!important;
+    }
+</style>

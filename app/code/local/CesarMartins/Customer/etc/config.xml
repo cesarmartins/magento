@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * César Martins
+ *
+ * @category    Modulo de override de cadastrado de clientes
+ * @package     CesarMartins_Customer
+ * @author      César Martins <cesar.martins01@gmail.com>
+ */
+-->
+<config>
+    <modules>
+        <CesarMartins_Customer>
+            <version>0.0.1</version>
+        </CesarMartins_Customer>
+    </modules>
+    <frontend>
+        <routers>
+            <customer>
+                <args>
+                    <modules>
+                        <CesarMartins_Customer before="Mage_Customer">CesarMartins_Customer</CesarMartins_Customer>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+        <events>
+            <customer_login>
+                <observers>
+                    <cesarmartins_customer_login>
+                        <type>singleton</type>
+                        <class>cesarmartins_customer/observer</class>
+                        <method>customerLogin</method>
+                    </cesarmartins_customer_login>
+                </observers>
+            </customer_login>
+        </events>
+    </frontend>
+    <global>
+        <models>
+            <CesarMartins_Customer>
+                <class>CesarMartins_Customer_Model</class>
+            </CesarMartins_Customer>
+        </models>
+        <helpers>
+            <CesarMartins_Customer>
+                <class>CesarMartins_Customer_Helper</class>
+            </CesarMartins_Customer>
+        </helpers>
+    </global>
+</config>

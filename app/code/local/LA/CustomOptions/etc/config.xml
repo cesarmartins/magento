@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_CustomOptions
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <LA_CustomOptions>
+            <version>0.1.0</version>
+        </LA_CustomOptions>
+    </modules>
+    <frontend>
+        <routers>
+            <customoptions>
+                <use>standard</use>
+                <args>
+                    <module>LA_CustomOptions</module>
+                    <frontName>customoptions</frontName>
+                </args>
+            </customoptions>
+        </routers>
+        <layout>
+            <updates>
+                <customoptions>
+                    <file>customoptions.xml</file>
+                </customoptions>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <LA_CustomOptions>
+                    <files>
+                        <default>LA_CustomOptions.csv</default>
+                    </files>
+                </LA_CustomOptions>
+            </modules>
+        </translate>
+    </frontend>
+    <admin>
+        <routers>
+            <customoptionsadmin>
+                <use>admin</use>
+                <args>
+                    <module>LA_CustomOptions</module>
+                    <frontName>customoptionsadmin</frontName>
+                </args>
+            </customoptionsadmin>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <customoptions>
+                    <file>customoptions.xml</file>
+                </customoptions>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <LA_CustomOptions>
+                    <files>
+                        <default>LA_CustomOptions.csv</default>
+                    </files>
+                </LA_CustomOptions>
+            </modules>
+        </translate>
+    </adminhtml>   
+    <global>
+        <models>
+            <customoptions>
+                <class>LA_CustomOptions_Model</class>
+                <resourceModel>customoptions_mysql4</resourceModel>
+            </customoptions>
+            <customoptions_mysql4>
+                <class>LA_CustomOptions_Model_Mysql4</class>
+                <entities>
+                    <customoptions>
+                        <table>customoptions</table>
+                    </customoptions>
+                </entities>
+            </customoptions_mysql4>
+        </models>
+        <resources>
+            <customoptions_setup>
+                <setup>
+                    <module>LA_CustomOptions</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </customoptions_setup>
+            <customoptions_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </customoptions_write>
+            <customoptions_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </customoptions_read>
+        </resources>
+        <blocks>
+            <customoptions>
+                <class>LA_CustomOptions_Block</class>
+            </customoptions>
+        </blocks>
+        <helpers>
+            <customoptions>
+                <class>LA_CustomOptions_Helper</class>
+            </customoptions>
+        </helpers>
+         <events>
+            <sales_quote_add_item>
+                <observers>
+                    <customoptions_observers>
+                        <class>customoptions/observer</class>
+                        <method>addCustomproduct</method>
+                    </customoptions_observers>
+                </observers>
+            </sales_quote_add_item>
+             <sales_convert_quote_item_to_order_item>
+                 <observers>
+                     <customoptions_observers>
+                         <type>model</type>
+                         <class>customoptions/observer</class>
+                         <method>salesConvertQuoteItemToOrderItem</method>
+                     </customoptions_observers>
+                 </observers>
+             </sales_convert_quote_item_to_order_item>
+        </events>
+    </global>
+</config>

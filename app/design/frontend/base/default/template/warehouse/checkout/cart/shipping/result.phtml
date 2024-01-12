@@ -1,0 +1,181 @@
+<!-- Warehouse -->
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $taxHelper                    = $helper->getTaxHelper() ?>
+<?php $config                       = $helper->getConfig() ?>
+<?php $displayShippingPriceIncTax   = $taxHelper->displayShippingPriceIncludingTax() ?>
+<?php $displayShippingBothPrices    = $taxHelper->displayShippingBothPrices() ?>
+<?php $rateIdPrefix                 = 's_method_' ?>
+
+
+
+
+ <!-- Warehouse -->
+<?php if ($config->isMultipleMode() && $config->isSplitOrderEnabled()){ ?>
+<?php echo $stockId          = (int) $this->getStockId() ?>
+    <?php if (!$this->isShippingRatesEmpty($stockId)){ ?>
+        <tfoot id="co-shipping-method-form-<?php echo $stockId ?>" class="warehouse-shipping-methods" data-action="<?php echo $this->getUrl('checkout/cart/estimateUpdatePost') ?>">
+            <?php $warehouse        = $helper->getWarehouseByStockId($stockId)?>
+            <?php if (!$warehouse) echo "NOOOOOO"; ?>
+            <?php $shippingRates    = $this->getShippingRates2($stockId) ?>
+            <?php if (count($shippingRates)){ ?>
+                <?php $shippingMethod   = $this->getAddressShippingMethod2($stockId) ?>
+                <?php foreach ($shippingRates as $carrierCode => $carrierShippingRates){ ?>
+                    <?php foreach ($carrierShippingRates as $rate){ ?>
+                        <tr >
+                            <?php $rateCode     = $rate->getCode() ?>
+                            <?php $rateCodeId  = str_replace(' ','_',$rateCode)?>
+                            <?php $ratePrice    = (float) $rate->getPrice() ?>
+                            <?php $rateId       = $rateIdPrefix.trim($rateCodeId).'_'.$stockId ?>
+                            <?php if ($rate->getErrorMessage()){?>
+                                <th class="error-msg" colspan="6">
+                                     <?php echo $this->escapeHtml($rate->getErrorMessage()) ?>
+                                </th>
+                            <?php } else{ ?>
+                            <?php $label = explode('--',$rate->getMethodTitle())?>
+                                <th colspan="1">
+                                    <label for="<?php echo $rateId ?>">
+                                        <input name="estimate_method[<?php echo $stockId ?>]" type="radio" value="<?php echo $this->htmlEscape($rateCode) ?>" id="<?php echo $rateId ?>"<?php if ($rateCode === $shippingMethod){ ?> checked="checked"<?php } ?> class="radio" />
+                                        <?php echo $this->htmlEscape(trim($label[0])) ?>
+                                    </label>
+                                </th>
+                                <th colspan="3" style="text-align: center;">
+                                    <label for="<?php echo $rateId ?>">
+                                        <?php echo trim($label[1]) ?>
+                                    </label>
+                                </th>
+                                <th colspan="2">
+                                     <label for="<?php echo $rateId ?>">
+                                        Valor do frete
+                                        <?php $excTaxPrice = $this->getShippingPrice2($stockId, $ratePrice, $displayShippingPriceIncTax) ?>
+                                        <?php $incTaxPrice = $this->getShippingPrice2($stockId, $ratePrice, true) ?>
+                                        <?php echo $excTaxPrice ?>
+                                        <?php if ($displayShippingBothPrices && $incTaxPrice != $excTaxPrice){ ?>
+                                            (<?php echo $this->__('Incl. Tax') ?> <?php echo $incTaxPrice ?>)
+                                        <?php } ?>
+                                    </label>
+                                </th>
+                            <?php } ?>
+                        </tr>
+                    <?php } ?>
+                <?php } ?>
+            <?php } ?>
+            <script type="text/javascript">
+                var divForm = jQuery('#co-shipping-method-form-<?php echo $stockId ?>');
+                divForm.find('input').each(function(e,i){
+                    jQuery(i).on('change',function(ev){
+                        var name = this.name;
+                        var inputShipping =this.name+'='+this.value
+                        
+                        var totalsUpdate = new XHRCart();
+                        totalsUpdate.selectors = ['.totals']; // Atualiza o bloco de totais
+                        //totalsUpdate.callback = fixSubmitButtoms;
+                        totalsUpdate.send(divForm.data('action'),inputShipping);
+                    });
+                });
+            </script>
+        </tfoot>
+    <?php } ?>        
+<?php }else{} ?>
+<!-- End Warehouse -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php /* ?>
+<!-- End Warehouse -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-24">
+
+            <!-- Warehouse -->
+            <?php if ($config->isMultipleMode() && $config->isSplitOrderEnabled()){ ?>
+            <?php $stockId          = (int) $this->getStockId() ?>
+            
+            <?php if (!$this->isShippingRatesEmpty($stockId)){ ?>
+            
+            <div id="co-shipping-method-form-<?php echo $stockId ?>" data-action="<?php echo $this->getUrl('checkout/cart/estimateUpdatePost') ?>">
+            <dl id="warehouse-shipping-methods-<?php echo $stockId ?>" class="warehouse-shipping-methods">
+                <?php $warehouse        = $helper->getWarehouseByStockId($stockId)?>
+                <?php if (!$warehouse) echo "NOOOOOO"; ?>
+
+                <?php $shippingRates    = $this->getShippingRates2($stockId) ?>
+                <?php if (count($shippingRates)){ ?>
+                <?php $shippingMethod   = $this->getAddressShippingMethod2($stockId) ?>
+                
+                <dd class="warehouse-content">
+                    <dl class="sp-methods shipping-methods">
+
+                        <?php foreach ($shippingRates as $carrierCode => $carrierShippingRates){ ?><!-- 
+                        <dt><?php echo $this->htmlEscape($this->getCarrierName($carrierCode)) ?></dt> -->
+                        <dd>
+                            <ul>
+                                <?php foreach ($carrierShippingRates as $rate){ ?>
+                                <?php $rateCode     = $rate->getCode() ?>
+                                <?php $rateCodeId  = str_replace(' ','_',$rateCode)?>
+                                <?php $ratePrice    = (float) $rate->getPrice() ?>
+                                <?php $rateId       = $rateIdPrefix.trim($rateCodeId).'_'.$stockId ?>
+                                <li<?php if ($rate->getErrorMessage()) echo ' class="error-msg"' ?>>
+                                    <?php if ($rate->getErrorMessage()){ ?>
+                                    <?php echo $this->escapeHtml($rate->getErrorMessage()) ?>
+                                    <?php }else{ ?>
+                                    <input name="estimate_method[<?php echo $stockId ?>]" type="radio" value="<?php echo $this->htmlEscape($rateCode) ?>" id="<?php echo $rateId ?>"<?php if ($rateCode === $shippingMethod){ ?> checked="checked"<?php } ?> class="radio" />
+                                    <label for="<?php echo $rateId ?>"><?php echo $this->htmlEscape($rate->getMethodTitle()) ?>
+                                    <?php $excTaxPrice = $this->getShippingPrice2($stockId, $ratePrice, $displayShippingPriceIncTax) ?>
+                                    <?php $incTaxPrice = $this->getShippingPrice2($stockId, $ratePrice, true) ?>
+                                    <?php echo $excTaxPrice ?>
+                                    <?php if ($displayShippingBothPrices && $incTaxPrice != $excTaxPrice){ ?>
+                                        (<?php echo $this->__('Incl. Tax') ?> <?php echo $incTaxPrice ?>)
+                                    <?php } ?>
+                                    </label>
+                                    <?php } ?>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </dd>
+                        <?php } ?>
+                    </dl>
+                </dd>
+                <?php } ?>
+            </dl>
+            <script type="text/javascript">
+            
+            var divForm = jQuery('#co-shipping-method-form-<?php echo $stockId ?>');
+            divForm.find('input').each(function(e,i){
+                jQuery(i).on('change',function(ev){
+                    var name = this.name;
+                    var inputShipping =this.name+'='+this.value
+                    
+                    var totalsUpdate = new XHRCart();
+                    totalsUpdate.selectors = ['.totals']; // Atualiza o bloco de totais
+                    //totalsUpdate.callback = fixSubmitButtoms;
+                    totalsUpdate.send(divForm.data('action'),inputShipping);
+                });
+            });
+            </script>
+            </div>
+            
+            <?php } ?>
+            
+            <?php }else{} ?>
+            <!-- End Warehouse -->
+            
+        </div>
+    </div>
+
+</div>
+
+<?php */ ?>

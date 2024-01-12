@@ -1,0 +1,484 @@
+<div id="promo" class="calculadora-app">
+<img class="banner-calculadora" src="https://melhorlojavirtual.online/veneza_homologacao/media/wysiwyg/novos-banners/piso.png">
+
+    <fieldset id="fieldset-1" class="step is-active" data-step="1" data-container="step" data-active-step="">
+        <h1 class="article-title">1. Em que ambiente deseja aplicar o piso?</h1>
+        <p class="lead">A resistência do Piso Cerâmico é determinado a partir do ambiente de aplicação.</p>
+        <fieldset class="m-input-fieldset">
+            <label class="radio-group-label"></label>
+            <div data-field-container="local" data-message="true" data-error-message="Selecione uma opção">
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="local" value="Uso Interno" id="local_0" data-required="" data-validate="radio">
+                        <label for="local_0">
+                            <img src="" alt="">
+                            <p class="radio-item-text">
+                                Ambiente Interno
+                            </p>
+                        </label>
+                    </span>
+                </div>
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="local" value="Uso Externo com Cobertura" id="local_1" data-required="" data-validate="radio">
+                        <label for="local_1">
+                            <img src="" alt="">
+                            <p class="radio-item-text">
+                                Ambiente Externo com Cobertura
+                            </p>
+                        </label>
+                    </span>
+                </div>
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="local" value="Uso Externo sem Cobertura" id="local_2" data-required="" data-validate="radio">
+                        <label for="local_2">
+                            <img src="" alt="">
+                            <p class="radio-item-text">
+                                Ambiente Externo sem Cobertura (necessidade de um piso antiderrapante)
+                            </p>
+                        </label>
+                    </span>
+                </div>
+                <span class="m-input-info no-background" data-message-container=""></span>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.proximoPasso(2)">Continuar</button>
+        </div>
+    </fieldset>
+    <fieldset id="fieldset-2" class="step is-done" data-step="2" data-container="step">
+        <h1 class="article-title">2. Qual o acabamento lateral que você deseja ?</h1>
+        <fieldset class="m-input-fieldset">
+            <label class="radio-group-label"></label>
+            <div data-field-container="borda" data-message="true" data-error-message="Selecione uma opção" class="is-valid">
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="borda" value="Borda Reta" id="borda_0" data-required="" data-validate="radio" class="is-valid">
+                        <label for="borda_0">
+                            <img src="" alt="">
+                            <p class="radio-item-text">
+                                Borda Reta: Acabamento reto, preciso e uniforme, quase imperceptível que causa um efeito visual agradável e sofisticado ao ambiente
+                            </p>
+                        </label>
+                    </span>
+                </div>
+                <div class="m-input-box m-radio-box">
+                    <span class="radio-group ">
+                        <input type="radio" name="borda" value="Borda Arredondada" id="borda_1" data-required="" data-validate="radio" class="is-valid">
+                        <label for="borda_1">
+                            <img src="" alt="">
+                            <p class="radio-item-text">
+                                Borda Arredondada: Acabamento tradicional, arredondamento nas bordas e com espaçamento maior entre as peças, deixando o rejunte mais aparente
+                            </p>
+                        </label>
+                    </span>
+                </div>
+                <span class="m-input-info no-background" data-message-container="" data-message-default=" "> </span>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(1)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.proximoPasso(3)">Continuar</button>
+        </div>
+    </fieldset>
+    <fieldset id="fieldset-3" class="step is-done" data-step="3" data-container="step" data-active-step="true">
+        <h1 class="article-title">3. Qual o estilo de estampa que você deseja para o piso?</h1>
+        <fieldset class="m-input-fieldset">
+            <label class="radio-group-label"></label>
+            <div class="m-select-box is-valid" data-field-container="estampa" data-message="true">
+                <select data-required="" data-validate="select" name="estampa" class="is-valid estampa-item">
+                    <option value="">Escolha uma opção</option>
+                    <option value="Cimento">Cimento</option>
+                    <option value="Decorado">Decorado</option>
+                    <option value="Madeira">Madeira</option>
+                    <option value="Mármore">Mármore</option>
+                    <option value="Cor Única">Cor Única</option>
+                    <option value="Pedra">Pedra</option>
+                    <option value="Granito">Granito</option>
+                </select>
+                <span class="m-input-info no-background" data-message-container="" data-message-default=" "> </span>
+            </div>
+        </fieldset>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(2)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.proximoPasso(4)">Continuar</button>
+        </div>
+    </fieldset>
+
+    <fieldset id="fieldset-4" class="step is-done" data-step="4" data-container="step" data-active-step="true">
+        <h1 class="article-title">4. Qual o tamanho da área que pretende instalar o piso?</h1>
+       
+       <div class="itens-calc">
+        <fieldset class="m-input-fieldset">
+            <label for="comp" id="comp">
+                Comprimento
+            </label>
+            <div data-field-container="comp" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" class="btn is-inverted is-disabled" id="btn-subtract-comp" data-action="subtract" disabled="" onclick="subtrairComprimento()">
+                        -
+                    </button>
+                    <input type="text" class="text-input" id="comp_imput" name="comp" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button type="button" class="btn is-inverted" data-action="sum" onclick="somarComprimento()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">
+                    Ex: 2.5 metros
+                </span>
+            </div>
+        </fieldset>
+        <fieldset class="m-input-fieldset">
+            <label for="larg" id="larg">
+                Largura
+            </label>
+            <div data-field-container="larg" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" class="btn is-inverted is-disabled" id="btn-subtract-larg" data-action="subtract" disabled="" onclick="subtrairTamanho()">
+                        -
+                    </button>
+                    <input type="text" class="text-input" id="larg_imput" name="larg" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button id="somar-tamanho" type="button" class="btn is-inverted" data-action="sum" onclick="somarTamanho()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">
+                    Ex: 2.5 metros
+                </span>
+            </div>
+        </fieldset>
+       </div>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(3)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.salvarTamanho(5)">Continuar</button>
+        </div>
+    </fieldset>
+    <fieldset id="fieldset-5" class="step is-done" data-step="5" data-container="step" data-active-step="true">
+        <h1 class="article-title">5. Quantas portas o ambiente possui?</h1>
+        <div class="itens-calc">
+
+        <fieldset class="m-input-fieldset">
+            <label for="qporta" id="qporta">
+                Quantas portas têm no ambiente?
+            </label>
+            <div data-field-container="qporta" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0">
+                    <button type="button" class="btn is-inverted is-disabled" id="btn-subtract-portas" data-action="subtract" disabled="" onclick="subtrairQtdPortas()">
+                        -
+                    </button>
+                    <input type="text" class="text-input" id="portas_imput" name="qporta" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="09" autocomplete="off">
+                    <button type="button" class="btn is-inverted" data-action="sum" onclick="somarQtdPortas()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">
+                </span>
+            </div>
+        </fieldset>
+        
+        <fieldset class="m-input-fieldset">
+            <label for="tporta" id="tporta">
+                Qual a largura da porta
+            </label>
+            <div data-field-container="tporta" data-message="true" data-error-message="Selecione um valor válido">
+                <div class="m-quantity-field" data-component="quantity-field" data-min-quantity="0" data-packaging-quantity="0.1" data-quantity="0.1">
+                    <button type="button" class="btn is-inverted is-disabled" id="btn-subtract-larguras" data-action="subtract" disabled="" onclick="subtrairLargPortas()">
+                        -
+                    </button>
+                    <input type="text" class="text-input" id="largura_imput" name="tporta" placeholder="0" data-field="quantity" data-required="" data-validate="float" data-mask="099.00" autocomplete="off">
+                    <button type="button" class="btn is-inverted" data-action="sum" onclick="somarLargPortas()">+</button>
+                </div>
+                <span class="m-input-info no-background" data-message-container="">
+                    Distância do vão da porta
+                </span>
+            </div>
+        </fieldset>
+        </div>
+        <div class="button-wrapper">
+            <button type="button" class="btn is-inverted is-medium" data-step-action="prev" onclick="Calculadora.voltarPasso(4)">Voltar</button>
+            <button type="button" class="btn is-medium" data-step-action="next" onclick="Calculadora.salvarPortas()">Continuar</button>
+        </div>
+    </fieldset>
+
+    <div id="div-resultado" data-container="scroll" class="is-done">
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="m-table " data-output-list="">
+                    <tbody>
+                        <tr>
+                            <td class="result-title">Quantidade de Piso necessário: </td>
+                            <td class="result" data-output-item="area" id="resultado" class="espaco-texto" data-output-append="true"> </td>
+                        </tr>
+                        <!--<tr>
+                        <td>Quantidade de Rodapé necessário</td>
+                        <td data-output-item="rodape" data-output-append="true">-48 m</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+            <img class="banner-result" src="https://melhorlojavirtual.online/veneza_homologacao/media/wysiwyg/novos-banners/piso-2.png">
+
+        </div>
+        <!--<div class="row section-spacing" data-container="product">
+            <h2 class="col-xs-12 title-2" data-description="">Hmm, não encontramos nenhum produto para sua necessidade.
+                Que tal uma passadinha na loja? : )</h2>
+        </div>
+        <div class="row" data-container="complementary">
+            <h2 class="col-xs-12 title-2" data-description=""></h2>
+        </div>-->
+    </div>
+
+</div>
+
+<script>
+    Calculadora = {
+        Tamanho: "",
+        Largura: "",
+        Portas: "",
+        PortasLargura: "",
+        Resultado: "",
+
+        proximoPasso(passo) {
+
+            let anterior = passo - 1;
+            let fieldsetAnterior = "#fieldset-" + anterior;
+            let fieldsetAtual = "#fieldset-" + passo;
+            jQuery(fieldsetAnterior).removeClass("is-active").addClass("is-done");
+            jQuery(fieldsetAtual).removeClass("is-done").addClass("is-active");
+
+        },
+
+        voltarPasso(passo) {
+
+            let anterior = passo + 1;
+            let fieldsetAnterior = "#fieldset-" + anterior;
+            let fieldsetAtual = "#fieldset-" + passo;
+            jQuery(fieldsetAnterior).removeClass("is-active").addClass("is-done");
+            jQuery(fieldsetAtual).removeClass("is-done").addClass("is-active");
+
+        },
+
+        salvarTamanho: function(passo) {
+
+            this.Tamanho = jQuery("#comp_imput").val();
+            this.Largura = jQuery("#larg_imput").val();
+            this.proximoPasso(passo);
+
+        },
+        salvarPortas: function() {
+
+            this.Portas = jQuery("#portas_imput").val();
+            this.PortasLargura = jQuery("#largura_imput").val();
+            this.realizarCalculoPiso();
+
+        },
+        realizarCalculoPiso: function() {
+
+            jQuery("#fieldset-5").removeClass("is-active").addClass("is-done");
+            jQuery("#div-resultado").removeClass("is-done").addClass("is-active");
+            this.Resultado = this.Tamanho * this.Largura;
+            jQuery("#resultado").html("<span> " + this.Resultado + " m²</span>");
+
+        }
+
+    }
+
+    function somarComprimento() {
+
+        var valorImput = jQuery("#comp_imput").val();
+        jQuery("#btn-subtract-comp").attr("disabled", false);
+        if (valorImput == "") {
+            jQuery("#comp_imput").val(1);
+        } else {
+            valorImput = parseFloat(valorImput) + 0.5;
+            jQuery("#comp_imput").val(valorImput);
+        }
+    }
+
+    function subtrairComprimento() {
+
+        var valorImput = jQuery("#comp_imput").val();
+        valorImput = parseFloat(valorImput) - 0.5;
+        jQuery("#comp_imput").val(valorImput);
+        if (valorImput == 0) {
+            jQuery("#btn-subtract-comp").attr("disabled", "disabled");
+        }
+    }
+
+    function somarTamanho() {
+
+        var valorImput = jQuery("#larg_imput").val();
+        jQuery("#btn-subtract-larg").attr("disabled", false);
+        if (valorImput == "") {
+            jQuery("#larg_imput").val(1);
+        } else {
+            valorImput = parseInt(valorImput) + 1;
+            jQuery("#larg_imput").val(valorImput);
+        }
+    }
+
+    function subtrairTamanho() {
+
+        var valorImput = jQuery("#larg_imput").val();
+        valorImput = parseInt(valorImput) - 1;
+        jQuery("#larg_imput").val(valorImput);
+        if (valorImput == 0) {
+            jQuery("#btn-subtract-larg").attr("disabled", "disabled");
+        }
+    }
+
+    function somarQtdPortas() {
+
+        var valorImput = jQuery("#portas_imput").val();
+        jQuery("#btn-subtract-portas").attr("disabled", false);
+        if (valorImput == "") {
+            jQuery("#portas_imput").val(1);
+        } else {
+            valorImput = parseInt(valorImput) + 1;
+            jQuery("#portas_imput").val(valorImput);
+        }
+    }
+
+    function subtrairQtdPortas() {
+
+        var valorImput = jQuery("#portas_imput").val();
+        valorImput = parseInt(valorImput) - 1;
+        jQuery("#portas_imput").val(valorImput);
+        if (valorImput == 0) {
+            jQuery("#btn-subtract-portas").attr("disabled", "disabled");
+        }
+    }
+
+    function somarLargPortas() {
+
+        var valorImput = jQuery("#largura_imput").val();
+        jQuery("#btn-subtract-larguras").attr("disabled", false);
+        if (valorImput == "") {
+            jQuery("#largura_imput").val(1);
+        } else {
+            valorImput = parseFloat(valorImput) + 0.5;
+            jQuery("#largura_imput").val(valorImput);
+        }
+    }
+
+    function subtrairLargPortas() {
+
+        var valorImput = jQuery("#largura_imput").val();
+        valorImput = parseFloat(valorImput) - 0.5;
+        jQuery("#largura_imput").val(valorImput);
+        if (valorImput == 0) {
+            jQuery("#btn-subtract-larguras").attr("disabled", "disabled");
+        }
+    }
+</script>
+<style>
+    .is-done {
+        display: none;
+    }
+
+    .is-active {
+        display: block;
+    }
+
+    .espaco-texto {
+        padding-left: 5px;
+    }
+    fieldset#fieldset-1 ,fieldset#fieldset-2 ,fieldset#fieldset-3 ,fieldset#fieldset-4, fieldset#fieldset-5{
+        padding: 25px;
+    box-shadow: 0px 0px 10px 1px #dedede;
+    border-radius: 10px;
+}
+h1.article-title {
+    color: #ff0014!important;
+    font-family: "Roboto","Helvetica","Arial",sans-serif!important;
+    font-weight: 100!important;
+    padding-top: 15px;
+}
+p.lead, p.radio-item-text{
+    font-family: "Roboto","Helvetica","Arial",sans-serif!important;
+    font-weight: 100!important;
+    padding-left: 15px;
+}
+div#promo {
+    max-width: 1200px!important;
+    margin: 0 auto;
+}
+.m-input-box.m-radio-box {
+    box-shadow: 0px 0px 7px 0px #bfbfbf;
+    border-radius: 10px;
+    margin: 15px 0px;
+    padding: 15px;
+}
+p.radio-item-text {
+    margin: 0;
+}
+button.btn.is-medium {
+    background-color: #ff0014;
+    border: 1px solid #ff0014;
+    color: white;
+}
+.banner-calculadora{
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.estampa-item {
+    box-shadow: 0px 0px 5px 0px #d2d2d2;
+    border-radius: 10px;
+    width: 500px;
+    margin-bottom: 30px;
+}
+.itens-calc fieldset.m-input-fieldset {
+    width: 40%;
+    box-shadow: 0px 0px 5px 0px #c5c5c5;
+    margin: 10px 20px;
+    padding: 17px;
+    border-radius: 10px;
+    text-align: center;
+}
+.itens-calc {
+    justify-content: center;
+    display: flex;
+}
+fieldset.m-input-fieldset label {
+    font-size: 20px;
+}
+.m-quantity-field {
+    display: flex;
+    padding: 10px 0px;
+    justify-content: center;
+}
+input#comp_imput, input#larg_imput, input#portas_imput, input#largura_imput {
+    width: 50px;
+    height: 30px;
+    line-height: 40px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 4px 0px #ababab;
+    padding: 0!important;
+    /* margin: 0 auto; */
+    text-align: center;
+    color: black;
+    margin: 1px;
+}
+.m-quantity-field button {
+    border: 1px solid #ff0014;
+    border-radius: 10px;
+    margin: 0 10px;
+    background-color: #ff0014;
+    color: white;
+}
+.m-quantity-field button:hover{
+    color: #f9f9f9;
+    text-decoration: none;
+    background-color: #c12f3b;
+    border: 1px solid #c12f3b;
+}
+.novo_box{
+    background-color: red;
+}
+td.result-title {
+    font-size: 22px;
+    color: #ff0014;
+
+}
+td#resultado {
+    font-size: 30px;
+    color: #ff0014;
+    font-weight: 600;
+}
+</style>

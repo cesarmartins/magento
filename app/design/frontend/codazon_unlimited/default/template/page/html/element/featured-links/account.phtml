@@ -1,0 +1,101 @@
+<?php
+/**
+ * Copyright © 2018 Codazon, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+$customerSession = Mage::getSingleton('customer/session');
+$helper = Mage::helper('flexibletheme');
+$displayStyle = $this->getData('display_style')?:($helper->getAccountPanelStyle()?:'dropdown');
+$isLoggedIn = $customerSession->isLoggedIn();
+?>
+
+<li class="link authorization-link">
+<?php if ($displayStyle == 'popup') : ?>
+    <div class="account-wrapper">
+    <?php if ($isLoggedIn) : ?>
+        <?php $customer = $customerSession->getCustomer(); ?>
+        <a href="javascript:;" class="account-trigger cdz-top-link" data-cdzpopuptrigger="account-popup">
+            <span class="text-underlink"><?php echo $this->__('Hello %s', $customer->getFirstname()); ?></span>
+            <span class="text-uppercase"><?php echo $this->__('Your account'); ?></span>
+        </a>
+        <?php else : ?>
+        <a href="javascript:;" class="account-trigger cdz-top-link" data-cdzpopuptrigger="account-popup">
+            <span class="text-underlink"><?php echo $this->__('Hello, Sign in'); ?></span>
+            <span class="text-uppercase"><?php echo $this->__('Your account'); ?></span>
+        </a>
+        <?php endif ?>
+    </div>
+    <div style="display:none">
+        <div class="mini-account-container" data-cdzpopup id="account-popup">
+            <div class="md-dialog-inner">
+                <?php echo $this->getBlockHtml('mini_account_dashboard'); ?>
+                <?php echo $this->getChildHtml(); ?>
+            </div>
+        </div>
+    </div>
+<?php elseif ($displayStyle == 'sidebar') : ?>
+    <div class="account-wrapper">
+        <?php if ($isLoggedIn) : ?>
+        <?php $customer = $customerSession->getCustomer(); ?>
+        <a href="javascript:;" class="account-trigger cdz-top-link" data-sidebartrigger='{"side": "right", "section":"mini-account-container"}'>
+            <span class="text-underlink"><?php echo $this->__('Hello %s', $customer->getFirstname()); ?></span>
+            <span class="text-uppercase"><?php echo $this->__('Your account'); ?></span>
+        </a>
+        <?php else : ?>
+        <a href="javascript:;" class="account-trigger cdz-top-link" data-sidebartrigger='{"side": "right", "section":"mini-account-container"}'>
+            <span class="text-underlink"><?php echo $this->__('Hello, Sign in'); ?></span>
+            <span class="text-uppercase"><?php echo $this->__('Your account'); ?></span>
+        </a>
+        <?php endif ?>
+    </div>
+<?php else : ?>
+    <div class="account-wrapper cdz-dropdown" data-role="cdz-dropdown">
+        <?php if ($isLoggedIn) : ?>
+        <?php $customer = $customerSession->getCustomer(); ?>
+        <a href="javascript:;" class="cdz-dd-trigger account-trigger cdz-top-link" data-role="cdz-dd-trigger">
+            <span class="text-underlink"><?php echo $this->__('Hello %s', $customer->getFirstname()); ?></span>
+            <span class="text-uppercase icone-user"><i class="fas fa-user"></i><span>Bem-vindo :)</span></span>
+        </a>
+        <?php else : ?>
+        <a href="javascript:;" class="cdz-dd-trigger account-trigger cdz-top-link" data-role="cdz-dd-trigger">
+            <span class="text-underlink"><?php echo $this->__('Hello, Sign in'); ?></span>
+            <span class="text-uppercase icone-user" style="    line-height: 10px;">
+            <i class="fas fa-user"></i>
+            </span>
+            <span class="ocultar-stick" style="font-size: 11px;color: white;margin-left: 5px;font-weight: 600;">Bem-vindo :)</span>
+            <span class="ocultar-stick" style="font-size: 9px;color: white;margin-left: 27px;font-weight: 600;display: block;">Entre ou Cadastre-se</span>
+  
+        </a>
+        <?php endif ?>
+        <div class="cdz-dd-content" data-role="cdz-dd-content">
+            <div class="cdz-dd-content-inner">
+                <div class="mini-account-container">
+                    <?php echo $this->getBlockHtml('mini_account_dashboard'); ?>
+                    <?php echo $this->getChildHtml(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif ?>
+</li>
+
+<style>
+.icone-user{
+    font-size: 25px;
+}
+.page-header .sticky-menu:not(.active) .authorization-link .account-trigger:after{
+    display: none;
+}
+.page-header .sticky-menu:not(.active) .authorization-link .account-trigger{
+    padding: 0!important;
+}
+.sticky-menu.js-sticky-menu.active span.ocultar-stick {
+    display: none!important;
+}
+.sticky-menu.js-sticky-menu.active .info-cep{
+    display: none;
+}
+</style>

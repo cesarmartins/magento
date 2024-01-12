@@ -1,0 +1,97 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+<div class="page-title">
+    <h1><?php echo $helper->__('My Pending Payments') ?></h1>
+</div>
+<?php echo $this->getPagerHtml(); ?>
+<?php if ($_orders->getSize()) : ?>
+<table class="data-table" id="order-pending-payment-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <?php if ($config->isInformationVisible()) : ?>
+    <col width="1" />
+    <?php endif ?>
+    <col width="1" />
+    <thead>
+        <tr>
+            <th><?php echo $helper->__('Order #') ?></th>
+            <th><?php echo $helper->__('Date') ?></th>
+            <th><?php echo $helper->__('Ship To') ?></th>
+            <th><span class="nobr"><?php echo $helper->__('Order Total') ?></span></th>
+            <?php if ($config->isInformationVisible()) : ?>
+            <th><?php echo $helper->__('Warehouse') ?></th>
+            <?php endif ?>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_orders as $_order): ?>
+        <tr>
+            <td><?php echo $_order->getRealOrderId() ?></td>
+            <td><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate(), Mage_Core_Model_Locale::FORMAT_TYPE_SHORT, true) ?></span></td>
+            <td><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+            <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+            <?php if ($config->isInformationVisible()) : ?>
+            <td>
+                <?php if ($_order->isMultipleWarehouse()) : ?>
+                <ul class="warehouse-list">
+                <?php foreach ($_order->getWarehouses() as $warehouse) : ?>
+                <li><?php echo $warehouse->getTitle() ?></li>
+                <?php endforeach; ?>
+                </ul>
+                <?php elseif ($_order->getWarehouse()) : ?>
+                <?php echo $_order->getWarehouse()->getTitle() ?>
+                <?php else : ?>
+                <?php echo $helper->__('No warehouse') ?>
+                <?php endif ?>
+            </td>
+            <?php endif; ?>
+            <td class="a-center">
+                <span class="nobr">
+                    <a href="<?php echo $this->getMakePaymentUrl($_order) ?>"><?php echo $helper->__('Make Payment') ?></a>
+                </span>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('order-pending-payment-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $helper->__('You have no pending payments.'); ?></p>
+<?php endif ?>

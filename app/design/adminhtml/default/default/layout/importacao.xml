@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <importacao_adminhtml_importacao_index translate="label">
+        <label>Importação</label>
+        <reference name="content">
+            <block type="adminhtml/template" name="importacaoindex" template="importacao/index.phtml" />
+        </reference>
+    </importacao_adminhtml_importacao_index>
+
+    <importacao_adminhtml_importacao_cadastrar translate="label">
+        <label>Cadastrar Usuários na Árvore</label>
+        <reference name="head">
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="importacaocadastrar" template="importacao/cadastrar.phtml" />
+        </reference>
+    </importacao_adminhtml_importacao_cadastrar>
+
+
+    <importacao_adminhtml_messageapp_index translate="label">
+        <label>Mensagem do app</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="messageapp" template="importacao/message.phtml" />
+        </reference>
+    </importacao_adminhtml_messageapp_index>
+
+    <importacao_adminhtml_messageapp_chat translate="label">
+        <label>Chat do APP</label>
+        <reference name="head">
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+            <action method="addJs"><script>jquery/jquery.md5.js</script></action>
+        </reference>
+        <remove name="footer"/>
+        <reference name="content">
+            <block type="adminhtml/template" name="messageappchat" template="messageapp/chat.phtml" />
+        </reference>
+    </importacao_adminhtml_messageapp_chat>
+
+    <importacao_adminhtml_exhibition_tableapresentation translate="label">
+        <label>Tabela da Árvore</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="tableapresentation" template="importacao/table_apresentation.phtml" />
+        </reference>
+    </importacao_adminhtml_exhibition_tableapresentation>
+
+
+    <importacao_adminhtml_importacao_actionimportacao translate="label">
+        <label>Cadastro de Ações</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="importacaoacionimportacao" template="importacao/action_importacao.phtml" />
+        </reference>
+    </importacao_adminhtml_importacao_actionimportacao>
+
+
+
+    <importacao_adminhtml_importacao_sortable translate="label">
+        <label>Posicionar Ações</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="sortable" template="importacao/sortable.phtml" />
+        </reference>
+    </importacao_adminhtml_importacao_sortable>
+
+
+
+
+    <importacao_adminhtml_importacao_acoes translate="label">
+        <label>Cadastro de Ações para Usuário</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="importacaocadastraracoes" template="importacao/cadastro_acoes.phtml" />
+        </reference>
+    </importacao_adminhtml_importacao_acoes>
+
+
+
+    <importacao_adminhtml_importacao_apresentation translate="label">
+        <label>Apresentação Árvore</label>
+        <reference name="head">
+
+            <action method="addCss"><stylesheet>jquery-ui.css</stylesheet></action>
+            <action method="addJs"><script>jquery/jquery-1-12-4.js</script></action>
+            <action method="addJs"><script>jquery/jquery-ui.js</script></action>
+            <action method="addItem"><type>skin_js</type><name>js/go.js</name></action>
+
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/template" name="importacao_apresentation" template="importacao/apresentation.phtml" />
+        </reference>
+    </importacao_adminhtml_importacao_apresentation>
+</layout>

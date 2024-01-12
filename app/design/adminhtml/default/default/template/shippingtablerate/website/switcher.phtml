@@ -1,0 +1,56 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php $helper = $this->getTextHelper(); ?>
+<?php if ($websites = $this->getWebsites()): ?>
+<p class="switcher"><label for="website_switcher"><?php echo $helper->__('Choose Website') ?>:</label>
+<select name="website_switcher" id="website_switcher" onchange="return switchWebsite(this);">
+    <?php if ($this->hasDefaultOption()): ?>
+    <option value=""><?php echo $this->getDefaultWebsiteName() ?></option>
+    <?php endif; ?>
+    <?php foreach ($websites as $website): ?>
+    <option value="<?php echo $website->getId() ?>"<?php if($this->getWebsiteId() == $website->getId()): ?> selected="selected"<?php endif; ?>><?php echo $website->getName() ?></option>
+    <?php endforeach; ?>
+</select>
+</p>
+<script type="text/javascript">
+    function switchWebsite(obj){
+        var websiteParam = obj.value ? 'website/' + obj.value + '/' : '';
+        if (obj.switchParams) websiteParam += obj.switchParams;
+        <?php if ($this->getUseConfirm()) : ?>
+        if (confirm("<?php echo $helper->__('Please confirm website switching. All data that hasn\'t been saved will be lost.') ?>")) {
+            setLocation('<?php echo $this->getSwitchUrl() ?>' + websiteParam);
+            return true;
+        } else {
+            obj.value = '<?php echo $this->getStoreId() ?>';
+        }
+        return false;
+        <?php else: ?>
+        setLocation('<?php echo $this->getSwitchUrl() ?>' + websiteParam);
+        <?php endif; ?>
+    }
+</script>
+<?php endif; ?>

@@ -1,0 +1,8 @@
+# app/code
+app/code/community/PedroTeixeira/Correios            app/code/community/PedroTeixeira/Correios
+# app/etc
+app/etc/modules/PedroTeixeira_Correios.xml            app/etc/modules/PedroTeixeira_Correios.xml
+# app/locale
+app/locale/pt_BR/PedroTeixeira_Correios.csv            app/locale/pt_BR/PedroTeixeira_Correios.csv
+# lib
+lib/Correios            lib/Correios

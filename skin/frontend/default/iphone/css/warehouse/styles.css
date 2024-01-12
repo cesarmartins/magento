@@ -1,0 +1,188 @@
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+
+/**
+ * Warehouse 
+ */
+.warehouse {  }
+.warehouse .warehouse-name { 
+    font-weight: bold; 
+}
+.warehouse .warehouse-origin { 
+    display: block; 
+    font-style: italic; 
+}
+.warehouse .warehouse-distance { 
+    display: block; 
+    font-style: italic; 
+}
+.warehouse .warehouse-description { 
+    display: block; 
+}
+/**
+ * Product Quote
+ */
+.product-quote {
+    border-spacing: 0; border-collapse: collapse; width: 100%;
+}
+.product-quote tbody td {
+    padding: 10px; 
+    vertical-align: top;
+}
+.product-quote tfoot td { 
+    padding: 5px; 
+}
+.product-quote tfoot button {
+    background: url(../../images/bg_gradient.png) repeat-x center;
+    background-color: #e76212;
+    color: #fff;
+    font-size: 21px;
+    display: block;
+    border: 0;
+    height: 35px;
+    line-height: 35px;
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+            appearance: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .45);
+    width: 100%;
+    margin: 10px 0 0;
+}
+.product-quote .current { 
+    
+}
+.product-quote .button-update { 
+    
+}
+.product-quote td, 
+.cart-table .product-options .item-options {
+    background: url(../../images/bg_shadow.png) repeat-x 0 0;
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+    .product-quote td, 
+    .product-quote .product-options .item-options, 
+    .product-quote, 
+    .product-quote thead tr, 
+    .product-quote tbody tr:first-child { 
+        background-image: url(../../images/bg_shadow_retina.png); 
+        background-size: 1px 40px; 
+    }
+}
+/**
+ * Cart 
+ */
+.cart-table .cart-item-product-quote-button { 
+    margin-left: 10px; 
+}
+.cart-table .warehouse-select {
+    width: 225px; 
+}
+.cart-table .product-quote { 
+    
+}
+.cart-table .product-quote .odd  { 
+    
+}
+.cart-table .product-quote .even { 
+    
+}
+.cart-table .product-quote thead th { 
+    
+}
+.cart-table .button-reset-cart span { 
+    
+}
+.cart-table .button-reset-cart { 
+    
+}
+.cart-table .btn-update { 
+     
+}
+/**
+ * Warehouse Block 
+ */
+.warehouse-block {  }
+.warehouse-block .block-title strong {
+    background-position: 0 0; 
+    background-repeat: no-repeat; 
+}
+.warehouse-block .block-title strong {
+    
+}
+.warehouse-block .current, 
+.warehouse-block .current.odd, 
+.warehouse-block .current.even { 
+    
+}
+.warehouse-block input.radio { 
+    float: left; 
+    margin: 3px -18px 0 0; 
+}
+.warehouse-block .label { 
+    display: block; 
+    margin-left: 18px; 
+}
+.warehouse-block li { 
+    padding: 3px 9px; 
+}
+.warehouse-block .actions .button-update { 
+    margin-left: 5px; 
+}
+/**
+ * Warehouse Shipping Method 
+ */
+.warehouse-shipping-methods .warehouse {
+    padding-top: 15px;
+}
+.warehouse-shipping-methods .warehouse .warehouse-name {
+    font-size: 1.125em;
+}
+.warehouse-shipping-methods .warehouse-content {
+    padding-bottom: 10px;
+}
+.warehouse-shipping-methods .warehouse-content .shipping-methods {
+    padding-left: 15px;
+}
+/**
+ * Checkout 
+ */
+.block-progress dl.warehouse-shipping-methods { 
+    border: 0; 
+    padding: 0;
+}
+.block-progress dl.warehouse-shipping-methods dt {
+    border: 0; 
+    padding: 0;
+}
+.block-progress dl.warehouse-shipping-methods dd {
+    border: 0; 
+    padding: 0 0 0 5px;
+}

@@ -1,0 +1,101 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<?php
+    $_order  = $this->getOrder();
+    $_source = $this->getSource();
+    $_fullInfo = $_order->getFullTaxInfo();
+    global $taxIter; $taxIter++;
+?>
+<?php  ?>
+
+<?php if ($this->displayFullSummary()): ?>
+<?php $isTop = 1; ?>
+    <?php if ($_fullInfo) foreach ($_fullInfo as $info): ?>
+        <?php if (isset($info['hidden']) && $info['hidden']) continue; ?>
+        <?php
+            $percent    = $info['percent'];
+            $amount     = $info['amount'];
+            $rates      = $info['rates'];
+            $isFirst    = 1;
+        ?>
+        <?php foreach ($rates as $rate): ?>
+        <tr class="summary-details-<?php echo $taxIter; ?> summary-details<?php if ($isTop): echo ' summary-details-first'; endif; ?>"<?php if (!$this->getIsPlaneMode()):?> style="display:none;"<?php endif;?>>
+            
+            <!-- Warehouse -->
+            <?php if ($config->isInformationVisible()) : ?>
+            <td>&nbsp;</td>
+            <?php endif ?>
+            <!-- End Warehouse -->
+            
+            <td <?php echo $this->getLabelProperties()?>>
+                <?php echo $this->escapeHtml($rate['title']); ?>
+                <?php if (!is_null($rate['percent'])): ?>
+                    (<?php echo (float)$rate['percent']; ?>%)
+                <?php endif; ?>
+                <br />
+            </td>
+            <?php if ($isFirst): ?>
+                <td <?php echo $this->getValueProperties()?> rowspan="<?php echo count($rates); ?>">
+                    <?php echo $_order->formatPrice($amount); ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+        <?php $isFirst = 0; ?>
+        <?php $isTop = 0; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif;?>
+
+<?php if ($this->displayFullSummary() && $_fullInfo && !$this->getIsPlaneMode()): ?>
+<tr class="summary-total" onclick="expandDetails(this, '.summary-details-<?php echo $taxIter;?>')">
+<?php elseif ($this->displayFullSummary() && $_fullInfo && $this->getIsPlaneMode()): ?>
+<tr class="show-details">
+<?php else: ?>
+<tr>
+<?php endif; ?>
+    
+    <!-- Warehouse -->
+    <?php if ($config->isInformationVisible()) : ?>
+    <td>&nbsp;</td>
+    <?php endif ?>
+    <!-- End Warehouse -->
+    
+    <td>
+        <?php if ($this->displayFullSummary()): ?>
+            <div class="summary-collapse"><?php echo $this->__('Tax'); ?></div>
+        <?php else: ?>
+            <?php echo $this->__('Tax'); ?>
+        <?php endif;?>
+    </td>
+    <td <?php echo $this->getValueProperties()?>><?php echo $_order->formatPrice($_source->getTaxAmount()) ?></td>
+</tr>

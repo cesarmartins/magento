@@ -1,0 +1,171 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+
+<!-- Warehouse -->
+
+<?php $orders = $this->getOrders() ?>
+
+<?php if ($config->isMultipleMode() && $config->isSplitOrderEnabled() && (count($orders) > 1)) : ?>
+
+<div class="page-title">
+    <h1><?php echo $helper->__('Your orders have been received.') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h2 class="sub-title"><?php echo $helper->__('Thank you for your purchase!') ?></h2>
+
+<p>&nbsp;</p>
+
+<table class="data-table success-orders" id="success-orders">
+    
+    <col />
+    <col width="100" />
+    <col width="100" />
+    <?php if ($config->isInformationVisible()) : ?>
+    <col width="175" />
+    <?php endif ?>
+    <col width="1" />
+    
+    <thead>
+        <tr>
+            <th><?php echo $helper->__('Order #') ?></th>
+            <th><?php echo $helper->__('Order Total') ?></th>
+            <th><?php echo $helper->__('Status') ?></th>
+            <?php if ($config->isInformationVisible()) : ?>
+            <th><?php echo $helper->__('Warehouse') ?></th>
+            <?php endif ?>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <?php foreach ($this->getOrders() as $order) : ?>
+        <tr>
+            <td><?php echo $order->getRealOrderId() ?></td>
+            <td><?php echo $order->formatPrice($order->getGrandTotal()) ?></td>
+            <td><em class="nobr"><?php echo $order->getStatusLabel() ?></em></td>
+            <?php if ($config->isInformationVisible()) : ?>
+            <td>
+                <?php if ($order->isMultipleWarehouse()) : ?>
+                <ul class="warehouse-list">
+                    <?php foreach ($order->getWarehouses() as $warehouse) : ?>
+                    <li><?php echo $warehouse->getTitle() ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php elseif ($order->getWarehouse()) : ?>
+                <?php echo $order->getWarehouse()->getTitle() ?>
+                <?php else : ?>
+                <?php echo $helper->__('No warehouse') ?>
+                <?php endif ?>
+            </td>
+            <?php endif ?>
+            <td class="a-center">
+                <?php if (
+                    $this->isOrderViewVisible($order) || 
+                    $this->isOrderPrintVisible($order) || 
+                    $this->isOrderMakePaymentVisible($order)
+                ) : ?>
+                <span class="nobr">
+                <?php if ($this->isOrderViewVisible($order)) : ?>
+                <a href="<?php echo $this->getOrderViewUrl($order) ?>"><?php echo $helper->__('View Order') ?></a>
+                <?php endif ?>
+                <?php if ($this->isOrderPrintVisible($order)) : ?>
+                <?php if ($this->isOrderViewVisible($order)) : ?><span class="separator">|</span> <?php endif ?>
+                <a href="<?php echo $this->getOrderPrintUrl($order) ?>"><?php echo $helper->__('Print Order') ?></a>
+                <?php endif ?>
+                
+                <?php if ($this->isOrderMakePaymentVisible($order)) : ?>
+                <?php if ($this->isOrderViewVisible($order) || $this->isOrderPrintVisible($order)) : ?><span class="separator">|</span> <?php endif ?>
+                <a href="<?php echo $this->getOrderMakePaymentUrl($order) ?>"><?php echo $helper->__('Make Payment') ?></a>
+                <?php endif ?>
+                
+                </span>
+                <?php else : ?>&nbsp;<?php endif ?>
+            </td>
+        </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+
+<script type="text/javascript">decorateTable('success-orders')</script>
+
+<p>&nbsp;</p>
+<p><?php echo $helper->__('You will receive the order confirmation emails with details of your orders and a link to track their progress.') ?></p>
+<p>
+    <?php echo $this->getChildHtml() ?>
+</p>
+
+<?php else : ?>
+
+<!-- End Warehouse -->
+
+<div class="page-title">
+    <h1><?php echo $this->__('Your order has been received') ?></h1>
+</div>
+<div class="checkout-success">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+
+    <?php if ($this->getOrderId()):?>
+        <?php if ($this->getCanViewOrder()) :?>
+            <p><?php echo $this->__('Your order # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+        <?php  else :?>
+            <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+        <?php endif;?>
+            <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+        <?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+            <p>
+                <?php echo $this->__('Click <a href="%s" onclick="this.target=\'_blank\'">here to print</a> a copy of your order confirmation.', $this->getPrintUrl()) ?>
+                <?php echo $this->getChildHtml() ?>
+            </p>
+        <?php endif;?>
+    <?php endif;?>
+            
+    <!-- Warehouse -->
+    <?php endif ?>
+    <!-- End Warehouse -->
+
+    <?php if ($this->getAgreementRefId()): ?>
+        <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+    <?php endif;?>
+
+    <?php if ($profiles = $this->getRecurringProfiles()):?>
+    <p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+    <ul class="disc">
+    <?php foreach($profiles as $profile):?>
+    <?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+        <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+    <?php endforeach;?>
+    </ul>
+    <?php endif;?>
+
+    <div class="buttons-set">
+        <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+    </div>
+</div>

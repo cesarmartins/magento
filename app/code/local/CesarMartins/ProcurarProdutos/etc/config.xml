@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category    Mage
+ * @package     CesarMartins_ProcurarProdutos
+ */
+-->
+<config>
+    <modules>
+        <CesarMartins_ProcurarProdutos>
+            <version>1.0</version>
+        </CesarMartins_ProcurarProdutos>
+        <procurarprodutos_resource>
+            <class>CesarMartins_ProcurarProdutos_Model_Resource</class>
+            <entities>
+                <search_query>
+                    <table>procurarprodutos_query</table>
+                </search_query>
+                <result>
+                    <table>procurarprodutos_result</table>
+                </result>
+                <fulltext>
+                    <table>procurarprodutos_fulltext</table>
+                </fulltext>
+            </entities>
+        </procurarprodutos_resource>
+    </modules>
+    <frontend>
+        <routers>
+            <procurarprodutos>
+                <use>standard</use>
+                <args>
+                    <module>CesarMartins_ProcurarProdutos</module>
+                    <frontName>procurarprodutos</frontName>
+                </args>
+            </procurarprodutos>
+        </routers>
+        <layout>
+            <updates>
+                <procurarprodutos>
+                    <file>procurarprodutos.xml</file>
+                </procurarprodutos>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <blocks>
+            <procurarprodutos>
+                <class>CesarMartins_ProcurarProdutos_Block</class>
+            </procurarprodutos>
+        </blocks>
+        <models>
+            <procurarprodutos>
+                <class>CesarMartins_ProcurarProdutos_Model</class>
+            </procurarprodutos>
+        </models>
+        <helpers>
+            <procurarprodutos>
+                <class>CesarMartins_ProcurarProdutos_Helper</class>
+            </procurarprodutos>
+        </helpers>
+    </global>
+</config>

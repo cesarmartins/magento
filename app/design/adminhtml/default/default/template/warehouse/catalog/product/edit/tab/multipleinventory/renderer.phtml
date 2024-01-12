@@ -1,0 +1,209 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<?php $helper             = $this->helper('warehouse'); ?>
+<?php $element            = $this->getElement(); ?>
+<?php $product            = $this->getProduct(); ?>
+<?php $elementHtmlId      = $element->getHtmlId(); ?>
+<?php $elementName        = $element->getName(); ?>
+<?php $elementClass       = $element->getClass(); ?>
+<?php $isComposite        = $product->isComposite(); ?>
+<?php $canUseQtyDecimals  = $product->getTypeInstance()->canUseQtyDecimals(); ?>
+<tr>
+    <td class="value" colspan="3">
+        <div id="<?php echo $elementHtmlId ?>">
+            <div class="grid">
+                <table cellspacing="0" class="data border" id="<?php echo $elementHtmlId ?>_grid" width="100%">
+                    <col/>
+                    <col width="85"/>
+                    <?php if (!$isComposite) : ?>
+                    <col width="55"/>
+                    <col width="65"/>
+                    <col width="75"/>
+                    <col width="75"/>
+                    <?php if ($canUseQtyDecimals) : ?>
+                    <col width="55"/>
+                    <?php endif; ?>
+                    <col width="95"/>
+                    <col width="95"/>
+                    <?php endif; ?>
+                    <col width="95"/>
+                    <col width="95"/>
+                    <col width="95"/>
+                    <thead>
+                        <tr class="headings">
+                            <th title="<?php echo $helper->__('Warehouse') ?>">
+                                <?php echo $helper->__('Warehouse') ?>
+                            </th>
+                            <th title="<?php echo $helper->__('Manage Stock') ?>">
+                                <?php echo $helper->__('Manage Stock') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php if (!$isComposite) : ?>
+                            <th title="<?php echo $helper->__('Qty') ?>">
+                                <?php echo $helper->__('Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <th title="<?php echo $helper->__('Qty for Item\'s Status to become Out of Stock') ?>">
+                                <?php echo $helper->__('Out of Stock Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <th title="<?php echo $helper->__('Minimum Qty Allowed in Shopping Cart') ?>">
+                                <?php echo $helper->__('Min Allowed Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <th title="<?php echo $helper->__('Maximum Qty Allowed in Shopping Cart') ?>">
+                                <?php echo $helper->__('Max Allowed Qty') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php if ($canUseQtyDecimals) : ?>
+                            <th title="<?php echo $helper->__('Qty Uses Decimals') ?>">
+                                <?php echo $helper->__('Decimals') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif; ?>
+                            <th title="<?php echo $helper->__('Backorders') ?>">
+                                <?php echo $helper->__('Backorders') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <th title="<?php echo $helper->__('Notify for Quantity Below') ?>">
+                                <?php echo $helper->__('Notify Qty Below') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <?php endif; ?>
+                            <th title="<?php echo $helper->__('Enable Qty Increments') ?>">
+                                <?php echo $helper->__('Enable Qty Inc.') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <th title="<?php echo $helper->__('Qty Increments') ?>">
+                                <?php echo $helper->__('Qty Inc.') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                            <th class="last" title="<?php echo $helper->__('Stock Availability') ?>">
+                                <?php echo $helper->__('Stock Availability') ?><br/>
+                                <?php echo $helper->__('[GLOBAL]') ?>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="<?php echo $elementHtmlId ?>_list">
+                        <?php foreach ($this->getValues() as $item) : ?>
+                        <?php $stockId = $item['stock_id']; ?>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][stock_id]" value="<?php echo $stockId ?>"/>
+                                <?php echo $helper->getWarehouseTitleByStockId($stockId) ?>
+                            </td>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select manage-stock required-entry" name="<?php echo $elementName ?>[<?php echo $stockId ?>][manage_stock]"<?php if ($item['use_config_manage_stock']) : ?> disabled="disabled"<?php endif; ?> style="width: 80px;">
+                                    <option value="1"<?php if ($item['manage_stock'] == 1) : ?> selected="selected"<?php endif; ?>>
+                                        <?php echo $helper->__('Yes') ?>
+                                    </option>
+                                    <option value="0"<?php if ($item['manage_stock'] == 0) : ?> selected="selected"<?php endif; ?>>
+                                        <?php echo $helper->__('No') ?>
+                                    </option>
+                                </select><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_manage_stock]" value="1"<?php if ($item['use_config_manage_stock']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php if(!$isComposite): ?>
+                            <td class="nobr">
+                                <input type="hidden" name="<?php echo $elementName ?>[<?php echo $stockId ?>][original_inventory_qty]" value="<?php echo $item['qty'] ?>"/>
+                                <input class="<?php echo $elementClass ?> qty required-entry validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][qty]" value="<?php echo $item['qty'] ?>"/>
+                            </td>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][min_qty]" value="<?php echo $item['min_qty'] ?>"<?php if ($item['use_config_min_qty']) : ?> disabled="disabled"<?php endif; ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_min_qty]" value="1"<?php if ($item['use_config_min_qty']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][min_sale_qty]" value="<?php echo $item['min_sale_qty'] ?>"<?php if ($item['use_config_min_sale_qty']) : ?> disabled="disabled"<?php endif; ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_min_sale_qty]" value="1"<?php if ($item['use_config_min_sale_qty']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][max_sale_qty]" value="<?php echo $item['max_sale_qty'] ?>"<?php if ($item['use_config_max_sale_qty']) : ?> disabled="disabled"<?php endif; ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_max_sale_qty]" value="1"<?php if ($item['use_config_max_sale_qty']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php if ($canUseQtyDecimals) : ?>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select is-qty-decimal" name="<?php echo $elementName ?>[<?php echo $stockId ?>][is_qty_decimal]" style="width: 50px;">
+                                    <option value="1"<?php if ($item['is_qty_decimal'] == 1) : ?> selected="selected"<?php endif; ?>>
+                                        <?php echo $helper->__('Yes') ?>
+                                    </option>
+                                    <option value="0"<?php if ($item['is_qty_decimal'] == 0) : ?> selected="selected"<?php endif; ?>>
+                                        <?php echo $helper->__('No') ?>
+                                    </option>
+                                </select>
+                            </td>
+                            <?php endif; ?>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select backorders required-entry" name="<?php echo $elementName ?>[<?php echo $stockId ?>][backorders]"<?php if ($item['use_config_backorders']) : ?> disabled="disabled"<?php endif; ?> style="width: 90px;">
+                                    <?php foreach ($this->getBackordersValues() as $option): ?>
+                                    <option value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $item['backorders']) : ?> selected="selected"<?php endif; ?>>
+                                        <?php echo $option['label'] ?>
+                                    </option>
+                                    <?php endforeach; ?>
+                                </select><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_backorders]" value="1"<?php if ($item['use_config_backorders']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][notify_stock_qty]" value="<?php echo $item['notify_stock_qty'] ?>"<?php if ($item['use_config_notify_stock_qty']) : ?> disabled="disabled"<?php endif; ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_notify_stock_qty]" value="1"<?php if ($item['use_config_notify_stock_qty']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <?php endif; ?>
+                            <td class="nobr">
+                                <select class="<?php echo $elementClass ?> select enable-qty-increments required-entry" name="<?php echo $elementName ?>[<?php echo $stockId ?>][enable_qty_increments]"<?php if ($item['use_config_enable_qty_increments']) : ?> disabled="disabled"<?php endif; ?> style="width: 90px;">
+                                    <option value="1"<?php if ($item['enable_qty_increments'] == 1) : ?> selected="selected"<?php endif; ?>><?php echo $helper->__('Yes') ?></option>
+                                    <option value="0"<?php if ($item['enable_qty_increments'] == 0) : ?> selected="selected"<?php endif; ?>><?php echo $helper->__('No') ?></option>
+                                </select><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_enable_qty_increments]" value="1"<?php if ($item['use_config_enable_qty_increments']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <td class="nobr">
+                                <input class="<?php echo $elementClass ?> qty validate-number" type="text" name="<?php echo $elementName ?>[<?php echo $stockId ?>][qty_increments]" value="<?php echo $item['qty_increments'] ?>"<?php if ($item['use_config_qty_increments']) : ?> disabled="disabled"<?php endif; ?>/><br/>
+                                <input type="checkbox" name="<?php echo $elementName ?>[<?php echo $stockId ?>][use_config_qty_increments]" value="1"<?php if ($item['use_config_qty_increments']) : ?> checked="checked"<?php endif; ?> onclick="toggleValueElements(this, this.parentNode);" class="checkbox"/>
+                                <label class="normal">&nbsp;<?php echo $helper->__('Default') ?></label>
+                            </td>
+                            <td class="nobr last">
+                                <select class="<?php echo $elementClass ?> select is-in-stock" name="<?php echo $elementName ?>[<?php echo $stockId ?>][is_in_stock]" style="width: 70px;">
+                                    <?php foreach ($this->getIsInStockValues() as $option): ?>
+                                    <option value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $item['is_in_stock']) : ?> selected="selected"<?php endif; ?>>
+                                        <?php echo $option['label'] ?>
+                                    </option> 
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </td>
+</tr>

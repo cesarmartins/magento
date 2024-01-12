@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * César Martins
+ *
+ * @package     CesarMartins_OrderHistory
+ * @author      César Martins <cesar.martins01@gmail.com>
+ */
+-->
+<config>
+    <modules>
+        <CesarMartins_OrderHistory>
+            <version>0.0.1</version>
+        </CesarMartins_OrderHistory>
+    </modules>
+    <global>
+        <helpers>
+            <CesarMartins_OrderHistory>
+                <class>CesarMartins_OrderHistory_Helper</class>
+            </CesarMartins_OrderHistory>
+        </helpers>
+    </global>
+</config>

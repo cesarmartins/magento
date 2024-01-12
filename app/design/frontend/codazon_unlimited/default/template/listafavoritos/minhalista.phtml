@@ -1,0 +1,125 @@
+<?php
+$collection = $this->getData("collection");
+$imageHelper = $this->helper('catalog/image');
+$width = "40px";
+$height = "40px";
+$_coreHelper = $this->helper('core');
+?>
+<style type="text/css">
+    .cdz-products-grid{margin-left:0}.cdz-products-grid .item.product-item{margin-left:0}@media (min-width:1900px){.cdz-products-grid .item.product-item{width:calc(25% - 20px)}}@media (min-width: 1600px) and (max-width: 1899px){.cdz-products-grid .item.product-item{width:calc(25% - 20px)}}@media (min-width: 1420px) and (max-width: 1599px){.cdz-products-grid .item.product-item{width:calc(25% - 20px)}}@media (min-width: 1280px) and (max-width: 1419px){.cdz-products-grid .item.product-item{width:calc(25% - 20px)}}@media (min-width: 980px) and (max-width: 1279px){.cdz-products-grid .item.product-item{width:calc(33.333333333333% - 20px)}}@media (min-width: 768px) and (max-width: 979px){.cdz-products-grid .item.product-item{width:calc(33.333333333333% - 20px)}}@media (min-width: 480px) and (max-width: 767px){.cdz-products-grid .item.product-item{width:calc(50% - 10px)}}@media (min-width: 320px) and (max-width: 479px){.cdz-products-grid .item.product-item{width:calc(50% - 10px)}}@media (max-width:319px){.cdz-products-grid .item.product-item{width:calc(50% - 10px)}}@media(min-width: 768px){.cdz-products-grid{margin-right:-20px}.product-items .item.product-item{margin-bottom:20px}.cdz-products-grid .item.product-item{margin-right:20px}}@media(max-width: 767px){.cdz-products-grid{margin-right:-10px}.product-items .item.product-item{margin-bottom:10px}.cdz-products-grid .item.product-item{margin-right:10px}}</style>
+<div>Meus Produtos Selecionandos</div>
+    <div class="category-products product-list-style-14">
+        <ul class="cdz-products-grid items product-items flex-grid" data-sameheight=".product-details,.product-item-details">
+            <input name="id" id="id" type="hidden" value="<?php echo $collection[0]["lista_favoritos_id"]; ?>">
+            <input id="base_url" name="base_url" type="hidden" value="<?php echo Mage::getBaseUrl(); ?>" />
+        <?php foreach ($collection as $_item){
+            $_product = Mage::getModel('catalog/product')->load($_item["product_id"]);
+        ?>
+                <li class="item product product-item grid-pesquisa" style="border: solid 1px #cccccc">
+                    <div class="product-item-info">
+                        <div class="product-item-top">
+                            <a href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath(); ?>" title="ARGAMASSA QUARTZOLIT ACI INTERNO" class="product-image abs-img" style="padding-bottom: 127.87878787879%">
+                                <img class="product-image-photo"
+                                     src="<?php echo Mage::helper('catalog/image')->init($_product, 'thumbnail'); ?>" alt="<?php echo $_product->getName(); ?>" id="product-collection-image-127">
+                            </a>
+                        </div>
+                        <div class="product details product-item-details product-info" style="min-height: 178px;">
+                            <div class="detail-items-wrap">
+
+                                <div class="product-item-inner">
+                                    <strong class="product-name">
+                                        <a class="product-item-link grid-pesquisa-font" href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath(); ?>"><?php echo $_product->getName(); ?></a></strong>
+
+
+                                    <div class="product-item-sku"><span class="label">SKU: </span><span class="value"><?php echo $_product->getSku(); ?></span></div>
+
+
+
+                                    <div class="price-box">
+                                        <span class="regular-price" id="product-price-127">
+                                            <span class="price"><?php echo $_coreHelper->formatPrice($_product->getPrice()); ?></span>
+                                        </span>
+
+                                    </div>
+
+
+                                    <style>
+
+                                        ul.cdz-products-grid.items.product-items.flex-grid .grid-pesquisa span.regular-price>span.price {
+                                            font-size: 18px!important;
+                                            color: #000000!important;
+                                            font-weight: 600;
+                                            letter-spacing: 1px;
+                                        }
+                                    </style>                                                                                                                                            <div class="actions-secondary botoes-produto">
+                                        <!-- <button type="button" title="Comprar" class="button btn-cart" onclick="setLocation('https://melhorlojavirtual.online/veneza_homologacao/checkout/cart/add/uenc/aHR0cHM6Ly9tZWxob3Jsb2phdmlydHVhbC5vbmxpbmUvdmVuZXphX2hvbW9sb2dhY2FvL2RlcGFydGFtZW50by9waXNvcy1lLXJldmVzdGltZW50b3MuaHRtbC8,/product/127/form_key/j1mipdpW8Q2PvnsD/')"><span><span>Comprar</span></span></button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+        <?php } ?>
+        </ul>
+    </div>
+    <ul class="wishlist-collection">
+        <li class="wishlist-collection-item add-list">
+            <button class="color-primary" id="btn-nova-lista" onclick="history.back()">
+                Voltar
+            </button>
+        </li>
+        <li class="wishlist-collection-item add-list">
+            <button class="color-primary" id="btn-adicionar-produtos">
+                Adicionar produtos ao carrinho
+            </button>
+        </li>
+    </ul>
+</div>
+
+
+<script>
+
+    jQuery("#btn-adicionar-produtos").on("click", function (e){
+
+        e.preventDefault();
+
+        var id = jQuery('#id').val();
+        var base_url = jQuery("#base_url").val();
+
+        console.log("base_url: " + base_url + " id: " + id);
+
+        jQuery.ajax({
+            method: "POST",
+            dataType: "json",
+            url: base_url + "listafavoritos/ajax/adicionarProdutosNoCarrinho",
+            data: { id: id }
+        })
+            .done(function( msg ) {
+                if(msg.retorno){
+
+                    var url = base_url + "checkout/cart/";
+                    setLocation(url);
+                }
+
+            });
+    });
+
+
+</script>
+
+<style>
+    button.button.button-primary.button-full.no-shadow.radius {
+    border-color: #ff0013;
+    background-color: #ff0013;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 10px;
+    width: 400px;
+    margin: 30px 0px;
+}
+.container.wishlist-home-screen {
+    box-shadow: 0px 0px 10px 1px #c1c1c1;
+    border-radius: 10px;
+    padding: 20px;
+}
+</style>

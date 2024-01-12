@@ -1,0 +1,110 @@
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+/**
+ * Manage Warehouses
+ */
+.head-adminhtml-warehouse { 
+    background-image: url(../images/warehouse/fugue_building.png);
+}
+/**
+ * Manage Shipping Table Rate Methods
+ */
+.head-adminhtml-tablerate-method, 
+.head-tablerate-method { 
+    background-image: url(../images/shippingtablerate/fugue_table_money.png);
+}
+/**
+ * Product Table 
+ */
+#productGrid_table td .qty-table, 
+#productGrid_table td .batch-prices-table { 
+    border:0 !important; 
+    background: transparent !important; 
+    width:100% !important; 
+}
+#productGrid_table td .qty-table tr, 
+#productGrid_table td .batch-prices-table tr { 
+    background: transparent !important; 
+}
+#productGrid_table td .qty-table tr td, 
+#productGrid_table td .batch-prices-table tr td { 
+    border:0 !important; 
+    background: transparent !important; 
+}
+/**
+ * Batch Price 
+ */
+.batch-price-grid .data {
+    width: 465px !important; 
+}
+.batch-price-grid .data input {  }
+/**
+ * Batch Special Price 
+ */
+.batch-special-price-grid .data {
+    width: 465px !important;
+}
+.batch-special-price-grid .data input {  }
+/**
+ * Tier Price 
+ */
+.tier-price-grid .data {
+    width: 640px !important; 
+}
+.tier-price-grid .data input {  }
+/**
+ * Stock Priority
+ */
+.stock-priority .data { 
+    width: 465px; 
+}
+.stock-priority .data input.priority { 
+    width: 50px !important; text-align: left; 
+}
+/**
+ * Stock Tax Class
+ */
+.stock-tax-class .data { 
+    width: 465px; 
+}
+.stock-tax-class .data select.tax-class { 
+    width: 150px !important; text-align: left; 
+}
+/**
+ * Stock Shipping Carrier 
+ */
+.stock-shipping-carrier .data { 
+    width: 465px; 
+}
+.stock-shipping-carrier .data select.shipping-carrier { 
+    width: 200px !important; text-align: left; 
+}
+/**
+ * Shelf 
+ */
+.shelf .data { }
+.shelf .data input { 
+    width: 585px !important; 
+}

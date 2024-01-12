@@ -1,0 +1,325 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+<script type="text/javascript">
+//<![CDATA[
+
+// Warehouse Options Mode
+var WarehouseOptionsModeModel = Class.create();
+WarehouseOptionsModeModel.prototype = {
+    initialize : function()
+    {
+        this.selectElement = $('warehouse_options_mode');
+        if (this.selectElement) {
+            this.singleAssignmentMethodElement = $('warehouse_options_single_assignment_method').up(1);
+            this.multipleAssignmentMethodElement = $('warehouse_options_multiple_assignment_method').up(1);
+            this.multipleAssignmentTypeElement = $('warehouse_options_multiple_assignment_type').up(1);
+            this.splitOrderElement = $('warehouse_options_split_order').up(1);
+            this.splitQtyElement = $('warehouse_options_split_qty').up(1);
+            this.forceCartNoBackordersElement = $('warehouse_options_force_cart_no_backorders').up(1);
+            this.forceCartItemNoBackordersElement = $('warehouse_options_force_cart_item_no_backorders').up(1);
+            this.refreshSelect();
+            this.bindSelectChange();
+        }
+    }, 
+    bindSelectChange : function()
+    {
+        Event.observe(this.selectElement, 'change', this.refreshSelect.bind(this));
+    }, 
+    refreshSelect : function()
+    {
+        if (this.selectElement.value == '') {
+            return this;
+        }
+        if (this.selectElement.value == 'single') {
+            this.singleAssignmentMethodElement.show();
+            this.multipleAssignmentMethodElement.hide();
+            this.multipleAssignmentTypeElement.hide();
+            this.splitOrderElement.hide();
+            this.splitQtyElement.hide();
+            this.forceCartNoBackordersElement.hide();
+            this.forceCartItemNoBackordersElement.hide();
+        } else if (this.selectElement.value == 'multiple') {
+            this.singleAssignmentMethodElement.hide();
+            this.multipleAssignmentMethodElement.show();
+            this.multipleAssignmentTypeElement.show();
+            this.splitOrderElement.show();
+            this.splitQtyElement.show();
+            this.forceCartNoBackordersElement.show();
+            this.forceCartItemNoBackordersElement.show();
+        }
+        return this;
+    }
+}
+warehouseOptionsModeSelect = new WarehouseOptionsModeModel();
+
+// Warehouse Options Display Information
+var WarehouseOptionsDisplayInformationModel = Class.create();
+WarehouseOptionsDisplayInformationModel.prototype = {
+    initialize : function()
+    {
+        this.selectElement = $('warehouse_options_display_information');
+        if (this.selectElement) {
+            this.sortByElement = $('warehouse_options_sort_by').up(1);
+            this.displayOriginElement = $('warehouse_options_display_origin').up(1);
+            this.displayDistanceElement = $('warehouse_options_display_distance').up(1);
+            this.distanceUnitElement = $('warehouse_options_distance_unit').up(1);
+            this.displayDescriptionElement = $('warehouse_options_display_description').up(1);
+            this.catalogDisplayInformationSelectElement = $('warehouse_catalog_display_information');
+            this.catalogDisplayInformationElement = $('warehouse_catalog_display_information').up(1);
+            this.catalogDisplayDescriptionElement = $('warehouse_catalog_display_description').up(1);
+            this.catalogDisplayOutOfStockElement = $('warehouse_catalog_display_out_of_stock').up(1);
+            this.catalogDisplayOriginElement = $('warehouse_catalog_display_origin').up(1);
+            this.catalogDisplayDistanceElement = $('warehouse_catalog_display_distance').up(1);
+            this.catalogDisplayAvailabilityElement = $('warehouse_catalog_display_availability').up(1);
+            this.catalogDisplayQtyElement = $('warehouse_catalog_display_qty').up(1);
+            this.catalogDisplayTaxElement = $('warehouse_catalog_display_tax').up(1);
+            this.catalogDisplayShippingElement = $('warehouse_catalog_display_shipping').up(1);
+            this.refreshSelect();
+            this.bindSelectChange();
+        }
+    }, 
+    bindSelectChange : function()
+    {
+        Event.observe(this.selectElement, 'change', this.refreshSelect.bind(this));
+    }, 
+    refreshSelect : function()
+    {
+        if (this.selectElement.value == '') {
+            return this;
+        }
+        if (this.selectElement.value == '1') {
+            this.sortByElement.show();
+            this.displayOriginElement.show();
+            this.displayDistanceElement.show();
+            this.distanceUnitElement.show();
+            this.displayDescriptionElement.show();
+            this.catalogDisplayInformationElement.show();
+        } else {
+            this.sortByElement.hide();
+            this.displayOriginElement.hide();
+            this.displayDistanceElement.hide();
+            this.distanceUnitElement.hide();
+            this.displayDescriptionElement.hide();
+            this.catalogDisplayInformationElement.hide();
+        }
+        if (
+            (this.selectElement.value == '1') && 
+            (this.catalogDisplayInformationSelectElement.value == '1')
+        ) {
+            this.catalogDisplayOutOfStockElement.show();
+            this.catalogDisplayOriginElement.show();
+            this.catalogDisplayDistanceElement.show();
+            this.catalogDisplayDescriptionElement.show();
+            this.catalogDisplayAvailabilityElement.show();
+            this.catalogDisplayQtyElement.show();
+            this.catalogDisplayTaxElement.show();
+            this.catalogDisplayShippingElement.show();
+        } else {
+            this.catalogDisplayOutOfStockElement.hide();
+            this.catalogDisplayOriginElement.hide();
+            this.catalogDisplayDistanceElement.hide();
+            this.catalogDisplayDescriptionElement.hide();
+            this.catalogDisplayAvailabilityElement.hide();
+            this.catalogDisplayQtyElement.hide();
+            this.catalogDisplayTaxElement.hide();
+            this.catalogDisplayShippingElement.hide();
+        }
+        return this;
+    }
+}
+warehouseOptionsDisplayInformationSelect = new WarehouseOptionsDisplayInformationModel();
+
+// Warehouse Options Display Distance
+var WarehouseOptionsDisplayDistanceModel = Class.create();
+WarehouseOptionsDisplayDistanceModel.prototype = {
+    initialize : function()
+    {
+        this.selectElement = $('warehouse_options_display_distance');
+        if (this.selectElement) {
+            this.distanceUnitElement = $('warehouse_options_distance_unit').up(1);
+            this.refreshSelect();
+            this.bindSelectChange();
+        }
+    }, 
+    bindSelectChange : function()
+    {
+        Event.observe(this.selectElement, 'change', this.refreshSelect.bind(this));
+    }, 
+    refreshSelect : function()
+    {
+        if (this.selectElement.value == '') {
+            return this;
+        }
+        if (this.selectElement.value == '1') {
+            this.distanceUnitElement.show();
+        } else {
+            this.distanceUnitElement.hide();
+        }
+        return this;
+    }
+}
+warehouseOptionsDisplayDistanceSelect = new WarehouseOptionsDisplayDistanceModel();
+
+// Warehouse Options Single Assignment Method
+var WarehouseOptionsSingleAssignmentMethodModel = Class.create();
+WarehouseOptionsSingleAssignmentMethodModel.prototype = {
+    initialize : function()
+    {
+        this.selectElement = $('warehouse_options_single_assignment_method');
+        if (this.selectElement) {
+            this.modeSelectElement = $('warehouse_options_mode');
+            this.allowAdjustmentElement = $('warehouse_options_allow_adjustment').up(1);
+            this.refreshSelect();
+            this.bindSelectChange();
+        }
+    }, 
+    bindSelectChange : function()
+    {
+        Event.observe(this.selectElement, 'change', this.refreshSelect.bind(this));
+    }, 
+    refreshSelect : function()
+    {
+        if (this.modeSelectElement.value == 'multiple') {
+            return this;
+        }
+        if (this.selectElement.value == '') {
+            return this;
+        }
+        if (this.selectElement.value == 'manual') {
+            this.allowAdjustmentElement.hide();
+        } else {
+            this.allowAdjustmentElement.show();
+        }
+        return this;
+    }
+}
+warehouseOptionsSingleAssignmentMethodSelect = new WarehouseOptionsSingleAssignmentMethodModel();
+
+// Warehouse Options Multiple Assignment Method
+var WarehouseOptionsMultipleAssignmentMethodModel = Class.create();
+WarehouseOptionsMultipleAssignmentMethodModel.prototype = {
+    initialize : function()
+    {
+        this.selectElement = $('warehouse_options_multiple_assignment_method');
+        if (this.selectElement) {
+            this.modeSelectElement = $('warehouse_options_mode');
+            this.allowAdjustmentElement = $('warehouse_options_allow_adjustment').up(1);
+            this.assignmentType = $('warehouse_options_multiple_assignment_type').up(1);
+            this.refreshSelect();
+            this.bindSelectChange();
+        }
+    }, 
+    bindSelectChange : function()
+    {
+        Event.observe(this.selectElement, 'change', this.refreshSelect.bind(this));
+    }, 
+    refreshSelect : function()
+    {
+        if (this.modeSelectElement.value == 'single') {
+            return this;
+        }
+        if (this.selectElement.value == '') {
+            return this;
+        }
+        if (this.selectElement.value == 'manual') {
+            this.allowAdjustmentElement.hide();
+        } else {
+            this.allowAdjustmentElement.show();
+        }
+        if (
+            (this.selectElement.value == 'lowest_subtotal') || 
+            (this.selectElement.value == 'lowest_shipping') || 
+            (this.selectElement.value == 'lowest_tax') || 
+            (this.selectElement.value == 'lowest_grand_total')
+        ) {
+            this.assignmentType.show();
+        } else {
+            this.assignmentType.hide();
+        }
+        return this;
+    }
+}
+warehouseOptionsMultipleAssignmentMethodSelect = new WarehouseOptionsMultipleAssignmentMethodModel();
+
+// Warehouse Catalog Display Information
+var WarehouseCatalogDisplayInformationModel = Class.create();
+WarehouseCatalogDisplayInformationModel.prototype = {
+    initialize : function()
+    {
+        this.selectElement = $('warehouse_catalog_display_information');
+        if (this.selectElement) {
+            this.optionsDisplayInformationSelectElement = $('warehouse_options_display_information');
+            this.displayOutOfStockElement = $('warehouse_catalog_display_out_of_stock').up(1);
+            this.displayOriginElement = $('warehouse_catalog_display_origin').up(1);
+            this.displayDistanceElement = $('warehouse_catalog_display_distance').up(1);
+            this.displayDescriptionElement = $('warehouse_catalog_display_description').up(1);
+            this.displayAvailabilityElement = $('warehouse_catalog_display_availability').up(1);
+            this.displayQtyElement = $('warehouse_catalog_display_qty').up(1);
+            this.displayTaxElement = $('warehouse_catalog_display_tax').up(1);
+            this.displayShippingElement = $('warehouse_catalog_display_shipping').up(1);
+            this.refreshSelect();
+            this.bindSelectChange();
+        }
+    }, 
+    bindSelectChange : function()
+    {
+        Event.observe(this.selectElement, 'change', this.refreshSelect.bind(this));
+    }, 
+    refreshSelect : function()
+    {
+        if (this.selectElement.value == '') {
+            return this;
+        }
+        if (
+            (this.selectElement.value == '1') && 
+            (this.optionsDisplayInformationSelectElement.value == '1')
+        ) {
+            this.displayOutOfStockElement.show();
+            this.displayOriginElement.show();
+            this.displayDistanceElement.show();
+            this.displayDescriptionElement.show();
+            this.displayAvailabilityElement.show();
+            this.displayQtyElement.show();
+            this.displayTaxElement.show();
+            this.displayShippingElement.show();
+        } else {
+            this.displayOutOfStockElement.hide();
+            this.displayOriginElement.hide();
+            this.displayDistanceElement.hide();
+            this.displayDescriptionElement.hide();
+            this.displayAvailabilityElement.hide();
+            this.displayQtyElement.hide();
+            this.displayTaxElement.hide();
+            this.displayShippingElement.hide();
+        }
+        return this;
+    }
+}
+warehouseCatalogDisplayInformationSelect = new WarehouseCatalogDisplayInformationModel();
+
+//]]>
+</script>

@@ -1,0 +1,114 @@
+<?php
+/**
+ * Mage Plugins, Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mage Plugins Commercial License (MPCL 1.0)
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://mageplugins.net/commercial-license/
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to mageplugins@gmail.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.mageplugins.net for more information.
+ *
+ * @category   MP
+ * @package    MP_Warehouse
+ * @copyright  Copyright (c) 2017-2018 Mage Plugins, Co. and affiliates (https://mageplugins.net/)
+ * @license    https://mageplugins.net/commercial-license/ Mage Plugins Commercial License (MPCL 1.0)
+ */
+?>
+
+<!-- Warehouse -->
+<?php $helper                       = $this->helper('warehouse') ?>
+<?php $config                       = $helper->getConfig() ?>
+<!-- End Warehouse -->
+
+<div class="box-account box-recent">
+<?php $_orders = $this->getOrders(); ?>
+    <div class="box-head">
+        <h2><?php echo $this->__('Recent Orders') ?></h2>
+        <?php if( sizeof($_orders->getItems()) > 0 ): ?><a href="<?php echo $this->getUrl('sales/order/history') ?>"><?php echo $this->__('View All') ?></a><?php endif; ?>
+    </div>
+<?php if( sizeof($_orders->getItems()) > 0 ): ?>
+    <table class="data-table orders" id="my-orders-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    
+    <!-- Warehouse -->
+    <?php if ($config->isInformationVisible()) : ?>
+    <col width="1" />
+    <?php endif ?>
+    <!-- End Warehouse -->
+    
+    <col width="1" />
+        <thead>
+            <tr>
+                <th class="number"><?php echo $this->__('Order #') ?></th>
+                <th class="date"><?php echo $this->__('Date') ?></th>
+                <th class="ship"><?php echo $this->__('Ship To') ?></th>
+                <th class="total"><span class="nobr"><?php echo $this->__('Order Total') ?></span></th>
+                <th class="status"><?php echo $this->__('Status') ?></th>
+                
+                <!-- Warehouse -->
+                <?php if ($config->isInformationVisible()) : ?>
+                <th class="warehouse"><?php echo $helper->__('Warehouse') ?></th>
+                <?php endif ?>
+                <!-- End Warehouse -->
+                
+                <th class="view">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($_orders as $_order): ?>
+                <tr>
+                    <td class="number"><?php echo $_order->getRealOrderId() ?></td>
+                    <td class="date"><span class="nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+                    <td class="ship"><?php echo $_order->getShippingAddress() ? $this->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
+                    <td class="total"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                    <td class="status"><em><?php echo $_order->getStatusLabel() ?></em></td>
+                    
+                    <!-- Warehouse -->
+                    <?php if ($config->isInformationVisible()) : ?>
+                    <td class="warehouse">
+                        <?php if ($_order->isMultipleWarehouse()) : ?>
+                        <ul class="warehouse-list">
+                            <?php foreach ($_order->getWarehouses() as $warehouse) : ?>
+                            <li><?php echo $warehouse->getTitle() ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <?php elseif ($_order->getWarehouse()) : ?>
+                        <?php echo $_order->getWarehouse()->getTitle() ?>
+                        <?php else : ?>
+                        <?php echo $helper->__('No warehouse') ?>
+                        <?php endif ?>
+                    </td>
+                    <?php endif ?>
+                    <!-- End Warehouse -->
+                    
+                    <td class="a-center view">
+                        <span class="nobr">
+                        <a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
+                        <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+                            <span class="separator">|</span> <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+                        <?php endif ?>
+                        </span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <script type="text/javascript">decorateTable('my-orders-table')</script>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no orders.'); ?></p>
+<?php endif; ?>
+</div>
